@@ -166,7 +166,7 @@ public class PanelAPI extends javax.swing.JFrame {
 	
 	private void imprimirPalabrasMasUsadas(){
 		try {
-			ProcesadorDeArchivos pda = new ProcesadorDeArchivos();
+			FileProcessor pda = new FileProcessor();
 			pda.procesar(files);
 			for(String s:pda.calcularPalabrasMasUsadas()){
 				console.append(s);
