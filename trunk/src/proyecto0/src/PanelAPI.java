@@ -3,12 +3,12 @@ import java.awt.BorderLayout;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 import java.io.File;
+import java.io.IOException;
 import java.util.Locale;
 
 import javax.swing.JButton;
 import javax.swing.JComboBox;
 import javax.swing.JFileChooser;
-import javax.swing.JOptionPane;
 import javax.swing.JPanel;
 import javax.swing.JTextArea;
 
@@ -74,25 +74,7 @@ public class PanelAPI extends javax.swing.JFrame {
 					load.setBounds(35, 66, 148, 23);
 					load.addActionListener(new ActionListener() {
 						public void actionPerformed(ActionEvent evt) {
-							    chooser = new JFileChooser(); 
-							    //chooser.setCurrentDirectory(new java.io.File("."));
-							    if(idiom){
-							    	chooser.setDefaultLocale(Locale.getDefault());
-							    }
-							    else{
-							    	chooser.setDefaultLocale(Locale.ENGLISH);
-							    }
-							    chooser.setDialogTitle(chooseTitle);
-							    chooser.setFileSelectionMode(JFileChooser.DIRECTORIES_ONLY);
-							    //
-							    // disable the "All files" option.
-							    //
-							    chooser.setAcceptAllFileFilterUsed(false);
-							    //    
-							    if (chooser.showOpenDialog(chooser) == JFileChooser.APPROVE_OPTION) { 
-							    	files=chooser.getSelectedFile().listFiles();
-									comenzar.setEnabled(true);
-							    }
+							crearJFileChooser();
 						}
 					});
 				}
@@ -104,85 +86,122 @@ public class PanelAPI extends javax.swing.JFrame {
 					comenzar.setEnabled(false);
 					comenzar.addActionListener(new ActionListener() {
 						public void actionPerformed(ActionEvent evt) {
-						    /*
-						     * IMPLEMENTAR 
-						     * METODO
-						     * AQUI
-						     * 
-						     * 
-						     */
-				
-					}
-				});
+							imprimirPalabrasMasUsadas();
+						}
+					});
 				}
 				{
-					menuIdiomas = new JComboBox<String>();
-					principal.add(menuIdiomas);
-					menuIdiomas.setBounds(0, 0, 82, 18);
 					spanish = "Español";
 					english = "Ingles";
 					chooseTitle = "Seleccionar Directorio";
-					menuIdiomas.addItem(spanish);
-					menuIdiomas.addItem(english);
 					idiom = true;
-					menuIdiomas.addActionListener(new OyenteMenu());
-					
+					menuIdiomas = new JComboBox<String>();
+					principal.add(menuIdiomas);
+					crearMenu();
 				}
 				{
 					console = new JTextArea();
 					principal.add(console);
 					console.setBounds(12, 108, 360, 142);
+					console.setEditable(false);
 				}
 			}
 			pack();
 			setSize(400, 300);
 		} catch (Exception e) {
-		    //add your error handling code here
 			e.printStackTrace();
 		}
 	}
+	
+	
+	
+	private void cambiarIdioma(){
+		if (idiom){
+			if(menuIdiomas.getSelectedItem().toString().equals("Ingles")){
+				idiom = false;
+				load.setText("Load Directory");
+				comenzar.setText("Start");
+				spanish = "Spanish";
+				english = "English";
+				chooseTitle = "Select Directory";
+				crearMenu();
+			}
+		}
+		else{
+			if(menuIdiomas.getSelectedItem().toString().equals("Spanish")){
+				idiom = true;
+				load.setText("Cargar Directorio");
+				comenzar.setText("Comenzar");
+				spanish = "Español";
+				english = "Ingles";
+				chooseTitle = "Seleccionar Directorio";
+				crearMenu();
+			}
+		}
+	}
+	
+	
+	
 	private void crearMenu(){
 		menuIdiomas.setVisible(false);
-		  menuIdiomas = new JComboBox<String>();
-		  principal.add(menuIdiomas);
-		  menuIdiomas.setBounds(0, 0, 82, 18);
-		  menuIdiomas.addItem(spanish);
-		  menuIdiomas.addItem(english);
-		  if(idiom){
-			  menuIdiomas.setSelectedIndex(0);
-		  }
-		  else{
-			  menuIdiomas.setSelectedIndex(1);
-		  }
-		  menuIdiomas.addActionListener(new OyenteMenu());
-	}
-	private class OyenteMenu implements ActionListener{
-
-		public void actionPerformed(ActionEvent evt) {
-			  
-			  if (idiom){
-				  if(menuIdiomas.getSelectedItem().toString().equals("Ingles")){
-					  idiom = false;
-					  load.setText("Load Directory");
-					  comenzar.setText("Start");
-					  spanish = "Spanish";
-					  english = "English";
-					  chooseTitle = "Select Directory";
-					  crearMenu();
-				  }
-			  }
-			  else{
-				  if(menuIdiomas.getSelectedItem().toString().equals("Spanish")){
-					  idiom = true;
-					  load.setText("Cargar Directorio");
-					  comenzar.setText("Comenzar");
-					  spanish = "Español";
-					  english = "Ingles";
-					  chooseTitle = "Seleccionar Directorio";
-					  crearMenu();
-				  }
-			  }
+		menuIdiomas = new JComboBox<String>();
+		principal.add(menuIdiomas);
+		menuIdiomas.setBounds(0, 0, 82, 18);
+		menuIdiomas.addItem(spanish);
+		menuIdiomas.addItem(english);
+		if(idiom){
+			menuIdiomas.setSelectedIndex(0);
 		}
-		
+		else{
+			menuIdiomas.setSelectedIndex(1);
+		}
+		menuIdiomas.addActionListener(new ActionListener() {
+			public void actionPerformed(ActionEvent evt) {
+				cambiarIdioma();
+			}
+		});
 	}
+	
+	
+	
+	private void imprimirPalabrasMasUsadas(){
+		try {
+			ProcesadorDeArchivos pda = new ProcesadorDeArchivos();
+			pda.procesar(files);
+			for(String s:pda.calcularPalabrasMasUsadas()){
+				console.append(s);
+				console.append("\n");
+			}
+			
+		} 
+		catch (IOException e) {
+				e.printStackTrace();
+		}
+	}
+	
+	
+	
+	private void crearJFileChooser(){
+	    chooser = new JFileChooser(); 
+	    //seleccion de idioma
+	    if(idiom){
+	    	chooser.setDefaultLocale(Locale.getDefault());
+	    }
+	    else{
+	    	chooser.setDefaultLocale(Locale.ENGLISH);
+	    }
+	    chooser.setDialogTitle(chooseTitle);
+	    chooser.setFileSelectionMode(JFileChooser.DIRECTORIES_ONLY);
+
+	    //desactiva la opcion "todos los archivos"
+	    chooser.setAcceptAllFileFilterUsed(false);
+	    
+	    //si se selecciono una carpeta se carga el arreglo de File y se activa el boton "comenzar"    
+	    if (chooser.showOpenDialog(chooser) == JFileChooser.APPROVE_OPTION) { 
+	    	files=chooser.getSelectedFile().listFiles();
+			comenzar.setEnabled(true);
+	    }
+	}
+	
+	
 }
