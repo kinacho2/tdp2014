@@ -10,21 +10,22 @@ import java.util.StringTokenizer;
 
 import TDAMapa.Entry;
 import TDAMapa.InvalidKeyException;
-import TDAMapa.ListMap;
+import TDAMapa.MapeoHashAbierto;
 import TDAMapa.Map;
  
 public class FileProcessor {
+	
         private String[] arreglo;
         private Map<String,Integer> mapa;
        
+        
+        
         public FileProcessor() {
-        	mapa = new ListMap<String,Integer>();
+        	mapa = new MapeoHashAbierto<String,Integer>();
         }
         
-        public Map<String,Integer> getMapa(){
-        	return mapa;
-        }
        
+        
         public void procesar(File[] archivos) throws IOException {
                 //crea el arreglo de strings que va a retornar.
                 String[] ret= new String[5];

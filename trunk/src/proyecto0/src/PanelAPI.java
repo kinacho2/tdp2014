@@ -28,6 +28,8 @@ import javax.swing.SwingUtilities;
 * THIS MACHINE, SO JIGLOO OR THIS CODE CANNOT BE USED
 * LEGALLY FOR ANY CORPORATE OR COMMERCIAL PURPOSE.
 */
+
+
 public class PanelAPI extends javax.swing.JFrame {
 	private JPanel principal;
 	private JTextArea console;
@@ -44,6 +46,7 @@ public class PanelAPI extends javax.swing.JFrame {
 	/**
 	* Auto-generated main method to display this JFrame
 	*/
+	
 	public static void main(String[] args) {
 		SwingUtilities.invokeLater(new Runnable() {
 			public void run() {
@@ -54,10 +57,21 @@ public class PanelAPI extends javax.swing.JFrame {
 		});
 	}
 	
+	/**
+	 * Constructor de la clase PanelAPI
+	 */
+	
+	
 	public PanelAPI() {
 		super();
 		initGUI();
 	}
+	
+	/**
+	 * @author Gaviot Joaquin with Jigloo plugin
+	 * Inicializa las componentes gráficas de la interface
+	 */
+	
 	
 	private void initGUI() {
 		try {
@@ -113,7 +127,10 @@ public class PanelAPI extends javax.swing.JFrame {
 		}
 	}
 	
-	
+	/**
+	 * @author Gaviot Joaquin
+	 * metodo utilizado para cambiar el idioma de la interface entre inlges y español
+	 */
 	
 	private void cambiarIdioma(){
 		if (idiom){
@@ -140,7 +157,10 @@ public class PanelAPI extends javax.swing.JFrame {
 		}
 	}
 	
-	
+	/**
+	 * @author Gaviot Joaquin
+	 * metodo utilizado para crear el menu de seleccion de idioma
+	 */
 	
 	private void crearMenu(){
 		menuIdiomas.setVisible(false);
@@ -162,6 +182,10 @@ public class PanelAPI extends javax.swing.JFrame {
 		});
 	}
 	
+	/**
+	 * @author Gaviot Joaquin
+	 * metodo que imprime en el JTextArea las 5 palabras mas usadas dentro del directorio elegido
+	 */
 	
 	
 	private void imprimirPalabrasMasUsadas(){
@@ -179,7 +203,10 @@ public class PanelAPI extends javax.swing.JFrame {
 		}
 	}
 	
-	
+	/**
+	 * Codigo obtenido usando la ayuda del siguiente link: http://www.rgagnon.com/javadetails/java-0370.html
+	 * metodo que despliega el panel de seleccion de directorio
+	 */
 	
 	private void crearJFileChooser(){
 	    chooser = new JFileChooser(); 
