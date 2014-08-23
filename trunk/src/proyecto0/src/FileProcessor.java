@@ -67,20 +67,20 @@ public class FileProcessor {
         //codigo obtenido con ayuda del siguiente link:
         //http://www.mkyong.com/java/how-to-read-file-from-java-bufferedreader-example/
         private String leerArchivo( File file ) throws IOException {
-                String s=new String();
-               
-                //Crea un BufferedReader para leer de un archivo.
-                BufferedReader lector = new BufferedReader(new FileReader(file));
-               
-                //Leo cada linea mientras tenga lineas por leer en el archivo.
-                String linea=lector.readLine();
-                while (linea!=null) {
-                        s+=linea+" ";
-                        linea=lector.readLine();
-                }
-                //cierro el BufferedReader.
-                lector.close();
-                return s;
+        	String s=new String();
+              
+            //Crea un BufferedReader para leer de un archivo.
+            BufferedReader lector = new BufferedReader(new FileReader(file));
+             
+            //Leo cada linea mientras tenga lineas por leer en el archivo.
+            String linea=lector.readLine();
+            while (linea!=null) {
+            	s+=linea+" ";
+                linea=lector.readLine();
+            }
+            //cierro el BufferedReader.
+            lector.close();
+            return s;
         }
         
         //Devuelve las 5 palabras con másfrecuencia en una lista
