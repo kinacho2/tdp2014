@@ -84,14 +84,14 @@ public class FileProcessor {
         }
         
         //Devuelve las 5 palabras con másfrecuencia en una lista
-        public List<String> calcularPalabrasMasUsadas(){
-        	List<String> lista = new LinkedList<String>();
+        public List<Entry<String,Integer>> calcularPalabrasMasUsadas(){
+        	List<Entry<String,Integer>> lista = new LinkedList<String>();
         	
         	for (Entry<String,Integer> entrada : mapa.entries()) {
         		
         		//Si la lista lista no tiene 5 elementos los inserta ya que son los menores hasta ese momento      
-        		if (lista.size() < 5) {
-        			lista.add(entrada.getKey());        			
+        		if (lista.size() <= 5) {
+        			lista.add(entrada);        			
         		} else {
         			
         			//busca la palabra con menor frecuencia y luego se compara con la entrada actual
