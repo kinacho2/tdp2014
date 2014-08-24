@@ -85,7 +85,7 @@ public class FileProcessor {
         
         //Devuelve las 5 palabras con másfrecuencia en una lista
         public List<Entry<String,Integer>> calcularPalabrasMasUsadas(){
-        	List<Entry<String,Integer>> lista = new LinkedList<String>();
+        	List<Entry<String,Integer>> lista = new LinkedList<Entry<String,Integer>>();
         	
         	for (Entry<String,Integer> entrada : mapa.entries()) {
         		
@@ -100,7 +100,7 @@ public class FileProcessor {
         			try {
 						if (mapa.get(menorFrecuencia) < entrada.getValue()) {
 							lista.remove(menorFrecuencia);
-							lista.add(entrada.getKey());
+							lista.add(entrada);
 						}
 					} catch (InvalidKeyException e) {
 						e.printStackTrace();
@@ -108,41 +108,19 @@ public class FileProcessor {
         		
         		}
         	}
-        	modificarLista(lista);
         	return lista;
         }
         
-        private void modificarLista(List<String> lista){
-        	try {
-	        	List<String> aux = new LinkedList<String>();
-	        	for (String palabra : lista) {
-					aux.add(palabra+": "+mapa.get(palabra));
-		        }
-	        	lista.removeAll(lista);
-	        	for(String palabra : aux){
-	        		lista.add(palabra);
-	        	}
-        	} 
-        	catch (InvalidKeyException e) {
-				e.printStackTrace();
-			}
-        }
-        
         // busca la palabra con menor frecuencia dentro de la lista
-        private String buscarPalabraMinima(List<String> lista, Map<String,Integer> mapa) {
+        private String buscarPalabraMinima(List<Entry<String,Integer>> lista, Map<String,Integer> mapa) {
+        	int frecuencia=lista.get(0).getValue();
+        	String menor = lista.get(0).getKey();
         	
-        	String menor = lista.get(0);
-        	
-        	try {
-            	//Recorre los 5 elementos de la lista y busca el menor
-        		for (String palabra : lista) {
-						if (mapa.get(palabra) < mapa.get(menor))
-							menor = palabra;
-	        	}
-        		
-        	} catch (InvalidKeyException e) {
-				e.printStackTrace();
-			}
+            //Recorre los 5 elementos de la lista y busca el menor
+        	for (Entry<String,Integer> entrada : lista) {
+				if (entrada.getValue() < frecuencia)
+					menor = entrada.getKey();
+	        }
         	return menor;
         }
 }
