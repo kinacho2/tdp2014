@@ -112,14 +112,14 @@ public class FileProcessor {
         }
         
         // busca la palabra con menor frecuencia dentro de la lista
-        private String buscarPalabraMinima(List<Entry<String,Integer>> lista, Map<String,Integer> mapa) {
+        private Entry<String,Integer> buscarPalabraMinima(List<Entry<String,Integer>> lista, Map<String,Integer> mapa) {
         	int frecuencia=lista.get(0).getValue();
-        	String menor = lista.get(0).getKey();
+        	Entry<String,Integer> menor = lista.get(0);
         	
             //Recorre los 5 elementos de la lista y busca el menor
         	for (Entry<String,Integer> entrada : lista) {
 				if (entrada.getValue() < frecuencia)
-					menor = entrada.getKey();
+					menor = entrada;
 	        }
         	return menor;
         }
