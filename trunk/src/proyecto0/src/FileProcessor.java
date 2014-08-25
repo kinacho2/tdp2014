@@ -27,8 +27,7 @@ public class FileProcessor {
        
         
         public void procesar(File[] archivos) throws IOException {
-                //crea el arreglo de strings que va a retornar.
-                String[] ret= new String[5];
+        	
                 String stringAux=new String();
                
                 //lee cada archivo y lo almacena en un string todo concatenado.
@@ -58,7 +57,6 @@ public class FileProcessor {
 	                	mapa.put(palabra, frecuencia);
 	                	
                 	} catch (InvalidKeyException e) {
-						// TODO Auto-generated catch block
 						e.printStackTrace();
 					}
             }
@@ -90,15 +88,15 @@ public class FileProcessor {
         	for (Entry<String,Integer> entrada : mapa.entries()) {
         		
         		//Si la lista lista no tiene 5 elementos los inserta ya que son los menores hasta ese momento      
-        		if (lista.size() <= 5) {
+        		if (lista.size() < 5) {
         			lista.add(entrada);        			
         		} else {
         			
         			//busca la palabra con menor frecuencia y luego se compara con la entrada actual
-        			String menorFrecuencia = buscarPalabraMinima(lista, mapa);
+        			Entry<String,Integer> menorFrecuencia = buscarPalabraMinima(lista, mapa);
         		
         			try {
-						if (mapa.get(menorFrecuencia) < entrada.getValue()) {
+						if (mapa.get(menorFrecuencia.getKey()) < entrada.getValue()) {
 							lista.remove(menorFrecuencia);
 							lista.add(entrada);
 						}
