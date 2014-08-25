@@ -3,6 +3,7 @@ import java.awt.BorderLayout;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 import java.io.File;
+import java.io.FilenameFilter;
 import java.io.IOException;
 import java.util.Locale;
 
@@ -14,6 +15,8 @@ import javax.swing.JTextArea;
 
 import javax.swing.WindowConstants;
 import javax.swing.SwingUtilities;
+
+import TDAMapa.Entry;
 
 
 /**
@@ -42,7 +45,13 @@ public class PanelAPI extends javax.swing.JFrame {
 	private String spanish;
 	private String english;
 	boolean idiom;
+	String text1;
+	String text2;
+	String text3;
+	String text4;
 
+	
+	
 	/**
 	* Auto-generated main method to display this JFrame
 	*/
@@ -57,21 +66,21 @@ public class PanelAPI extends javax.swing.JFrame {
 		});
 	}
 	
+	
 	/**
 	 * Constructor de la clase PanelAPI
 	 */
-	
 	
 	public PanelAPI() {
 		super();
 		initGUI();
 	}
 	
+	
 	/**
 	 * @author Gaviot Joaquin with Jigloo plugin
 	 * Inicializa las componentes gráficas de la interface
 	 */
-	
 	
 	private void initGUI() {
 		try {
@@ -118,6 +127,10 @@ public class PanelAPI extends javax.swing.JFrame {
 					principal.add(console);
 					console.setBounds(12, 108, 360, 142);
 					console.setEditable(false);
+					text1 = "Las palabras mas usadas son: ";
+					text2 = "'' se repite ";
+					text3 = " veces ";
+					text4 = "El directorio no contiene documentos de texto...";
 				}
 			}
 			pack();
@@ -126,6 +139,7 @@ public class PanelAPI extends javax.swing.JFrame {
 			e.printStackTrace();
 		}
 	}
+	
 	
 	/**
 	 * @author Gaviot Joaquin
@@ -142,6 +156,10 @@ public class PanelAPI extends javax.swing.JFrame {
 				english = "English";
 				chooseTitle = "Select Directory";
 				crearMenu();
+				text1 = "the most used words: ";
+				text2 = "'' repeats ";
+				text3 = " times ";
+				text4 = "The directory haven´t text files...";
 			}
 		}
 		else{
@@ -153,9 +171,14 @@ public class PanelAPI extends javax.swing.JFrame {
 				english = "Ingles";
 				chooseTitle = "Seleccionar Directorio";
 				crearMenu();
+				text1 = "Las palabras mas usadas son: ";
+				text2 = "'' se repite ";
+				text3 = " veces ";
+				text4 = "El directorio no contiene documentos de texto...";
 			}
 		}
 	}
+	
 	
 	/**
 	 * @author Gaviot Joaquin
@@ -182,19 +205,31 @@ public class PanelAPI extends javax.swing.JFrame {
 		});
 	}
 	
+	
 	/**
 	 * @author Gaviot Joaquin
 	 * metodo que imprime en el JTextArea las 5 palabras mas usadas dentro del directorio elegido
 	 */
 	
-	
 	private void imprimirPalabrasMasUsadas(){
 		try {
 			FileProcessor pda = new FileProcessor();
 			pda.procesar(files);
-			for(String s:pda.calcularPalabrasMasUsadas()){
-				console.append(s);
+			console.setText("");
+			if(files.length > 0){
+				console.append(text1);
 				console.append("\n");
+				
+				for(Entry<String,Integer> s:pda.calcularPalabrasMasUsadas()){
+					console.append("''"+s.getKey());
+					console.append(text2);
+					console.append(""+s.getValue());
+					console.append(text3);
+					console.append("\n");
+				}
+			}
+			else{
+				console.append(text4);
 			}
 			
 		} 
@@ -202,6 +237,7 @@ public class PanelAPI extends javax.swing.JFrame {
 				e.printStackTrace();
 		}
 	}
+	
 	
 	/**
 	 * Codigo obtenido usando la ayuda del siguiente link: http://www.rgagnon.com/javadetails/java-0370.html
@@ -217,6 +253,8 @@ public class PanelAPI extends javax.swing.JFrame {
 	    else{
 	    	chooser.setDefaultLocale(Locale.ENGLISH);
 	    }
+	    
+	    //Titulo y tipo de archivo
 	    chooser.setDialogTitle(chooseTitle);
 	    chooser.setFileSelectionMode(JFileChooser.DIRECTORIES_ONLY);
 
@@ -225,10 +263,26 @@ public class PanelAPI extends javax.swing.JFrame {
 	    
 	    //si se selecciono una carpeta se carga el arreglo de File y se activa el boton "comenzar"    
 	    if (chooser.showOpenDialog(chooser) == JFileChooser.APPROVE_OPTION) { 
-	    	files=chooser.getSelectedFile().listFiles();
+	    	files=chooser.getSelectedFile().listFiles(new Filtro(".txt"));
 			comenzar.setEnabled(true);
 	    }
 	}
 	
+	
+	/**
+	 *	Clase que extiende a FilenameFilter de java.io, redefine el metodo accept y devuelve un boolean utilizando el metodo de la clase String endsWith
+	 *	Código obtenido del siguiente link: http://www.sc.ehu.es/sbweb/fisica/cursoJava/fundamentos/archivos/file.htm
+	 *	
+	 */
+	
+	private class Filtro implements FilenameFilter{
+	    String extension;
+	    Filtro(String extension){
+	        this.extension=extension;
+	    }
+	    public boolean accept(File dir, String name){
+	        return name.endsWith(extension);
+	    }
+	}
 	
 }
