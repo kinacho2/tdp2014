@@ -15,7 +15,6 @@ import TDAMapa.Map;
  
 public class FileProcessor {
 	
-        private String[] arreglo;
         private Map<String,Integer> mapa;
        
         
