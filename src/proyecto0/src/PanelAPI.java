@@ -78,7 +78,7 @@ public class PanelAPI extends javax.swing.JFrame {
 	
 	
 	/**
-	 * @author Gaviot Joaquin with Jigloo plugin
+	 * @author Nestor Fligiuolo, Joaquin Gaviot Y Andrea Borek
 	 * Inicializa las componentes gráficas de la interface
 	 */
 	
@@ -142,7 +142,7 @@ public class PanelAPI extends javax.swing.JFrame {
 	
 	
 	/**
-	 * @author Gaviot Joaquin
+	 * @author Nestor Fligiuolo, Joaquin Gaviot Y Andrea Borek
 	 * metodo utilizado para cambiar el idioma de la interface entre inlges y español
 	 */
 	
@@ -181,7 +181,7 @@ public class PanelAPI extends javax.swing.JFrame {
 	
 	
 	/**
-	 * @author Gaviot Joaquin
+	 * @author Nestor Fligiuolo, Joaquin Gaviot Y Andrea Borek
 	 * metodo utilizado para crear el menu de seleccion de idioma
 	 */
 	
@@ -207,23 +207,23 @@ public class PanelAPI extends javax.swing.JFrame {
 	
 	
 	/**
-	 * @author Gaviot Joaquin
+	 * @author Nestor Fligiuolo, Joaquin Gaviot Y Andrea Borek
 	 * metodo que imprime en el JTextArea las 5 palabras mas usadas dentro del directorio elegido
 	 */
 	
 	private void imprimirPalabrasMasUsadas(){
 		try {
 			FileProcessor pda = new FileProcessor();
-			pda.procesar(files);
+			Entry<String,Integer>[]array = pda.procesar(files);
 			console.setText("");
 			if(files.length > 0){
 				console.append(text1);
 				console.append("\n");
 				
-				for(Entry<String,Integer> s:pda.calcularPalabrasMasUsadas()){
-					console.append("''"+s.getKey());
+				for(int i = 0; i<5 && i < array.length;i++){
+					console.append("''"+array[i].getKey());
 					console.append(text2);
-					console.append(""+s.getValue());
+					console.append(""+array[i].getValue());
 					console.append(text3);
 					console.append("\n");
 				}
