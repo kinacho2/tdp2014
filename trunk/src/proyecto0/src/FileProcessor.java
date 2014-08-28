@@ -9,8 +9,8 @@ import java.util.StringTokenizer;
 
 
 
-import TDAMapa.Entry;
-import TDAMapa.Entrada;
+import TDAEntry.Entry;
+import TDAEntry.Entrada;
 
 
 /**

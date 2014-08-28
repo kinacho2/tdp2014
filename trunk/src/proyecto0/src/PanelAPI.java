@@ -16,7 +16,7 @@ import javax.swing.JTextArea;
 import javax.swing.WindowConstants;
 import javax.swing.SwingUtilities;
 
-import TDAMapa.Entry;
+import TDAEntry.Entry;
 
 
 /**
@@ -30,6 +30,7 @@ import TDAMapa.Entry;
 * A COMMERCIAL LICENSE HAS NOT BEEN PURCHASED FOR
 * THIS MACHINE, SO JIGLOO OR THIS CODE CANNOT BE USED
 * LEGALLY FOR ANY CORPORATE OR COMMERCIAL PURPOSE.
+* @author Nestor Fligiuolo, Joaquin Gaviot Y Andrea Borek
 */
 
 
@@ -78,7 +79,6 @@ public class PanelAPI extends javax.swing.JFrame {
 	
 	
 	/**
-	 * @author Nestor Fligiuolo, Joaquin Gaviot Y Andrea Borek
 	 * Inicializa las componentes gráficas de la interface
 	 */
 	
@@ -142,8 +142,7 @@ public class PanelAPI extends javax.swing.JFrame {
 	
 	
 	/**
-	 * @author Nestor Fligiuolo, Joaquin Gaviot Y Andrea Borek
-	 * metodo utilizado para cambiar el idioma de la interface entre inlges y español
+	 * Método utilizado para cambiar el idioma de la interface entre inlges y español
 	 */
 	
 	private void cambiarIdioma(){
@@ -181,8 +180,7 @@ public class PanelAPI extends javax.swing.JFrame {
 	
 	
 	/**
-	 * @author Nestor Fligiuolo, Joaquin Gaviot Y Andrea Borek
-	 * metodo utilizado para crear el menu de seleccion de idioma
+	 * Método utilizado para crear el menu de seleccion de idioma
 	 */
 	
 	private void crearMenu(){
@@ -207,8 +205,7 @@ public class PanelAPI extends javax.swing.JFrame {
 	
 	
 	/**
-	 * @author Nestor Fligiuolo, Joaquin Gaviot Y Andrea Borek
-	 * metodo que imprime en el JTextArea las 5 palabras mas usadas dentro del directorio elegido
+	 * Método que imprime en el JTextArea las 5 palabras mas usadas dentro del directorio elegido
 	 */
 	
 	private void imprimirPalabrasMasUsadas(){
@@ -240,8 +237,8 @@ public class PanelAPI extends javax.swing.JFrame {
 	
 	
 	/**
-	 * Codigo obtenido usando la ayuda del siguiente link: http://www.rgagnon.com/javadetails/java-0370.html
-	 * metodo que despliega el panel de seleccion de directorio
+	 * Método que despliega el panel de seleccion de directorio
+	 * Código obtenido usando la ayuda del siguiente link: http://www.rgagnon.com/javadetails/java-0370.html
 	 */
 	
 	private void crearJFileChooser(){
@@ -272,7 +269,6 @@ public class PanelAPI extends javax.swing.JFrame {
 	/**
 	 *	Clase que extiende a FilenameFilter de java.io, redefine el metodo accept y devuelve un boolean utilizando el metodo de la clase String endsWith
 	 *	Código obtenido del siguiente link: http://www.sc.ehu.es/sbweb/fisica/cursoJava/fundamentos/archivos/file.htm
-	 *	
 	 */
 	
 	private class Filtro implements FilenameFilter{
