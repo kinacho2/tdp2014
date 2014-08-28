@@ -39,52 +39,50 @@ public class FileProcessor {
          */
         
         public Entry<String, Integer>[] procesar(File[] archivos) throws IOException {
-        	
-                String stringAux=new String();
-               
-                //lee cada archivo y lo almacena en un string todo concatenado.
-                for(int i=0;i<archivos.length;i++){
-                        stringAux+=leerArchivo(archivos[i]);
-                }
-                //eliminar todas las apariciones de simbolos reemplazandolos por un vacio ("")
-                String tokens= ".,;:()*&%$-_=+[{]}|<>?/!@";
-                for(int i=0;i<tokens.length();i++){
-                	stringAux = stringAux.replace(""+tokens.charAt(i), "");
-                }
+        	String stringAux=new String();
+			//lee cada archivo y lo almacena en un string todo concatenado.
+			for(int i=0;i<archivos.length;i++){
+			        stringAux+=leerArchivo(archivos[i]);
+			}
                 
-               
-                //Se crea un StringTokenizer para buscar cada palabra y meterlas en un diccionario sin el caracter espacio.
-                StringTokenizer stEspacio = new StringTokenizer(stringAux," ");
-                Integer frecuencia;
-                String palabra;
-                //Se crea un arreglo para almacenar las 5 palabras mas repetidas
-                int i=0;
-                while (stEspacio.hasMoreTokens()) {
-                	palabra = stEspacio.nextToken().toUpperCase();
-                	
-                		frecuencia = mapa.get(palabra);
-	                	if (frecuencia != null) {
-	                		frecuencia++;
-	                		System.out.print("");
-	            		}
-	                	else
-	                		frecuencia = 1;
-	                	mapa.put(palabra, frecuencia);
-	                	Entry<String,Integer> nuevaEntrada = new Entrada<String,Integer>(palabra, frecuencia);
-	                	if(i<array.length-1 && array[i]==null){
-	                		array[i] = nuevaEntrada;
-	                		i++;
-	                	} else {
-	                		if(frecuencia != null && frecuencia > array[4].getValue()){
-	                			insertar(nuevaEntrada);
-	                		}
-	                	
-	                	}
-	                	
-            }
-                
-            return array;
-        }
+			 //eliminar todas las apariciones de simbolos reemplazandolos por un vacio ("")
+			String tokens= ".,;:()*&%$-_=+[{]}|<>?/!@";
+			for(int i=0;i<tokens.length();i++){
+				stringAux = stringAux.replace(""+tokens.charAt(i), "");
+			}
+			                
+			//Se crea un StringTokenizer para buscar cada palabra y meterlas en un diccionario sin el caracter espacio.
+			StringTokenizer stEspacio = new StringTokenizer(stringAux," ");
+			Integer frecuencia;
+			String palabra;
+			                
+			//Se crea un arreglo para almacenar las 5 palabras mas repetidas
+			int i=0;
+			while (stEspacio.hasMoreTokens()) {
+				palabra = stEspacio.nextToken().toUpperCase();
+			                	
+				frecuencia = mapa.get(palabra);
+			 	if (frecuencia != null) {
+			 		frecuencia++;
+			 		System.out.print("");
+				}
+				else
+					frecuencia = 1;
+			  	mapa.put(palabra, frecuencia);
+			 	Entry<String,Integer> nuevaEntrada = new Entrada<String,Integer>(palabra, frecuencia);
+			 	if(i<array.length-1 && array[i]==null){
+					array[i] = nuevaEntrada;
+			  		i++;
+			   	} 
+			 	else {
+					if(frecuencia != null && frecuencia > array[4].getValue()){
+						insertar(nuevaEntrada);
+			 		}             	
+				}
+				                	
+			}
+			return array;
+		}
         
         /**
          * Inserta la palabra en el lugar correspondiente
