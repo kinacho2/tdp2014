@@ -22,11 +22,12 @@ public class FileProcessor {
 	
         private HashMap<String,Integer> mapa;
         Entry<String,Integer>[] array;
-        
+        int max;
        
         public FileProcessor() {
         	mapa = new HashMap<String,Integer>();
             array = (Entry<String,Integer>[]) new Entrada[6];
+            max=0;
 
         }
         
@@ -45,18 +46,19 @@ public class FileProcessor {
 			        stringAux+=leerArchivo(archivos[i]);
 			}
                 
-			 //eliminar todas las apariciones de simbolos reemplazandolos por un vacio ("")
+			//eliminar todas las apariciones de simbolos reemplazandolos por un espacio (" ")
 			String tokens= ".,;:()*&%$-_=+[{]}|<>?/!@";
 			for(int i=0;i<tokens.length();i++){
-				stringAux = stringAux.replace(""+tokens.charAt(i), "");
-			}
-			                
+				stringAux = stringAux.replace(""+tokens.charAt(i), " ");
+			} 
+			
 			//Se crea un StringTokenizer para buscar cada palabra y meterlas en un diccionario sin el caracter espacio.
 			StringTokenizer stEspacio = new StringTokenizer(stringAux," ");
 			Integer frecuencia;
 			String palabra;
 			                
 			//Se crea un arreglo para almacenar las 5 palabras mas repetidas
+			max=stEspacio.countTokens();
 			int i=0;
 			while (stEspacio.hasMoreTokens()) {
 				palabra = stEspacio.nextToken().toUpperCase();
@@ -69,6 +71,7 @@ public class FileProcessor {
 				else
 					frecuencia = 1;
 			  	mapa.put(palabra, frecuencia);
+			  	max++;
 			 	Entry<String,Integer> nuevaEntrada = new Entrada<String,Integer>(palabra, frecuencia);
 			 	if(i<array.length-1 && array[i]==null){
 					array[i] = nuevaEntrada;
@@ -79,11 +82,27 @@ public class FileProcessor {
 						insertar(nuevaEntrada);
 			 		}             	
 				}
+			 	
 				                	
 			}
 			return array;
 		}
         
+        /**
+         * retorna el porcentaje de aparicion de la palabra en la posicion p del arreglo
+         * @param i indice de acceso al arreglo
+         * @return un float con el porcentaje correspondiente 
+         */
+        
+        public float calcularPorcentaje(int i){
+        	float r=0.0f;
+        	// se hace un redondeo a 2 cifras decimales
+        	if(max>0){
+        		Float f = new Float(Math.round((double)10000.0d * array[i].getValue() / max) / 100.0d);
+        		r = f.floatValue();
+        	}
+        		return r;
+        }
         /**
          * Inserta la palabra en el lugar correspondiente
          * @param entrada 
@@ -92,7 +111,7 @@ public class FileProcessor {
         private void insertar(Entry<String, Integer> en){
         	boolean inserte = false;
         	boolean inserte2=false;
-        	int i = 4;
+        	int i = array.length - 2;
         	
         	/*
         	 * busca la posicion para insertar e inserta ordenadamente

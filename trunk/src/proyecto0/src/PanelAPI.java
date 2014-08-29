@@ -47,8 +47,6 @@ public class PanelAPI extends javax.swing.JFrame {
 	private String english;
 	boolean idiom;
 	String text1;
-	String text2;
-	String text3;
 	String text4;
 
 	
@@ -128,8 +126,6 @@ public class PanelAPI extends javax.swing.JFrame {
 					console.setBounds(12, 108, 360, 142);
 					console.setEditable(false);
 					text1 = "Las palabras mas usadas son: ";
-					text2 = "'' se repite ";
-					text3 = " veces ";
 					text4 = "El directorio no contiene documentos de texto...";
 				}
 			}
@@ -156,8 +152,6 @@ public class PanelAPI extends javax.swing.JFrame {
 				chooseTitle = "Select Directory";
 				crearMenu();
 				text1 = "the most used words: ";
-				text2 = "'' repeats ";
-				text3 = " times ";
 				text4 = "The directory haven´t text files...";
 			}
 		}
@@ -171,8 +165,6 @@ public class PanelAPI extends javax.swing.JFrame {
 				chooseTitle = "Seleccionar Directorio";
 				crearMenu();
 				text1 = "Las palabras mas usadas son: ";
-				text2 = "'' se repite ";
-				text3 = " veces ";
 				text4 = "El directorio no contiene documentos de texto...";
 			}
 		}
@@ -219,9 +211,7 @@ public class PanelAPI extends javax.swing.JFrame {
 				
 				for(int i = 0; i<5 && i < array.length;i++){
 					console.append("''"+array[i].getKey());
-					console.append(text2);
-					console.append(""+array[i].getValue());
-					console.append(text3);
+					console.append("'' "+pda.calcularPorcentaje(i)+" %");
 					console.append("\n");
 				}
 			}
