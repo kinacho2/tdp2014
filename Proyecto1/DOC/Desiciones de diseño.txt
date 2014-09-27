@@ -1,0 +1,41 @@
+-La temática sera futurista.
+
+-Tipo de enemigos
+    Kamikaze: Sigue a la nave hasta la altura de la misma.
+    Básicos: Tienen un patrón de recorrido y disparo.
+    Bombardero: Es lento pero dispara rapidamnente.
+    Artillero: Siguen un recorrido lineal y disparan en ráfaga.
+    Rafaga: es una coleccion de Basico
+  -Devuelven PowerUp
+    Bombarderos: uno por cada enemigo que se elimine.
+    Básicos: si se desruye la ráfaga de enemigos dará un PowerUp.
+    Rafaga: el ultimo Basico crea un PowerUp al ser destruido.
+    El resto de los enemigos darán un power-ups si tiene un color especial.
+-Tipos de PowerUp:
+	-De tipo ofensivo
+     	  .Multiplicador: aumenta la cantidadde disparos, por cada paquete de power-ups.
+     	  .Lazcaer: lacer en linea recta que aumenta el grosor del mismo.
+   	  .Wave: Disparo en forma sinusoidal.
+	-De tipo defensivo
+     	  .Escudo: Protege de los disparos y naves enemigos.
+     	  .Compañero: Realiza las mismas acciones que la nave del jugador, pero unos segundos atrasado.
+	-Especial
+     	 .Bomba: Poder especial que destruye todos los enemigos de la pantalla.
+	Los PowerUp de tipo ofensivo y defensivo se cancelan entre si, es decir que no se pueden llevar 2 del mismo tipo
+-Puntaje:
+	El puntaje lo mantendra la clase main
+  	 .Por cada nave se dará un puntaje específico al destruirla.
+ 	 .Los power-ups darán puntaje al tomarlos.
+-Vidas:
+    Se tiene varias vidas que pueden ganarse cada cierta cantidad de puntos ganados.
+    Cada nave tiene una cantidad de resistencia a los disparos que son 1, 3 y 5.
+-Tipos de jugador:
+    .Rápido: Dispara rápidamente pero su potencia es menor; además tiene resistencia a un sólo disparo.
+    .Balanceado: Las estadíscicas las tiene equilibrada, tiene resistencia a 3 disparos.
+    .Resistencia: Dispara lento, su potencia de ataque es lenta y resiste a 5 disparos.
+
+-Los Jefes de cada nivel daran una Bomba al jugador al ser destruidos
+
+-Tanto el jugador como los enemigos tendran un nivel que es su potencia de fuego
+
+Cantidad de Niveles: 3.
