@@ -6,15 +6,16 @@ import java.net.URL;
 import javax.swing.ImageIcon;
 
 public class Jugador extends Nave {
-	
-	//url imagen
-	protected static final URL url = (Nave.class.getClassLoader().getResource("img/Jugador/Balanceado.gif"));
-	
-	
+	protected static URL url = (Nave.class.getClassLoader().getResource("img/Jugador/Balanceado.gif"));
+	protected static URL urlDer = (Nave.class.getClassLoader().getResource("img/Jugador/BalanceadoDerecha.gif"));
+	protected static URL urlIzq = (Nave.class.getClassLoader().getResource("img/Jugador/BalanceadoIzquierda.gif"));
 	
 	
-	public Jugador(){
+	public Jugador(URL url,URL urlDer, URL urlIzq){
 		super(new ImageIcon(url),32,44);
+		this.url=url;
+		this.urlDer=urlDer;
+		this.urlIzq=urlIzq;
 	}
 	
 	public void keyPressed(KeyEvent e) {
