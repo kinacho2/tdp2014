@@ -14,7 +14,7 @@ public abstract class Nave {
 	
 	protected int vida, x, y, dx, dy;
 	//imagen de la nave
-	private Image image;
+	protected Image image;
 	
 	//url de la image
 	

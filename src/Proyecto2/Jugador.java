@@ -6,9 +6,9 @@ import java.net.URL;
 import javax.swing.ImageIcon;
 
 public class Jugador extends Nave {
-	protected static URL url = (Nave.class.getClassLoader().getResource("img/Jugador/Balanceado.gif"));
-	protected static URL urlDer = (Nave.class.getClassLoader().getResource("img/Jugador/BalanceadoDerecha.gif"));
-	protected static URL urlIzq = (Nave.class.getClassLoader().getResource("img/Jugador/BalanceadoIzquierda.gif"));
+	protected static URL url;
+	protected static URL urlDer;
+	protected static URL urlIzq;
 	
 	
 	public Jugador(URL url,URL urlDer, URL urlIzq){
@@ -28,10 +28,12 @@ public class Jugador extends Nave {
 
         if (key == KeyEvent.VK_LEFT) {
             dx = -1;
+            image = (new ImageIcon(urlIzq).getImage());
         }
 
         if (key == KeyEvent.VK_RIGHT) {
             dx = 1;
+            image = (new ImageIcon(urlDer).getImage());
         }
 
         if (key == KeyEvent.VK_UP) {
@@ -48,10 +50,12 @@ public class Jugador extends Nave {
 
         if (key == KeyEvent.VK_LEFT) {
             dx = 0;
+            image = (new ImageIcon(url).getImage());
         }
 
         if (key == KeyEvent.VK_RIGHT) {
             dx = 0;
+            image = (new ImageIcon(url).getImage());
         }
 
         if (key == KeyEvent.VK_UP) {
