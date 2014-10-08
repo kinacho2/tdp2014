@@ -4,13 +4,15 @@ import java.io.BufferedReader;
 import java.io.File;
 import java.io.FileReader;
 import java.io.IOException;
-import java.util.HashMap;
 import java.util.StringTokenizer;
 
 
 
 import TDAEntry.Entry;
 import TDAEntry.Entrada;
+import TDAMapa.Map;
+import TDAMapa.MapeoConLista;
+import TDAMapa.InvalidKeyException;
 
 
 /**
@@ -20,12 +22,12 @@ import TDAEntry.Entrada;
  */
 public class FileProcessor {
 	
-        private HashMap<String,Integer> mapa;
+        private Map<String,Integer> mapa;
         Entry<String,Integer>[] array;
         int max;
        
         public FileProcessor() {
-        	mapa = new HashMap<String,Integer>();
+        	mapa = new MapeoConLista<String,Integer>();
             array = (Entry<String,Integer>[]) new Entrada[6];
             max=0;
 
@@ -61,6 +63,7 @@ public class FileProcessor {
 			max=stEspacio.countTokens();
 			int i=0;
 			while (stEspacio.hasMoreTokens()) {
+				try{
 				palabra = stEspacio.nextToken().toUpperCase();
 			                	
 				frecuencia = mapa.get(palabra);
@@ -81,6 +84,11 @@ public class FileProcessor {
 					if(frecuencia != null && frecuencia > array[4].getValue()){
 						insertar(nuevaEntrada);
 			 		}             	
+				}
+			 	
+				}
+				catch(InvalidKeyException ex){
+					
 				}
 			 	
 				                	
