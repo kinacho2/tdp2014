@@ -35,7 +35,7 @@ public class Mind extends JPanel implements ActionListener {
         setBackground(Color.BLACK);
         setDoubleBuffered(true);
 
-        player = new Jugador();
+        player = new Normal();
 
         timer = new Timer(5, this);
         timer.start();
