@@ -6,16 +6,16 @@ import java.net.URL;
 import javax.swing.ImageIcon;
 
 public class Jugador extends Nave {
-	protected static URL url;
-	protected static URL urlDer;
-	protected static URL urlIzq;
+	protected static ImageIcon icon;
+	protected static ImageIcon iconDer;
+	protected static ImageIcon iconIzq;
 	
 	
 	public Jugador(URL url,URL urlDer, URL urlIzq){
 		super(new ImageIcon(url),32,44);
-		this.url=url;
-		this.urlDer=urlDer;
-		this.urlIzq=urlIzq;
+		this.icon=new ImageIcon(url);
+		this.iconDer=new ImageIcon(urlDer);
+		this.iconIzq=new ImageIcon(urlIzq);
 	}
 	
 	public void keyPressed(KeyEvent e) {
@@ -28,12 +28,12 @@ public class Jugador extends Nave {
 
         if (key == KeyEvent.VK_LEFT) {
             dx = -1;
-            image = (new ImageIcon(urlIzq).getImage());
+            image = iconIzq.getImage();
         }
 
         if (key == KeyEvent.VK_RIGHT) {
             dx = 1;
-            image = (new ImageIcon(urlDer).getImage());
+            image = iconDer.getImage();
         }
 
         if (key == KeyEvent.VK_UP) {
@@ -50,12 +50,12 @@ public class Jugador extends Nave {
 
         if (key == KeyEvent.VK_LEFT) {
             dx = 0;
-            image = (new ImageIcon(url).getImage());
+            image = icon.getImage();
         }
 
         if (key == KeyEvent.VK_RIGHT) {
             dx = 0;
-            image = (new ImageIcon(url).getImage());
+            image = icon.getImage();
         }
 
         if (key == KeyEvent.VK_UP) {
