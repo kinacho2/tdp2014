@@ -23,7 +23,7 @@ public class Mind extends JPanel implements ActionListener {
 	
     private Timer timer;
     private Jugador player;
-    
+    private final int delay = 15;
 
     public Mind() {
 
@@ -35,9 +35,9 @@ public class Mind extends JPanel implements ActionListener {
         setBackground(Color.BLACK);
         setDoubleBuffered(true);
 
-        player = new Normal();
+        player = new Resistente();
 
-        timer = new Timer(5, this);
+        timer = new Timer(delay, this);
         timer.start();
     }
 

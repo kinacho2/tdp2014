@@ -9,13 +9,14 @@ public class Jugador extends Nave {
 	protected static ImageIcon icon;
 	protected static ImageIcon iconDer;
 	protected static ImageIcon iconIzq;
+	protected int velocidad;
 	
-	
-	public Jugador(URL url,URL urlDer, URL urlIzq){
-		super(new ImageIcon(url),32,44);
-		this.icon=new ImageIcon(url);
-		this.iconDer=new ImageIcon(urlDer);
-		this.iconIzq=new ImageIcon(urlIzq);
+	public Jugador(int vel, ImageIcon icon, ImageIcon iconDer, ImageIcon iconIzq){
+		super(icon,icon.getIconWidth(),icon.getIconHeight());
+		this.icon=icon;
+		this.iconDer=iconDer;
+		this.iconIzq=iconIzq;
+		velocidad=vel;
 	}
 	
 	public void keyPressed(KeyEvent e) {
@@ -27,21 +28,21 @@ public class Jugador extends Nave {
         }
 
         if (key == KeyEvent.VK_LEFT) {
-            dx = -1;
+            dx = -velocidad;
             image = iconIzq.getImage();
         }
 
         if (key == KeyEvent.VK_RIGHT) {
-            dx = 1;
+            dx = velocidad;
             image = iconDer.getImage();
         }
 
         if (key == KeyEvent.VK_UP) {
-            dy = -1;
+            dy = -velocidad;
         }
 
         if (key == KeyEvent.VK_DOWN) {
-            dy = 1;
+            dy = velocidad;
         }
     }
 
