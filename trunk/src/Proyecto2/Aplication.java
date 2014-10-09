@@ -33,7 +33,7 @@ public class Aplication extends javax.swing.JFrame {
         
 
         setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
-        setSize(400, 300);
+        setSize(800, 600);
         setLocationRelativeTo(null);
         setTitle("R - Type");
         setResizable(false);
