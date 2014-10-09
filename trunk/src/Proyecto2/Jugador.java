@@ -24,7 +24,9 @@ public class Jugador extends Nave {
         int key = e.getKeyCode();
         
         if (key == KeyEvent.VK_SPACE) {
-            disparar();
+            if(puedeDisparar()){
+            	disparar();
+            }
         }
 
         if (key == KeyEvent.VK_LEFT) {

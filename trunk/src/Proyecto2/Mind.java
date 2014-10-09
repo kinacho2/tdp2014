@@ -35,7 +35,7 @@ public class Mind extends JPanel implements ActionListener {
         setBackground(Color.BLACK);
         setDoubleBuffered(true);
 
-        player = new Resistente();
+        player = new Normal();
 
         timer = new Timer(delay, this);
         timer.start();
@@ -83,10 +83,17 @@ public class Mind extends JPanel implements ActionListener {
 
         public void keyReleased(KeyEvent e) {
         	player.keyReleased(e);
+        	if(e.getKeyCode() == KeyEvent.VK_SPACE){
+        		player.setDisCero();
+            }
         }
 
         public void keyPressed(KeyEvent e) {
         	player.keyPressed(e);
+        	if(e.getKeyCode() == KeyEvent.VK_SPACE){
+        		player.setDis();
+            }
+        	
         }
     }
 
