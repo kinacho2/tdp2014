@@ -16,7 +16,7 @@ public class MindEnemies extends Thread  {
 	public MindEnemies(PanelEnemies p) {
 		enemies = new ArrayList();
 		panel = p;
-		Enemigo n = new Artillero();
+		Enemigo n = new Bombardero();
 		enemies.add(n);
 	}
 

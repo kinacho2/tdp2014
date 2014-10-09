@@ -9,6 +9,6 @@ public class Bombardero extends Enemigo {
 	protected static final URL url = (Nave.class.getClassLoader().getResource("img/Enemigo/bombardero.png"));
 
 	public Bombardero(){
-		super(new ImageIcon(url),80,70);
+		super(new ImageIcon(url),192,168);
 	}
 }
