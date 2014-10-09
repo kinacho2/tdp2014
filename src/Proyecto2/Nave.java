@@ -24,7 +24,8 @@ public abstract class Nave {
 	
 	protected int height;
 	protected int width;
-	
+	private int dis;
+	private int longDis;
 	// basado en el codigo http://zetcode.com/tutorials/javagamestutorial/movingsprites/ para mover el jugador
 	public Nave(ImageIcon icon, int w, int h){
 		
@@ -35,10 +36,11 @@ public abstract class Nave {
 		ImageIcon ii = new ImageIcon(icon.getImage().getScaledInstance(w,h,Image.SCALE_DEFAULT));
 		
 		image = ii.getImage();
-		
 		missiles = new ArrayList();
 		x = 40;
 		y = 60;
+		dis=0;
+		longDis=7;
 	}
 	
 	
@@ -60,12 +62,33 @@ public abstract class Nave {
 		return image;
 	}
     
+    /*
+     * aumenta en 1 el delay de los disparos
+     */
+    
+    public void setDis(){
+    	dis= (dis+1) % longDis;
+    }
+    /*
+     * setea el delay en 0
+     */
+    public void setDisCero(){
+    	dis=0;
+    }
+    
+    protected boolean puedeDisparar(){
+    	return dis%longDis==0;
+    }
+    
     public ArrayList getMissiles() {
         return missiles;
     }
     
+    
+    
     public void disparar() {
-        missiles.add(new Disparo(x + width/2 , y ));
+    	if(puedeDisparar())
+    		missiles.add(new Disparo(x + width/2 , y ));
     }
 
 	
