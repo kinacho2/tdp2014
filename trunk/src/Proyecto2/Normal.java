@@ -12,6 +12,6 @@ public class Normal extends Jugador {
 	
 	
 	public Normal(){
-		super(3,new ImageIcon(url),new ImageIcon(urlDer),new ImageIcon(urlIzq));
+		super(3,400,560,new ImageIcon(url),new ImageIcon(urlDer),new ImageIcon(urlIzq));
 	}
 }

@@ -3,6 +3,7 @@ package Proyecto2;
 import java.awt.Graphics;
 import java.awt.Graphics2D;
 import java.awt.Toolkit;
+import java.awt.geom.AffineTransform;
 import java.util.ArrayList;
 
 import javax.swing.JPanel;
@@ -29,7 +30,12 @@ public class PanelEnemies extends JPanel {
 	        //repinta los enemigos
 	        for (int i = 0; i < ms.size(); i++ ) {
 	            Enemigo m = (Enemigo) ms.get(i);
+	            double rot = m.getRotacion();
+	            double calculo = 3.14*3.14*Math.sin(rot);
+	            AffineTransform tx = AffineTransform.getRotateInstance(rot, m.getX(), m.getY());
+	            g2d.setTransform(tx);
 	            g2d.drawImage(m.getImage(), m.getX(), m.getY(), this);
+	            
 	        }
 
 	        Toolkit.getDefaultToolkit().sync();
@@ -38,5 +44,8 @@ public class PanelEnemies extends JPanel {
 	 
 	 public MindEnemies getMindEnemies(){
 		 return mind;
+	 }
+	 public void setJugador(Jugador jugador){
+		 mind.setJugador(jugador);
 	 }
 }

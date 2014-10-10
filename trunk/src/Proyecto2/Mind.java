@@ -32,10 +32,10 @@ public class Mind extends JPanel implements ActionListener {
         setLayout(null);
         addKeyListener(new TAdapter());
         setFocusable(true);
-        setBackground(Color.BLACK);
+        //setBackground(Color.BLACK);
         setDoubleBuffered(true);
 
-        player = new Normal();
+        player = new Veloz();
 
         timer = new Timer(delay, this);
         timer.start();
@@ -95,6 +95,10 @@ public class Mind extends JPanel implements ActionListener {
             }
         	
         }
+    }
+    
+    public Jugador getJugador(){
+    	return player;
     }
 
 }
