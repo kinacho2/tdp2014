@@ -11,8 +11,8 @@ public class Disparo {
     private Image image;
     boolean visible;
 
-    private final int BOARD_WIDTH = 390;
-    private final int MISSILE_SPEED = 2;
+    private final int BOARD_WIDTH = 39;
+    private final int MISSILE_SPEED = 20;
     
     //largo y ancho de la image
 	
@@ -49,7 +49,7 @@ public class Disparo {
 
     public void move() {
         y -= MISSILE_SPEED;
-        if (y > BOARD_WIDTH)
+        if (y < BOARD_WIDTH)
             visible = false;
     }
 }

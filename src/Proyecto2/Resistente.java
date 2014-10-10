@@ -12,6 +12,6 @@ public class Resistente extends Jugador {
 	
 	
 	public Resistente(){
-		super(2,new ImageIcon(url),new ImageIcon(urlDer),new ImageIcon(urlIzq));
+		super(2,400,560,new ImageIcon(url),new ImageIcon(urlDer),new ImageIcon(urlIzq));
 	}
 }

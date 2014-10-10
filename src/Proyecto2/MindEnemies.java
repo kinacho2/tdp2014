@@ -16,18 +16,18 @@ public class MindEnemies extends Thread  {
 	public MindEnemies(PanelEnemies p) {
 		enemies = new ArrayList();
 		panel = p;
-		Enemigo n = new Bombardero();
+		Enemigo n = new Kamikaze();
 		enemies.add(n);
 	}
 
 
 	public void run() {
 		boolean stop = false;
-		try {
+		//try {
 			while (!stop) {
 				
 				
-				MindEnemies.sleep(1000);
+				//MindEnemies.sleep(150);
 				
 				
 				panel.repaint();
@@ -47,15 +47,22 @@ public class MindEnemies extends Thread  {
 				
 			}
 		
-		} catch (InterruptedException e) {
-			e.printStackTrace();
-		}
+	//	} catch (InterruptedException e) {
+		//}
 	}
 
 
 	public ArrayList getEnemies() {
 		// TODO Auto-generated method stub
 		return enemies;
+	}
+	
+	public void setJugador(Jugador jugador){
+		for (int i = 0; i < enemies.size(); i++ ) {
+            Enemigo m = (Enemigo) enemies.get(i);
+            m.setJugador(jugador);
+        }
+		
 	}
 	
 

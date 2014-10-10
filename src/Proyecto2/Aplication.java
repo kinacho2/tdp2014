@@ -3,6 +3,7 @@ package Proyecto2;
 import java.awt.Color;
 
 import javax.swing.JFrame;
+import javax.swing.JLabel;
 import javax.swing.JPanel;
 import javax.swing.WindowConstants;
 import javax.swing.SwingUtilities;
@@ -26,9 +27,11 @@ public class Aplication extends javax.swing.JFrame {
 
 	 	Mind mind = new Mind();
         add(mind);
-       
+        
         PanelEnemies panelEnemies = new PanelEnemies();
         mind.add(panelEnemies);
+        panelEnemies.setBounds(0, 0, 800, 600);
+        panelEnemies.setJugador(mind.getJugador());
         
         
 

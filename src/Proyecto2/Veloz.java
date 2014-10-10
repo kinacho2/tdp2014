@@ -12,6 +12,6 @@ public class Veloz extends Jugador {
 	
 	
 	public Veloz(){
-		super(5,new ImageIcon(url),new ImageIcon(urlDer),new ImageIcon(urlIzq));
+		super(5,400,560,new ImageIcon(url),new ImageIcon(urlDer),new ImageIcon(urlIzq));
 	}
 }
