@@ -10,50 +10,52 @@ public class MindEnemies extends Thread  {
 
 	protected ArrayList enemies;
 	protected PanelEnemies panel;
+	private Mapa mapa;
+	private Random ran;
 	
 	
-	
-	public MindEnemies(PanelEnemies p) {
+	public MindEnemies(PanelEnemies p, Mapa map) {
 		enemies = new ArrayList();
 		panel = p;
-		Enemigo n = new Kamikaze();
-		enemies.add(n);
+		ran=new Random(5);
+		mapa=map;
+		
 	}
 
 
 	public void run() {
 		boolean stop = false;
-		//try {
+		try {
 			while (!stop) {
-				
-				
-				//MindEnemies.sleep(150);
-				
-				
-				panel.repaint();
-				
-				for (int i = 0; i < enemies.size(); i++ ) {
+				MindEnemies.sleep(150);
+				if(ran.nextInt(20)==0){
+					Enemigo m = mapa.nextEnemigo();
+					if(m!=null){
+						enemies.add(m);
+					}
+				}
+
+		        for (int i = 0; i < enemies.size(); i++ ) {
 		            Enemigo m = (Enemigo) enemies.get(i);
 		            m.move();
+		            if (!m.getVisible()){
+		            	enemies.remove(i);
+		            }
+		        m.disparar();
+		        m.setDis();
+		           
 		        }
-				
-				/*
-				 Random rand = new Random();
-				 int num = rand.nextInt(2);
-				 if (num < 1)
-					 enemies.remove(0);
-				 */
-
-				
+		        mapa.setEnemies(enemies);
+				panel.repaint();
 			}
 		
-	//	} catch (InterruptedException e) {
-		//}
+		} catch (InterruptedException e) {
+			//
+		}
 	}
 
 
 	public ArrayList getEnemies() {
-		// TODO Auto-generated method stub
 		return enemies;
 	}
 	

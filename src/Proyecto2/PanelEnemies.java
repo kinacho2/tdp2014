@@ -11,28 +11,43 @@ import javax.swing.JPanel;
 public class PanelEnemies extends JPanel {
 
 	protected MindEnemies mind;
+	Mapa mapa;
 	
-	public PanelEnemies( ){
-		mind = new MindEnemies(this);
-		
+	public PanelEnemies(Mind m,Mapa map ){
+		mind = new MindEnemies(this,map);
+		mapa=map;
 		setLayout(null);
         setOpaque(false);
-        setBounds(0,0,400, 300);
+        setBounds(0,0,800, 600);
 	}
 	
-	 public void paint(Graphics g) {
+	 public synchronized void paint(Graphics g) {
 	        super.paint(g);
 
 	        Graphics2D g2d = (Graphics2D)g;
 	        
-	        ArrayList ms = mind.getEnemies();
+	        ArrayList ms = mapa.getMisilesEnemigos();
+	        
+	        //mueve, repinta y elimina los disparos en caso de que ya no sean visibles
+	        for (int j = 0; j < ms.size(); j++ ) {
+	            Disparo misil = (Disparo) ms.get(j);
+	            if(misil.isVisible()){
+	            	misil.move();
+	            	g2d.drawImage(misil.getImage(), misil.getX(), misil.getY(), this);
+	            }
+	            else{
+	            	ms.remove(j);
+	            }
+	            
+	        }
+	        
+	        ArrayList enemigos = mind.getEnemies();
 	        
 	        //repinta los enemigos
-	        for (int i = 0; i < ms.size(); i++ ) {
-	            Enemigo m = (Enemigo) ms.get(i);
+	        for (int i = 0; i < enemigos.size(); i++ ) {
+	            Enemigo m = (Enemigo) enemigos.get(i);
 	            double rot = m.getRotacion();
-	            double calculo = 3.14*3.14*Math.sin(rot);
-	            AffineTransform tx = AffineTransform.getRotateInstance(rot, m.getX(), m.getY());
+	            AffineTransform tx = AffineTransform.getRotateInstance(rot, m.getX()+m.getWidth()/2, m.getY()+m.getHeight()/2);
 	            g2d.setTransform(tx);
 	            g2d.drawImage(m.getImage(), m.getX(), m.getY(), this);
 	            
