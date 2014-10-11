@@ -9,14 +9,17 @@ public class Jugador extends Nave {
 	protected static ImageIcon icon;
 	protected static ImageIcon iconDer;
 	protected static ImageIcon iconIzq;
+	protected int power;
 	
-	public Jugador(int vel,int x, int y, ImageIcon icon, ImageIcon iconDer, ImageIcon iconIzq){
-		super(vel, x, y, icon, icon.getIconWidth(), icon.getIconHeight());
+	public Jugador(int vida, int vel,int x, int y, ImageIcon icon, ImageIcon iconDer, ImageIcon iconIzq){
+		super(vida, vel, x, y, icon, icon.getIconWidth(), icon.getIconHeight());
 		this.icon=icon;
 		this.iconDer=iconDer;
 		this.iconIzq=iconIzq;
 		velocidad=vel;
 		setJugador(this);
+		velocidadMisil = 20;
+		power=1;
 	}
 	
 	public void keyPressed(KeyEvent e) {
@@ -28,21 +31,21 @@ public class Jugador extends Nave {
             	disparar();
             }
         }
-        else
+       
         if (key == KeyEvent.VK_LEFT) {
             dx = -velocidad;
             image = iconIzq.getImage();
         }
-        else
+        
         if (key == KeyEvent.VK_RIGHT) {
             dx = velocidad;
             image = iconDer.getImage();
         }
-        else
+       
         if (key == KeyEvent.VK_UP) {
             dy = -velocidad;
         }
-        else
+        
         if (key == KeyEvent.VK_DOWN) {
             dy = velocidad;
         }
@@ -55,19 +58,30 @@ public class Jugador extends Nave {
             dx = 0;
             image = icon.getImage();
         }
-        else
+      
         if (key == KeyEvent.VK_RIGHT) {
             dx = 0;
             image = icon.getImage();
         }
-        else
+        
         if (key == KeyEvent.VK_UP) {
             dy = 0;
         }
-        else
+       
         if (key == KeyEvent.VK_DOWN) {
             dy = 0;
         }
+    }
+    
+    public void disparar() {
+    	
+    	Disparo d = new Disparo(x + width/2 , y, 0, 1, velocidadMisil);
+    	Disparo[] array = d.cloneNivel(power);
+    	if(puedeDisparar()){
+    		for(int i = 0;i<array.length;i++){
+    			mapa.addDisparoJugador(array[i]);
+    		}
+    	}
     }
 
 }

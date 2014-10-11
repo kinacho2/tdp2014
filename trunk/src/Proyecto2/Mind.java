@@ -22,83 +22,122 @@ import javax.swing.WindowConstants;
 public class Mind extends JPanel implements ActionListener {
 	
     private Timer timer;
-    private Jugador player;
+    private Jugador jugador;
     private final int delay = 15;
+    private Mapa mapa;
 
-    public Mind() {
+    public Mind(Mapa map) {
 
     	setOpaque(true);
         setSize(400, 300);
         setLayout(null);
         addKeyListener(new TAdapter());
         setFocusable(true);
-        //setBackground(Color.BLACK);
+        setBackground(Color.BLACK);
         setDoubleBuffered(true);
-
-        player = new Veloz();
-
+        mapa = map;
         timer = new Timer(delay, this);
         timer.start();
+        
     }
-
-
+    
     public void paint(Graphics g) {
-        super.paint(g);
+	        super.paint(g);
 
-        Graphics2D g2d = (Graphics2D)g;
-        g2d.drawImage(player.getImage(), player.getX(), player.getY(), this);
-        
-        ArrayList ms = player.getMissiles();
-        
-        
-        //repinta los disparos
-        for (int i = 0; i < ms.size(); i++ ) {
-            Disparo m = (Disparo) ms.get(i);
-            g2d.drawImage(m.getImage(), m.getX(), m.getY(), this);
-        }
-
-        Toolkit.getDefaultToolkit().sync();
-        g.dispose();
+	        Graphics2D g2d = (Graphics2D)g;
+	        if (jugador.getVisible())
+	        	g2d.drawImage(jugador.getImage(), jugador.getX(), jugador.getY(), this);
+	        
+	        ArrayList ms = mapa.getMisilesJugador();
+	        
+	        
+	        //repinta los disparos
+	        for (int i = 0; i < ms.size(); i++ ) {
+	            Disparo m = (Disparo) ms.get(i);
+	            g2d.drawImage(m.getImage(), m.getX(), m.getY(), this);
+	        }
+	
+	        Toolkit.getDefaultToolkit().sync();
+	        g.dispose();
     }
-
 
     public void actionPerformed(ActionEvent e) {
-    	ArrayList ms = player.getMissiles();
-
-    	
-    	//verifica que esten visibles los disparos
+        ArrayList ms = mapa.getMisilesJugador();
+        ArrayList enemigos = mapa.getEnemies();
+        
+        //mueve los misiles del jugador y remueve los que no estan visibles
+        
         for (int i = 0; i < ms.size(); i++) {
         	Disparo m = (Disparo) ms.get(i);
             if (m.isVisible()) 
                 m.move();
-            else ms.remove(i);
+            else 
+            	mapa.removerDisparoJugador(i);
+            
+            //verifica si algun misil del jugador colisiono a un enemigo
+            
+            for (int j = 0; j < enemigos.size(); j++) {
+            	Enemigo enemigo = (Enemigo) enemigos.get(j);
+                if (m.colision(enemigo)) {
+                	if (m.isVisible())
+                		enemigo.setVida(m.getDaño());
+                	m.setVisible();
+                }
+            }
         }
         
-    	player.move();
+        ms = mapa.getMisilesEnemigos();
+        
+        //verifica si algun misil del enemigo colisiono con el jugador
+        
+        for (int j = 0; j < ms.size(); j++ ) {
+            Disparo misil = (Disparo) ms.get(j);
+            if (misil.colision(jugador)){
+            	if (misil.isVisible()) 
+            		jugador.setVida(misil.getDaño());
+            	misil.setVisible();
+            }
+        }
+        
+        jugador.move();
         repaint();  
     }
-
 
     private class TAdapter extends KeyAdapter {
 
         public void keyReleased(KeyEvent e) {
-        	player.keyReleased(e);
+        	jugador.keyReleased(e);
         	if(e.getKeyCode() == KeyEvent.VK_SPACE){
-        		player.setDisCero();
+        		jugador.setDisCero();
             }
         }
 
         public void keyPressed(KeyEvent e) {
-        	player.keyPressed(e);
+        	jugador.keyPressed(e);
         	if(e.getKeyCode() == KeyEvent.VK_SPACE){
-        		player.setDis();
+        		jugador.setDis();
             }
         	
         }
     }
     
     public Jugador getJugador(){
-    	return player;
+    	return jugador;
     }
+    
+    public void crearJugador(int select){
+    	if(select==1){
+        	jugador = new Veloz();
+    	}
+    	if(select==2){
+        	jugador = new Normal();
+    	}
+    	if(select==3){
+        	jugador = new Resistente();
+    	}
+        jugador.setMapa(mapa);
+        mapa.setJugador(jugador);
+    }
+    
 
 }

@@ -2,6 +2,7 @@ package Proyecto2;
 
 import java.awt.Image;
 import java.net.URL;
+import java.util.Random;
 
 import javax.swing.ImageIcon;
 
@@ -11,83 +12,61 @@ public class Kamikaze extends Enemigo {
 
 	private static final int defaultWidth = 40;
 	private static final int defaultHeight = 32;
-	private static final int defaultVel = 5;
+	private static final int defaultVel = 10;
+	private static final int defaultVida = 3;
+
 	
 	public Kamikaze(){
-		super(15,400,200,new ImageIcon(url),defaultWidth,defaultHeight);	
-		System.out.println(x+" "+y);
-		}
+		super(defaultVida,defaultVel,0,-defaultHeight,new ImageIcon(url),defaultWidth,defaultHeight);
+		Random rand = new Random();
+		x = rand.nextInt(800);
+		
+	}
 	
-	public void move(){
-		try {
-			MindEnemies.sleep(150);
-			double dx=jugador.getX()-x;
-			double dy=jugador.getY()-y;
+	public synchronized void move(){
+		
+		if(y<300){
+			dx=jugador.getX()-x;
+			dy=jugador.getY()-y;
 			double mod = Math.sqrt(dy*dy+dx*dx);
-			double cos = Math.abs(Math.acos(dx/mod));
-			double sin = Math.abs(Math.asin(dx/mod));
-			double pi = Math.PI;
-			
-			//funcion de rotacion de imagen
-			if(dx==0){
-				if(dy<0){
-					setRotacion(0);
-				}
-				else{
-					setRotacion(pi);
-				}
-			}
-			else{
-				if(dx>0){
-					if (dy==0){
-						setRotacion(pi/2);
-					}
-					else{
-						if(dy<0){
-							setRotacion(sin);
-						}
-						else{
-							setRotacion(pi/2+cos);
-						}
-					}
-				}
-				
-				else{
-					if (dy==0){
-						setRotacion((3/2)*pi);
-					}
-					else{
-						if(dy>0){
-							setRotacion(pi+sin);
-						}
-						else{
-							setRotacion(pi/2-cos);
-							System.out.println(3*(pi/2));
-						}
-					}
-				}
-			}
-			
-			System.out.println(dx+" "+dy+" "+mod+" "+sin+" "+cos);
-
+			setRotacion();
+			//centra la direccion del Enemigo hacia el jugador
 			dx+=jugador.getWidth()/2;
 			dy+=jugador.getHeight()/2;
 			if(dx!=0 || dy!=0){
 				dx = dx / mod;
 				dy = dy / mod;
 			}
-			else{
+			else {
 				dy=0.1d;
 				dx=0.1d;
 			}
 			y+=dy*velocidad;
 			x+=dx*velocidad;
-			
-			
-		} 
-		catch (InterruptedException e) {
-			// TODO Auto-generated catch block
-			e.printStackTrace();
+		}
+		else{
+			y += dy*velocidad;
+			x+=dx*velocidad;
+		}
+		verificarColision();
+	}
+	
+	public void disparar(){
+		
+		if(puedeDisparar()){
+			double dxAux=jugador.getX() - x + jugador.getWidth()/2;
+			double dyAux=jugador.getY() - y + jugador.getHeight()/2;
+			double mod = Math.sqrt(dyAux*dyAux+dxAux*dxAux);
+			if(dxAux!=0 || dyAux!=0){
+				dxAux = dxAux / mod;
+				dyAux = dyAux / mod;
+			}
+			else {
+				dyAux=0.1d;
+				dxAux=0.1d;
+			}
+			if(y<300)
+				mapa.addDisparoEnemigo(new Disparo(x + width/2 , y+height, -dxAux, dyAux, velocidadMisil));
 		}
 	}
 }

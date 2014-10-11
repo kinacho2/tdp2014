@@ -24,17 +24,18 @@ import javax.swing.SwingUtilities;
 public class Aplication extends javax.swing.JFrame {
 
 	 public Aplication() {
-
-	 	Mind mind = new Mind();
+		 
+		Mapa map= new Mapa();
+		
+	 	Mind mind = new Mind(map);
+	 	mind.crearJugador(1);
         add(mind);
         
-        PanelEnemies panelEnemies = new PanelEnemies();
+        PanelEnemies panelEnemies = new PanelEnemies(mind,map);
         mind.add(panelEnemies);
         panelEnemies.setBounds(0, 0, 800, 600);
         panelEnemies.setJugador(mind.getJugador());
         
-        
-
         setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
         setSize(800, 600);
         setLocationRelativeTo(null);
