@@ -16,7 +16,7 @@ public class Disparo {
 	
   	protected int height;
   	protected int width;
-	private int daño;
+	private int damage;
 	double dx;
 	double dy;
 
@@ -40,7 +40,7 @@ public class Disparo {
         visible = true;
         this.x = x - width/2;
         this.y = y - height;
-        daño=1;
+        damage=1;
         velocidad = missileSpeed;
         
         
@@ -82,8 +82,8 @@ public class Disparo {
     	visible = false;
     }
 
-	public int getDaño() {
-		return daño;
+	public int getDamage() {
+		return damage;
 	}
 	
 	public Disparo[] cloneNivel(int power){

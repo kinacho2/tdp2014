@@ -93,7 +93,7 @@ public class Mind extends JPanel implements ActionListener {
             	Enemigo enemigo = (Enemigo) enemigos.get(j);
                 if (m.colision(enemigo)) {
                 	if (m.isVisible())
-                		enemigo.setVida(m.getDaño());
+                		enemigo.setVida(m.getDamage());
                 	m.setVisible();
                 	mapa.addExposion(m.newExplosion());
                 }
@@ -108,7 +108,7 @@ public class Mind extends JPanel implements ActionListener {
             Disparo misil = (Disparo) ms.get(j);
             if (misil.colision(jugador)){
             	if (misil.isVisible()) 
-            		jugador.setVida(misil.getDaño());
+            		jugador.setVida(misil.getDamage());
             	misil.setVisible();
             	mapa.addExposion(misil.newExplosion());
             }
