@@ -127,7 +127,6 @@ public class Mapa {
 	}
 	
 	public ArrayList explosiones(){
-		System.out.println(explosiones.size());
 		return explosiones;
 	}
 
