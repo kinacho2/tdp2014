@@ -16,7 +16,7 @@ public abstract class Enemigo extends Nave{
 	
 	public void verificarColision(){
 		if (colision(jugador)) {
-			int vd = getDañoColision();
+			int vd = getDamageColision();
 			jugador.setVida(vida);
 			setVida(vd);
 		}

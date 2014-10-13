@@ -176,7 +176,7 @@ public abstract class Nave {
 		}
 	}
 	
-	public int getDañoColision() {
+	public int getDamageColision() {
 		return vida;
 	}
 	
