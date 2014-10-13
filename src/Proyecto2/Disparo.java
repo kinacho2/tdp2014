@@ -1,7 +1,6 @@
 package Proyecto2;
 
 import java.awt.Image;
-
 import javax.swing.ImageIcon;
 
 
@@ -11,7 +10,6 @@ public class Disparo {
     private Image image;
     boolean visible;
 
-    private final int BOARD_WIDTH = 39;
     private int velocidad;
     
     //largo y ancho de la image
@@ -21,12 +19,17 @@ public class Disparo {
 	private int daño;
 	double dx;
 	double dy;
-	
+
+    private int maxHeight = -height*2;
+    private int minHeight = 600 + height;
+	private int maxWidth = 800 + width;
+	private int minWidth = -width*2;
+    
     
     public Disparo(int x, int y, double dx, double dy, int missileSpeed) {
 
-    	height = 2;
-		width = 2;
+    	height = 10;
+		width = 10;
     	this.dx=dx;
     	this.dy=dy;
     	
@@ -39,6 +42,8 @@ public class Disparo {
         this.y = y - height;
         daño=1;
         velocidad = missileSpeed;
+        
+        
     }
 
 
@@ -61,8 +66,8 @@ public class Disparo {
     public void move() {
         y -= dy*velocidad;
         x += dx*velocidad;
-       if (y < BOARD_WIDTH)
-            visible = false;
+       if (y < maxHeight || y >  minHeight || x < minWidth || x > maxWidth)
+            setVisible();
     }
     
     public boolean colision(Nave nave) {
@@ -70,6 +75,7 @@ public class Disparo {
 				((x + width) >= nave.getX()+1 &&  (x + width) <= (nave.getX() + nave.getWidth()+1) && y >= nave.getY()+1  && y <= (nave.getY() + nave.getHeight()+1)) ||
 				(x >= nave.getX()+1 &&  x <= (nave.getX() + nave.getWidth()+1) && (y + height) >= nave.getY()+1  && (y + height) <= (nave.getY() + nave.getHeight()+1)) ||
 				((x + width) >= nave.getX()+1 &&  (x + width) <= (nave.getX() + nave.getWidth()+1) && (y + height) >= nave.getY()+1  && (y + height) <= (nave.getY() + nave.getHeight()+1));
+		 
 	}
     
     public void setVisible() {
@@ -83,22 +89,32 @@ public class Disparo {
 	public Disparo[] cloneNivel(int power){
 		Disparo[] d = new Disparo[ power*2-1 ];
 		double n = 0;
-		
+		int direccion = 1;
 		for(int i = 0;i<power*2-1;i++){
-			d[i]=new Disparo(x,y,n*power,dy,velocidad);
+			d[i]=new Disparo(x, y, n*power, direccion*dy, velocidad);
 			
 			if(n == 0){
-				n = -0.1d;
+				n = -0.3d;
 			}
 
-			if(n + 0.2 == -n && i == 2){
+			if(n + 0.6 == -n && i == 2){
 				n=0.3d;
+				direccion = -1;
+				y += 30;
 			}
 			n = -n;
 		}
 		return d;
 	}
-
 	
+	public Explosion newExplosion(){
+		return new ExplosionPequena(x + width/2, y + height / 2);
+	}
+	
+	public void setPosicion(int x, int y){
+		this.x = x;
+		this.y = y;
+	}
 	
 }
+

@@ -1,6 +1,5 @@
 package Proyecto2;
 
-import java.awt.Image;
 import java.net.URL;
 import java.util.Random;
 
@@ -9,18 +8,20 @@ import javax.swing.ImageIcon;
 public class Kamikaze extends Enemigo {
 
 	protected static final URL url = (Nave.class.getClassLoader().getResource("img/Enemigo/kamikaze.png"));
+	protected static final URL urlUp = (Nave.class.getClassLoader().getResource("img/Enemigo/kamikazeUp.png"));
 
 	private static final int defaultWidth = 40;
 	private static final int defaultHeight = 32;
-	private static final int defaultVel = 10;
+	private static final int defaultVel = 15;
 	private static final int defaultVida = 3;
-
+	private boolean up;
 	
-	public Kamikaze(){
-		super(defaultVida,defaultVel,0,-defaultHeight,new ImageIcon(url),defaultWidth,defaultHeight);
+	public Kamikaze(boolean up){
+		super(defaultVida,defaultVel,0,-defaultHeight,up? new ImageIcon(urlUp): new ImageIcon(url),defaultWidth,defaultHeight);
 		Random rand = new Random();
 		x = rand.nextInt(800);
-		
+		setFrecuenciaDeDisparo(7,20);
+		this.up = up;
 	}
 	
 	public synchronized void move(){
@@ -46,27 +47,21 @@ public class Kamikaze extends Enemigo {
 		}
 		else{
 			y += dy*velocidad;
-			x+=dx*velocidad;
+			x += dx*velocidad;
 		}
 		verificarColision();
 	}
 	
 	public void disparar(){
-		
-		if(puedeDisparar()){
-			double dxAux=jugador.getX() - x + jugador.getWidth()/2;
-			double dyAux=jugador.getY() - y + jugador.getHeight()/2;
-			double mod = Math.sqrt(dyAux*dyAux+dxAux*dxAux);
-			if(dxAux!=0 || dyAux!=0){
-				dxAux = dxAux / mod;
-				dyAux = dyAux / mod;
-			}
-			else {
-				dyAux=0.1d;
-				dxAux=0.1d;
-			}
-			if(y<300)
-				mapa.addDisparoEnemigo(new Disparo(x + width/2 , y+height, -dxAux, dyAux, velocidadMisil));
+		if(puedeDisparar() && y<350){
+			Disparo d = apuntarYDisparar();
+			mapa.addDisparoEnemigo(d);
 		}
 	}
+
+	@Override
+	public boolean isEspecial() {
+		return up;
+	}
 }
+

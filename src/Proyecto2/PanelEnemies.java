@@ -11,8 +11,9 @@ import javax.swing.JPanel;
 public class PanelEnemies extends JPanel {
 
 	protected MindEnemies mind;
-	Mapa mapa;
+	protected Mapa mapa;
 	
+
 	public PanelEnemies(Mind m,Mapa map ){
 		mind = new MindEnemies(this,map);
 		mapa=map;
@@ -21,7 +22,7 @@ public class PanelEnemies extends JPanel {
         setBounds(0,0,800, 600);
 	}
 	
-	 public synchronized void paint(Graphics g) {
+	public synchronized void paint(Graphics g) {
 	        super.paint(g);
 
 	        Graphics2D g2d = (Graphics2D)g;
@@ -31,6 +32,7 @@ public class PanelEnemies extends JPanel {
 	        //mueve, repinta y elimina los disparos en caso de que ya no sean visibles
 	        for (int j = 0; j < ms.size(); j++ ) {
 	            Disparo misil = (Disparo) ms.get(j);
+	            if (misil!=null)
 	            if(misil.isVisible()){
 	            	misil.move();
 	            	g2d.drawImage(misil.getImage(), misil.getX(), misil.getY(), this);
@@ -55,12 +57,16 @@ public class PanelEnemies extends JPanel {
 
 	        Toolkit.getDefaultToolkit().sync();
 	        g.dispose();
+	        
+	        
     }
 	 
-	 public MindEnemies getMindEnemies(){
+	public MindEnemies getMindEnemies(){
 		 return mind;
 	 }
-	 public void setJugador(Jugador jugador){
+	public void setJugador(Jugador jugador){
 		 mind.setJugador(jugador);
-	 }
+	}
+	 
+
 }

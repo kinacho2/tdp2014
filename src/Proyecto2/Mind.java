@@ -6,16 +6,11 @@ import java.awt.Graphics2D;
 import java.awt.Toolkit;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
-import java.awt.event.KeyAdapter;
+import java.awt.event.KeyListener;
 import java.awt.event.KeyEvent;
-
-
-import java.awt.Color;
-import java.awt.Dimension;
 import java.util.ArrayList;
 
 import javax.swing.Timer;
-
 import javax.swing.JPanel;
 import javax.swing.WindowConstants;
 
@@ -25,9 +20,11 @@ public class Mind extends JPanel implements ActionListener {
     private Jugador jugador;
     private final int delay = 15;
     private Mapa mapa;
+    private boolean stop;
+    private int delayFinal;
+    private int contDelay;
 
-    public Mind(Mapa map) {
-
+    public Mind(Mapa map,int select) {
     	setOpaque(true);
         setSize(400, 300);
         setLayout(null);
@@ -36,6 +33,10 @@ public class Mind extends JPanel implements ActionListener {
         setBackground(Color.BLACK);
         setDoubleBuffered(true);
         mapa = map;
+        crearJugador(select);
+        stop = false;
+        delayFinal = jugador.getExplosion().getDelay();
+        contDelay = 0;
         timer = new Timer(delay, this);
         timer.start();
         
@@ -55,6 +56,18 @@ public class Mind extends JPanel implements ActionListener {
 	        for (int i = 0; i < ms.size(); i++ ) {
 	            Disparo m = (Disparo) ms.get(i);
 	            g2d.drawImage(m.getImage(), m.getX(), m.getY(), this);
+	        }
+	        
+	        //repinta las explosiones
+	        
+	        ms = mapa.explosiones();
+	        for (int i = 0; i < ms.size(); i++ ) {
+	            Explosion m = (Explosion) ms.get(i);
+	            g2d.drawImage(m.getImage(), m.getX(), m.getY(), this);
+	            m.setTime(delay);
+	            if(!m.getVisible()){
+	            	ms.remove(i);
+	            }
 	        }
 	
 	        Toolkit.getDefaultToolkit().sync();
@@ -82,6 +95,7 @@ public class Mind extends JPanel implements ActionListener {
                 	if (m.isVisible())
                 		enemigo.setVida(m.getDaño());
                 	m.setVisible();
+                	mapa.addExposion(m.newExplosion());
                 }
             }
         }
@@ -96,14 +110,32 @@ public class Mind extends JPanel implements ActionListener {
             	if (misil.isVisible()) 
             		jugador.setVida(misil.getDaño());
             	misil.setVisible();
+            	mapa.addExposion(misil.newExplosion());
             }
         }
         
-        jugador.move();
-        repaint();  
+        
+        if(jugador.getVisible()){
+        	jugador.move();
+            
+        }
+        else{
+        	if(!stop){
+        		mapa.addExposion(jugador.getExplosion());
+        		stop = true;
+        	}
+        	else{
+        		contDelay += delay;
+        		if(contDelay >= delayFinal)
+        			mapa.stop();
+        	}
+        }
+        
+       	repaint();  
+       
     }
 
-    private class TAdapter extends KeyAdapter {
+    private class TAdapter implements KeyListener {
 
         public void keyReleased(KeyEvent e) {
         	jugador.keyReleased(e);
@@ -119,6 +151,12 @@ public class Mind extends JPanel implements ActionListener {
             }
         	
         }
+
+		@Override
+		public void keyTyped(KeyEvent arg0) {
+			// TODO Auto-generated method stub
+			
+		}
     }
     
     public Jugador getJugador(){
@@ -139,5 +177,8 @@ public class Mind extends JPanel implements ActionListener {
         mapa.setJugador(jugador);
     }
     
+    public void stop(){
+    	timer.stop();
+    }
 
 }

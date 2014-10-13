@@ -1,6 +1,7 @@
 package Proyecto2;
 
 import java.net.URL;
+import java.util.Random;
 
 import javax.swing.ImageIcon;
 
@@ -12,26 +13,46 @@ public class Bombardero extends Enemigo {
 	private static final int defaultWidth = 192;
 	private static final int defaultHeight = 168;
 	private static final int defaultVel = 10;
-	private static final int defaultVida = 5;
-	private int defaultX;
-	private int defaultY;
+	private static final int defaultVida = 20;
+	
+	
+	
+	//altura de inicio del segundo patron
+	private int defaultY = 250;
+	
+	//cuanta la cantidad de rebotes en los bordes
 	private int cont;
 	
-	boolean primero;
-	boolean segundo;
-	boolean tercero;
+	//booleanos que indican los 3 patrones de movimiento distintos del bombardero
+	//acercamiento desde abajo
+	boolean primero = true;
 	
+	//movimiento de rebote en forma de 8
+	boolean segundo = true;
 	
+	//salida evasiva hacia la parte de arriba
+	boolean tercero = true;
+	
+	private int delayDisparo = 10;
+	private int bombarderoDis = 0;
 	
 	public Bombardero(){
-		super(defaultVida,7,45,150+defaultWidth,new ImageIcon(url),defaultWidth,defaultHeight);
-		defaultX =45;
-		defaultY = 250;
-		cont=0;
+		super(defaultVida,7,0,0,new ImageIcon(url),defaultWidth,defaultHeight);
 		
-		primero = true;
-		segundo = true;
-		tercero = true;
+		cont=0;
+		y = minHeight;
+		setFrecuenciaDeDisparo(delayDisparo+1,delayDisparo*3);
+		
+		Random rand = new Random();
+		boolean hemisferioInicial = rand.nextBoolean();
+		if (hemisferioInicial) {
+			posInicialX = 45;
+			
+		} else {
+			posInicialX = maxWidth - 45 - velocidad*20;
+			
+		}
+		x = posInicialX;
 	}
 	
 	public void move(){
@@ -40,28 +61,28 @@ public class Bombardero extends Enemigo {
 			y-=velocidad;
 		}
 		else{
-			if(x<defaultX+velocidad*20 && primero){
+			if(x<posInicialX+velocidad*20 && primero){
 				x+=velocidad;
 				y-=velocidad;
-				if(x>=defaultX+velocidad*20){
+				if(x>=posInicialX+velocidad*20){
 					cont++;
 				}
 			}
 			else{
 				primero = false;
-				if(x>defaultX && segundo){
+				if(x>posInicialX && segundo){
 					x-=velocidad;
-					if(x<=defaultX){
+					if(x<=posInicialX){
 						cont++;
 					}
 				}
 				else{
 					segundo = false;
 					
-					if(x<defaultX+velocidad*20 && tercero){
-						x+=velocidad;
-						y+=velocidad;
-						if(x>=defaultX+velocidad*20){
+					if(x < posInicialX + velocidad * 20 && tercero){
+						x += velocidad;
+						y += velocidad;
+						if(x>=posInicialX+velocidad*20){
 							cont++;
 						}
 						
@@ -70,9 +91,9 @@ public class Bombardero extends Enemigo {
 					else{
 						tercero = false;
 					
-						if(x>defaultX){
+						if(x>posInicialX){
 							x-=velocidad;
-							if(x<=defaultX){
+							if(x<=posInicialX){
 								cont++;
 							}
 							
@@ -86,7 +107,7 @@ public class Bombardero extends Enemigo {
 				}
 			}
 		
-			if (cont>=16){
+			if (cont>=8){
 				if(y>(-100-defaultWidth)){
 					y-=velocidad;
 				}
@@ -94,4 +115,23 @@ public class Bombardero extends Enemigo {
 		}
 		verificarColision();	
 	}
+	
+	public void disparar(){
+		if(puedeDisparar() && y<350){
+			Disparo d = apuntarYDisparar();
+			d.setPosicion(d.getX(), d.getY() - defaultHeight/2);
+			mapa.addDisparoEnemigo(d);
+		}
+	}
+	
+	public boolean puedeDisparar(){
+		bombarderoDis= (bombarderoDis + 1) % (delayDisparo*3);
+		return super.puedeDisparar() || (bombarderoDis%2 == 0 && bombarderoDis <= delayDisparo);
+	}
+
+	@Override
+	public boolean isEspecial() {
+		return true;
+	}
+	
 }
