@@ -22,6 +22,7 @@ public class Kamikaze extends Enemigo {
 		x = rand.nextInt(800);
 		setFrecuenciaDeDisparo(7,20);
 		this.up = up;
+		puntaje = 35;
 	}
 	
 	public synchronized void move() {

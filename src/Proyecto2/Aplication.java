@@ -4,11 +4,6 @@ import java.awt.BorderLayout;
 import java.awt.Color;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
-import java.io.BufferedWriter;
-import java.io.File;
-import java.io.FileWriter;
-import java.io.IOException;
-import java.io.PrintWriter;
 
 import javax.swing.BorderFactory;
 import javax.swing.JButton;
@@ -16,6 +11,7 @@ import javax.swing.JFrame;
 import javax.swing.JLabel;
 import javax.swing.JOptionPane;
 import javax.swing.JPanel;
+import javax.swing.Timer;
 import javax.swing.WindowConstants;
 import javax.swing.SwingUtilities;
 
@@ -84,15 +80,14 @@ public class Aplication extends javax.swing.JFrame {
 	        setVisible(true);
 	        mind.setVisible(true);
 	        
-
-	        System.out.println("ola2");
+	        
 	        // Inicia el hilo de los Hilos
-	        //panelEnemies.getMindEnemies().run();
+	        panelEnemies.getMindEnemies().run();
 		}
 	    
 	    private void initGUI() {
 			
-			initMain();
+			initGame(3);
 			
 			setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
 			pack();

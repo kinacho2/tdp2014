@@ -9,7 +9,7 @@ public class Resistente extends Jugador {
 	protected static URL urlDer = (Nave.class.getClassLoader().getResource("img/Jugador/resistenteDer.gif"));
 	protected static URL urlIzq = (Nave.class.getClassLoader().getResource("img/Jugador/resistenteIzq.gif"));
 	private static final int defaultVel = 2;
-	private static final int defaultVida = 1000;
+	private static final int defaultVida = 8;
 	
 	
 	public Resistente(){

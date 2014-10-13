@@ -53,6 +53,8 @@ public class Bombardero extends Enemigo {
 			
 		}
 		x = posInicialX;
+		
+		puntaje = 200;
 	}
 	
 	public void move() {

@@ -11,7 +11,6 @@ public class Jugador extends Nave {
 	protected int power;
 	protected static URL explode = (Nave.class.getClassLoader().getResource("img/Explosiones/player.gif"));
 	
-	
 	public Jugador(int vida, int vel,int x, int y, ImageIcon icon, ImageIcon iconDer, ImageIcon iconIzq){
 		super(vida, vel, x, y, icon, new ImageIcon(explode), icon.getIconWidth(), icon.getIconHeight());
 		this.icon = icon;
@@ -20,7 +19,8 @@ public class Jugador extends Nave {
 		velocidad=vel;
 		setJugador(this);
 		velocidadMisil = 20;
-		power=3;
+		power = 3;
+		puntaje = 0;
 	}
 	
 	public void keyPressed(KeyEvent e) {
@@ -112,5 +112,13 @@ public class Jugador extends Nave {
 	@Override
 	public Explosion getExplosion() {
 		return new Explosion(x + width/2, y + height/2, new ImageIcon(explode), width, height);
+	}
+
+	public int getPuntaje() {
+		return puntaje;
+	}
+
+	public void setPuntaje(int puntaje) {
+		this.puntaje += puntaje;
 	}
 }

@@ -57,5 +57,10 @@ public abstract class Enemigo extends Nave {
 	public Explosion getExplosion() {
 		return new Explosion(x + width/2, y + height/2, new ImageIcon(explode), width, height);
 	}
+
+
+	public int getPuntaje() {
+		return puntaje;
+	}
 	
 }

@@ -10,6 +10,8 @@ import java.awt.event.KeyListener;
 import java.awt.event.KeyEvent;
 import java.util.ArrayList;
 
+import javax.swing.BorderFactory;
+import javax.swing.JLabel;
 import javax.swing.Timer;
 import javax.swing.JPanel;
 import javax.swing.WindowConstants;
@@ -23,11 +25,14 @@ public class Mind extends JPanel implements ActionListener {
     private boolean stop;
     private int delayFinal;
     private int contDelay;
+    private JPanel bar;
+    private JLabel puntaje;
+    private int pje;
 
     public Mind(Mapa map,int select) {
     	
     	setOpaque(true);
-        setSize(400, 300);
+        setSize(800, 600);
         setLayout(null);
         addKeyListener(new TAdapter());
         setFocusable(true);
@@ -39,6 +44,22 @@ public class Mind extends JPanel implements ActionListener {
         stop = false;
         delayFinal = jugador.getExplosion().getDelay();
         contDelay = 0;
+        
+        bar = new JPanel();
+        bar.setLayout(null);
+		bar.setBackground(new java.awt.Color(0,255,0));
+		bar.setBorder(BorderFactory.createCompoundBorder(null,null));
+        bar.setBounds(0, 510, 800, 50);
+        add(bar);
+        
+        pje = 0;
+        
+        puntaje = new JLabel(""+pje);
+		puntaje.setBounds(800-50, 0, 50, 50);
+		bar.add(puntaje);
+		
+		
+		
         timer = new Timer(delay, this);
         timer.start();
         
@@ -119,8 +140,10 @@ public class Mind extends JPanel implements ActionListener {
             for (int j = 0; j < enemigos.size(); j++) {
             	Enemigo enemigo = (Enemigo) enemigos.get(j);
                 if (m.colision(enemigo)) {
-                	if (m.isVisible())
+                	if (m.isVisible()){
                 		enemigo.setVida(m.getDamage());
+                	}
+                	puntaje.setText("" + jugador.getPuntaje());
                 	m.setVisible();
                 	mapa.addExposion(m.newExplosion());
                 }
