@@ -12,4 +12,25 @@ public class Rafaga extends Enemigo {
 	
 	public Rafaga(){
 		super(defaultVida,defaultVel,45,600-defaultWidth,new ImageIcon(),defaultWidth,defaultHeight);	}
+
+
+	@Override
+	public boolean isEspecial() {
+		// TODO Auto-generated method stub
+		return false;
+	}
+
+
+	@Override
+	public void disparar() {
+		// TODO Auto-generated method stub
+		
+	}
+
+
+	@Override
+	public void move() {
+		// TODO Auto-generated method stub
+		
+	}
 }

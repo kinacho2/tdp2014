@@ -1,7 +1,6 @@
 package Proyecto2;
 
 import java.net.URL;
-
 import javax.swing.ImageIcon;
 
 public class Resistente extends Jugador {
@@ -9,8 +8,8 @@ public class Resistente extends Jugador {
 	protected static URL url = (Nave.class.getClassLoader().getResource("img/Jugador/resistente.gif"));
 	protected static URL urlDer = (Nave.class.getClassLoader().getResource("img/Jugador/resistenteDer.gif"));
 	protected static URL urlIzq = (Nave.class.getClassLoader().getResource("img/Jugador/resistenteIzq.gif"));
-	private static final int defaultVel = 3;
-	private static final int defaultVida = 6;
+	private static final int defaultVel = 2;
+	private static final int defaultVida = 1000;
 	
 	
 	public Resistente(){
