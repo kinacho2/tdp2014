@@ -1,12 +1,5 @@
 package Proyecto2;
 
-import java.awt.Color;
-import java.io.BufferedWriter;
-import java.io.File;
-import java.io.FileWriter;
-import java.io.IOException;
-import java.io.PrintWriter;
-
 import javax.swing.JFrame;
 import javax.swing.WindowConstants;
 import javax.swing.SwingUtilities;

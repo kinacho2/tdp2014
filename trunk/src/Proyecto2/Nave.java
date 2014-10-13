@@ -44,7 +44,7 @@ public abstract class Nave {
 		this.x = xx;
 		this.y = yy;
 		this.posInicialX = x;
-		//ajusta la imagen al tamaño de los parametros w = ancho y h = alto
+		//ajusta la imagen al tamanio de los parametros w = ancho y h = alto
 		ImageIcon ii = new ImageIcon(icon.getImage().getScaledInstance(w,h,Image.SCALE_DEFAULT));
 		image = ii.getImage();
 		this.explosion = explosion.getImage();
