@@ -20,7 +20,6 @@ public class PanelEnemies extends JPanel {
 		setLayout(null);
         setOpaque(false);
         setBounds(0,0,800, 600);
-        //mind.run();
 	}
 	
 	public synchronized void paint(Graphics g) {
@@ -70,6 +69,7 @@ public class PanelEnemies extends JPanel {
 	 */
 	public void setJugador(Jugador jugador) {
 		 mind.setJugador(jugador);
+	
 	}
 	 
 
