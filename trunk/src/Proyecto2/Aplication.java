@@ -2,8 +2,12 @@ package Proyecto2;
 
 import java.awt.BorderLayout;
 import java.awt.Color;
+import java.awt.Graphics;
+import java.awt.Graphics2D;
+import java.awt.Toolkit;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
+import java.util.ArrayList;
 
 import javax.swing.BorderFactory;
 import javax.swing.JButton;
@@ -74,20 +78,24 @@ public class Aplication extends javax.swing.JFrame {
 	        map.setMind(mind);
 	        map.setMindEnemies(panelEnemies.getMindEnemies());
 	       
-	        setSize(800, 600);
-	        
-	        
-	        setVisible(true);
-	        mind.setVisible(true);
 	        
 	        
 	        // Inicia el hilo de los Hilos
-	        panelEnemies.getMindEnemies().run();
+	        
+	        repaint();
+	        
+	       
+			//Thread.sleep(10000);
+	        //panelEnemies.getMindEnemies().run();
+			
+	       
+
+	        
 		}
 	    
 	    private void initGUI() {
 			
-			initGame(3);
+			initPrimerPanel();
 			
 			setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
 			pack();
@@ -96,7 +104,6 @@ public class Aplication extends javax.swing.JFrame {
 			setLocationRelativeTo(null);
 			setTitle("R - Type");
 			setVisible(true);
-			System.out.println("hola");
 		
 	}
 	
@@ -274,4 +281,12 @@ public class Aplication extends javax.swing.JFrame {
 			initPrimerPanel();
 		}
 	}
+	
+	public void paint(Graphics g) {
+        super.paint(g);
+        Graphics2D g2d = (Graphics2D)g;
+        Toolkit.getDefaultToolkit().sync();
+        g.dispose();
+}
+	
 }
