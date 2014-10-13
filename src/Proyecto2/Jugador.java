@@ -111,6 +111,6 @@ public class Jugador extends Nave {
 
 	@Override
 	public Explosion getExplosion() {
-		return new ExplosionMediana(x + width/2, y + height/2, new ImageIcon(explode), width, height);
+		return new Explosion(x + width/2, y + height/2, new ImageIcon(explode), width, height);
 	}
 }

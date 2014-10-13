@@ -18,14 +18,11 @@ public class Resistente extends Jugador {
 
 
 	public void disparar() {
-		
-		if(power==1){
+		if(power == 1){
 			mapa.addDisparoJugador(new Disparo(x + width/2 - 10 , y, 0, 1, velocidadMisil));
 			mapa.addDisparoJugador(new Disparo(x + width/2 + 10 , y, 0, 1, velocidadMisil));
 		}
 		else
-			super.disparar();
-		
-		
+			super.disparar();	
 	}
 }
