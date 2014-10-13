@@ -16,7 +16,7 @@ public class Kamikaze extends Enemigo {
 	private static final int defaultVida = 3;
 	private boolean up;
 	
-	public Kamikaze(boolean up){
+	public Kamikaze(boolean up) {
 		super(defaultVida,defaultVel,0,-defaultHeight,up? new ImageIcon(urlUp): new ImageIcon(url),defaultWidth,defaultHeight);
 		Random rand = new Random();
 		x = rand.nextInt(800);
@@ -24,42 +24,41 @@ public class Kamikaze extends Enemigo {
 		this.up = up;
 	}
 	
-	public synchronized void move(){
+	public synchronized void move() {
 		
-		if(y<300){
-			dx=jugador.getX()-x;
-			dy=jugador.getY()-y;
+		if (y < 300) {
+			dx = jugador.getX() - x;
+			dy = jugador.getY() - y;
 			double mod = Math.sqrt(dy*dy+dx*dx);
 			setRotacion();
+			
 			//centra la direccion del Enemigo hacia el jugador
-			dx+=jugador.getWidth()/2;
-			dy+=jugador.getHeight()/2;
-			if(dx!=0 || dy!=0){
+			dx += jugador.getWidth() / 2;
+			dy += jugador.getHeight() / 2;
+			
+			if (dx != 0 || dy != 0) {
 				dx = dx / mod;
 				dy = dy / mod;
+			} else {
+				dy = 0.1d;
+				dx = 0.1d;
 			}
-			else {
-				dy=0.1d;
-				dx=0.1d;
-			}
-			y+=dy*velocidad;
-			x+=dx*velocidad;
-		}
-		else{
-			y += dy*velocidad;
-			x += dx*velocidad;
+			y += dy * velocidad;
+			x += dx * velocidad;
+		} else {
+			y += dy * velocidad;
+			x += dx * velocidad;
 		}
 		verificarColision();
 	}
 	
-	public void disparar(){
-		if(puedeDisparar() && y<350){
+	public void disparar() {
+		if(puedeDisparar() && y < 350) {
 			Disparo d = apuntarYDisparar();
 			mapa.addDisparoEnemigo(d);
 		}
 	}
 
-	@Override
 	public boolean isEspecial() {
 		return up;
 	}

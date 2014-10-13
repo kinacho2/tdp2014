@@ -11,9 +11,6 @@ public class Normal extends Jugador {
 	private static final int defaultVel = 4;
 	private static final int defaultVida = 5;
 
-	
-	
-	
 	public Normal(){
 		super(defaultVida,defaultVel,400,560,new ImageIcon(url),new ImageIcon(urlDer),new ImageIcon(urlIzq));
 	}

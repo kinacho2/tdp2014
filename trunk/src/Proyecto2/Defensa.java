@@ -2,7 +2,7 @@ package Proyecto2;
 
 import javax.swing.ImageIcon;
 
-public abstract class Defensa extends Jugador{
+public abstract class Defensa extends Jugador {
 	private String nombre;
 
 	public Defensa(int vida, int vel, int x, int y,ImageIcon icon, ImageIcon iconDer, ImageIcon iconIzq, String nom){

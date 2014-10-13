@@ -36,7 +36,7 @@ public class Bombardero extends Enemigo {
 	private int delayDisparo = 10;
 	private int bombarderoDis = 0;
 	
-	public Bombardero(){
+	public Bombardero() {
 		super(defaultVida,7,0,0,new ImageIcon(url),defaultWidth,defaultHeight);
 		
 		cont=0;
@@ -55,50 +55,42 @@ public class Bombardero extends Enemigo {
 		x = posInicialX;
 	}
 	
-	public void move(){
+	public void move() {
 		
-		if(y>defaultY){
-			y-=velocidad;
-		}
-		else{
-			if(x<posInicialX+velocidad*20 && primero){
-				x+=velocidad;
-				y-=velocidad;
-				if(x>=posInicialX+velocidad*20){
+		if( y > defaultY ) {
+			y -= velocidad;
+		} else {
+			if( x < posInicialX + velocidad * 20 && primero ) {
+				x += velocidad;
+				y -= velocidad;
+				if(x >= posInicialX + velocidad * 20 ) {
 					cont++;
 				}
-			}
-			else{
+			} else {
 				primero = false;
-				if(x>posInicialX && segundo){
-					x-=velocidad;
-					if(x<=posInicialX){
+				if(x > posInicialX && segundo) {
+					x -= velocidad;
+					if(x <= posInicialX) {
 						cont++;
 					}
-				}
-				else{
+				} else {
 					segundo = false;
 					
-					if(x < posInicialX + velocidad * 20 && tercero){
+					if(x < posInicialX + velocidad * 20 && tercero) {
 						x += velocidad;
 						y += velocidad;
-						if(x>=posInicialX+velocidad*20){
+						if(x >= posInicialX + velocidad * 20) {
 							cont++;
 						}
-						
-					}
-					
-					else{
+					} else {
 						tercero = false;
 					
-						if(x>posInicialX){
-							x-=velocidad;
-							if(x<=posInicialX){
+						if(x > posInicialX) {
+							x -= velocidad;
+							if(x <= posInicialX) {
 								cont++;
-							}
-							
-						}
-						else{
+							}		
+						} else {
 							primero = true;
 							segundo = true;
 							tercero = true;
@@ -107,29 +99,32 @@ public class Bombardero extends Enemigo {
 				}
 			}
 		
-			if (cont>=8){
-				if(y>(-100-defaultWidth)){
-					y-=velocidad;
+			if (cont >= 8) {
+				if(y > (-100  -defaultWidth) ) {
+					y -= velocidad;
 				}
 			}
 		}
 		verificarColision();	
 	}
 	
-	public void disparar(){
-		if(puedeDisparar() && y<350){
+	
+	// El enemigo dispara directo al jugador
+	public void disparar() {
+		
+		if(puedeDisparar() && y < 350) {
 			Disparo d = apuntarYDisparar();
 			d.setPosicion(d.getX(), d.getY() - defaultHeight/2);
 			mapa.addDisparoEnemigo(d);
 		}
 	}
 	
-	public boolean puedeDisparar(){
-		bombarderoDis= (bombarderoDis + 1) % (delayDisparo*3);
+	public boolean puedeDisparar() {
+		bombarderoDis = (bombarderoDis + 1) % (delayDisparo*3);
 		return super.puedeDisparar() || (bombarderoDis%2 == 0 && bombarderoDis <= delayDisparo);
 	}
 
-	@Override
+	// El bombardero siempre será espcial; es decir, devolverá un PowerUp cuando sea destruido 
 	public boolean isEspecial() {
 		return true;
 	}

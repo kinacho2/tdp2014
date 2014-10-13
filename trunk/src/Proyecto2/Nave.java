@@ -38,7 +38,7 @@ public abstract class Nave {
 	
 	
 	// basado en el codigo http://zetcode.com/tutorials/javagamestutorial/movingsprites/ para mover el jugador
-	public Nave(int vida, int vel, int xx, int yy, ImageIcon icon, ImageIcon explosion, int w, int h){
+	public Nave(int vida, int vel, int xx, int yy, ImageIcon icon, ImageIcon explosion, int w, int h) {
 		height = h;
 		width = w;
 		this.x = xx;
@@ -63,7 +63,7 @@ public abstract class Nave {
 		minWidth = -width*2;
 		
 	}
-	public void setJugador(Jugador jugador){
+	public void setJugador(Jugador jugador) {
 		this.jugador=jugador;
 	}
 	
@@ -85,7 +85,7 @@ public abstract class Nave {
      * aumenta en 1 el delay de los disparos
      */
     
-    public void setDis(){
+    public void setDis() {
     	dis= (dis+1) % longDis;
     }
     
@@ -93,12 +93,12 @@ public abstract class Nave {
      * setea el delay en 0
      */
     
-    public void setDisCero(){
+    public void setDisCero() {
     	dis=0;
     }
     
-    protected boolean puedeDisparar(){
-    	return dis%longDis==0;
+    protected boolean puedeDisparar() {
+    	return dis % longDis == 0;
     }
     
     public abstract void disparar();
@@ -126,14 +126,14 @@ public abstract class Nave {
 				rotacion = 0;
 			else
 				rotacion = (pi);
-		else if(dx>0)
-			if (dy==0)
+		else if (dx > 0)
+			if (dy == 0)
 				rotacion = (pi/2);
-			else if(dy<0)
+			else if(dy < 0)
 				rotacion = (sin);
 			else
 				rotacion = (pi/2+cos);	
-		else if (dy==0)
+		else if (dy == 0)
 			rotacion = ((3/2)*pi);
 				
 		else if(dy>0)
@@ -157,7 +157,7 @@ public abstract class Nave {
 				((x + width) >= nave.getX() &&  (x + width) <= (nave.getX() + nave.getWidth()) && (y + height) >= nave.getY()  && (y + height) <= (nave.getY() + nave.getHeight()));
 	}
 	
-	public void setVisible(){
+	public void setVisible() {
 		visible = false;
 	}
 	
@@ -165,13 +165,13 @@ public abstract class Nave {
 		return visible;
 	}
 	
-	public void setMapa(Mapa map){
+	public void setMapa(Mapa map) {
 		mapa = map;
 	}
 	
-	public void setVida(int vd){
+	public void setVida(int vd) {
 		vida -= vd;
-		if(vida <= 0){
+		if(vida <= 0) {
 			setVisible();
 		}
 	}
@@ -182,11 +182,11 @@ public abstract class Nave {
 	
 	public abstract Explosion getExplosion();
 	
-	protected boolean fueraDePantalla(){
+	protected boolean fueraDePantalla() {
 		return (x < minWidth || x > maxWidth || y > minHeight || y < maxHeight);
 	}
 	
-	protected void setFrecuenciaDeDisparo(int init, int longitud){
+	protected void setFrecuenciaDeDisparo(int init, int longitud) {
 		dis = init;
 		longDis = longitud;
 	}

@@ -38,6 +38,7 @@ public class MindEnemies extends Thread  {
 					}
 				}
 
+		        
 				//mueve y remueve, en caso de ser necesario, las naves enemigas
 				
 		        for (int i = 0; i < enemies.size(); i++ ) {
@@ -64,6 +65,7 @@ public class MindEnemies extends Thread  {
 		return enemies;
 	}
 	
+	// Establec el jugaodr a los enemigos
 	public void setJugador(Jugador jugador){
 		for (int i = 0; i < enemies.size(); i++ ) {
             Enemigo m = (Enemigo) enemies.get(i);
