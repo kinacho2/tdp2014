@@ -17,6 +17,7 @@ public class Artillero extends Enemigo {
 	public Artillero(boolean up){
 		super(defaultVida,defaultVel,45,-defaultHeight,up? new ImageIcon(urlUp): new ImageIcon(url),defaultWidth,defaultHeight);
 		this.up = up;
+		puntaje = 50;
 	}
 
 	@Override

@@ -35,6 +35,7 @@ public class Basico extends Enemigo {
 		
 		this.up = up;
 		setFrecuenciaDeDisparo(10,20);
+		puntaje = 25;
 	}
 	
 	// mueve al enemigo en forma parabólica 

@@ -10,6 +10,7 @@ public abstract class Nave {
 	protected Jugador jugador;
 	protected int vida;
 	protected Mapa mapa;
+	protected int puntaje;
 
 	//variables para la imagen
 	protected int height;
@@ -50,11 +51,11 @@ public abstract class Nave {
 		this.explosion = explosion.getImage();
 		
 		
-		this.dis=0;
-		this.longDis=7;
+		this.dis = 0;
+		this.longDis = 7;
 		
-		this.velocidad=vel;
-		this.vida=vida;
+		this.velocidad = vel;
+		this.vida =vida;
 		visible = true;
 		
 		maxHeight = -height*2;
@@ -173,6 +174,7 @@ public abstract class Nave {
 		vida -= vd;
 		if(vida <= 0) {
 			setVisible();
+			jugador.setPuntaje(puntaje);
 		}
 	}
 	
