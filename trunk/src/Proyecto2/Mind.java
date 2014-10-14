@@ -11,6 +11,7 @@ import java.awt.event.KeyEvent;
 import java.util.ArrayList;
 
 import javax.swing.BorderFactory;
+import javax.swing.JButton;
 import javax.swing.JLabel;
 import javax.swing.Timer;
 import javax.swing.JPanel;
@@ -26,13 +27,15 @@ public class Mind extends JPanel implements ActionListener {
     private int delayFinal;
     private int contDelay;
     private JPanel bar;
-    private JLabel puntaje;
-    private int pje;
+    
+   
 
-    public Mind(Mapa map,int select) {
+	private JLabel puntaje;
+
+    public Mind(Mapa map, int select) {
     	
     	setOpaque(true);
-        setSize(800, 600);
+        
         setLayout(null);
         addKeyListener(new TAdapter());
         setFocusable(true);
@@ -45,25 +48,17 @@ public class Mind extends JPanel implements ActionListener {
         delayFinal = jugador.getExplosion().getDelay();
         contDelay = 0;
         
-        bar = new JPanel();
-        bar.setLayout(null);
-		bar.setBackground(new java.awt.Color(0,255,0));
-		bar.setBorder(BorderFactory.createCompoundBorder(null,null));
-        bar.setBounds(0, 510, 800, 50);
-        add(bar);
-        
-        pje = 0;
-        
-        puntaje = new JLabel(""+pje);
-		puntaje.setBounds(800-50, 0, 50, 50);
-		bar.add(puntaje);
-		
-		
-		
         timer = new Timer(delay, this);
         timer.start();
         
     }
+    
+    public void setBar(JPanel bar) {
+		this.bar = bar;
+        puntaje = new JLabel("Puntaje: "+ 0);
+		puntaje.setBounds(800-150, 0, 150, 50);
+		bar.add(puntaje);
+	}
     
     public void paint(Graphics g) {
 	        super.paint(g);
@@ -118,7 +113,6 @@ public class Mind extends JPanel implements ActionListener {
         }
         
        	repaint();  
-       
     }
     
     // Mueve los disparos visibles de jugador y los que no son removidos; además verifica si algún disparo colisionó
@@ -143,7 +137,7 @@ public class Mind extends JPanel implements ActionListener {
                 	if (m.isVisible()){
                 		enemigo.setVida(m.getDamage());
                 	}
-                	puntaje.setText("" + jugador.getPuntaje());
+                	puntaje.setText("Puntaje: " + jugador.getPuntaje());
                 	m.setVisible();
                 	mapa.addExposion(m.newExplosion());
                 }
@@ -208,6 +202,7 @@ public class Mind extends JPanel implements ActionListener {
     	}
         jugador.setMapa(mapa);
         mapa.setJugador(jugador);
+        jugador.setMinHeight(530);
     }
     
     public void stop() {

@@ -4,12 +4,14 @@ import java.awt.BorderLayout;
 import java.awt.Color;
 import java.awt.Graphics;
 import java.awt.Graphics2D;
+import java.awt.Image;
 import java.awt.Toolkit;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 import java.util.ArrayList;
 
 import javax.swing.BorderFactory;
+import javax.swing.ImageIcon;
 import javax.swing.JButton;
 import javax.swing.JFrame;
 import javax.swing.JLabel;
@@ -45,6 +47,9 @@ public class Aplication extends javax.swing.JFrame {
 	private JButton quit;
 	private JButton newGame;
 	private JPanel main;
+	private JPanel game;
+	private Mind mind;
+	private JPanel bar;
 	
 
 	 public Aplication() {
@@ -59,13 +64,28 @@ public class Aplication extends javax.swing.JFrame {
 	    
 	    private void initGame(int select){
 	    	
-		 	Mapa map= new Mapa();
-
-		 	// Mente del Jugador
-		 	
-		 	Mind mind = new Mind(map,select);
-	        //add(mind);
-		 	getContentPane().add(mind);
+	    	game = new JPanel();
+	    	
+	    	Mapa map = new Mapa();
+			getContentPane().add(game, BorderLayout.CENTER);
+			game.setBackground(new java.awt.Color(0,0,0));
+			{
+				mind = new Mind(map,select);
+				game.add(mind);
+				mind.setLayout(null);
+				mind.setPreferredSize(new java.awt.Dimension(800, 520));
+				
+			}
+			{
+				bar = new JPanel();
+				game.add(bar);
+				bar.setLayout(null);
+				bar.setPreferredSize(new java.awt.Dimension(800, 50));
+				bar.setBackground(new java.awt.Color(25,100,25));
+				mind.setBar(bar);
+			}
+			
+			
 	        
 	        
 	        // Mente de los enemigos
@@ -78,32 +98,30 @@ public class Aplication extends javax.swing.JFrame {
 	        map.setMind(mind);
 	        map.setMindEnemies(panelEnemies.getMindEnemies());
 	       
+	        setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
+	        setSize(800, 600);
+	        setLocationRelativeTo(null);
+	        setTitle("R - Type");
+	        setResizable(false);
+	        setVisible(true);
+	        mind.repaint();
+	        // Inicia el hilo de los Enemigos
 	        
-	        
-	        // Inicia el hilo de los Hilos
-	        
-	        repaint();
-	        
-	       
-			//Thread.sleep(10000);
-	        //panelEnemies.getMindEnemies().run();
+	        panelEnemies.getMindEnemies().start();
 			
-	       
-
 	        
 		}
 	    
 	    private void initGUI() {
 			
-			initPrimerPanel();
+	    	initPrimerPanel();
 			
 			setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
-			pack();
-			setSize(800,600);
-			setResizable(false);
-			setLocationRelativeTo(null);
-			setTitle("R - Type");
-			setVisible(true);
+	        setSize(800, 600);
+	        setLocationRelativeTo(null);
+	        setTitle("R - Type");
+	        setResizable(false);
+	        setVisible(true);
 		
 	}
 	
@@ -132,9 +150,7 @@ public class Aplication extends javax.swing.JFrame {
 			quit.setForeground(new java.awt.Color(0,255,0));
 			quit.setPreferredSize(new java.awt.Dimension(14, 7));
 			quit.setFont(new java.awt.Font("Segoe UI",0,20));
-			quit.setBorder(BorderFactory.createCompoundBorder(
-					null, 
-					null));
+			quit.setBorder(BorderFactory.createCompoundBorder(null, null));
 			quit.addActionListener(new OyenteQuit());
 		}
 	}
@@ -177,31 +193,33 @@ public class Aplication extends javax.swing.JFrame {
 		{
 			labelVeloz = new JLabel();
 			main.add(labelVeloz);
-			labelVeloz.setText("Veloz");
+			labelVeloz.setIcon(new ImageIcon(Nave.class.getClassLoader().getResource("img/Jugador/veloz.gif")));
 			labelVeloz.setBounds(174, 88, 64, 64);
-			labelVeloz.setBackground(new java.awt.Color(0,255,0));
+			labelVeloz.setBackground(new java.awt.Color(155,155,155));
 			labelVeloz.setOpaque(true);
 		}
 		{
 			labelNormal = new JLabel();
 			main.add(labelNormal);
-			labelNormal.setText("Normal");
+			labelNormal.setIcon(new ImageIcon(Nave.class.getClassLoader().getResource("img/Jugador/normal.gif")));
 			labelNormal.setBounds(175, 188, 64, 64);
 			labelNormal.setOpaque(true);
-			labelNormal.setBackground(new java.awt.Color(0,255,0));
+			labelNormal.setBackground(new java.awt.Color(155,155,155));
 		}
 		{
 			labelResistente = new JLabel();
 			main.add(labelResistente);
-			labelResistente.setText("Resistente");
+			labelResistente.setIcon(new ImageIcon(Nave.class.getClassLoader().getResource("img/Jugador/resistente.gif")));
 			labelResistente.setBounds(175, 288, 64, 64);
-			labelResistente.setBackground(new java.awt.Color(0,255,0));
+			labelResistente.setBackground(new java.awt.Color(155,155,155));
 			labelResistente.setOpaque(true);
 		}
 		{
 			atras = new JButton();
 			main.add(atras);
-			atras.setText("<-");
+			ImageIcon ii = new ImageIcon(Nave.class.getClassLoader().getResource("img/Menu _barras/back.png"));
+			atras.setIcon(new ImageIcon(ii.getImage().getScaledInstance(61,44,Image.SCALE_DEFAULT)));
+			
 			atras.setBounds(70, 461, 61, 44);
 			atras.setBackground(new java.awt.Color(0,0,0));
 			atras.setFont(new java.awt.Font("Segoe UI",0,20));
@@ -258,7 +276,10 @@ public class Aplication extends javax.swing.JFrame {
 
 		@Override
 		public void actionPerformed(ActionEvent arg0) {
-			
+			main.setVisible(false);
+			setVisible(false);
+			initGame(2);
+			setVisible(true);
             
 		}
 	}
@@ -267,7 +288,10 @@ public class Aplication extends javax.swing.JFrame {
 
 		@Override
 		public void actionPerformed(ActionEvent arg0) {
-			
+			main.setVisible(false);
+			setVisible(false);
+			initGame(3);
+			setVisible(true);
            
 		}
 	}
@@ -282,11 +306,6 @@ public class Aplication extends javax.swing.JFrame {
 		}
 	}
 	
-	public void paint(Graphics g) {
-        super.paint(g);
-        Graphics2D g2d = (Graphics2D)g;
-        Toolkit.getDefaultToolkit().sync();
-        g.dispose();
-}
+	
 	
 }

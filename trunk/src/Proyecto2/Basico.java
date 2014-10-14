@@ -21,7 +21,7 @@ public class Basico extends Enemigo {
 	public Basico(boolean up) {
 		super(defaultVida,defaultVel,0,-defaultHeight,up? new ImageIcon(urlUp): new ImageIcon(url),defaultWidth,defaultHeight);	
 		Random rand = new Random();
-		alturaMinima = rand.nextInt(20) + 10;
+		alturaMinima = rand.nextInt(10) + 20;
 		
 		boolean hemisferioInicial = rand.nextBoolean();
 		if (hemisferioInicial) {
