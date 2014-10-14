@@ -11,6 +11,7 @@ public abstract class Enemigo extends Nave {
 		super(vida,vel, x, y, ii, new ImageIcon(explode), w, h);
 		velocidadMisil = -5;
 		
+		
 	}
 	
 	

@@ -197,5 +197,9 @@ public abstract class Nave {
 	public int getVelocidad() {
 		return velocidad;
 	}
+	
+	public void setMinHeight(int h){
+		minHeight = h;
+	}
 }
 

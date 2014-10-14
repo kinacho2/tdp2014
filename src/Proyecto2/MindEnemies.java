@@ -20,6 +20,8 @@ public class MindEnemies extends Thread  {
 		
 		ran=new Random(5);
 		mapa=map;
+
+       	
 		
 	}
 	

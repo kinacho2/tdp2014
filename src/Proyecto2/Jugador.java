@@ -19,7 +19,7 @@ public class Jugador extends Nave {
 		velocidad=vel;
 		setJugador(this);
 		velocidadMisil = 20;
-		power = 3;
+		power = 1;
 		puntaje = 0;
 	}
 	
@@ -88,7 +88,7 @@ public class Jugador extends Nave {
 	 public void move() {
 		 
 		 
-		 if(x >= minWidth)
+		 if(x >= minWidth + width*2)
 			x += dx;
 		 else
 			x = 1;
@@ -96,17 +96,17 @@ public class Jugador extends Nave {
 		 if( x <= maxWidth)
 			x += dx;
 		 else
-			 x = maxWidth-1;
+			 x = maxWidth - 1;
 		 
-		 if(y >= 0 )
+		 if(y >= maxHeight + height*2 )
 	        y += dy;
 		 else
 			y = 1;
 		 
-		 if(y <= minHeight)
+		 if(y <= minHeight - height)
 			y += dy;
 		 else
-			y = minHeight-1;
+			y = minHeight - height - 7;
    }
 
 	@Override

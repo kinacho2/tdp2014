@@ -13,7 +13,7 @@ public class Resistente extends Jugador {
 	
 	
 	public Resistente(){
-		super(defaultVida,defaultVel,400,560,new ImageIcon(url),new ImageIcon(urlDer),new ImageIcon(urlIzq));
+		super(defaultVida,defaultVel,400,450,new ImageIcon(url),new ImageIcon(urlDer),new ImageIcon(urlIzq));
 	}
 
 
