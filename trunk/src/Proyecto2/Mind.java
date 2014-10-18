@@ -72,7 +72,7 @@ public class Mind extends JPanel implements ActionListener {
     
     }
     
-    public void paint(Graphics g) {
+    public synchronized void paint(Graphics g) {
 	        super.paint(g);
 
 	        // Pinta el jugador
@@ -132,7 +132,7 @@ public class Mind extends JPanel implements ActionListener {
     
     // Mueve los disparos visibles de jugador y los que no son removidos; además verifica si algún disparo colisionó
     // con algún enemigo
-    private void disparosJugador() {
+    private synchronized void disparosJugador() {
     	// arreglo de disparos de jugador y de enemigos que se encuentran en el mapa
         ArrayList ms = mapa.getMisilesJugador();
         ArrayList enemigos = mapa.getEnemies();
@@ -166,7 +166,7 @@ public class Mind extends JPanel implements ActionListener {
     
     // Mueve los disparos visibles de los enemigos y los que no son removidos; además verifica si algún disparo colisionó
     // con algún enemigo
-    private void disparosEnemigos() {
+    private synchronized void disparosEnemigos() {
     	
     	// arreglo de disparos de los enemigos que se encuentran en el mapa
     	ArrayList ms = mapa.getMisilesEnemigos();

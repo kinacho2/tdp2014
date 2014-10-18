@@ -57,7 +57,6 @@ public class PanelEnemies extends JPanel {
 	        Toolkit.getDefaultToolkit().sync();
 	        g.dispose();
 	        
-	        
     }
 	 
 	public MindEnemies getMindEnemies() {
