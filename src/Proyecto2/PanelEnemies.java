@@ -63,14 +63,5 @@ public class PanelEnemies extends JPanel {
 	public MindEnemies getMindEnemies() {
 		 return mind;
 	}
-	
-	/*
-	 * esyablece a la mente el jugador
-	 */
-	public void setJugador(Jugador jugador) {
-		 mind.setJugador(jugador);
-	
-	}
-	 
 
 }
