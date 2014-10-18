@@ -5,6 +5,17 @@ import java.util.Random;
 
 import javax.swing.JOptionPane;
 
+import Proyecto2.Explosiones_Disparos.Disparo;
+import Proyecto2.Explosiones_Disparos.Explosion;
+import Proyecto2.Frames_Minds.Mind;
+import Proyecto2.Frames_Minds.MindEnemies;
+import Proyecto2.Naves.Enemigos.Artillero;
+import Proyecto2.Naves.Enemigos.Basico;
+import Proyecto2.Naves.Enemigos.Bombardero;
+import Proyecto2.Naves.Enemigos.Enemigo;
+import Proyecto2.Naves.Enemigos.Kamikaze;
+import Proyecto2.Naves.Jugador.Jugador;
+
 public class Mapa {
 	
 	protected ArrayList misilesEnemigos;

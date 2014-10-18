@@ -1,8 +1,12 @@
-package Proyecto2;
+package Proyecto2.Naves.Jugador;
 
 import java.awt.event.KeyEvent;
 import java.net.URL;
 import javax.swing.ImageIcon;
+
+import Proyecto2.Explosiones_Disparos.Disparo;
+import Proyecto2.Explosiones_Disparos.Explosion;
+import Proyecto2.Naves.Nave;
 
 public class Jugador extends Nave {
 	protected ImageIcon icon;

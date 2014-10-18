@@ -1,7 +1,10 @@
-package Proyecto2;
+package Proyecto2.Naves.Jugador;
 
 import java.net.URL;
 import javax.swing.ImageIcon;
+
+import Proyecto2.Explosiones_Disparos.Disparo;
+import Proyecto2.Naves.Nave;
 
 public class Resistente extends Jugador {
 

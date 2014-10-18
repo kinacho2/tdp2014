@@ -13,6 +13,13 @@ import javax.swing.JLabel;
 import javax.swing.JOptionPane;
 import javax.swing.JPanel;
 
+import Proyecto2.Frames_Minds.Mind;
+import Proyecto2.Frames_Minds.PanelEnemies;
+import Proyecto2.Naves.Nave;
+import Proyecto2.Naves.Jugador.Normal;
+import Proyecto2.Naves.Jugador.Resistente;
+import Proyecto2.Naves.Jugador.Veloz;
+
 import java.awt.event.WindowAdapter;
 import java.awt.event.WindowEvent;
 

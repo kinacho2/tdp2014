@@ -1,4 +1,4 @@
-package Proyecto2;
+package Proyecto2.Frames_Minds;
 
 import java.awt.Color;
 import java.awt.Graphics;
@@ -17,6 +17,15 @@ import javax.swing.JOptionPane;
 import javax.swing.Timer;
 import javax.swing.JPanel;
 import javax.swing.WindowConstants;
+
+import Proyecto2.Mapa;
+import Proyecto2.Explosiones_Disparos.Disparo;
+import Proyecto2.Explosiones_Disparos.Explosion;
+import Proyecto2.Naves.Enemigos.Enemigo;
+import Proyecto2.Naves.Jugador.Jugador;
+import Proyecto2.Naves.Jugador.Normal;
+import Proyecto2.Naves.Jugador.Resistente;
+import Proyecto2.Naves.Jugador.Veloz;
 
 public class Mind extends JPanel implements ActionListener {
 	
