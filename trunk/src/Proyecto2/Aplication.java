@@ -111,15 +111,8 @@ public class Aplication extends javax.swing.JFrame {
 			
 	        
 	        // Inicia el hilo de los Enemigos
-	        try{
+	      
 	        panelEnemies.getMindEnemies().start();
-	        }
-	        catch(NullPointerException ex){
-	        	JOptionPane dialogo = new JOptionPane();
-	            
-	            dialogo.showMessageDialog(null, ex.getMessage(), "Atencion",JOptionPane.ERROR_MESSAGE);
-				
-	        }
 	        
 		}
 	    
