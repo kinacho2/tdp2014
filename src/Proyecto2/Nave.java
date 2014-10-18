@@ -12,26 +12,27 @@ public abstract class Nave {
 	protected Mapa mapa;
 	protected int puntaje;
 
-	//variables para la imagen
+   //variables para la imagen
 	protected int height;
 	protected int width;
+	//angulo en radianes
 	private double rotacion = 0.0;
 	protected Image image;
 	protected Image explosion;
 	protected boolean visible;
 
 
-	// variables para disparar
+   // variables para disparar
 	private int dis;
 	private int longDis;
 	protected int velocidadMisil;
 
-	// Para la Posicion
+   // Para la Posicion
 	protected int velocidad;
 	protected int x, y;
 	protected double dx, dy;
 	protected int posInicialX;
-
+	// bordes de la pantalla
     protected int maxHeight;
     protected int minHeight;
     protected int maxWidth;
@@ -66,7 +67,7 @@ public abstract class Nave {
 		this.jugador=jugador;
 	}
 	
-	 public abstract void move();
+	public abstract void move();
 	 
 	public int getX() {
 	        return x;
@@ -150,24 +151,23 @@ public abstract class Nave {
 	}
 
 	 public boolean colision(Nave nave) {
-			 
-		return  nave.getVisible() && 
-				((x >= nave.getX() &&  x <= (nave.getX() + nave.getWidth()) && y >= nave.getY()  && y <= (nave.getY() + nave.getHeight())) 
-				||
-				((x + width) >= nave.getX() &&  (x + width) <= (nave.getX() + nave.getWidth()) && y >= nave.getY()  && y <= (nave.getY() + nave.getHeight())) 
-				||
-				(x >= nave.getX() &&  x <= (nave.getX() + nave.getWidth()) && (y + height) >= nave.getY()  && (y + height) <= (nave.getY() + nave.getHeight())) 
-				||
-				((x + width) >= nave.getX() &&  (x + width) <= (nave.getX() + nave.getWidth()) && (y + height) >= nave.getY()  && (y + height) <= (nave.getY() + nave.getHeight()))
-				//next
-				||
-				(x <= nave.getX() &&  (x + width) >= (nave.getX() + nave.getWidth()) && (y + height) >= (nave.getY() + nave.getHeight())  && y <= (nave.getY() + nave.getHeight())) 
-				||
-				(x <= nave.getX() &&  (x + width) >= (nave.getX() + nave.getWidth()) && (y + height) >= (nave.getY())  && y <= (nave.getY())) 
-				||
-				(x <= (nave.getX()+ nave.getWidth()) &&  (x + width) >= (nave.getX() + nave.getWidth()) && (y + height) >= (nave.getY() + nave.getHeight())  && y <= (nave.getY())) 
-				||
-				(x <= nave.getX() &&  (x + width) >= nave.getX() && (y + height) >= (nave.getY() + nave.getHeight())  && y <= (nave.getY()))); 
+		boolean A,B,C,D,E,F,G,H,M,N,P,Q, fColision; 
+		
+		A = x >= nave.getX();
+		B = x <= (nave.getX() + nave.getWidth());
+		C = y >= nave.getY();
+		D = y <= (nave.getY() + nave.getHeight());
+		E = (x + width) >= nave.getX();
+		F = (x + width) <= (nave.getX() + nave.getWidth());
+		G = (y + height) >= nave.getY();
+		H = (y + height) <= (nave.getY() + nave.getHeight());
+		M  = !A;
+		N = !F;
+		P = !H;
+		Q = !C;
+		// funcion de colicion que verifica si uno o mas puntos del borde del objeto nave intersectan con el borde de this
+		fColision = (A && B || E && F) && (C && D || G && H) ||  M && N && ( P && D || G && H) ||  Q &&  P && (B &&  N ||  M && E);
+		return  nave.getVisible() && fColision;
 				
 				
 	}
