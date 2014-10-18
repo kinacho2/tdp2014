@@ -151,7 +151,7 @@ public abstract class Nave {
 	}
 
 	 public boolean colision(Nave nave) {
-		boolean A,B,C,D,E,F,G,H,M,N,P,Q, fColision; 
+		boolean A,B,C,D,E,F,G,H, fColision; 
 		
 		A = x >= nave.getX();
 		B = x <= (nave.getX() + nave.getWidth());
@@ -161,12 +161,9 @@ public abstract class Nave {
 		F = (x + width) <= (nave.getX() + nave.getWidth());
 		G = (y + height) >= nave.getY();
 		H = (y + height) <= (nave.getY() + nave.getHeight());
-		M  = !A;
-		N = !F;
-		P = !H;
-		Q = !C;
+		
 		// funcion de colicion que verifica si uno o mas puntos del borde del objeto nave intersectan con el borde de this
-		fColision = (A && B || E && F) && (C && D || G && H) ||  M && N && ( P && D || G && H) ||  Q &&  P && (B &&  N ||  M && E);
+		fColision = (A && B || E && F) && (C && D || G && H) ||  !A && !F && ( !H && D || G && H) ||  !C &&  !H && (B &&  !F ||  !A && E);
 		return  nave.getVisible() && fColision;
 				
 				
