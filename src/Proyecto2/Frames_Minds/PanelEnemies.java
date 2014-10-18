@@ -1,4 +1,4 @@
-package Proyecto2;
+package Proyecto2.Frames_Minds;
 
 import java.awt.Graphics;
 import java.awt.Graphics2D;
@@ -7,6 +7,10 @@ import java.awt.geom.AffineTransform;
 import java.util.ArrayList;
 
 import javax.swing.JPanel;
+
+import Proyecto2.Mapa;
+import Proyecto2.Explosiones_Disparos.Disparo;
+import Proyecto2.Naves.Enemigos.Enemigo;
 
 public class PanelEnemies extends JPanel {
 

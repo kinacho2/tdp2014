@@ -1,8 +1,11 @@
-package Proyecto2;
+package Proyecto2.Naves.Enemigos;
 
 import java.net.URL;
 import java.util.Random;
 import javax.swing.ImageIcon;
+
+import Proyecto2.Explosiones_Disparos.Disparo;
+import Proyecto2.Naves.Nave;
 
 public class Basico extends Enemigo {
 

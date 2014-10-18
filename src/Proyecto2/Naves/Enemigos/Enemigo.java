@@ -1,8 +1,13 @@
-package Proyecto2;
+package Proyecto2.Naves.Enemigos;
 
 import java.net.URL;
 
 import javax.swing.ImageIcon;
+
+import Proyecto2.Explosiones_Disparos.Disparo;
+import Proyecto2.Explosiones_Disparos.Explosion;
+import Proyecto2.Naves.Nave;
+import Proyecto2.Naves.Jugador.Jugador;
 
 public abstract class Enemigo extends Nave {
 	protected static final URL explode = (Nave.class.getClassLoader().getResource("Proyecto2/img/Explosiones/nave.gif"));

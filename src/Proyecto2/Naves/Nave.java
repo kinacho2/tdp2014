@@ -1,9 +1,13 @@
-package Proyecto2;
+package Proyecto2.Naves;
 
 import java.awt.Dimension;
 import java.awt.Image;
 
 import javax.swing.ImageIcon;
+
+import Proyecto2.Mapa;
+import Proyecto2.Explosiones_Disparos.Explosion;
+import Proyecto2.Naves.Jugador.Jugador;
 
 public abstract class Nave {
 	
@@ -162,7 +166,7 @@ public abstract class Nave {
 		G = (y + height) >= nave.getY();
 		H = (y + height) <= (nave.getY() + nave.getHeight());
 		
-		// funcion de colicion que verifica si uno o mas puntos del borde del objeto nave intersectan con el borde de this
+		// funcion de colicion que verifica si uno o mas puntos del borde del objeto nave intersectan con el borde del objeto que ejecuta la funcion
 		fColision = (A && B || E && F) && (C && D || G && H) ||  !A && !F && ( !H && D || G && H) ||  !C &&  !H && (B &&  !F ||  !A && E);
 		return  nave.getVisible() && fColision;
 				

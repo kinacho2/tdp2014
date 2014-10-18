@@ -1,4 +1,4 @@
-package Proyecto2;
+package Proyecto2.Explosiones_Disparos;
 
 import java.awt.Image;
 import javax.swing.ImageIcon;

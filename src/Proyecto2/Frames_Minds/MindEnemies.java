@@ -1,7 +1,10 @@
-package Proyecto2;
+package Proyecto2.Frames_Minds;
 
 import java.util.ArrayList;
 import java.util.Random;
+
+import Proyecto2.Mapa;
+import Proyecto2.Naves.Enemigos.Enemigo;
 
 public class MindEnemies extends Thread  {
 

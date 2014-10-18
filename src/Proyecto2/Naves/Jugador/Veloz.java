@@ -1,8 +1,11 @@
-package Proyecto2;
+package Proyecto2.Naves.Jugador;
 
 import java.net.URL;
 
 import javax.swing.ImageIcon;
+
+import Proyecto2.Naves.Nave;
+
 public class Veloz extends Jugador {
 
 	protected static URL url = (Nave.class.getClassLoader().getResource("Proyecto2/img/Jugador/veloz.gif"));
