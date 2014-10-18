@@ -15,7 +15,8 @@ public class Artillero extends Enemigo {
 	private boolean primerMovimiento = true;
 	
 	public Artillero(boolean up){
-		super(defaultVida,defaultVel,45,-defaultHeight,up? new ImageIcon(urlUp): new ImageIcon(url),defaultWidth,defaultHeight);
+		super(defaultVida,defaultVel,up? new ImageIcon(urlUp): new ImageIcon(url),defaultWidth,defaultHeight);
+		y = -defaultHeight;
 		this.up = up;
 		puntaje = 50;
 	}

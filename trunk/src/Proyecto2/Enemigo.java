@@ -7,8 +7,8 @@ import javax.swing.ImageIcon;
 public abstract class Enemigo extends Nave {
 	protected static final URL explode = (Nave.class.getClassLoader().getResource("Proyecto2/img/Explosiones/nave.gif"));
 	
-	public Enemigo(int vida, int vel, int x, int y, ImageIcon ii,int w, int h) {
-		super(vida,vel, x, y, ii, new ImageIcon(explode), w, h);
+	public Enemigo(int vida, int vel, ImageIcon ii,int w, int h) {
+		super(vida,vel, ii, new ImageIcon(explode), w, h);
 		velocidadMisil = -5;
 		
 		

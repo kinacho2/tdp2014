@@ -6,7 +6,7 @@ public abstract class Defensa extends Jugador {
 	private String nombre;
 
 	public Defensa(int vida, int vel, int x, int y,ImageIcon icon, ImageIcon iconDer, ImageIcon iconIzq, String nom){
-		super(vida, vel, x, y, icon, iconDer, iconIzq);
+		super(vida, vel, icon, iconDer, iconIzq);
 		this.nombre = nom;
 	}
 	

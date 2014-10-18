@@ -19,7 +19,8 @@ public class Basico extends Enemigo {
 	private int alturaMinima;
 	
 	public Basico(boolean up) {
-		super(defaultVida,defaultVel,0,-defaultHeight,up? new ImageIcon(urlUp): new ImageIcon(url),defaultWidth,defaultHeight);	
+		super(defaultVida, defaultVel, up? new ImageIcon(urlUp): new ImageIcon(url), defaultWidth, defaultHeight);	
+		y = -defaultHeight;
 		Random rand = new Random();
 		alturaMinima = rand.nextInt(10) + 20;
 		

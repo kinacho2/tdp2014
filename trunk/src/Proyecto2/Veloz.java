@@ -13,7 +13,9 @@ public class Veloz extends Jugador {
 	
 	
 	public Veloz(){
-		super(defaultVida,defaultVel,400,450,new ImageIcon(url),new ImageIcon(urlDer),new ImageIcon(urlIzq));
+		super(defaultVida,defaultVel,new ImageIcon(url),new ImageIcon(urlDer),new ImageIcon(urlIzq));
+		x = 400;
+		y = 450;
 	}
 	
 	public static String getEstadisticas(){

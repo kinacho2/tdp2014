@@ -17,7 +17,8 @@ public class Kamikaze extends Enemigo {
 	private boolean up;
 	
 	public Kamikaze(boolean up) {
-		super(defaultVida,defaultVel,0,-defaultHeight,up? new ImageIcon(urlUp): new ImageIcon(url),defaultWidth,defaultHeight);
+		super(defaultVida, defaultVel, up? new ImageIcon(urlUp): new ImageIcon(url), defaultWidth, defaultHeight);
+		y = -defaultHeight;
 		Random rand = new Random();
 		x = rand.nextInt(800);
 		setFrecuenciaDeDisparo(7,20);
