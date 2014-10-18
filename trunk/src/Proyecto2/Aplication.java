@@ -103,7 +103,6 @@ public class Aplication extends javax.swing.JFrame {
 	        PanelEnemies panelEnemies = new PanelEnemies(mind,map);
 	        mind.add(panelEnemies);
 	        panelEnemies.setBounds(0, 0, 800, 600);
-	        panelEnemies.setJugador(mind.getJugador());
 			
 	        // Establece las Mentes al mapa
 	        map.setMind(mind);
