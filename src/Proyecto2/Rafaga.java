@@ -11,7 +11,9 @@ public class Rafaga extends Enemigo {
 	
 	
 	public Rafaga(){
-		super(defaultVida,defaultVel,45,600-defaultWidth,new ImageIcon(),defaultWidth,defaultHeight);	}
+		super(defaultVida,defaultVel,new ImageIcon(),defaultWidth,defaultHeight);	
+		
+	}
 
 
 	public boolean isEspecial() {

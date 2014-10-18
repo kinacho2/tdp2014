@@ -11,8 +11,8 @@ public class Jugador extends Nave {
 	protected int power;
 	protected static URL explode = (Nave.class.getClassLoader().getResource("Proyecto2/img/Explosiones/player.gif"));
 	
-	public Jugador(int vida, int vel,int x, int y, ImageIcon icon, ImageIcon iconDer, ImageIcon iconIzq){
-		super(vida, vel, x, y, icon, new ImageIcon(explode), icon.getIconWidth(), icon.getIconHeight());
+	public Jugador(int vida, int vel, ImageIcon icon, ImageIcon iconDer, ImageIcon iconIzq){
+		super(vida, vel, icon, new ImageIcon(explode), icon.getIconWidth(), icon.getIconHeight());
 		this.icon = icon;
 		this.iconDer = iconDer;
 		this.iconIzq = iconIzq;

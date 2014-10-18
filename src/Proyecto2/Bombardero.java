@@ -24,20 +24,21 @@ public class Bombardero extends Enemigo {
 	private int cont;
 	
 	//booleanos que indican los 3 patrones de movimiento distintos del bombardero
-	//acercamiento desde abajo
+	//se mueve en diagonal hacia arriba a la derecha
 	boolean primero = true;
 	
-	//movimiento de rebote en forma de 8
+	//se mueve horizontal hacia la izquierda
 	boolean segundo = true;
 	
-	//salida evasiva hacia la parte de arriba
+	//se mueve en diagonal hacia abajo a la derecha
 	boolean tercero = true;
 	
+	//variables que controlan un patron de disparo
 	private int delayDisparo = 10;
 	private int bombarderoDis = 0;
 	
 	public Bombardero() {
-		super(defaultVida,7,0,0,new ImageIcon(url),defaultWidth,defaultHeight);
+		super(defaultVida,7,new ImageIcon(url),defaultWidth,defaultHeight);
 		
 		cont=0;
 		y = minHeight;
@@ -60,15 +61,18 @@ public class Bombardero extends Enemigo {
 	public void move() {
 		
 		if( y > defaultY ) {
+			//se acerca al centro desde abajo
 			y -= velocidad;
 		} else {
 			if( x < posInicialX + velocidad * 20 && primero ) {
+				//se mueve en diagonal hacia arriba a la derecha
 				x += velocidad;
 				y -= velocidad;
 				if(x >= posInicialX + velocidad * 20 ) {
 					cont++;
 				}
 			} else {
+				//se setea el primer movimiento en false y se mueve hacia la izquierda horizontalmente
 				primero = false;
 				if(x > posInicialX && segundo) {
 					x -= velocidad;
@@ -76,8 +80,8 @@ public class Bombardero extends Enemigo {
 						cont++;
 					}
 				} else {
+					//se setea el segundo movimiento en false y se mueve en diagonal hacia la derecha y abajo
 					segundo = false;
-					
 					if(x < posInicialX + velocidad * 20 && tercero) {
 						x += velocidad;
 						y += velocidad;
@@ -85,14 +89,15 @@ public class Bombardero extends Enemigo {
 							cont++;
 						}
 					} else {
+						//se setea el tercer movimiento en false y se mueve hacia la izquierda horizontalmente
 						tercero = false;
-					
 						if(x > posInicialX) {
 							x -= velocidad;
 							if(x <= posInicialX) {
 								cont++;
 							}		
 						} else {
+							//se setean los tres movimientos en true para su repeticion
 							primero = true;
 							segundo = true;
 							tercero = true;
@@ -102,6 +107,11 @@ public class Bombardero extends Enemigo {
 			}
 		
 			if (cont >= 8) {
+				/*
+				cuenta la cantidad de rebotes en los bordes del patron de movimiento
+				en el momento que es 8 es decir que realizo el patron 2 veces parte hacia arriba rebotando
+				en los bordes verticales
+				*/
 				if(y > (-100  -defaultWidth) ) {
 					y -= velocidad;
 				}

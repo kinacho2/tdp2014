@@ -39,11 +39,9 @@ public abstract class Nave {
 	
 	
 	// basado en el codigo http://zetcode.com/tutorials/javagamestutorial/movingsprites/ para mover el jugador
-	public Nave(int vida, int vel, int xx, int yy, ImageIcon icon, ImageIcon explosion, int w, int h) {
+	public Nave(int vida, int vel, ImageIcon icon, ImageIcon explosion, int w, int h) {
 		height = h;
 		width = w;
-		this.x = xx;
-		this.y = yy;
 		this.posInicialX = x;
 		//ajusta la imagen al tamanio de los parametros w = ancho y h = alto
 		ImageIcon ii = new ImageIcon(icon.getImage().getScaledInstance(w,h,Image.SCALE_DEFAULT));

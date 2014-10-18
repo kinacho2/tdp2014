@@ -13,7 +13,10 @@ public class Normal extends Jugador {
 	private static final int defaultVida = 5;
 
 	public Normal(){
-		super(defaultVida,defaultVel,400,450,new ImageIcon(url),new ImageIcon(urlDer),new ImageIcon(urlIzq));
+		super(defaultVida,defaultVel,new ImageIcon(url),new ImageIcon(urlDer),new ImageIcon(urlIzq));
+		x = 400;
+		y = 450;
+		
 	}
 	
 	public static String getEstadisticas(){
