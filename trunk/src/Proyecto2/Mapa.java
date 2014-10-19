@@ -22,7 +22,6 @@ public class Mapa {
 	protected ArrayList misilesJugador;
 	protected ArrayList explosiones;
 	protected Jugador jugador;
-	protected ArrayList enemies;
 	protected ArrayList enemiesInWindow;
 	protected int indiceEnemigos;
 	protected int indiceExplosiones;
@@ -37,12 +36,12 @@ public class Mapa {
 		misilesEnemigos = new ArrayList();
 		misilesJugador = new ArrayList();
 
-		enemies = new ArrayList();
 		rn = new Random(5);
 		cantEnemies = 100;
      		
 		enemiesInWindow = new ArrayList();
 		indiceEnemigos=0;
+		
 		explosiones = new ArrayList();
 	}
 	
