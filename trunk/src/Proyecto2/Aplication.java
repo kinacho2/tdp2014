@@ -68,6 +68,8 @@ public class Aplication extends javax.swing.JFrame {
         
     }
 	    
+    //inicializa el panel del juego
+    
     private void initGame(int select){
     	
     	game = new JPanel();
@@ -123,6 +125,8 @@ public class Aplication extends javax.swing.JFrame {
         
 	}
 	    
+  //inicializa el primer panel para iniciar o salir del juego
+    
     private void initGUI() {
 		
     	initPrimerPanel();
@@ -170,6 +174,8 @@ public class Aplication extends javax.swing.JFrame {
 			quit.addActionListener(new OyenteQuit());
 		}
 	}
+	
+	//inicializa el segundi panel para seleccionar tipo de nave
 	
 	private void initMain(){
 		main = new JPanel();
