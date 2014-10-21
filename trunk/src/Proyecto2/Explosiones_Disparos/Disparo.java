@@ -82,11 +82,20 @@ public class Disparo {
     
     // Determina si el disparo colisionó con una nave
     public boolean colision(Nave nave) {
-		 return nave.getVisible() &&  (x >= nave.getX()+1 &&  x <= (nave.getX() + nave.getWidth()+1) && y >= nave.getY()+1  && y <= (nave.getY() + nave.getHeight()+1)) ||
-				((x + width) >= nave.getX()+1 &&  (x + width) <= (nave.getX() + nave.getWidth()+1) && y >= nave.getY()+1  && y <= (nave.getY() + nave.getHeight()+1)) ||
-				(x >= nave.getX()+1 &&  x <= (nave.getX() + nave.getWidth()+1) && (y + height) >= nave.getY()+1  && (y + height) <= (nave.getY() + nave.getHeight()+1)) ||
-				((x + width) >= nave.getX()+1 &&  (x + width) <= (nave.getX() + nave.getWidth()+1) && (y + height) >= nave.getY()+1  && (y + height) <= (nave.getY() + nave.getHeight()+1));
-		 
+boolean A,B,C,D,E,F,G,H, fColision; 
+		
+		A = x >= nave.getX();
+		B = x <= (nave.getX() + nave.getWidth());
+		C = y >= nave.getY();
+		D = y <= (nave.getY() + nave.getHeight());
+		E = (x + width) >= nave.getX();
+		F = (x + width) <= (nave.getX() + nave.getWidth());
+		G = (y + height) >= nave.getY();
+		H = (y + height) <= (nave.getY() + nave.getHeight());
+		
+		// funcion de colicion que verifica si alguno de los 4 puntos del borde del objeto disparo intersectan con area del objeto pasado por parametro
+		fColision = (A && B || E && F) && (C && D || G && H);
+		return  nave.getVisible() && fColision;
 	}
     
     // Establece que el disparo no está visible en la pantalla
