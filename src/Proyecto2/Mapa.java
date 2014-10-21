@@ -32,6 +32,7 @@ public class Mapa {
 	
 	
 	public Mapa() {
+		
 		// Arreglo de disparos
 		misilesEnemigos = new ArrayList();
 		misilesJugador = new ArrayList();
@@ -40,7 +41,7 @@ public class Mapa {
 		cantEnemies = 100;
      		
 		enemiesInWindow = new ArrayList();
-		indiceEnemigos=0;
+		indiceEnemigos = 0;
 		
 		explosiones = new ArrayList();
 	}
@@ -104,15 +105,17 @@ public class Mapa {
 	public ArrayList getMisilesJugador() {
 		return misilesJugador;
 	}
-	
+	/*
+	 * Crea un nuevo enemigo aleatoriamente
+	 */
 	public Enemigo nextEnemigo() {
 		Enemigo m;
 		if(indiceEnemigos < cantEnemies) {	
 			int probabilidad = rn.nextInt(cantEnemies);
 			
-			if(probabilidad%5 == 0)
+			if(probabilidad % 5 == 0)
 				m = new Kamikaze(probabilidad % 15 == 0);
-			else if(probabilidad%13 == 0)
+			else if(probabilidad % 13 == 0)
 				m = new Bombardero();
 			else if(probabilidad % 5 == 1) 
 				m = new Artillero((probabilidad % 30) == 1);
@@ -129,15 +132,20 @@ public class Mapa {
 		return m;
 	}
 	
+	/*
+	 * Agrega el explosion ex a la lista de explosivos 
+	 */
 	public void addExposion(Explosion ex) {
 		explosiones.add(ex);
 	}
-	
+	/*
+	 * retorna la siguiente explosión correspondiente 
+	 */
 	public Explosion getExplosion() {
-		Explosion toRet=null;
+		Explosion toRet = null;
 		
 		if(indiceExplosiones < explosiones.size()) {
-			toRet= (Explosion) explosiones.get(indiceExplosiones);
+			toRet = (Explosion) explosiones.get(indiceExplosiones);
 			indiceExplosiones++;
 		}
 		

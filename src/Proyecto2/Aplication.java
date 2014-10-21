@@ -63,80 +63,81 @@ public class Aplication extends javax.swing.JFrame {
 		initGUI();
     }
 
-	    public static void main(String[] args) {
-	        new Aplication();
-	        
-	    }
+    public static void main(String[] args) {
+        new Aplication();
+        
+    }
 	    
-	    private void initGame(int select){
-	    	
-	    	game = new JPanel();
-	    	
-	    	map = new Mapa();
-			getContentPane().add(game, BorderLayout.CENTER);
-			game.setBackground(new java.awt.Color(0,0,0));
-			
-			
-			
-			mind = new Mind(map,select);
-			game.add(mind);
-			mind.setLayout(null);
-			mind.setPreferredSize(new java.awt.Dimension(800, 520));
-			
-			// Barra de estado
+    private void initGame(int select){
+    	
+    	game = new JPanel();
+    	
+    	map = new Mapa();
+		getContentPane().add(game, BorderLayout.CENTER);
+		game.setBackground(new java.awt.Color(0,0,0));
 		
-			bar = new JPanel();
-			game.add(bar);
-			bar.setLayout(null);
-			bar.setPreferredSize(new java.awt.Dimension(800, 50));
-			bar.setBackground(new java.awt.Color(25,100,25));
-			
-			mind.setBar(bar);
 		
-	        // boton volver al menu
-			
-			volverMenu = new JButton("Salir al Menu");
-			volverMenu.addActionListener(new OyenteVolver());
-			volverMenu.setBounds(25, 11, 150, 25);
-			volverMenu.setForeground(new java.awt.Color(0,255,0));
-			volverMenu.setBackground(new java.awt.Color(0,0,0));
-			volverMenu.setBorder(BorderFactory.createCompoundBorder(null,null));
-			volverMenu.setFont(new java.awt.Font("Segoe UI",0,20));
-			bar.add(volverMenu);
-			
-			
-	        // Mente de los enemigos
-			
-	        PanelEnemies panelEnemies = new PanelEnemies(mind,map);
-	        mind.add(panelEnemies);
-	        panelEnemies.setBounds(0, 0, 800, 600);
-			
-	        // Establece las Mentes al mapa
-	        map.setMind(mind);
-	        map.setMindEnemies(panelEnemies.getMindEnemies());
-			
-	        
-	        // Inicia el hilo de los Enemigos
-	      
-	        panelEnemies.getMindEnemies().start();
-	        
-		}
+		
+		mind = new Mind(map,select);
+		game.add(mind);
+		mind.setLayout(null);
+		mind.setPreferredSize(new java.awt.Dimension(800, 520));
+		
+		// Barra de estado
+	
+		bar = new JPanel();
+		game.add(bar);
+		bar.setLayout(null);
+		bar.setPreferredSize(new java.awt.Dimension(800, 50));
+		bar.setBackground(new java.awt.Color(25,100,25));
+		
+		mind.setBar(bar);
+	
+        // boton volver al menu
+		
+		volverMenu = new JButton("Salir al Menu");
+		volverMenu.addActionListener(new OyenteVolver());
+		volverMenu.setBounds(25, 11, 150, 25);
+		volverMenu.setForeground(new java.awt.Color(0,255,0));
+		volverMenu.setBackground(new java.awt.Color(0,0,0));
+		volverMenu.setBorder(BorderFactory.createCompoundBorder(null,null));
+		volverMenu.setFont(new java.awt.Font("Segoe UI",0,20));
+		bar.add(volverMenu);
+		
+		
+        // Mente de los enemigos
+		
+        PanelEnemies panelEnemies = new PanelEnemies(mind,map);
+        mind.add(panelEnemies);
+        panelEnemies.setBounds(0, 0, 800, 600);
+		
+        // Establece las Mentes al mapa
+        
+        map.setMind(mind);
+        map.setMindEnemies(panelEnemies.getMindEnemies());
+		
+        
+        // Inicia el hilo de los Enemigos
+      
+        panelEnemies.getMindEnemies().start();
+        
+	}
 	    
-	    private void initGUI() {
-			
-	    	initPrimerPanel();
-			
-			setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
-	        setSize(800, 600);
-	        setLocationRelativeTo(null);
-	        setTitle("Chaos Wind");
-	        setResizable(false);
-	        setVisible(true);
-	        this.addWindowListener(new WindowAdapter() {
-				public void windowClosing(WindowEvent evt) {
-					cerrarJuego();
-				}
-			});
+    private void initGUI() {
+		
+    	initPrimerPanel();
+		
+		setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
+        setSize(800, 600);
+        setLocationRelativeTo(null);
+        setTitle("Chaos Wind");
+        setResizable(false);
+        setVisible(true);
+        this.addWindowListener(new WindowAdapter() {
+			public void windowClosing(WindowEvent evt) {
+				cerrarJuego();
+			}
+		});
 		
 	}
 	
