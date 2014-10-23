@@ -41,7 +41,7 @@ public class Bombardero extends Enemigo {
 	private int bombarderoDis = 0;
 	
 	public Bombardero() {
-		super(defaultVida,7,new ImageIcon(url),defaultWidth,defaultHeight);
+		super(defaultVida,defaultVel,new ImageIcon(url),defaultWidth,defaultHeight);
 		
 		cont=0;
 		y = minHeight;
