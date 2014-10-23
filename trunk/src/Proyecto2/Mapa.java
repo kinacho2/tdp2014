@@ -3,8 +3,6 @@
 import java.util.ArrayList;
 import java.util.Random;
 
-import javax.swing.JOptionPane;
-
 import Proyecto2.Explosiones_Disparos.Disparo;
 import Proyecto2.Explosiones_Disparos.Explosion;
 import Proyecto2.Frames_Minds.Mind;
