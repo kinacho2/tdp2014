@@ -16,7 +16,7 @@ public class Disparo {
 	private int x, y;
     private Image image;
     private ImageIcon explosion;
-    boolean visible;
+    private boolean visible;
 
     private int velocidad;
     
@@ -24,8 +24,8 @@ public class Disparo {
   	protected int height;
   	protected int width;
 	private int damage;
-	double dx;
-	double dy;
+	protected double dx;
+	protected double dy;
 
     private int maxHeight = -height*2;
     private int minHeight = 600 + height;

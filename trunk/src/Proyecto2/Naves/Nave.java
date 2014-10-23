@@ -63,7 +63,7 @@ public abstract class Nave {
 		
 		maxHeight = -height*2;
 		minHeight = 600 + height;
-		maxWidth = 800 - width;
+		maxWidth = 800 + width;
 		minWidth = -width*2;
 		
 	}

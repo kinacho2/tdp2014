@@ -109,7 +109,7 @@ public class Aplication extends javax.swing.JFrame {
 		
         // Mente de los enemigos
 		
-        PanelEnemies panelEnemies = new PanelEnemies(mind,map);
+        PanelEnemies panelEnemies = new PanelEnemies(map);
         mind.add(panelEnemies);
         panelEnemies.setBounds(0, 0, 800, 600);
 		
