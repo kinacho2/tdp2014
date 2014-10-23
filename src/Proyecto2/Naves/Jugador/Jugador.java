@@ -96,10 +96,10 @@ public class Jugador extends Nave {
 		 else
 			x = 1;
 		 
-		 if( x <= maxWidth)
+		 if( x <= maxWidth - width*2)
 			x += dx;
 		 else
-			 x = maxWidth - 1;
+			 x = maxWidth  - width*2 - 1;
 		 
 		 if(y >= maxHeight + height*2 )
 	        y += dy;

@@ -1,4 +1,4 @@
-package Proyecto2;
+ package Proyecto2;
 
 import java.util.ArrayList;
 import java.util.Random;
@@ -90,10 +90,6 @@ public class Mapa {
 		misilesJugador.add(d);
 	}
 	
-	public void removerDisparoEnemigo(int i) {
-		misilesEnemigos.remove(i);
-	}
-	
 	public void removerDisparoJugador(int i) {
 		misilesJugador.remove(i);
 	}
@@ -137,19 +133,6 @@ public class Mapa {
 	 */
 	public void addExposion(Explosion ex) {
 		explosiones.add(ex);
-	}
-	/*
-	 * retorna la siguiente explosión correspondiente 
-	 */
-	public Explosion getExplosion() {
-		Explosion toRet = null;
-		
-		if(indiceExplosiones < explosiones.size()) {
-			toRet = (Explosion) explosiones.get(indiceExplosiones);
-			indiceExplosiones++;
-		}
-		
-		return toRet;
 	}
 	
 	public ArrayList explosiones() {

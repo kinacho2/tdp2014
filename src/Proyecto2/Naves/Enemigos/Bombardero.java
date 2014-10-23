@@ -28,13 +28,13 @@ public class Bombardero extends Enemigo {
 	
 	//booleanos que indican los 3 patrones de movimiento distintos del bombardero
 	//se mueve en diagonal hacia arriba a la derecha
-	boolean primero = true;
+	private boolean primero = true;
 	
 	//se mueve horizontal hacia la izquierda
-	boolean segundo = true;
+	private boolean segundo = true;
 	
 	//se mueve en diagonal hacia abajo a la derecha
-	boolean tercero = true;
+	private boolean tercero = true;
 	
 	//variables que controlan un patron de disparo
 	private int delayDisparo = 10;

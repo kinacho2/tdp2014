@@ -18,7 +18,7 @@ public class PanelEnemies extends JPanel {
 	protected Mapa mapa;
 	
 
-	public PanelEnemies(Mind m,Mapa map ) {
+	public PanelEnemies(Mapa map ) {
 		mind = new MindEnemies(this,map);
 		mapa = map;
 		setLayout(null);
