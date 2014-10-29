@@ -4,7 +4,7 @@ import java.net.URL;
 
 import javax.swing.ImageIcon;
 
-import ProyectoX.Explosiones_Disparos.Disparo;
+import ProyectoX.Disparos.Disparo;
 import ProyectoX.Naves.Nave;
 
 public class Resistente extends Jugador {

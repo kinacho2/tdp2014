@@ -5,8 +5,8 @@ import java.util.Random;
 
 import javax.swing.JOptionPane;
 
-import ProyectoX.Explosiones_Disparos.Disparo;
-import ProyectoX.Explosiones_Disparos.Explosion;
+import ProyectoX.Disparos.Disparo;
+import ProyectoX.Explosiones.Explosion;
 import ProyectoX.Frames_Minds.Mind;
 import ProyectoX.Frames_Minds.MindEnemies;
 import ProyectoX.Naves.Enemigos.Artillero;

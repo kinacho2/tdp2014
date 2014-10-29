@@ -9,7 +9,7 @@ import java.util.ArrayList;
 import javax.swing.JPanel;
 
 import ProyectoX.Mapa;
-import ProyectoX.Explosiones_Disparos.Disparo;
+import ProyectoX.Disparos.Disparo;
 import ProyectoX.Naves.Enemigos.Enemigo;
 
 public class PanelEnemies extends JPanel {
