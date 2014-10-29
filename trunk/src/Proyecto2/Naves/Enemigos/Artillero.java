@@ -12,7 +12,7 @@ public class Artillero extends Enemigo {
 	protected static final URL urlUp = (Nave.class.getClassLoader().getResource("Proyecto2/img/Enemigo/artilleroUP.png"));
 	private static final int defaultWidth = 60;
 	private static final int defaultHeight = 48;
-	private static final int defaultVel = 10;
+	private static final int defaultVel = 5;
 	private static final int defaultVida = 5;
 	private boolean up;
 	private boolean primerMovimiento = true;
@@ -33,7 +33,6 @@ public class Artillero extends Enemigo {
 	public void disparar() {
 		if(puedeDisparar() && y<500){
 			Disparo d = apuntarYDisparar();
-			d.setPosicion(d.getX(), d.getY() - defaultHeight/2);
 			mapa.addDisparoEnemigo(d);
 		}
 	}

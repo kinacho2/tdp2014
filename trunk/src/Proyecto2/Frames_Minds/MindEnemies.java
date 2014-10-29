@@ -5,6 +5,7 @@ import java.util.Random;
 
 import Proyecto2.Mapa;
 import Proyecto2.Naves.Enemigos.Enemigo;
+import Proyecto2.Naves.Enemigos.Jefes.Jefe;
 
 public class MindEnemies extends Thread  {
 
@@ -23,8 +24,6 @@ public class MindEnemies extends Thread  {
 		
 		ran=new Random(0);
 		mapa=map;
-
-       	
 		
 	}
 	
@@ -73,5 +72,14 @@ public class MindEnemies extends Thread  {
 		stop=true;
 	}
 
+	public void addBoss(Jefe boss){
+		enemies.add(boss);
+		ArrayList en = boss.getTorretas();
+		
+		for(int i=0; i<en.size(); i++){
+			enemies.add(en.get(i));
+		}
+		
+	}
 }
 

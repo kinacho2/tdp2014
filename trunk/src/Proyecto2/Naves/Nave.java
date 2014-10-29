@@ -2,6 +2,7 @@ package Proyecto2.Naves;
 
 import java.awt.Dimension;
 import java.awt.Image;
+import java.awt.geom.AffineTransform;
 
 import javax.swing.ImageIcon;
 
@@ -20,7 +21,7 @@ public abstract class Nave {
 	protected int height;
 	protected int width;
 	//angulo en radianes
-	private double rotacion = 0.0;
+	protected double rotacion = 0.0;
 	protected Image image;
 	protected Image explosion;
 	protected boolean visible;
@@ -112,9 +113,9 @@ public abstract class Nave {
         return new Dimension(width, height);
     }
  
-    public double getRotacion() 
+    public AffineTransform getRotacion() 
     {
-        return this.rotacion;
+        return AffineTransform.getRotateInstance(rotacion, getX() + getWidth()/2, getY() + getHeight()/2);
     }
      
     public void setRotacion() 

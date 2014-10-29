@@ -31,6 +31,17 @@ public class PanelEnemies extends JPanel {
 
 	        Graphics2D g2d = (Graphics2D) g;
 	        
+	        ArrayList enemigos = mind.getEnemies();
+	        
+	        //repinta los enemigos
+	        for (int i = 0; i < enemigos.size(); i++ ) {
+	            Enemigo m = (Enemigo) enemigos.get(i);
+	            AffineTransform tx = m.getRotacion();
+	            g2d.setTransform(tx);
+	            g2d.drawImage(m.getImage(), m.getX(), m.getY(), this);
+	            
+	        }
+	        
 	        ArrayList ms = mapa.getMisilesEnemigos();
 	        
 	        //mueve, repinta y elimina los disparos en caso de que ya no sean visibles
@@ -39,24 +50,15 @@ public class PanelEnemies extends JPanel {
 	            if (misil != null)
 		            if(misil.isVisible()) {
 		            	misil.move();
-		            	g2d.drawImage(misil.getImage(), misil.getX(), misil.getY(), this);
+		            	AffineTransform tx = AffineTransform.getRotateInstance(0, misil.getX() , misil.getY());
+			            g2d.setTransform(tx);
+			            g2d.drawImage(misil.getImage(), misil.getX(), misil.getY(), this);
 		            } else {
 		            	ms.remove(j);
 		            }
 	            
 	        }
-	        
-	        ArrayList enemigos = mind.getEnemies();
-	        
-	        //repinta los enemigos
-	        for (int i = 0; i < enemigos.size(); i++ ) {
-	            Enemigo m = (Enemigo) enemigos.get(i);
-	            double rot = m.getRotacion();
-	            AffineTransform tx = AffineTransform.getRotateInstance(rot, m.getX()+m.getWidth()/2, m.getY()+m.getHeight()/2);
-	            g2d.setTransform(tx);
-	            g2d.drawImage(m.getImage(), m.getX(), m.getY(), this);
-	            
-	        }
+	 
 
 	        Toolkit.getDefaultToolkit().sync();
 	        g.dispose();

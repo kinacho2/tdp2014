@@ -3,6 +3,8 @@
 import java.util.ArrayList;
 import java.util.Random;
 
+import javax.swing.JOptionPane;
+
 import Proyecto2.Explosiones_Disparos.Disparo;
 import Proyecto2.Explosiones_Disparos.Explosion;
 import Proyecto2.Frames_Minds.Mind;
@@ -12,6 +14,7 @@ import Proyecto2.Naves.Enemigos.Basico;
 import Proyecto2.Naves.Enemigos.Bombardero;
 import Proyecto2.Naves.Enemigos.Enemigo;
 import Proyecto2.Naves.Enemigos.Kamikaze;
+import Proyecto2.Naves.Enemigos.Jefes.*;
 import Proyecto2.Naves.Jugador.Jugador;
 
 public class Mapa {
@@ -27,6 +30,7 @@ public class Mapa {
 	protected MindEnemies mindEnemies;
 	protected int cantEnemies;
 	protected Random rn;
+	protected boolean jefe =false;
 	
 	
 	public Mapa() {
@@ -36,7 +40,7 @@ public class Mapa {
 		misilesJugador = new ArrayList();
 
 		rn = new Random(5);
-		cantEnemies = 100;
+		cantEnemies = 101;
      		
 		enemiesInWindow = new ArrayList();
 		indiceEnemigos = 0;
@@ -104,13 +108,13 @@ public class Mapa {
 	 */
 	public Enemigo nextEnemigo() {
 		Enemigo m;
-		if(indiceEnemigos < cantEnemies) {	
+		if(indiceEnemigos < cantEnemies - 1) {	
 			int probabilidad = rn.nextInt(cantEnemies);
 			
 			if(probabilidad % 5 == 0)
 				m = new Kamikaze(probabilidad % 15 == 0);
-			else if(probabilidad % 13 == 0)
-				m = new Bombardero();
+			else if(probabilidad % 11 == 0)
+				m = new Bombardero(probabilidad % 22 == 0);
 			else if(probabilidad % 5 == 1) 
 				m = new Artillero((probabilidad % 30) == 1);
 			else
@@ -118,11 +122,23 @@ public class Mapa {
 			
 			m.setJugador(jugador);
             m.setMapa(this);
+            indiceEnemigos++;
 			
 		} else {
-			return null;
+			if(!jefe){
+				m = new JefeTanque();
+				mindEnemies.addBoss((Jefe)m);
+				jefe = true;
+				m.setJugador(jugador);
+				m.setMapa(this);
+				m = null;
+				
+			}
+			else{
+				m = null;
+			}
 		}
-		indiceEnemigos++;
+		
 		return m;
 	}
 	
