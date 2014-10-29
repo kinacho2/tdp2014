@@ -19,8 +19,8 @@ import javax.swing.JPanel;
 import javax.swing.WindowConstants;
 
 import ProyectoX.Mapa;
-import ProyectoX.Explosiones_Disparos.Disparo;
-import ProyectoX.Explosiones_Disparos.Explosion;
+import ProyectoX.Disparos.Disparo;
+import ProyectoX.Explosiones.Explosion;
 import ProyectoX.Naves.Enemigos.Enemigo;
 import ProyectoX.Naves.Jugador.Jugador;
 import ProyectoX.Naves.Jugador.Normal;

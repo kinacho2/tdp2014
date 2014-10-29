@@ -5,7 +5,7 @@ import java.util.Random;
 
 import javax.swing.ImageIcon;
 
-import ProyectoX.Explosiones_Disparos.Disparo;
+import ProyectoX.Disparos.Disparo;
 import ProyectoX.Naves.Nave;
 
 public class Bombardero extends Enemigo {

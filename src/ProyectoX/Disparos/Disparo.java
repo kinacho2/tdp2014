@@ -1,10 +1,11 @@
-package ProyectoX.Explosiones_Disparos;
+package ProyectoX.Disparos;
 
 import java.awt.Image;
 import java.net.URL;
 
 import javax.swing.ImageIcon;
 
+import ProyectoX.Explosiones.Explosion;
 import ProyectoX.Naves.Nave;
 
 

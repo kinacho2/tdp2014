@@ -1,4 +1,4 @@
-package ProyectoX.Explosiones_Disparos;
+package ProyectoX.Explosiones;
 
 import java.awt.Image;
 import javax.swing.ImageIcon;
@@ -57,6 +57,10 @@ public class Explosion {
 
 	public int getDelay() {
 		return delay;
+	}
+	
+	public void setDelay(int delay){
+		this.delay = delay;
 	}
 	
 }
