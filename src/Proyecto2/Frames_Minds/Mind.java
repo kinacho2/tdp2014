@@ -9,10 +9,14 @@ import java.awt.event.ActionListener;
 import java.awt.event.KeyListener;
 import java.awt.event.KeyEvent;
 import java.util.ArrayList;
+
+import javax.swing.BorderFactory;
+import javax.swing.JButton;
 import javax.swing.JLabel;
 import javax.swing.JOptionPane;
 import javax.swing.Timer;
 import javax.swing.JPanel;
+import javax.swing.WindowConstants;
 
 import Proyecto2.Mapa;
 import Proyecto2.Explosiones_Disparos.Disparo;
