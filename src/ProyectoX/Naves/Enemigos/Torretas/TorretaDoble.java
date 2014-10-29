@@ -9,7 +9,7 @@ import ProyectoX.Naves.Nave;
 public class TorretaDoble extends Torreta{
 
 	
-	protected static final URL url = (Nave.class.getClassLoader().getResource("ProyectoX/img/Enemigo/torreta.png"));
+	protected static final URL url = (Nave.class.getClassLoader().getResource("ProyectoX/img/Enemigo/Torreta/torreta.png"));
 	private static final int defaultWidth = 24;
 	private static final int defaultHeight = 41;
 	private static final int defaultVida = 10;
