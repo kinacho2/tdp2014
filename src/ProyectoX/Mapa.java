@@ -125,7 +125,7 @@ public class Mapa {
 			else if(probabilidad % 5 == 1) 
 				m = new Artillero((probabilidad % 30) == 1);
 			else
-				m = new Basico(probabilidad % 11 == 0);
+				m = new Basico(true);
 			
 			m.setJugador(jugador);
             m.setMapa(this);

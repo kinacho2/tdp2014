@@ -5,6 +5,7 @@ import java.net.URL;
 import javax.swing.ImageIcon;
 
 import ProyectoX.Naves.Jugador.Jugador;
+import ProyectoX.Naves.Jugador.Defensa.EscudoX;
 
 public class Escudo extends PowerUp {
 
@@ -18,7 +19,6 @@ protected static final URL url = (PowerUp.class.getClassLoader().getResource("Pr
 
 	@Override
 	protected void efecto(Jugador jugador) {
-		// TODO Auto-generated method stub
-		
+		jugador.setDefensa(new EscudoX(jugador));
 	}
 }

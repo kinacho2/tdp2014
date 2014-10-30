@@ -63,6 +63,7 @@ public class MindEnemies extends Thread  {
 		} catch (InterruptedException e) {
 			
 		}
+		
 	}
 
 	public ArrayList getEnemies() {
