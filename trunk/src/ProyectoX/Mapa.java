@@ -44,7 +44,7 @@ public class Mapa {
 		misilesJugador = new ArrayList();
 
 		rn = new Random(5);
-		cantEnemies = 4;
+		cantEnemies = 101;
      	
 		enemiesInWindow = new ArrayList();
 		indiceEnemigos = 0;

@@ -8,8 +8,8 @@ import ProyectoX.Naves.Jugador.Jugador;
 
 public abstract class PowerUp {
 	
-	private int y;
-	private int x;
+	protected int y;
+	protected int x;
 	private Image image;
 	private int velocidad = 1;
 	private int width = 20;
@@ -44,6 +44,9 @@ public abstract class PowerUp {
 		fColision = (A && B || E && F) && (C && D || G && H);
 		if(jugador.getVisible() && fColision){
 			efecto(jugador);
+			toReturn = true;
+		}
+		else if(y > 650){
 			toReturn = true;
 		}
 		else{

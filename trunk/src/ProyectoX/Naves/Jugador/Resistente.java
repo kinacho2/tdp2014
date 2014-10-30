@@ -5,6 +5,7 @@ import java.net.URL;
 import javax.swing.ImageIcon;
 
 import ProyectoX.Disparos.Disparo;
+import ProyectoX.Disparos.Multiplicador.MultiplicadorLVI;
 import ProyectoX.Naves.Nave;
 
 public class Resistente extends Jugador {
@@ -20,16 +21,8 @@ public class Resistente extends Jugador {
 		super(defaultVida,defaultVel,new ImageIcon(url),new ImageIcon(urlDer),new ImageIcon(urlIzq));
 		x = 400;
 		y = 450;
-	}
-
-
-	public void disparar() {
-		if(power == 1){
-			mapa.addDisparoJugador(new Disparo(x + width/2 - 10 , y, 0, 1, velocidadMisil));
-			mapa.addDisparoJugador(new Disparo(x + width/2 + 10 , y, 0, 1, velocidadMisil));
-		}
-		else
-			super.disparar();	
+		arma = new MultiplicadorLVI(x, y , 0, 1);
+		power = "mul";
 	}
 	
 	public static String getEstadisticas(){
