@@ -8,9 +8,14 @@ import ProyectoX.Disparos.Disparo;
 import ProyectoX.Explosiones.Explosion;
 import ProyectoX.Naves.Nave;
 import ProyectoX.Naves.Jugador.Jugador;
+import ProyectoX.PowerUps.PowerUp;
 
 public abstract class Enemigo extends Nave {
 	protected static final URL explode = (Nave.class.getClassLoader().getResource("ProyectoX/img/Explosiones/nave.gif"));
+	
+	
+	protected PowerUp power; 
+	
 	
 	public Enemigo(int vida, int vel, ImageIcon ii,int w, int h) {
 		super(vida,vel, ii, new ImageIcon(explode), w, h);
@@ -74,10 +79,17 @@ public abstract class Enemigo extends Nave {
 		if(vida <= 0) {
 			setVisible();
 			jugador.setPuntaje(puntaje);
-			//si es especial aumenta la vida del jugador
+			//si es especial agrega un powerUp al mapa
 			if(isEspecial())
-				jugador.setVida(-2);
+				mapa.addPower(x, y);
 		}
 	}
 	
+	public void setPower(PowerUp power){
+		this.power = power;
+	}
+	
+	public PowerUp getPower(){
+		return power;
+	}
 }
