@@ -110,35 +110,12 @@ public class Disparo {
 	}
 	
 	// clona el tipo disparo para poder disparar en serie
-	public Disparo[] cloneNivel(int power) {
+	public Disparo[] cloneNivel() {
 		
 		// establece la cantidad de disapros por nivel
-		Disparo[] d = new Disparo[ power * 2-1 ];
-		double n = 0;
-		int direccion = 1;
-		
-		for (int i = 0; i < power * 2-1 ;i++) {
-			
-			// n * power determina la dirección del disparo
-			//  direccion * dy determina si es para arriba o para abajo
-			d[i] = new Disparo(x, y, n*power, direccion * dy, velocidad);
-			
-			// si es de nivel mayor a uno, establece el ángulo del disaparo
-			if (n == 0) {
-				n = -0.3d;
-			}
-
-			// cuando la iteración es 2 etablece el nivel 3
-			if (n + 0.6 == -n && i == 2) {
-				n = 0.3d;
-				direccion = -1;
-				y += 30;
-			}
-			// establece el simétrico del disparo
-			n = -n;
-		}
-		
-		return d;
+		Disparo[] d = new Disparo[1];
+		d[0] = new Disparo(x, y, dx, dy, velocidad);
+		return d ;
 	}
 	
 	public Explosion newExplosion() {

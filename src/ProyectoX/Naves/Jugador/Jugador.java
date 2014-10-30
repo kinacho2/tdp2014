@@ -13,8 +13,9 @@ public class Jugador extends Nave {
 	protected ImageIcon icon;
 	protected ImageIcon iconDer;
 	protected ImageIcon iconIzq;
-	protected int power;
+	protected String power;
 	protected static URL explode = (Nave.class.getClassLoader().getResource("ProyectoX/img/Explosiones/player.gif"));
+	protected Disparo arma;
 	
 	public Jugador(int vida, int vel, ImageIcon icon, ImageIcon iconDer, ImageIcon iconIzq){
 		super(vida, vel, icon, new ImageIcon(explode), icon.getIconWidth(), icon.getIconHeight());
@@ -24,8 +25,10 @@ public class Jugador extends Nave {
 		velocidad=vel;
 		setJugador(this);
 		velocidadMisil = 20;
-		power = 1;
+		power = "";
 		puntaje = 0;
+		arma = new Disparo(x + width/2 , y, 0, 1, velocidadMisil);
+    	
 	}
 	
 	public void keyPressed(KeyEvent e) {
@@ -80,9 +83,8 @@ public class Jugador extends Nave {
     }
     
     public void disparar() {
-    	
-    	Disparo d = new Disparo(x + width/2 , y, 0, 1, velocidadMisil);
-    	Disparo[] array = d.cloneNivel(power);
+    	arma.setPosicion(x + width/2, y + height/2);
+    	Disparo[] array = arma.cloneNivel();
     	if(puedeDisparar()){
     		for(int i = 0;i<array.length;i++){
     			mapa.addDisparoJugador(array[i]);
@@ -133,4 +135,22 @@ public class Jugador extends Nave {
 	public void setPuntaje(int puntaje) {
 		this.puntaje += puntaje;
 	}
+	
+	public String getPower(){
+		return power;
+	}
+	
+	public void setPower(String power){
+		this.power = power;
+	}
+	
+	public void setNewDisparo(Disparo d){
+		arma = d;
+	}
+	
+	public Disparo getDisparo(){
+		return arma;
+	}
+	
+	
 }
