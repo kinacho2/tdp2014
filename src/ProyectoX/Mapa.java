@@ -16,6 +16,8 @@ import ProyectoX.Naves.Enemigos.Enemigo;
 import ProyectoX.Naves.Enemigos.Kamikaze;
 import ProyectoX.Naves.Enemigos.Jefes.*;
 import ProyectoX.Naves.Jugador.Jugador;
+import ProyectoX.PowerUps.PUPBuilder;
+import ProyectoX.PowerUps.PowerUp;
 
 public class Mapa {
 	
@@ -28,6 +30,8 @@ public class Mapa {
 	protected int indiceExplosiones;
 	protected Mind mind;
 	protected MindEnemies mindEnemies;
+	protected PUPBuilder power;
+	protected ArrayList powerUps;
 	protected int cantEnemies;
 	protected Random rn;
 	protected boolean jefe =false;
@@ -41,11 +45,14 @@ public class Mapa {
 
 		rn = new Random(5);
 		cantEnemies = 4;
-     		
+     	
 		enemiesInWindow = new ArrayList();
 		indiceEnemigos = 0;
 		
 		explosiones = new ArrayList();
+		
+		power = new PUPBuilder(7);
+		powerUps = new ArrayList();
 	}
 	
 	public int cantEnemies(){
@@ -123,7 +130,8 @@ public class Mapa {
 			m.setJugador(jugador);
             m.setMapa(this);
             indiceEnemigos++;
-			
+            
+            
 		} else {
 			if(!jefe){
 				m = new JefeTanque();
@@ -152,12 +160,21 @@ public class Mapa {
 	public ArrayList explosiones() {
 		return explosiones;
 	}
+	
+	public ArrayList getPowers(){
+		return powerUps;
+	}
 
+	public void addPower(int x, int y){
+		powerUps.add(power.getPowerUpRandom(x, y));
+	}
 	
 	public void stop() {
 		mind.stop();
 		mindEnemies.setStop();
 		
 	}
+	
+	
 }
 

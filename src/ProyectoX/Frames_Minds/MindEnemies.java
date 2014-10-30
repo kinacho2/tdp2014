@@ -50,6 +50,7 @@ public class MindEnemies extends Thread  {
 		            if (!m.getVisible()){
 		            	enemies.remove(i);
 		            	mapa.addExposion(m.getExplosion());
+		            	
 		            }
 		            //dispara y aumenta un contador ciclico que retrasa la distancia entre la ejecucion de los disparos
 		            m.disparar();

@@ -14,12 +14,12 @@ public class Disparo {
 	private static final URL url = Disparo.class.getClassLoader().getResource("ProyectoX/img/Disparos/Basico/Basico.png");
 	private static final URL explode = Disparo.class.getClassLoader().getResource("ProyectoX/img/Explosiones/pequena.gif");
 	
-	private int x, y;
+	protected int x, y;
     private Image image;
     private ImageIcon explosion;
     private boolean visible;
 
-    private int velocidad;
+    protected int velocidad;
     
     //largo y ancho de la image
   	protected int height;
@@ -83,7 +83,7 @@ public class Disparo {
     
     // Determina si el disparo colisionó con una nave
     public boolean colision(Nave nave) {
-boolean A,B,C,D,E,F,G,H, fColision; 
+    	boolean A,B,C,D,E,F,G,H, fColision; 
 		
 		A = x >= nave.getX();
 		B = x <= (nave.getX() + nave.getWidth());
@@ -150,7 +150,9 @@ boolean A,B,C,D,E,F,G,H, fColision;
 		this.y = y;
 	}
 	
-	
+	public Disparo nextLevel(){
+		return new Disparo(x,y,dx,dy,velocidad);
+	}
 	
 }
 

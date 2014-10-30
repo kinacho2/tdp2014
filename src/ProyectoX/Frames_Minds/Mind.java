@@ -26,6 +26,7 @@ import ProyectoX.Naves.Jugador.Jugador;
 import ProyectoX.Naves.Jugador.Normal;
 import ProyectoX.Naves.Jugador.Resistente;
 import ProyectoX.Naves.Jugador.Veloz;
+import ProyectoX.PowerUps.PowerUp;
 
 public class Mind extends JPanel implements ActionListener {
 	
@@ -108,6 +109,12 @@ public class Mind extends JPanel implements ActionListener {
 	            	ms.remove(i);
 	            }
 	        }
+	        //repinta los powerUps
+	        ms = mapa.getPowers();
+	        for (int j = 0; j < ms.size(); j++ ) {
+	            PowerUp pw = (PowerUp) ms.get(j);
+	            g2d.drawImage(pw.getImage(), pw.getX(), pw.getY(), this);
+            }
 	
 	        Toolkit.getDefaultToolkit().sync();
 	        g.dispose();
@@ -119,6 +126,8 @@ public class Mind extends JPanel implements ActionListener {
     	disparosJugador();
     	
     	disparosEnemigos();
+    	
+    	colisionPowerUp();
         
         if(jugador.getVisible()) {
         	jugador.move(); 
@@ -139,7 +148,24 @@ public class Mind extends JPanel implements ActionListener {
        	repaint();  
     }
     
-    // Mueve los disparos visibles de jugador y los que no son removidos; además verifica si algún disparo colisionó
+    private synchronized void colisionPowerUp() {
+		ArrayList powers = mapa.getPowers();
+		
+		for (int j = 0; j < powers.size(); j++ ) {
+			PowerUp pw = (PowerUp) powers.get(j);
+	        if (pw.isVisible()) {
+	        	pw.move();
+	           	if(pw.colision(jugador)){
+	           		pw.setVisible();
+	            }
+	        }
+	        else{
+	        	powers.remove(j);
+	        }
+	    }
+	}
+
+	// Mueve los disparos visibles de jugador y los que no son removidos; además verifica si algún disparo colisionó
     // con algún enemigo
     private synchronized void disparosJugador() {
     	// arreglo de disparos de jugador y de enemigos que se encuentran en el mapa
