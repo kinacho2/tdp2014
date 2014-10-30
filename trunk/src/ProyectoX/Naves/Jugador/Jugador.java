@@ -8,6 +8,7 @@ import javax.swing.ImageIcon;
 import ProyectoX.Disparos.Disparo;
 import ProyectoX.Explosiones.Explosion;
 import ProyectoX.Naves.Nave;
+import ProyectoX.Naves.Jugador.Defensa.Defensa;
 
 public class Jugador extends Nave {
 	protected ImageIcon icon;
@@ -16,6 +17,7 @@ public class Jugador extends Nave {
 	protected String power;
 	protected static URL explode = (Nave.class.getClassLoader().getResource("ProyectoX/img/Explosiones/player.gif"));
 	protected Disparo arma;
+	private Defensa defensa;
 	
 	public Jugador(int vida, int vel, ImageIcon icon, ImageIcon iconDer, ImageIcon iconIzq){
 		super(vida, vel, icon, new ImageIcon(explode), icon.getIconWidth(), icon.getIconHeight());
@@ -58,6 +60,9 @@ public class Jugador extends Nave {
         if (key == KeyEvent.VK_S) {
         	dy = velocidad;
         }
+        if(defensa!=null){
+        	defensa.keyPressed(e);
+        }
     }
 
     public void keyReleased(KeyEvent e) {
@@ -80,6 +85,11 @@ public class Jugador extends Nave {
         if (key == KeyEvent.VK_S) {
             dy = 0;
         }
+        
+        if(defensa!=null){
+        	defensa.keyReleased(e);
+        }
+        
     }
     
     public void disparar() {
@@ -112,7 +122,11 @@ public class Jugador extends Nave {
 		 if(y <= minHeight - height)
 			y += dy;
 		 else
-			y = minHeight - height - 7;
+			y = minHeight - height - 1;
+		 
+		 if(defensa!=null){
+			 defensa.move();
+		 }
    }
 
 		public void setVida(int vd) {
@@ -152,5 +166,16 @@ public class Jugador extends Nave {
 		return arma;
 	}
 	
+	public void setDefensa(Defensa def){
+		defensa = def;
+	}
 	
+	public Defensa getDefensa(){
+		return defensa;
+	}
+
+	public void dropDefensa() {
+		defensa = null;
+		
+	}
 }

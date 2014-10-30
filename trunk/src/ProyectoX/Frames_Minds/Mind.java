@@ -90,6 +90,15 @@ public class Mind extends JPanel implements ActionListener {
 	        if (jugador.getVisible())
 	        	g2d.drawImage(jugador.getImage(), jugador.getX(), jugador.getY(), this);
 	        
+	        Jugador aux = jugador.getDefensa();
+	        
+	        if (aux != null){
+	        	if(aux.getVisible())
+	        		g2d.drawImage(aux.getImage(), aux.getX(), aux.getY(), this);
+	        	else
+	        		jugador.dropDefensa();
+	        }
+	        
 	        // arreglo de disparos
 	        ArrayList ms = mapa.getMisilesJugador();
 	
@@ -121,7 +130,6 @@ public class Mind extends JPanel implements ActionListener {
     }
 
     public void actionPerformed(ActionEvent e) {
-    	
     	
     	disparosJugador();
     	
@@ -205,13 +213,15 @@ public class Mind extends JPanel implements ActionListener {
     	
     	// arreglo de disparos de los enemigos que se encuentran en el mapa
     	ArrayList ms = mapa.getMisilesEnemigos();
+    	
+        Jugador aux = mapa.getJugador();
         
         // verifica si algun misil del enemigo colisiono con el jugador
         for (int j = 0; j < ms.size(); j++ ) {
             Disparo misil = (Disparo) ms.get(j);
-            if (misil.colision(jugador)) {
+            if (misil.colision(aux)) {
             	if (misil.isVisible()) {
-            		jugador.setVida(misil.getDamage());
+            		aux.setVida(misil.getDamage());
             	}
             	misil.setVisible();
             	mapa.addExposion(misil.newExplosion());

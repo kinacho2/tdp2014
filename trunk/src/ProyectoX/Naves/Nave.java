@@ -186,6 +186,10 @@ public abstract class Nave {
 		mapa = map;
 	}
 	
+	public Mapa getMapa(){
+		return mapa;
+	}
+	
 	public abstract void setVida(int vd) ;
 	
 	public int getVida(){

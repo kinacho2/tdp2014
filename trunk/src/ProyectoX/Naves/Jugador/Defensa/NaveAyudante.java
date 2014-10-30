@@ -4,7 +4,7 @@ import java.net.URL;
 
 import javax.swing.ImageIcon;
 
-import Proyecto2.Naves.Jugador.Jugador;
+import ProyectoX.Naves.Jugador.Jugador;
 
 public class NaveAyudante extends Defensa {
 
@@ -14,6 +14,6 @@ public class NaveAyudante extends Defensa {
 	
 	
 	public NaveAyudante(Jugador jugador){
-		super(defaultVida, jugador.getVelocidad(), jugador.getX() - jugador.getWidth(), jugador.getY(), new ImageIcon(), new ImageIcon(), new ImageIcon(),"def");
+		super(defaultVida, jugador.getVelocidad(), new ImageIcon(), new ImageIcon(), new ImageIcon());
 	}
 }
