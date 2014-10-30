@@ -81,7 +81,7 @@ public abstract class Enemigo extends Nave {
 			jugador.setPuntaje(puntaje);
 			//si es especial agrega un powerUp al mapa
 			if(isEspecial())
-				mapa.addPower(x, y);
+				mapa.addPower(x + width/2, y + height/2, false);
 		}
 	}
 	
@@ -91,5 +91,9 @@ public abstract class Enemigo extends Nave {
 	
 	public PowerUp getPower(){
 		return power;
+	}
+	
+	public void bomba(){
+		setVisible();
 	}
 }

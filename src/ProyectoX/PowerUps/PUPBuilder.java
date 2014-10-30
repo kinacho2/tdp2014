@@ -11,8 +11,8 @@ public class PUPBuilder {
 	}
 	
 	public PowerUp getPowerUpRandom(int x, int y){
-		PowerUp up = new Escudo(x, y);
-		/*int aux = rn.nextInt(100);
+		PowerUp up;
+		int aux = rn.nextInt(100);
 		if(aux >= 0 && aux < 13){
 			up = new Ayudante(x, y);
 		}else if(aux < 26){
@@ -30,7 +30,6 @@ public class PUPBuilder {
 		}else{
 			up = new Vida(x, y);
 		}
-		*/
 		return up;
 	}
 	

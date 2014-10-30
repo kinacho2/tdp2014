@@ -17,9 +17,26 @@ protected static final URL url = (PowerUp.class.getClassLoader().getResource("Pr
 		this.rn = rn;
 	}
 
-	@Override
+	
 	protected void efecto(Jugador jugador) {
-		// TODO Auto-generated method stub
+		PowerUp up;
+		int aux = rn;
+		if(aux >= 0 && aux < 13){
+			up = new Ayudante(x, y);
+		}else if(aux < 26){
+			up = new Escudo(x, y);
+		}else if(aux < 30){
+			up = new Bomba(x, y);
+		}else if(aux < 45){
+			up = new Multiplicador(x, y);
+		}else if(aux < 60){
+			up = new Laser(x, y);
+		}else if(aux < 75){
+			up = new Wave(x, y);
+		}else{
+			up = new Vida(x, y);
+		}
+		up.efecto(jugador);
 		
 	}
 }

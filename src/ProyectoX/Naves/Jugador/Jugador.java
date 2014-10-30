@@ -18,6 +18,7 @@ public class Jugador extends Nave {
 	protected static URL explode = (Nave.class.getClassLoader().getResource("ProyectoX/img/Explosiones/player.gif"));
 	protected Disparo arma;
 	private Defensa defensa;
+	private int bombas;
 	
 	public Jugador(int vida, int vel, ImageIcon icon, ImageIcon iconDer, ImageIcon iconIzq){
 		super(vida, vel, icon, new ImageIcon(explode), icon.getIconWidth(), icon.getIconHeight());
@@ -28,6 +29,7 @@ public class Jugador extends Nave {
 		setJugador(this);
 		velocidadMisil = 20;
 		power = "";
+		bombas = 1;
 		puntaje = 0;
 		arma = new Disparo(x + width/2 , y, 0, 1, velocidadMisil);
     	
@@ -60,6 +62,14 @@ public class Jugador extends Nave {
         if (key == KeyEvent.VK_S) {
         	dy = velocidad;
         }
+        if (key == KeyEvent.VK_X){
+        	if(bombas > 0){
+        		mapa.bomba();
+        		bombas--;
+        	}
+        }
+        
+        
         if(defensa!=null){
         	defensa.keyPressed(e);
         }
@@ -167,6 +177,9 @@ public class Jugador extends Nave {
 	}
 	
 	public void setDefensa(Defensa def){
+		if(defensa != null){
+			(defensa).remplazo();
+		}
 		defensa = def;
 	}
 	
@@ -176,6 +189,10 @@ public class Jugador extends Nave {
 
 	public void dropDefensa() {
 		defensa = null;
-		
+	}
+	
+	public void setBomba(){
+		if (bombas <= 3)
+			bombas ++;
 	}
 }

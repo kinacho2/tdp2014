@@ -53,5 +53,9 @@ public abstract class Torreta extends Enemigo {
         return AffineTransform.getRotateInstance(rotacion + Math.PI, getX() + getWidth()/2, getY() + getHeight()/2);
     }
 	
+	public void bomba(){
+		
+	}
+	
 	
 }

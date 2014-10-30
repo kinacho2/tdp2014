@@ -5,6 +5,7 @@ import java.net.URL;
 import javax.swing.ImageIcon;
 
 import ProyectoX.Naves.Jugador.Jugador;
+import ProyectoX.Naves.Jugador.Defensa.NaveAyudante;
 
 
 public class Ayudante extends PowerUp {
@@ -14,14 +15,12 @@ public class Ayudante extends PowerUp {
 	
 	public Ayudante(int x, int y) {
 		super(x, y, new ImageIcon(url));
-		// TODO Auto-generated constructor stub
 	}
 
 
 	@Override
 	protected void efecto(Jugador jugador) {
-		// TODO Auto-generated method stub
-		
+		jugador.setDefensa(new NaveAyudante(jugador));
 	}
 
 }
