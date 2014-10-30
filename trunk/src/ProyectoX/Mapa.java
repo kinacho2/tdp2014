@@ -16,6 +16,7 @@ import ProyectoX.Naves.Enemigos.Enemigo;
 import ProyectoX.Naves.Enemigos.Kamikaze;
 import ProyectoX.Naves.Enemigos.Jefes.*;
 import ProyectoX.Naves.Jugador.Jugador;
+import ProyectoX.PowerUps.Bomba;
 import ProyectoX.PowerUps.PUPBuilder;
 import ProyectoX.PowerUps.PowerUp;
 
@@ -25,6 +26,7 @@ public class Mapa {
 	protected ArrayList misilesJugador;
 	protected ArrayList explosiones;
 	protected Jugador jugador;
+	protected ArrayList jugadores;
 	protected ArrayList enemiesInWindow;
 	protected int indiceEnemigos;
 	protected int indiceExplosiones;
@@ -42,9 +44,11 @@ public class Mapa {
 		// Arreglo de disparos
 		misilesEnemigos = new ArrayList();
 		misilesJugador = new ArrayList();
+		
+		jugadores = new ArrayList();
 
 		rn = new Random(5);
-		cantEnemies = 101;
+		cantEnemies = 5;
      	
 		enemiesInWindow = new ArrayList();
 		indiceEnemigos = 0;
@@ -67,12 +71,20 @@ public class Mapa {
 		this.enemiesInWindow = enemies;
 	}
 
-	public Jugador getJugador() {
-		return jugador;
+	public ArrayList getJugador() {
+		return jugadores;
 	}
 
-	public void setJugador(Jugador jugador) {
+	public void setNewJugador(Jugador jugador) {
+		jugadores.add(jugador);
+	}
+	
+	public void setJugador(Jugador jugador){
 		this.jugador = jugador;
+	}
+	
+	public void removeJugador(Jugador jugador){
+		jugadores.remove(jugador);
 	}
 	
 	public void setMind(Mind mind) {
@@ -127,6 +139,7 @@ public class Mapa {
 			else
 				m = new Basico(true);
 			
+			
 			m.setJugador(jugador);
             m.setMapa(this);
             indiceEnemigos++;
@@ -165,13 +178,27 @@ public class Mapa {
 		return powerUps;
 	}
 
-	public void addPower(int x, int y){
-		powerUps.add(power.getPowerUpRandom(x, y));
+	public void addPower(int x, int y, boolean bomba){
+		PowerUp up;
+		if(bomba){
+			up = new Bomba(x,y);
+		}else{
+			up = power.getPowerUpRandom(x, y);
+		}
+		powerUps.add(up);
 	}
 	
 	public void stop() {
 		mind.stop();
 		mindEnemies.setStop();
+		
+	}
+
+	public synchronized void bomba() {
+		for(int i = 0; i < enemiesInWindow.size(); i++){
+			Enemigo m = (Enemigo) enemiesInWindow.get(i);
+			m.bomba();
+		}
 		
 	}
 	

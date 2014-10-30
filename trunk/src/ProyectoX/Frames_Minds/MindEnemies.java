@@ -30,7 +30,7 @@ public class MindEnemies extends Thread  {
 	public void run() {
 		try {
 			while (!stop) {
-				
+				enemies = mapa.getEnemies();
 				MindEnemies.sleep(100);
 				
 				//calcula la probabilidad de aparicion de los enemigos en pantalla

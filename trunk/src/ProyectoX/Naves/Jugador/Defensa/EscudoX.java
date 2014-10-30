@@ -35,8 +35,9 @@ public class EscudoX extends Defensa {
 			Enemigo m = (Enemigo) enemigos.get(i);
 			m.setJugador(jugador);
 		}
+		setIndex(mapa.getJugador().size());
+		mapa.setNewJugador(this);
 		mapa.setJugador(this);
-		
 	}
 	
 	public void setVisible(){
@@ -48,11 +49,16 @@ public class EscudoX extends Defensa {
 			m.setJugador(jugador);
 		}
 		mapa.setJugador(jugador);
+		mapa.getJugador().remove(index);
 	}
 
 	public void move(){
 		x = jugador.getX() + jugador.getWidth()/2 - defaultWidth/2;
 		y = jugador.getY() + jugador.getHeight()/2 - defaultHeight/2;
+	}
+	
+	public void disparar(){
+		
 	}
 	
 	

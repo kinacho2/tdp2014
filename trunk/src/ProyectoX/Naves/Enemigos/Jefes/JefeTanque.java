@@ -50,7 +50,7 @@ public class JefeTanque extends Jefe{
 		cargarArchivoTorretas(boundsDouble, new FabricaTorretasDobles(), cantTorretasDobles);
 		cargarArchivoTorretas(boundsSimple, new FabricaTorretasSimples(), cantTorretasSimples);
 		
-		
+		puntaje = 2000;
 			
 		
 	}
@@ -59,12 +59,14 @@ public class JefeTanque extends Jefe{
 
 	public void move() {
 		if(torretas.size() == 0){
+			jugador.setPuntaje(puntaje);
+			mapa.addPower(400, 200, true);
 			setVisible();
 			width = defaultWidth;
 			height = defaultHeight;
+			
 		}
-		int[] toEliminate = new int[torretas.size()];
-		int j=0;
+		
 		if(y < 100 && primero){
 			y +=velocidad;
 			for(int i=0; i<torretas.size(); i++){

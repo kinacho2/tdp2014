@@ -77,12 +77,16 @@ public class Disparo {
     public void move() {
         y -= dy * velocidad;
         x += dx * velocidad;
-       if (y < maxHeight || y >  minHeight || x < minWidth || x > maxWidth)
+        verificarColisionBorde();
+    }
+    
+    protected void verificarColisionBorde(){
+    	if (y < maxHeight || y >  minHeight || x < minWidth || x > maxWidth)
             setVisible();
     }
     
     // Determina si el disparo colisionó con una nave
-    public boolean colision(Nave nave) {
+    public synchronized boolean colision(Nave nave) {
     	boolean A,B,C,D,E,F,G,H, fColision; 
 		
 		A = x >= nave.getX();

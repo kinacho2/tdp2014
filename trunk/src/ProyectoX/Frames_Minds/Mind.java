@@ -214,19 +214,22 @@ public class Mind extends JPanel implements ActionListener {
     	// arreglo de disparos de los enemigos que se encuentran en el mapa
     	ArrayList ms = mapa.getMisilesEnemigos();
     	
-        Jugador aux = mapa.getJugador();
+       	ArrayList jugadores = mapa.getJugador();
         
         // verifica si algun misil del enemigo colisiono con el jugador
-        for (int j = 0; j < ms.size(); j++ ) {
-            Disparo misil = (Disparo) ms.get(j);
-            if (misil.colision(aux)) {
-            	if (misil.isVisible()) {
-            		aux.setVida(misil.getDamage());
-            	}
-            	misil.setVisible();
-            	mapa.addExposion(misil.newExplosion());
-            }
-        }
+       	for(int i = 0; i < jugadores.size(); i++){
+       		Jugador aux = (Jugador) jugadores.get(i);
+	        for (int j = 0; j < ms.size(); j++ ) {
+	            Disparo misil = (Disparo) ms.get(j);
+	            if (misil.colision(aux)) {
+	            	if (misil.isVisible()) {
+	            		aux.setVida(misil.getDamage());
+	            		misil.setVisible();
+	            		mapa.addExposion(misil.newExplosion());
+	            	}
+	            }
+	        }
+       	}
     	
     }
 
@@ -267,6 +270,7 @@ public class Mind extends JPanel implements ActionListener {
     	}
         jugador.setMapa(mapa);
         mapa.setJugador(jugador);
+        mapa.setNewJugador(jugador);
         jugador.setMinHeight(530);
     }
     

@@ -8,6 +8,7 @@ import java.io.InputStream;
 import java.net.URISyntaxException;
 import java.net.URL;
 import java.util.ArrayList;
+import java.util.Random;
 
 import javax.swing.ImageIcon;
 import javax.swing.JOptionPane;
@@ -100,6 +101,22 @@ public abstract class Jefe extends Enemigo{
 		for(int i=0; i<torretas.size(); i++){
 			Torreta t =(Torreta)torretas.get(i);
 			t.setMapa(map);
+		}
+	}
+	
+	public synchronized void bomba(){
+		if(torretas.size() > 2){
+			Random rn = new Random(4);
+			Enemigo m = (Enemigo) torretas.get(rn.nextInt(torretas.size()));
+			m.setVisible();
+			m = (Enemigo) torretas.get(rn.nextInt(torretas.size()));
+			m.setVisible();
+		}
+		else{
+			for(int i = 0; i < torretas.size(); i++){
+				Enemigo m = (Enemigo) torretas.get(i);
+				m.setVisible();
+			}
 		}
 	}
 }
