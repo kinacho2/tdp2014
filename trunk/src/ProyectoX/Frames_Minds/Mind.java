@@ -69,16 +69,25 @@ public class Mind extends JPanel implements ActionListener {
     public void setBar(JPanel bar) {
 		this.bar = bar;
         puntaje = new JLabel("Puntaje: "+ 0);
-		puntaje.setBounds(800-150, 0, 150, 50);
+		puntaje.setBounds(800-150, 0, 350, 50);
 		bar.add(puntaje);
 		
 		labelVida = new JLabel("Vida: " + jugador.getVida());
-		labelVida.setBounds(800-200, 0, 50, 50);
+		labelVida.setBounds(800-250, 0, 100, 50);
 		bar.add(labelVida);
 		
 		contadorEnemigos = new JLabel("Enemigos restantes: " + mapa.cantEnemies());
-		contadorEnemigos.setBounds(800-400, 0, 150, 50);
+		contadorEnemigos.setBounds(800-500, 0, 250, 50);
 		bar.add(contadorEnemigos);
+		
+		//quit.setBackground(new java.awt.Color(0,0,0));
+		//labelVida.setPreferredSize(new java.awt.Dimension(14, 7));
+		labelVida.setFont(new java.awt.Font("Segoe UI",0,20));
+		labelVida.setForeground(new java.awt.Color(255,0,0));
+		puntaje.setFont(new java.awt.Font("Segoe UI",0,20));
+		puntaje.setForeground(new java.awt.Color(0,0,255));
+		contadorEnemigos.setFont(new java.awt.Font("Segoe UI",0,20));
+		contadorEnemigos.setForeground(new java.awt.Color(0,255,0));
     
     }
     
