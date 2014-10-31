@@ -6,6 +6,7 @@ import java.util.Random;
 import ProyectoX.Mapa;
 import ProyectoX.Naves.Enemigos.Enemigo;
 import ProyectoX.Naves.Enemigos.Jefes.Jefe;
+import ProyectoX.Naves.Jugador.Jugador;
 
 public class MindEnemies extends Thread  {
 

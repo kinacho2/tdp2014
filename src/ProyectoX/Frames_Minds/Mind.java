@@ -136,6 +136,8 @@ public class Mind extends JPanel implements ActionListener {
     	disparosEnemigos();
     	
     	colisionPowerUp();
+    	
+    	verificarColisionDefensa(jugador.getDefensa());
         
         if(jugador.getVisible()) {
         	jugador.move(); 
@@ -151,6 +153,9 @@ public class Mind extends JPanel implements ActionListener {
         			dialog.showMessageDialog(null, puntaje.getText() + "\nVuelva al menu de seleccion para comenzar nuevamente", "FIN DEL JUEGO", JOptionPane.INFORMATION_MESSAGE);
         		}
         	}
+        }
+        if(jugador.getVida() <= 0){
+        	jugador.setVisible();
         }
         
        	repaint();  
@@ -191,7 +196,8 @@ public class Mind extends JPanel implements ActionListener {
             // verifica si algun misil del jugador colisiono a un enemigo
             for (int j = 0; j < enemigos.size(); j++) {
             	Enemigo enemigo = (Enemigo) enemigos.get(j);
-                if (m.colision(enemigo)) {
+            	
+            	if (m.colision(enemigo)) {
                 	if (m.isVisible()){
                 		enemigo.setVida(m.getDamage());
                 	}
@@ -199,6 +205,7 @@ public class Mind extends JPanel implements ActionListener {
                 	m.setVisible();
                 	mapa.addExposion(m.newExplosion());
                 }
+                
             }
         }
     	puntaje.setText("Puntaje: " + jugador.getPuntaje());
@@ -231,6 +238,21 @@ public class Mind extends JPanel implements ActionListener {
 	        }
        	}
     	
+    }
+    
+    private synchronized void verificarColisionDefensa(Jugador def){
+    	if(def != null){
+    		ArrayList enemigos = mapa.getEnemies();
+    		for (int j = 0; j < enemigos.size(); j++) {
+            	Enemigo enemigo = (Enemigo) enemigos.get(j);
+            
+            	if(def != null && enemigo.colision(def)){
+            		int danio = def.getDamageColision();
+            		def.setVida(enemigo.getDamageColision());
+            		enemigo.setVida( danio);
+            	}
+    		}
+    	}
     }
 
     private class TAdapter implements KeyListener {

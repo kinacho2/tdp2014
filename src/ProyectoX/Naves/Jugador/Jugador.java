@@ -137,15 +137,17 @@ public class Jugador extends Nave {
 		 if(defensa!=null){
 			 defensa.move();
 		 }
-   }
+	 }
 
-		public void setVida(int vd) {
+	public void setVida(int vd) {
 			
-			if(vida <= 0) 
-				setVisible();
-			else
-				vida-=vd;
-		}
+		if(vida <= -1) 
+			setVisible();
+		else
+			vida-=vd;		
+		if(vida > 10)
+			vida = 10;
+	}
 	 
 	@Override
 	public Explosion getExplosion() {
