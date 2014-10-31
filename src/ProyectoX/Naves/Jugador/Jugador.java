@@ -140,13 +140,12 @@ public class Jugador extends Nave {
 	 }
 
 	public void setVida(int vd) {
-			
-		if(vida <= -1) 
-			setVisible();
-		else
+		if(vida > 0)
 			vida-=vd;		
 		if(vida > 10)
 			vida = 10;
+		if(vida <= -1) 
+			setVisible();
 	}
 	 
 	@Override

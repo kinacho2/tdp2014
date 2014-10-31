@@ -19,7 +19,7 @@ protected static final URL url = (PowerUp.class.getClassLoader().getResource("Pr
 
 	@Override
 	protected void efecto(Jugador jugador) {
-		jugador.setVida(-5);
+		jugador.setVida(-4);
 		
 	}
 }
