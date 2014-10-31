@@ -47,7 +47,7 @@ public class Mapa {
 		
 		jugadores = new ArrayList();
 
-		rn = new Random(5);
+		rn = new Random(7);
 		cantEnemies = 101;
      	
 		enemiesInWindow = new ArrayList();
@@ -137,7 +137,7 @@ public class Mapa {
 			else if(probabilidad % 5 == 1) 
 				m = new Artillero((probabilidad % 30) == 1);
 			else
-				m = new Basico(true);
+				m = new Basico(probabilidad % 11 == 0);
 			
 			
 			m.setJugador(jugador);

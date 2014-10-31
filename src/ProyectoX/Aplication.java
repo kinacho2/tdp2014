@@ -91,7 +91,7 @@ public class Aplication extends javax.swing.JFrame {
 		game.add(bar);
 		bar.setLayout(null);
 		bar.setPreferredSize(new java.awt.Dimension(800, 50));
-		bar.setBackground(new java.awt.Color(25,100,25));
+		bar.setBackground(new java.awt.Color(0,0,0));
 		
 		mind.setBar(bar);
 	
