@@ -14,7 +14,7 @@ public class Resistente extends Jugador {
 	protected static URL urlDer = (Nave.class.getClassLoader().getResource("ProyectoX/img/Jugador/resistenteDer.gif"));
 	protected static URL urlIzq = (Nave.class.getClassLoader().getResource("ProyectoX/img/Jugador/resistenteIzq.gif"));
 	private static final int defaultVel = 2;
-	private static final int defaultVida = 8;
+	private static final int defaultVida = 800;
 	
 	
 	public Resistente(){
@@ -30,4 +30,7 @@ public class Resistente extends Jugador {
 		return ("<html>VIDA: "+defaultVida+"<br>VELOCIDAD: "+defaultVel+"<br>POTENCIA INICIAL: "+2+"<br>ALTO: "+icon.getIconHeight()+"<br>ANCHO: "+icon.getIconWidth()+"</html>");
 	}
 	
+	public void setVida(int vd){
+		
+	}
 }

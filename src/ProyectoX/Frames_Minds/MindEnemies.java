@@ -36,7 +36,7 @@ public class MindEnemies extends Thread  {
 				
 				//calcula la probabilidad de aparicion de los enemigos en pantalla
 				
-				if(ran.nextInt(20)==0){
+				if(ran.nextInt(25)==0){
 					Enemigo m = mapa.nextEnemigo();
 					if(m!=null){
 						enemies.add(m);
