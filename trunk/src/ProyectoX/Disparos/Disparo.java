@@ -24,7 +24,7 @@ public class Disparo {
     //largo y ancho de la image
   	protected int height;
   	protected int width;
-	private int damage;
+	protected int damage;
 	protected double dx;
 	protected double dy;
 
@@ -99,7 +99,7 @@ public class Disparo {
 		H = (y + height) <= (nave.getY() + nave.getHeight());
 		
 		// funcion de colicion que verifica si alguno de los 4 puntos del borde del objeto disparo intersectan con area del objeto pasado por parametro
-		fColision = (A && B || E && F) && (C && D || G && H);
+		fColision = (A && B || E && F) && (C && D || G && H) ||  !A && !F && ( !H && D || G && H) ||  !C &&  !H && (B &&  !F ||  !A && E);
 		return  nave.getVisible() && fColision;
 	}
     

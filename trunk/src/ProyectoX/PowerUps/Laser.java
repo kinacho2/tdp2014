@@ -4,6 +4,7 @@ import java.net.URL;
 
 import javax.swing.ImageIcon;
 
+import ProyectoX.Disparos.Laser.LaserLVI;
 import ProyectoX.Naves.Jugador.Jugador;
 
 public class Laser extends PowerUp {
@@ -19,7 +20,7 @@ protected static final URL url = (PowerUp.class.getClassLoader().getResource("Pr
 
 	@Override
 	protected void efecto(Jugador jugador) {
-		// TODO Auto-generated method stub
+		jugador.setNewDisparo(new LaserLVI(jugador));
 		
 	}
 }
