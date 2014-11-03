@@ -48,7 +48,7 @@ public class Mapa {
 		jugadores = new ArrayList();
 
 		rn = new Random(7);
-		cantEnemies = 101;
+		cantEnemies = 4;
      	
 		enemiesInWindow = new ArrayList();
 		indiceEnemigos = 0;
