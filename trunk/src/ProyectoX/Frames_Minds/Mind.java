@@ -212,7 +212,7 @@ public class Mind extends JPanel implements ActionListener {
                 	}
                 	puntaje.setText("Puntaje: " + jugador.getPuntaje());
                 	m.setVisible();
-                	mapa.addExposion(m.newExplosion());
+                	mapa.addExposion(m.newExplosion(enemigo.getY() + enemigo.getHeight()));
                 }
                 
             }
@@ -241,11 +241,12 @@ public class Mind extends JPanel implements ActionListener {
 	            	if (misil.isVisible()) {
 	            		aux.setVida(misil.getDamage());
 	            		misil.setVisible();
-	            		mapa.addExposion(misil.newExplosion());
+	            		mapa.addExposion(misil.newExplosion(jugador.getY()));
 	            	}
 	            }
 	        }
        	}
+       	
     	
     }
     

@@ -109,6 +109,7 @@ public class Mapa {
 	
 	public void addDisparoJugador(Disparo d) {
 		misilesJugador.add(d);
+		
 	}
 	
 	public void removerDisparoJugador(int i) {
@@ -121,6 +122,7 @@ public class Mapa {
 
 	public ArrayList getMisilesJugador() {
 		return misilesJugador;
+		
 	}
 	/*
 	 * Crea un nuevo enemigo aleatoriamente

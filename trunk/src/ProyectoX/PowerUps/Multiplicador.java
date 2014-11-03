@@ -14,11 +14,9 @@ protected static final URL url = (PowerUp.class.getClassLoader().getResource("Pr
 	
 	public Multiplicador(int x, int y) {
 		super(x, y, new ImageIcon(url));
-		// TODO Auto-generated constructor stub
 	}
 
 
-	@Override
 	protected void efecto(Jugador jugador) {
 		if(jugador.getPower().equals(power)){
 			jugador.setNewDisparo(jugador.getDisparo().nextLevel());

@@ -16,7 +16,7 @@ public class Disparo {
 	
 	protected int x, y;
     private Image image;
-    private ImageIcon explosion;
+    protected ImageIcon explosion;
     private boolean visible;
 
     protected int velocidad;
@@ -122,7 +122,7 @@ public class Disparo {
 		return d ;
 	}
 	
-	public Explosion newExplosion() {
+	public Explosion newExplosion(int altura) {
 		return new Explosion(x + width/2, y + height / 2, explosion, width, height);
 	}
 	
