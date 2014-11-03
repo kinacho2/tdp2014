@@ -20,7 +20,7 @@ public class LaserLVIII extends DisparoLaser{
 		y = jugador.getY() - height;
 		damage = 5;
 		
-		setDelays(100, 180, 10);
+		setDelays(100, 180, 3);
 	}
 
 	public Disparo nextLevel(){

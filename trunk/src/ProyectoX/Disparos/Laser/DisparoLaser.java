@@ -60,6 +60,7 @@ public abstract class DisparoLaser extends Disparo {
 			}
 			toRet = A && B && C || D && C || I && C;
 		}
+		delay++;
 		
 		return toRet;
 	}
@@ -82,7 +83,7 @@ public abstract class DisparoLaser extends Disparo {
 	//al impactar no debe desaparecer por lo que el setVisible es redefinido
 	
 	public void setVisible(){
-		delay++;
+		
 	}
 	
 	//desarmar() es la nueva funcione que hace desaparecer el disparo cuando se cumple su tiempo

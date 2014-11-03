@@ -17,7 +17,7 @@ public abstract class Torreta extends Enemigo {
 		super(vida, 0, ii, w, h);
 		x = xx;
 		y = yy;
-		velocidadMisil = -2;
+		velocidadMisil = -6;
 	}
 
 	public void disparar() {
