@@ -40,16 +40,15 @@ public class Bombardero extends Enemigo {
 	private int delayDisparo = 10;
 	private int bombarderoDis = 0;
 	
-	public Bombardero() {
+	public Bombardero(boolean init) {
 		super(defaultVida,7,new ImageIcon(url),defaultWidth,defaultHeight);
 		
 		cont=0;
 		y = minHeight;
 		setFrecuenciaDeDisparo(delayDisparo+1,delayDisparo*3);
 		
-		Random rand = new Random();
-		boolean hemisferioInicial = rand.nextBoolean();
-		if (hemisferioInicial) {
+
+		if (init) {
 			posInicialX = 45;
 			
 		} else {

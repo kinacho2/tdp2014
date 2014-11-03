@@ -135,11 +135,11 @@ public class Mapa {
 			if(probabilidad % 5 == 0)
 				m = new Kamikaze(probabilidad % 15 == 0);
 			else if(probabilidad % 13 == 0)
-				m = new Bombardero();
+				m = new Bombardero(probabilidad % 2 == 0);
 			else if(probabilidad % 5 == 1) 
 				m = new Artillero((probabilidad % 30) == 1);
 			else
-				m = new Basico(true);
+				m = new Basico((probabilidad % 11) == 0);
 			
 			
 			m.setJugador(jugador);
@@ -195,6 +195,10 @@ public class Mapa {
 		mindEnemies.setStop();
 		
 	}
+	
+	/*
+	 * Le indica al mapa que se deben eliminar todos los enemigos de pantalla
+	*/
 
 	public synchronized void bomba() {
 		for(int i = 0; i < enemiesInWindow.size(); i++){
