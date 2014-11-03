@@ -17,7 +17,7 @@ public abstract class PowerUp {
 	boolean visible = true;
 	
 	public PowerUp(int x, int y, ImageIcon ii){
-		image = ii.getImage().getScaledInstance(20,20,Image.SCALE_DEFAULT);
+		image = ii.getImage().getScaledInstance(25,25,Image.SCALE_DEFAULT);
 		this.y = y;
 		this.x = x;
 	}

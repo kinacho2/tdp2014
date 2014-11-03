@@ -16,9 +16,7 @@ public abstract class Defensa extends Jugador{
 	}
 
 	public void remplazo() {
-		super.setVisible();
+		mapa.removeJugador(this);
 	}
-	
-	
 
 }

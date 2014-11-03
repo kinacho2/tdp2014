@@ -179,7 +179,7 @@ public class Jugador extends Nave {
 	
 	public void setDefensa(Defensa def){
 		if(defensa != null){
-			(defensa).remplazo();
+			defensa.remplazo();
 		}
 		defensa = def;
 	}

@@ -26,7 +26,7 @@ public class PUPBuilder {
 		}else if(aux < 75){
 			up = new Wave(x, y);
 		}else if(aux < 80){
-			up = new PRandom(x, y, rn.nextInt());
+			up = new PRandom(x, y);
 		}else{
 			up = new Vida(x, y);
 		}

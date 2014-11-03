@@ -232,17 +232,18 @@ public class Mind extends JPanel implements ActionListener {
     	
        	ArrayList jugadores = mapa.getJugador();
         
-        // verifica si algun misil del enemigo colisiono con el jugador
-       	for(int i = 0; i < jugadores.size(); i++){
-       		Jugador aux = (Jugador) jugadores.get(i);
-	        for (int j = 0; j < ms.size(); j++ ) {
-	            Disparo misil = (Disparo) ms.get(j);
-	            misil.move();
-	            if (misil.colision(aux)) {
-	            	if (misil.isVisible()) {
-	            		aux.setVida(misil.getDamage());
-	            		misil.setVisible();
-	            		mapa.addExposion(misil.newExplosion(jugador.getY()));
+        // verifica si algun misil del enemigo colisiono con el jugador o alguna de sus defensas
+       
+        for (int j = 0; j < ms.size(); j++ ) {
+            Disparo misil = (Disparo) ms.get(j);
+            misil.move();
+            for(int i = 0; i < jugadores.size(); i++){
+           		Jugador aux = (Jugador) jugadores.get(i);
+           		if (misil.colision(aux)) {
+           			if (misil.isVisible()) {
+           				aux.setVida(misil.getDamage());
+           				misil.setVisible();
+           				mapa.addExposion(misil.newExplosion(jugador.getY()));
 	            	}
 	            }
 	        }
