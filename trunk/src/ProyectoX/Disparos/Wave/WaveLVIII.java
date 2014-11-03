@@ -18,8 +18,8 @@ public class WaveLVIII extends DisparoWave {
 	public Disparo[] cloneNivel(){
 		Disparo[] d = new Disparo[6];
 		
-		d[0] = new Disparo(x  - 10 , y, 0, 1, velocidad);
-		d[1] = new Disparo(x  + 10 , y, 0, 1, velocidad);
+		d[0] = new WaveLVIII(x  - 10 , y, 2, -1);
+		d[1] = new WaveLVIII(x  + 10 , y, -2, -1);
 		d[2] = new DisparoWave(x  - 10 , y, 2, 1);
 		d[3] = new DisparoWave(x  + 10 , y, -2, 1);
 		d[4] = new WaveLVIII(x  - 10 , y, 2, 1);
@@ -29,8 +29,8 @@ public class WaveLVIII extends DisparoWave {
 	}
 
 	public void move(){
-		y = y + velocidad + (int)(dy * Math.sin(variacion) * velocidad);
-		x = x - (int)(dx*variacion)/4 + (int)(dx *Math.sin(variacion));
+		y = (int)(y + dy*(velocidad + Math.sin(variacion) * velocidad)) ;
+		x = x + (int)(dx*variacion)/4 + (int)(dx *Math.sin(variacion));
 		variacion = variacion + 1;
 		verificarColisionBorde();
 	}

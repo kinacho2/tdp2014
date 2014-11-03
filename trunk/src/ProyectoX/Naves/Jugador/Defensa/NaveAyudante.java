@@ -36,7 +36,6 @@ public class NaveAyudante extends Defensa {
 		super.setVisible();
 		
 		mapa.addExposion(getExplosion());
-		mapa.getJugador().remove(index);
 		
 	}
 	

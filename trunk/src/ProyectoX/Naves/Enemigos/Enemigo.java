@@ -19,7 +19,7 @@ public abstract class Enemigo extends Nave {
 	
 	public Enemigo(int vida, int vel, ImageIcon ii,int w, int h) {
 		super(vida,vel, ii, new ImageIcon(explode), w, h);
-		velocidadMisil = -5;
+		velocidadMisil = -7;
 		
 		
 	}
@@ -62,7 +62,7 @@ public abstract class Enemigo extends Nave {
 			dxAux = 0.1d;
 		}
 		
-		return new Disparo(x + width/2 , y + height, -dxAux, dyAux, -4);
+		return new Disparo(x + width/2 , y + height, -dxAux, dyAux, velocidadMisil);
 	}
 	
 	public Explosion getExplosion() {
@@ -74,7 +74,7 @@ public abstract class Enemigo extends Nave {
 		return puntaje;
 	}
 	
-	public void setVida(int vd) {
+	public synchronized void setVida(int vd) {
 		vida -= vd;
 		if(vida <= 0) {
 			setVisible();

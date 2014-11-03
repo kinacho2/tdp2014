@@ -15,7 +15,7 @@ public class Disparo {
 	private static final URL explode = Disparo.class.getClassLoader().getResource("ProyectoX/img/Explosiones/pequena.gif");
 	
 	protected int x, y;
-    private Image image;
+    protected Image image;
     protected ImageIcon explosion;
     private boolean visible;
 
@@ -42,8 +42,8 @@ public class Disparo {
     	this.dy = dy;
     	
         ImageIcon ii = new ImageIcon(url);
-        ii = new ImageIcon(ii.getImage().getScaledInstance(width, height, Image.SCALE_DEFAULT));
-        image = ii.getImage();
+        image = ii.getImage().getScaledInstance(width, height, Image.SCALE_DEFAULT);
+       
         
         ii = new ImageIcon(explode);
         explosion = new ImageIcon(ii.getImage().getScaledInstance(width,height,Image.SCALE_DEFAULT));

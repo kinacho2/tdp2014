@@ -1,6 +1,7 @@
 package ProyectoX.PowerUps;
 
 import java.net.URL;
+import java.util.Random;
 
 import javax.swing.ImageIcon;
 
@@ -12,9 +13,10 @@ protected static final URL url = (PowerUp.class.getClassLoader().getResource("Pr
 	
 	private int rn;
 	
-	public PRandom(int x, int y, int rn) {
+	public PRandom(int x, int y) {
 		super(x, y, new ImageIcon(url));
-		this.rn = rn;
+		Random ran = new Random();
+		this.rn = ran.nextInt(100);
 	}
 
 	

@@ -19,8 +19,8 @@ public class WaveLVII extends DisparoWave{
 	public Disparo[] cloneNivel(){
 		Disparo[] d = new Disparo[4];
 		
-		d[0] = new Disparo(x  - 10 , y, 0, 1, -velocidad);
-		d[1] = new Disparo(x  + 10 , y, 0, 1, -velocidad);
+		d[0] = new DisparoWave(x  - 10 , y, 3, 1);
+		d[1] = new DisparoWave(x  + 10 , y, -3, 1);
 		d[2] = new DisparoWave(x  - 10 , y, 2, 1);
 		d[3] = new DisparoWave(x  + 10 , y, -2, 1);
 		
