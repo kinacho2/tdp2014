@@ -237,6 +237,7 @@ public class Mind extends JPanel implements ActionListener {
        		Jugador aux = (Jugador) jugadores.get(i);
 	        for (int j = 0; j < ms.size(); j++ ) {
 	            Disparo misil = (Disparo) ms.get(j);
+	            misil.move();
 	            if (misil.colision(aux)) {
 	            	if (misil.isVisible()) {
 	            		aux.setVida(misil.getDamage());

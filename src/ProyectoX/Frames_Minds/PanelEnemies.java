@@ -49,7 +49,7 @@ public class PanelEnemies extends JPanel {
 	            Disparo misil = (Disparo) ms.get(j);
 	            if (misil != null)
 		            if(misil.isVisible()) {
-		            	misil.move();
+		            	//misil.move();
 		            	AffineTransform tx = AffineTransform.getRotateInstance(0, misil.getX() , misil.getY());
 			            g2d.setTransform(tx);
 			            g2d.drawImage(misil.getImage(), misil.getX(), misil.getY(), this);
