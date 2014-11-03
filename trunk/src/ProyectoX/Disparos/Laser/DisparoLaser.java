@@ -15,11 +15,17 @@ public abstract class DisparoLaser extends Disparo {
 
 	protected Image laser;
 	private int delay = 0;
+	//delay entre la carga y el disparo
 	private int minDelay;
+	//delay que indica el tiempo que permanece el disparo en la pantalla
 	private int maxDelay;
+	//delay para que el laser no impacte de manera continua
 	private int impacto;
+	
 	protected Jugador jugador;
+	//segunda imagen que representa al disparo
 	private ImageIcon second;
+	//se le asigna false cuando cambia la imagen
 	private boolean control = true;
 	
 	public DisparoLaser(int width, int height, ImageIcon first, ImageIcon second, Jugador jugador) {
@@ -44,8 +50,6 @@ public abstract class DisparoLaser extends Disparo {
 		D = x > nave.getX() &&  x < nave.getX() + nave.getWidth();
 		I =  x + width < nave.getX() &&  x + width > nave.getX();
 		
-		
-		
 		if(delay > minDelay && delay % impacto == 0){
 			if(control){
 				laser = second.getImage();
@@ -60,7 +64,7 @@ public abstract class DisparoLaser extends Disparo {
 		return toRet;
 	}
 	
-	
+	//el laser permanece pegado al jugador
 	
 	public void move(){
 		x = jugador.getX() + jugador.getWidth()/2 - width/2;
@@ -75,13 +79,19 @@ public abstract class DisparoLaser extends Disparo {
 		return new Explosion(x + width/2, altura - width/2, explosion, width, width);
 	}
 	
+	//al impactar no debe desaparecer por lo que el setVisible es redefinido
+	
 	public void setVisible(){
-		
+		delay++;
 	}
+	
+	//desarmar() es la nueva funcione que hace desaparecer el disparo cuando se cumple su tiempo
 	
 	private void desarmar(){
 		super.setVisible();
 	}
+	
+	//setea los distintos delays del disparo
 	
 	protected void setDelays(int min, int max, int impacto){
 		maxDelay = max;
