@@ -6,6 +6,7 @@ import java.net.URL;
 import javax.swing.ImageIcon;
 
 import ProyectoX.Disparos.Disparo;
+import ProyectoX.Disparos.MisilBomba;
 import ProyectoX.Explosiones.Explosion;
 import ProyectoX.Naves.Nave;
 import ProyectoX.Naves.Jugador.Defensa.Defensa;
@@ -64,7 +65,8 @@ public class Jugador extends Nave {
         }
         if (key == KeyEvent.VK_X){
         	if(bombas > 0){
-        		mapa.bomba();
+        		//mapa.bomba();
+        		mapa.addDisparoJugador(new MisilBomba(x - width/2, y - height/2, mapa));
         		bombas--;
         	}
         }
