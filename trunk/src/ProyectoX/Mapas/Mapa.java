@@ -12,6 +12,7 @@ import ProyectoX.Frames_Minds.MindEnemies;
 import ProyectoX.Naves.Enemigos.Artillero;
 import ProyectoX.Naves.Enemigos.Basico;
 import ProyectoX.Naves.Enemigos.Bombardero;
+import ProyectoX.Naves.Enemigos.EnemiesBuilder;
 import ProyectoX.Naves.Enemigos.Enemigo;
 import ProyectoX.Naves.Enemigos.Kamikaze;
 import ProyectoX.Naves.Enemigos.Jefes.*;
@@ -20,7 +21,7 @@ import ProyectoX.PowerUps.Bomba;
 import ProyectoX.PowerUps.PUPBuilder;
 import ProyectoX.PowerUps.PowerUp;
 
-public class Mapa {
+public abstract class Mapa {
 	
 	protected ArrayList misilesEnemigos;
 	protected ArrayList misilesJugador;
@@ -37,6 +38,7 @@ public class Mapa {
 	protected int cantEnemies;
 	protected Random rn;
 	protected boolean jefe =false;
+	protected EnemiesBuilder enBuilder;
 	
 	
 	public Mapa() {
@@ -46,16 +48,13 @@ public class Mapa {
 		misilesJugador = new ArrayList();
 		
 		jugadores = new ArrayList();
-
-		rn = new Random(7);
-		cantEnemies = 4;
      	
 		enemiesInWindow = new ArrayList();
 		indiceEnemigos = 0;
 		
 		explosiones = new ArrayList();
 		
-		power = new PUPBuilder(7);
+		
 		powerUps = new ArrayList();
 	}
 	
@@ -127,42 +126,14 @@ public class Mapa {
 	/*
 	 * Crea un nuevo enemigo aleatoriamente
 	 */
-	public Enemigo nextEnemigo() {
-		Enemigo m;
-		if(indiceEnemigos < cantEnemies) {	
-			int probabilidad = rn.nextInt(cantEnemies);
-			
-			if(probabilidad % 5 == 0)
-				m = new Kamikaze(probabilidad % 15 == 0);
-			else if(probabilidad % 13 == 0)
-				m = new Bombardero(probabilidad % 2 == 0);
-			else if(probabilidad % 5 == 1) 
-				m = new Artillero((probabilidad % 30) == 1);
-			else
-				m = new Basico(true);
-			
-			
-			m.setJugador(jugador);
-            m.setMapa(this);
-            indiceEnemigos++;
-            
-            
-		} else {
-			if(!jefe){
-				m = new JefeTanque();
-				mindEnemies.addBoss((Jefe)m);
-				jefe = true;
-				m.setJugador(jugador);
-				m.setMapa(this);
-				m = null;
-				
-			}
-			else{
-				m = null;
-			}
-		}
+	public Enemigo nextEnemigo(){
+		Enemigo m = enBuilder.getNextEnemigo();
 		
-		return m;
+		m.setJugador(jugador);
+        m.setMapa(this);
+        indiceEnemigos++;
+        
+        return m;
 	}
 	
 	/*

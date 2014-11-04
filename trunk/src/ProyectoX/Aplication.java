@@ -16,6 +16,7 @@ import javax.swing.JPanel;
 import ProyectoX.Frames_Minds.Mind;
 import ProyectoX.Frames_Minds.PanelEnemies;
 import ProyectoX.Mapas.Mapa;
+import ProyectoX.Mapas.Nivel_I;
 import ProyectoX.Naves.Nave;
 import ProyectoX.Naves.Jugador.Normal;
 import ProyectoX.Naves.Jugador.Resistente;
@@ -75,7 +76,7 @@ public class Aplication extends javax.swing.JFrame {
     	
     	game = new JPanel();
     	
-    	map = new Mapa();
+    	map = new Nivel_I();
 		getContentPane().add(game, BorderLayout.CENTER);
 		game.setBackground(new java.awt.Color(0,0,0));
 		

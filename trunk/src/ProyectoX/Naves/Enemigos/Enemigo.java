@@ -76,11 +76,11 @@ public abstract class Enemigo extends Nave {
 	
 	public synchronized void setVida(int vd) {
 		vida -= vd;
-		if(vida <= 0) {
+		if(vida <= 0 && getVisible()) {
 			setVisible();
 			jugador.setPuntaje(puntaje);
 			//si es especial agrega un powerUp al mapa
-			if(isEspecial())
+			if(isEspecial() )
 				mapa.addPower(x + width/2, y + height/2, false);
 		}
 	}
