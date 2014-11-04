@@ -6,8 +6,8 @@ import java.awt.geom.AffineTransform;
 
 import javax.swing.ImageIcon;
 
-import ProyectoX.Mapa;
 import ProyectoX.Explosiones.Explosion;
+import ProyectoX.Mapas.Mapa;
 import ProyectoX.Naves.Jugador.Jugador;
 
 public abstract class Nave {

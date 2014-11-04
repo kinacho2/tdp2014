@@ -3,7 +3,7 @@ package ProyectoX.Frames_Minds;
 import java.util.ArrayList;
 import java.util.Random;
 
-import ProyectoX.Mapa;
+import ProyectoX.Mapas.Mapa;
 import ProyectoX.Naves.Enemigos.Enemigo;
 import ProyectoX.Naves.Enemigos.Jefes.Jefe;
 import ProyectoX.Naves.Jugador.Jugador;

@@ -8,8 +8,8 @@ import java.util.ArrayList;
 
 import javax.swing.JPanel;
 
-import ProyectoX.Mapa;
 import ProyectoX.Disparos.Disparo;
+import ProyectoX.Mapas.Mapa;
 import ProyectoX.Naves.Enemigos.Enemigo;
 
 public class PanelEnemies extends JPanel {

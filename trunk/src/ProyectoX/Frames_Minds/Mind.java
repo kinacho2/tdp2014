@@ -18,9 +18,9 @@ import javax.swing.Timer;
 import javax.swing.JPanel;
 import javax.swing.WindowConstants;
 
-import ProyectoX.Mapa;
 import ProyectoX.Disparos.Disparo;
 import ProyectoX.Explosiones.Explosion;
+import ProyectoX.Mapas.Mapa;
 import ProyectoX.Naves.Enemigos.Enemigo;
 import ProyectoX.Naves.Jugador.Jugador;
 import ProyectoX.Naves.Jugador.Normal;

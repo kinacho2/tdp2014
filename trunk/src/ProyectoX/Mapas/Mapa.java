@@ -1,4 +1,4 @@
- package ProyectoX;
+ package ProyectoX.Mapas;
 
 import java.util.ArrayList;
 import java.util.Random;
