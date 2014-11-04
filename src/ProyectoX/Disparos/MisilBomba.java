@@ -20,7 +20,7 @@ public class MisilBomba extends Disparo{
 	
 	
 	protected Image misil;
-	private int delay = 0;
+	private long init;
 	//delay entre la carga y el disparo
 	private int minDelay;
 	//delay que indica el tiempo que permanece el disparo en la pantalla
@@ -39,8 +39,10 @@ public class MisilBomba extends Disparo{
 		this.x = x - defaultWidth/2 + 65;
 		this.y = y - defaultHeight;
 		
-		minDelay = 150;
-		maxDelay = 220;
+		init = System.currentTimeMillis();
+		
+		minDelay = 26 * 100 - 1;
+		maxDelay = minDelay + 9 * 100;
 		
 		width = 13;
 		height = 30;
@@ -56,15 +58,15 @@ public class MisilBomba extends Disparo{
 	//la bomba es una imagen gif por lo que no se mueve
 	
 	public void move(){
-		delay++;
-		if(delay > minDelay){
+		long now = System.currentTimeMillis();
+		if(now - init > minDelay){
 			if(control){
 				Explosion aux = new Explosion(400, 300, new ImageIcon(explode), 800, 600);
 				aux.setDelay(5000);
 				mapa.addExposion(aux);
 				control = false;
 			}
-			if(delay > maxDelay){
+			if(now - init > maxDelay){
 				super.setVisible();
 				mapa.bomba();
 			}
