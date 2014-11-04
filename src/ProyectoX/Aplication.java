@@ -15,6 +15,7 @@ import javax.swing.JPanel;
 
 import ProyectoX.Frames_Minds.Mind;
 import ProyectoX.Frames_Minds.PanelEnemies;
+import ProyectoX.Mapas.Mapa;
 import ProyectoX.Naves.Nave;
 import ProyectoX.Naves.Jugador.Normal;
 import ProyectoX.Naves.Jugador.Resistente;
