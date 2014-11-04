@@ -1,7 +1,6 @@
 package ProyectoX.Disparos.Laser;
 
 import java.awt.Image;
-import java.net.URL;
 
 import javax.swing.ImageIcon;
 
@@ -16,9 +15,9 @@ public abstract class DisparoLaser extends Disparo {
 	protected Image laser;
 	private int delay = 0;
 	//delay entre la carga y el disparo
-	private int minDelay;
+	protected int minDuracion;
 	//delay que indica el tiempo que permanece el disparo en la pantalla
-	private int maxDelay;
+	protected int maxDuracion;
 	//delay para que el laser no impacte de manera continua
 	private int impacto;
 	
@@ -28,6 +27,11 @@ public abstract class DisparoLaser extends Disparo {
 	//se le asigna false cuando cambia la imagen
 	private boolean control = true;
 	
+	private long init ;
+	
+	
+	
+	
 	public DisparoLaser(int width, int height, ImageIcon first, ImageIcon second, Jugador jugador) {
 		super(0, 0, 0, 0, 0);
 		this.jugador = jugador;
@@ -36,6 +40,10 @@ public abstract class DisparoLaser extends Disparo {
 		laser = first.getImage();
 		this.second = second;
 		
+		init = System.currentTimeMillis();
+		minDuracion = 200;
+		maxDuracion = 1500;
+		
 	}
 
 	public Image getImage(){
@@ -43,14 +51,17 @@ public abstract class DisparoLaser extends Disparo {
 	}
 	
 	public synchronized boolean colision(Nave nave){
-		boolean A, B, C, D, I, toRet = false;
-		A = x > nave.getX();
-		B = x + width < nave.getX() + nave.getWidth();
+		boolean A, B, C, D, I, F, toRet = false;
+		A = x < nave.getX() && x + width > nave.getX() + nave.getWidth();
+		B = x + width < nave.getX() + nave.getWidth() && x > nave.getX();
 		C = y + height > nave.getY() + nave.getHeight();
 		D = x > nave.getX() &&  x < nave.getX() + nave.getWidth();
 		I =  x + width < nave.getX() &&  x + width > nave.getX();
 		
-		if(delay > minDelay && delay % impacto == 0){
+		F = nave.getY() + nave.getHeight()/2 > 0;
+		
+		long aux = System.currentTimeMillis();
+		if(aux  - init > minDuracion){
 			if(control){
 				laser = second.getImage();
 				this.height = second.getIconHeight();
@@ -58,9 +69,10 @@ public abstract class DisparoLaser extends Disparo {
 				move();
 				control = false;
 			}
-			toRet = A && B && C || D && C || I && C;
+			toRet = (A || B || D || I) && C && F && delay % impacto == 0;
+			
 		}
-		delay++;
+		
 		
 		return toRet;
 	}
@@ -71,7 +83,7 @@ public abstract class DisparoLaser extends Disparo {
 		x = jugador.getX() + jugador.getWidth()/2 - width/2;
 		y = jugador.getY() - height;
 		delay++;
-		if(delay > maxDelay){
+		if(System.currentTimeMillis() - init > maxDuracion){
 			desarmar();
 		}
 	}
@@ -95,8 +107,8 @@ public abstract class DisparoLaser extends Disparo {
 	//setea los distintos delays del disparo
 	
 	protected void setDelays(int min, int max, int impacto){
-		maxDelay = max;
-		minDelay = min;
+		maxDuracion = max;
+		minDuracion = min;
 		this.impacto = impacto;
 	}
 }
