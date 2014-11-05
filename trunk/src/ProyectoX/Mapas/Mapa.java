@@ -70,17 +70,25 @@ public abstract class Mapa {
 		this.enemiesInWindow = enemies;
 	}
 
+	//retorna el arreglo que contiene al jugador y a su defensa
+	
 	public ArrayList getJugador() {
 		return jugadores;
 	}
-
+	
+	//Las defensas se comportan como un jugador por lo que se guarda un arreglo de jugadores
+	
 	public void setNewJugador(Jugador jugador) {
 		jugadores.add(jugador);
 	}
 	
+	//retorna al jugador principal, que en caso de tener escudo es el mismo escudo
+	
 	public void setJugador(Jugador jugador){
 		this.jugador = jugador;
 	}
+	
+	//remueve la defensa o el jugador eliminado
 	
 	public void removeJugador(Jugador jugador){
 		jugadores.remove(jugador);
