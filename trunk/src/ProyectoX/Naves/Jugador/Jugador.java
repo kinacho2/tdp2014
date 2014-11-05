@@ -19,7 +19,7 @@ public class Jugador extends Nave {
 	protected static URL explode = (Nave.class.getClassLoader().getResource("ProyectoX/img/Explosiones/player.gif"));
 	protected Disparo arma;
 	private Defensa defensa;
-	private int bombas;
+	protected int bombas;
 	
 	public Jugador(int vida, int vel, ImageIcon icon, ImageIcon iconDer, ImageIcon iconIzq){
 		super(vida, vel, icon, new ImageIcon(explode), icon.getIconWidth(), icon.getIconHeight());
@@ -30,7 +30,7 @@ public class Jugador extends Nave {
 		setJugador(this);
 		velocidadMisil = 20;
 		power = "";
-		bombas = 1;
+		bombas = 100;
 		puntaje = 0;
 		arma = new Disparo(x + width/2 , y, 0, 1, velocidadMisil);
     	

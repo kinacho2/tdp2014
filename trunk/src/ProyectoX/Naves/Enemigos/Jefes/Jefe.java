@@ -104,7 +104,7 @@ public abstract class Jefe extends Enemigo{
 		}
 	}
 	
-	public synchronized void bomba(){
+	public synchronized int bomba(){
 		if(torretas.size() > 2){
 			Random rn = new Random(4);
 			Enemigo m = (Enemigo) torretas.get(rn.nextInt(torretas.size()));
@@ -118,5 +118,7 @@ public abstract class Jefe extends Enemigo{
 				m.setVisible();
 			}
 		}
+		//modificar a gusto
+		return 0;
 	}
 }

@@ -50,7 +50,7 @@ public class JefeTanque extends Jefe{
 		cargarArchivoTorretas(boundsDouble, new FabricaTorretasDobles(), cantTorretasDobles);
 		cargarArchivoTorretas(boundsSimple, new FabricaTorretasSimples(), cantTorretasSimples);
 		
-		puntaje = 2000;
+		puntaje = 500;
 			
 		
 	}

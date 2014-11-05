@@ -18,6 +18,7 @@ public abstract class Torreta extends Enemigo {
 		x = xx;
 		y = yy;
 		velocidadMisil = -6;
+		puntaje = 10;
 	}
 
 	public void disparar() {
@@ -53,8 +54,8 @@ public abstract class Torreta extends Enemigo {
         return AffineTransform.getRotateInstance(rotacion + Math.PI, getX() + getWidth()/2, getY() + getHeight()/2);
     }
 	
-	public void bomba(){
-		
+	public int bomba(){
+		return 0;
 	}
 	
 	

@@ -93,7 +93,8 @@ public abstract class Enemigo extends Nave {
 		return power;
 	}
 	
-	public void bomba(){
+	public int bomba(){
 		setVisible();
+		return getPuntaje();
 	}
 }

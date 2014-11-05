@@ -26,7 +26,12 @@ public class EscudoX extends Defensa {
 		y = jugador.getY() + jugador.getHeight()/2 - defaultHeight/2;
 		height = defaultHeight;
 		width = defaultWidth;
+		
+		
 		setJugador(jugador);
+		
+		bombas = 0;
+		
 		setMapa(jugador.getMapa());
 		
 		ArrayList enemigos = mapa.getEnemies();
