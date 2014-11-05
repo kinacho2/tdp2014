@@ -16,7 +16,7 @@ public class Kamikaze extends Enemigo {
 	private static final int defaultWidth = 40;
 	private static final int defaultHeight = 32;
 	private static final int defaultVel = 15;
-	private static final int defaultVida = 3;
+	private static final int defaultVida = 30;
 	private boolean up;
 	
 	public Kamikaze(boolean up) {

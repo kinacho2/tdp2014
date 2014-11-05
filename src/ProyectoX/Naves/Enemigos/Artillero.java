@@ -14,7 +14,7 @@ public class Artillero extends Enemigo {
 	private static final int defaultWidth = 60;
 	private static final int defaultHeight = 48;
 	private static final int defaultVel = 5;
-	private static final int defaultVida = 5;
+	private static final int defaultVida = 50;
 	private boolean up;
 	private boolean primerMovimiento = true;
 	

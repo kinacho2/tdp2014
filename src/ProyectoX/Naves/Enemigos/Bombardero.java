@@ -16,7 +16,7 @@ public class Bombardero extends Enemigo {
 	private static final int defaultWidth = 192;
 	private static final int defaultHeight = 168;
 	private static final int defaultVel = 10;
-	private static final int defaultVida = 20;
+	private static final int defaultVida = 200;
 	
 	
 	

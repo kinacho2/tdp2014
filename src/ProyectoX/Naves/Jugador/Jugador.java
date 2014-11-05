@@ -30,7 +30,7 @@ public class Jugador extends Nave {
 		setJugador(this);
 		velocidadMisil = 20;
 		power = "";
-		bombas = 100;
+		bombas = 1;
 		puntaje = 0;
 		arma = new Disparo(x + width/2 , y, 0, 1, velocidadMisil);
     	
@@ -65,8 +65,7 @@ public class Jugador extends Nave {
         }
         if (key == KeyEvent.VK_X){
         	if(bombas > 0){
-        		//mapa.bomba();
-        		mapa.addDisparoJugador(new MisilBomba(x - width/2, y - height/2, mapa));
+        		mapa.addDisparoJugador(new MisilBomba(x + width/2, y, mapa));
         		bombas--;
         	}
         }
@@ -144,8 +143,8 @@ public class Jugador extends Nave {
 	public void setVida(int vd) {
 		if(vida > 0)
 			vida-=vd;		
-		if(vida > 10)
-			vida = 10;
+		if(vida > 100)
+			vida = 100;
 		if(vida <= -1) 
 			setVisible();
 	}

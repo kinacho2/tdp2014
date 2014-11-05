@@ -69,7 +69,7 @@ public abstract class DisparoLaser extends Disparo {
 				move();
 				control = false;
 			}
-			toRet = (A || B || D || I) && C && F && delay % impacto == 0;
+			toRet = (A || B || D || I) && C && F;
 			
 		}
 		

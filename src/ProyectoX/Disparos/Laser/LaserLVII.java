@@ -19,7 +19,7 @@ public class LaserLVII extends DisparoLaser{
 		x = jugador.getX() + jugador.getWidth()/2 - width/2;
 		y = jugador.getY() - height;
 		
-		damage = 2;
+		damage = 5;
 		
 		setDelays(250, 1499, 5);
 	}

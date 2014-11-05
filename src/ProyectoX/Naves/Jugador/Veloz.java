@@ -12,7 +12,7 @@ public class Veloz extends Jugador {
 	protected static URL urlDer = (Nave.class.getClassLoader().getResource("ProyectoX/img/Jugador/velozDer.gif"));
 	protected static URL urlIzq = (Nave.class.getClassLoader().getResource("ProyectoX/img/Jugador/velozIzq.gif"));
 	private static final int defaultVel = 5;
-	private static final int defaultVida = 2;
+	private static final int defaultVida = 20;
 	
 	
 	public Veloz(){
