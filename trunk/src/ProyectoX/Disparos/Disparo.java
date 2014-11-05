@@ -51,7 +51,7 @@ public class Disparo {
         visible = true;
         this.x = x - width/2;
         this.y = y - height/2;
-        damage = 1;
+        damage = 10;
         velocidad = missileSpeed;
         
         

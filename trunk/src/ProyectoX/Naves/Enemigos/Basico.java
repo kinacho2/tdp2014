@@ -15,7 +15,7 @@ public class Basico extends Enemigo {
 	private static final int defaultWidth = 27;
 	private static final int defaultHeight = 38;
 	private static final int defaultVel = 3;
-	private static final int defaultVida = 2;
+	private static final int defaultVida = 20;
 	
 	// up indica si el enemigo es de tipo especial y devuelve el PowerUp
 	private boolean up;

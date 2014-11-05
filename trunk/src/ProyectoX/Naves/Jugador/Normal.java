@@ -13,7 +13,7 @@ public class Normal extends Jugador {
 	protected static URL urlDer = (Nave.class.getClassLoader().getResource("ProyectoX/img/Jugador/normalDer.gif"));
 	protected static URL urlIzq = (Nave.class.getClassLoader().getResource("ProyectoX/img/Jugador/normalIzq.gif"));
 	private static final int defaultVel = 3;
-	private static final int defaultVida = 5;
+	private static final int defaultVida = 50;
 
 	public Normal(){
 		super(defaultVida,defaultVel,new ImageIcon(url),new ImageIcon(urlDer),new ImageIcon(urlIzq));

@@ -15,7 +15,7 @@ public class NaveAyudante extends Defensa {
 	protected static URL url = (Defensa.class.getClassLoader().getResource("ProyectoX/img/PUP/Ayudante/Compa.gif"));
 	protected static URL urlDer = (Defensa.class.getClassLoader().getResource("ProyectoX/img/PUP/Ayudante/CompaDer.gif"));
 	protected static URL urlIzq = (Defensa.class.getClassLoader().getResource("ProyectoX/img/PUP/Ayudante/CompaIzq.gif"));
-	private static final int defaultVida = 8;
+	private static final int defaultVida = 80;
 	protected static final int defaultWidth = 32;
 	protected static final int defaultHeight = 32;
 	

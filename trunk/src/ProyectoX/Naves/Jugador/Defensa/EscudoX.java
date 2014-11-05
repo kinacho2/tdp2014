@@ -14,7 +14,7 @@ import ProyectoX.Naves.Jugador.Jugador;
 public class EscudoX extends Defensa {
 
 	protected static final URL url = (Jugador.class.getClassLoader().getResource("ProyectoX/img/PUP/Escudo/Escudo.gif"));
-	protected static final int defaultVida = 20;
+	protected static final int defaultVida = 200;
 	protected static final int defaultWidth = 64;
 	protected static final int defaultHeight = 64;
 	

@@ -18,7 +18,7 @@ public class LaserLVIII extends DisparoLaser{
 
 		x = jugador.getX() + jugador.getWidth()/2 - width/2;
 		y = jugador.getY() - height;
-		damage = 5;
+		damage = 8;
 		
 		setDelays(400, 2000, 2);
 	}
