@@ -59,7 +59,7 @@ public abstract class Mapa {
 	}
 	
 	public int cantEnemies(){
-		return cantEnemies - indiceEnemigos;
+		return cantEnemies - indiceEnemigos + enemiesInWindow.size();
 	}
 	
 	public ArrayList getEnemies() {
@@ -180,10 +180,12 @@ public abstract class Mapa {
 	*/
 
 	public synchronized void bomba() {
+		int puntaje = 0;
 		for(int i = 0; i < enemiesInWindow.size(); i++){
 			Enemigo m = (Enemigo) enemiesInWindow.get(i);
-			m.bomba();
+			puntaje += m.bomba();
 		}
+		jugador.setPuntaje(puntaje);
 		
 	}
 	
