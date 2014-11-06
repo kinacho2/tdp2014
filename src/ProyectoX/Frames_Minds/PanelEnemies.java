@@ -27,9 +27,12 @@ public class PanelEnemies extends JPanel {
 	}
 	
 	public synchronized void paint(Graphics g) {
+		 
 	        super.paint(g);
 
 	        Graphics2D g2d = (Graphics2D) g;
+	   
+	        g2d.drawImage(mapa.getImage(), mapa.getX(), mapa.getY(), this);
 	        
 	        ArrayList enemigos = mind.getEnemies();
 	        
@@ -49,7 +52,6 @@ public class PanelEnemies extends JPanel {
 	            Disparo misil = (Disparo) ms.get(j);
 	            if (misil != null)
 		            if(misil.isVisible()) {
-		            	//misil.move();
 		            	AffineTransform tx = AffineTransform.getRotateInstance(0, misil.getX() , misil.getY());
 			            g2d.setTransform(tx);
 			            g2d.drawImage(misil.getImage(), misil.getX(), misil.getY(), this);

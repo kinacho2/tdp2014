@@ -1,9 +1,15 @@
  package ProyectoX.Mapas;
 
+import java.awt.Graphics;
+import java.awt.Graphics2D;
+import java.awt.Image;
+import java.awt.Toolkit;
+import java.awt.geom.AffineTransform;
 import java.util.ArrayList;
 import java.util.Random;
 
 import javax.swing.JOptionPane;
+import javax.swing.JPanel;
 
 import ProyectoX.Disparos.Disparo;
 import ProyectoX.Explosiones.Explosion;
@@ -21,7 +27,7 @@ import ProyectoX.PowerUps.Bomba;
 import ProyectoX.PowerUps.PUPBuilder;
 import ProyectoX.PowerUps.PowerUp;
 
-public abstract class Mapa {
+public abstract class Mapa{
 	
 	protected ArrayList misilesEnemigos;
 	protected ArrayList misilesJugador;
@@ -40,6 +46,12 @@ public abstract class Mapa {
 	protected boolean jefe =false;
 	protected EnemiesBuilder enBuilder;
 	
+	protected Image imagenFondo;
+	private int x = -50;
+	private int y = -5400;
+	private int delay;
+	private int delayVel = 10;
+	
 	
 	public Mapa() {
 		
@@ -56,6 +68,7 @@ public abstract class Mapa {
 		
 		
 		powerUps = new ArrayList();
+		
 	}
 	
 	public int cantEnemies(){
@@ -188,6 +201,24 @@ public abstract class Mapa {
 		jugador.setPuntaje(puntaje);
 		
 	}
+	
+	public Image getImage(){
+		return imagenFondo;
+	}
+	
+	public int getX(){
+		return x;
+	}
+	
+	public int getY(){
+		if(delay % delayVel  == 0){
+			y++;
+		}
+		delay = (delay + 1) % delayVel;
+		return y;
+	}
+	
+	
 	
 	
 }

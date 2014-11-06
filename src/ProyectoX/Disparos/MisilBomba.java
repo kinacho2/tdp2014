@@ -30,6 +30,7 @@ public class MisilBomba extends Disparo{
 	
 	private int distancia;
 	private int maxDistancia;
+	
 	//delay entre el disparo y la explosion
 	private int minDelay;
 	
@@ -62,7 +63,7 @@ public class MisilBomba extends Disparo{
 		
 		this.mapa = mapa;
 		
-		damage = 200;
+		damage = 2000;
 		
 	}
 	
@@ -70,7 +71,6 @@ public class MisilBomba extends Disparo{
 		return misil;
 	}
 	
-	//la bomba es una imagen gif por lo que no se mueve
 	
 	public void move(){
 		long now = System.currentTimeMillis();
@@ -79,26 +79,38 @@ public class MisilBomba extends Disparo{
 		if(isVisible()){
 			y = y - velocidad;
 			distancia ++;
+			
+			//cuando el misil recorre la distancia debe explotar, antes puede ser colisionado por un enemigo y destruirse
 			if(control2 && distancia>=maxDistancia){
 				control2 = false;
+				
+				//el misil explota y cambia de imagen, los enemigos que colisionen con la explosion seran destruidos
 				ImageIcon ii =  new ImageIcon(url2);
 				misil = ii.getImage().getScaledInstance(defaultWidth2, defaultHeight2, Image.SCALE_DEFAULT);
+				
+				//la imagen pasa a tener otro ancho y alto
 				width = defaultWidth2;
 				height = defaultHeight2;
+				
+				//se ajusta el x e y a la nueva imagen
 				x = x - defaultWidth2/2 + defaultWidth /2;
 				y = y - defaultHeight2/2 + defaultHeight/2;
+				
+				//se inisializa la variable en el tiempo determinado
 				init = System.currentTimeMillis();
 				velocidad = 0;
 			}
 			
 			if(!control2 && now - init > minDelay){
+				//se añade la explosion una sola vez al cumplirse el tiempo determinado
 				if(control){
 					control = false;
 					Explosion aux = new Explosion(400, 300, new ImageIcon(explode), 800, 600);
-					aux.setDelay(5000);
+					aux.setDelay(2000);
 					mapa.addExposion(aux);
 					
 				}
+				//al llegar este tiempo se le indica al mapa que destruya los enemigos en pantalla a excepsion del Jefe
 				if(now - init > maxDelay){
 					super.setVisible();
 					mapa.bomba();

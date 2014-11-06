@@ -8,17 +8,21 @@ public class Explosion {
 	private Image image;
 	private int x;
 	private int y;
-	private boolean visible;
 	private int tiempo ;
 	private int delay;
+	
+	private long init;
 	
 	public Explosion(int x, int y, ImageIcon icon, int w, int h) {
 		
 		this.x = x - w/2;
 		this.y = y - h/2;
-		visible = true;
+
 		tiempo = 0;
-		delay = 2500;
+		delay = 1200;
+		
+		init = System.currentTimeMillis();
+		
 		ImageIcon aux = new ImageIcon(icon.getImage().getScaledInstance(w,h,Image.SCALE_DEFAULT));
 		this.image = aux.getImage();
 	}
@@ -35,11 +39,13 @@ public class Explosion {
 		return x;
 	}
 	
-	public void setVisible() {
-		visible = false;
-	}
-	
 	public boolean getVisible() {
+		boolean visible = true;
+		long now = System.currentTimeMillis();
+		
+		if(now - init > delay)
+			visible = false;
+		
 		return visible;
 	}
 	
@@ -48,12 +54,6 @@ public class Explosion {
 	establecer que la explosión no se encuentra visible y la clase encargada de  eliminarlo del arreglo de explosiones
 	realice lo que corresponda
 	 */
-	public void setTime(int time) {
-		if(tiempo < delay) {
-			tiempo += time;
-		}else
-			setVisible();
-	}
 
 	public int getDelay() {
 		return delay;
