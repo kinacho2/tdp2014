@@ -83,6 +83,9 @@ public class Aplication extends javax.swing.JFrame {
 		
 		
 		mind = new Mind(map,select);
+		
+		
+		
 		game.add(mind);
 		mind.setLayout(null);
 		mind.setPreferredSize(new java.awt.Dimension(800, 520));

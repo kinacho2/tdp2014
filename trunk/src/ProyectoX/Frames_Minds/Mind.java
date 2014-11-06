@@ -47,12 +47,12 @@ public class Mind extends JPanel implements ActionListener {
 
     public Mind(Mapa map, int select) {
     	
-    	setOpaque(true);
+    	setOpaque(false);
         
         setLayout(null);
         addKeyListener(new TAdapter());
         setFocusable(true);
-        setBackground(Color.BLACK);
+        //setBackground(Color.BLACK);
         setDoubleBuffered(true);
         
         mapa = map;
@@ -93,9 +93,11 @@ public class Mind extends JPanel implements ActionListener {
     
     public synchronized void paint(Graphics g) {
 	        super.paint(g);
+	        
 
 	        // Pinta el jugador
 	        Graphics2D g2d = (Graphics2D)g;
+	        
 	        if (jugador.getVisible())
 	        	g2d.drawImage(jugador.getImage(), jugador.getX(), jugador.getY(), this);
 	        
@@ -122,13 +124,14 @@ public class Mind extends JPanel implements ActionListener {
 	        for (int i = 0; i < ms.size(); i++ ) {
 	            Explosion m = (Explosion) ms.get(i);
 	            g2d.drawImage(m.getImage(), m.getX(), m.getY(), this);
-	            m.setTime(delay);
 	            if(!m.getVisible()) {
 	            	ms.remove(i);
 	            }
 	        }
+	        
 	        //repinta los powerUps
 	        ms = mapa.getPowers();
+	        
 	        for (int j = 0; j < ms.size(); j++ ) {
 	            PowerUp pw = (PowerUp) ms.get(j);
 	            g2d.drawImage(pw.getImage(), pw.getX(), pw.getY(), this);
@@ -136,6 +139,8 @@ public class Mind extends JPanel implements ActionListener {
 	
 	        Toolkit.getDefaultToolkit().sync();
 	        g.dispose();
+	        
+	       
     }
 
     public void actionPerformed(ActionEvent e) {

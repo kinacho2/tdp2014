@@ -1,6 +1,10 @@
 package ProyectoX.Mapas;
 
+import java.awt.Image;
+import java.net.URL;
 import java.util.Random;
+
+import javax.swing.ImageIcon;
 
 import ProyectoX.Naves.Enemigos.EnemiesBuilder;
 import ProyectoX.Naves.Enemigos.Enemigo;
@@ -10,12 +14,17 @@ import ProyectoX.PowerUps.PUPBuilder;
 
 public class Nivel_I extends Mapa{
 	
+	protected static final URL fondo = (Mapa.class.getClassLoader().getResource("ProyectoX/img/Fondos/fondoNivel1.png"));
+	
+	
+	
 	public Nivel_I(){
 		super();
 		rn = new Random(7);
 		cantEnemies = 101;
 		power = new PUPBuilder(7);
 		enBuilder = new EnemiesBuilder(5);
+		imagenFondo = (new ImageIcon(fondo)).getImage();
 	}
 
 	
@@ -40,6 +49,7 @@ public class Nivel_I extends Mapa{
 		
 		return m;
 	}
+	
 	
 	
 }
