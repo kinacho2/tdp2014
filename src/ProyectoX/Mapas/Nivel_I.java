@@ -15,7 +15,7 @@ import ProyectoX.PowerUps.PUPBuilder;
 public class Nivel_I extends Mapa{
 	
 	protected static final URL fondo = (Mapa.class.getClassLoader().getResource("ProyectoX/img/Fondos/fondoNivel1.png"));
-	
+	protected static final int initY = -8072 + 600;
 	
 	
 	public Nivel_I(){
@@ -24,7 +24,11 @@ public class Nivel_I extends Mapa{
 		cantEnemies = 101;
 		power = new PUPBuilder(7);
 		enBuilder = new EnemiesBuilder(5);
-		imagenFondo = (new ImageIcon(fondo)).getImage();
+		ImageIcon ii = new ImageIcon(fondo);
+		imagenFondo = ii.getImage();
+		
+		y = initY;
+		
 	}
 
 	
@@ -50,6 +54,17 @@ public class Nivel_I extends Mapa{
 		return m;
 	}
 	
-	
+	public int getY(){
+		if(delay % delayVel  == 0){
+			y++;
+			if(y  >= 0 ){
+				y = initY;
+			}
+		}
+		
+		
+		delay = (delay + 1) % delayVel;
+		return y;
+	}
 	
 }

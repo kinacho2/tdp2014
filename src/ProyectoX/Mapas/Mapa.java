@@ -48,9 +48,9 @@ public abstract class Mapa{
 	
 	protected Image imagenFondo;
 	private int x = -50;
-	private int y = -5400;
-	private int delay;
-	private int delayVel = 10;
+	protected int y;
+	protected int delay;
+	protected int delayVel = 7;
 	
 	
 	public Mapa() {
