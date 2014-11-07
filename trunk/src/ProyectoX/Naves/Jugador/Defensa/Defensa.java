@@ -19,4 +19,10 @@ public abstract class Defensa extends Jugador{
 		mapa.removeJugador(this);
 	}
 
+	public void setVida(int vd){
+		vida-=vd;	
+		if(vida <= -1) 
+			setVisible();
+		
+	}
 }

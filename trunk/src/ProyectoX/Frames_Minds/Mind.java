@@ -250,6 +250,9 @@ public class Mind extends JPanel implements ActionListener {
            				misil.setVisible();
            				mapa.addExposion(misil.newExplosion(jugador.getY()));
 	            	}
+           			else{
+           				ms.remove(misil);
+           			}
 	            }
 	        }
        	}

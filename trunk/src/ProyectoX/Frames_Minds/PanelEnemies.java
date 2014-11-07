@@ -56,7 +56,7 @@ public class PanelEnemies extends JPanel {
 			            g2d.setTransform(tx);
 			            g2d.drawImage(misil.getImage(), misil.getX(), misil.getY(), this);
 		            } else {
-		            	ms.remove(j);
+		            	//ms.remove(j);
 		            }
 	            
 	        }
