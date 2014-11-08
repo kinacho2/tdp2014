@@ -15,7 +15,7 @@ public class Kamikaze extends Enemigo {
 
 	private static final int defaultWidth = 40;
 	private static final int defaultHeight = 32;
-	private static final int defaultVel = 15;
+	private static final int defaultVel = 10;
 	private static final int defaultVida = 30;
 	private boolean up;
 	
@@ -24,7 +24,7 @@ public class Kamikaze extends Enemigo {
 		y = -defaultHeight;
 		Random rand = new Random();
 		x = rand.nextInt(800);
-		setFrecuenciaDeDisparo(7,20);
+		setFrecuenciaDeDisparo(7,30);
 		this.up = up;
 		puntaje = 35;
 	}

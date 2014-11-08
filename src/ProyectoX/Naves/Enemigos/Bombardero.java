@@ -15,7 +15,7 @@ public class Bombardero extends Enemigo {
 
 	private static final int defaultWidth = 192;
 	private static final int defaultHeight = 168;
-	private static final int defaultVel = 10;
+	private static final int defaultVel = 3;
 	private static final int defaultVida = 200;
 	
 	
@@ -41,11 +41,11 @@ public class Bombardero extends Enemigo {
 	private int bombarderoDis = 0;
 	
 	public Bombardero(boolean init) {
-		super(defaultVida,7,new ImageIcon(url),defaultWidth,defaultHeight);
+		super(defaultVida,defaultVel,new ImageIcon(url),defaultWidth,defaultHeight);
 		
 		cont=0;
 		y = minHeight;
-		setFrecuenciaDeDisparo(delayDisparo+1,delayDisparo*3);
+		setFrecuenciaDeDisparo(delayDisparo+1,delayDisparo*4);
 		
 
 		if (init) {

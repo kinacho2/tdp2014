@@ -14,7 +14,7 @@ public class Basico extends Enemigo {
 	protected static final URL urlUp = (Nave.class.getClassLoader().getResource("ProyectoX/img/Enemigo/basicoUP.png"));
 	private static final int defaultWidth = 27;
 	private static final int defaultHeight = 38;
-	private static final int defaultVel = 3;
+	private static final int defaultVel = 2;
 	private static final int defaultVida = 20;
 	
 	// up indica si el enemigo es de tipo especial y devuelve el PowerUp
@@ -39,7 +39,7 @@ public class Basico extends Enemigo {
 		}
 		
 		this.up = up;
-		setFrecuenciaDeDisparo(10,20);
+		setFrecuenciaDeDisparo(10,30);
 		puntaje = 25;
 	}
 	
