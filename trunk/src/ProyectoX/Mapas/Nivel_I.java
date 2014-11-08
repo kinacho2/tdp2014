@@ -12,12 +12,13 @@ import ProyectoX.Naves.Enemigos.Jefes.Jefe;
 import ProyectoX.Naves.Enemigos.Jefes.JefeAvion;
 import ProyectoX.Naves.Enemigos.Jefes.JefeTanque;
 import ProyectoX.PowerUps.PUPBuilder;
+import ProyectoX.Sound.Sonido;
 
 public class Nivel_I extends Mapa{
 	
 	protected static final URL fondo = (Mapa.class.getClassLoader().getResource("ProyectoX/img/Fondos/fondoNivel1.png"));
 	protected static final int initY = -8072 + 600;
-	
+	protected static final String soundJefe = "/ProyectoX/sounds/music/Enclave.mp3";
 	
 	public Nivel_I(){
 		super();
@@ -30,7 +31,8 @@ public class Nivel_I extends Mapa{
 		
 		y = initY;
 		jefe = new JefeAvion(); 
-		
+		jefe.addReproductor(reproductor);
+		reproductor.addSound(new Sonido(soundJefe, true));
 	}
 
 	/*

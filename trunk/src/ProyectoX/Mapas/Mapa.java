@@ -26,9 +26,12 @@ import ProyectoX.Naves.Jugador.Jugador;
 import ProyectoX.PowerUps.Bomba;
 import ProyectoX.PowerUps.PUPBuilder;
 import ProyectoX.PowerUps.PowerUp;
+import ProyectoX.Sound.Reproductor;
 
 public abstract class Mapa{
 	
+	
+	protected Reproductor reproductor;
 	protected ArrayList misilesEnemigos;
 	protected ArrayList misilesJugador;
 	protected ArrayList explosiones;
@@ -70,6 +73,7 @@ public abstract class Mapa{
 		
 		powerUps = new ArrayList();
 		
+		reproductor = new Reproductor();
 	}
 	
 	public int cantEnemies(){
@@ -110,6 +114,8 @@ public abstract class Mapa{
 	
 	public void setMind(Mind mind) {
 		this.mind = mind;
+		mind.addReproductor(reproductor);
+
 	}
 
 	public void setMindEnemies(MindEnemies mindEnemies) {
@@ -155,6 +161,7 @@ public abstract class Mapa{
 			
 			m.setJugador(jugador);
 	        m.setMapa(this);
+	        m.addReproductor(reproductor);
 	        indiceEnemigos++;  
 		} else {
 			if(!estaJefe){

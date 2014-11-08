@@ -35,6 +35,7 @@ public class Mind implements ActionListener {
     private boolean stop;
     private int delayFinal;
     private int contDelay;
+    private Reproductor reproductor;
    
 
     public Mind(Mapa map, PanelJugador panel, int select) {
@@ -49,7 +50,6 @@ public class Mind implements ActionListener {
         
         timer = new Timer(delay, this);
         timer.start();
-        Reproductor rep = new Reproductor("/ProyectoX/sounds/music/Enclave.mp3",true);
     }
 
     public void actionPerformed(ActionEvent e) {
@@ -80,7 +80,7 @@ public class Mind implements ActionListener {
         if(jugador.getVida() <= 0){
         	jugador.setVisible();
         }
-        
+        reproductor.verificarStop();
        	panel.repaint();  
     }
     
@@ -200,10 +200,17 @@ public class Mind implements ActionListener {
         mapa.setJugador(jugador);
         mapa.setNewJugador(jugador);
         jugador.setMinHeight(530);
+        
     }
     
     public void stop() {
     	timer.stop();
     }
+
+	public void addReproductor(Reproductor rep) {
+		reproductor = rep;
+		jugador.addReproductor(reproductor);
+		
+	}
 
 }

@@ -9,9 +9,11 @@ import javax.swing.ImageIcon;
 import ProyectoX.Explosiones.Explosion;
 import ProyectoX.Mapas.Mapa;
 import ProyectoX.Naves.Jugador.Jugador;
+import ProyectoX.Sound.Reproductor;
 
 public abstract class Nave {
 	
+	protected Reproductor reproductor;
 	protected Jugador jugador;
 	protected int vida;
 	protected Mapa mapa;
@@ -218,6 +220,10 @@ public abstract class Nave {
 	
 	public void setMinHeight(int h){
 		minHeight = h;
+	}
+	
+	public void addReproductor(Reproductor rep){
+		reproductor = rep;
 	}
 }
 
