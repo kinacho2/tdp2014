@@ -15,6 +15,7 @@ import javax.swing.JPanel;
 
 import ProyectoX.Frames_Minds.Mind;
 import ProyectoX.Frames_Minds.PanelEnemies;
+import ProyectoX.Frames_Minds.PanelJugador;
 import ProyectoX.Mapas.Mapa;
 import ProyectoX.Mapas.Nivel_I;
 import ProyectoX.Naves.Nave;
@@ -54,6 +55,7 @@ public class Aplication extends javax.swing.JFrame {
 	private JPanel main;
 	private JPanel game;
 	private Mind mind;
+	private PanelJugador panel;
 	private Mapa map;
 	private JPanel bar;
 	private JButton volverMenu;
@@ -81,14 +83,14 @@ public class Aplication extends javax.swing.JFrame {
 		game.setBackground(new java.awt.Color(0,0,0));
 		
 		
+		panel = new PanelJugador(map,select);
+		//mind = new Mind(map,select);
 		
-		mind = new Mind(map,select);
 		
 		
-		
-		game.add(mind);
-		mind.setLayout(null);
-		mind.setPreferredSize(new java.awt.Dimension(800, 520));
+		game.add(panel);
+		panel.setLayout(null);
+		panel.setPreferredSize(new java.awt.Dimension(800, 520));
 		
 		// Barra de estado
 	
@@ -98,7 +100,7 @@ public class Aplication extends javax.swing.JFrame {
 		bar.setPreferredSize(new java.awt.Dimension(800, 50));
 		bar.setBackground(new java.awt.Color(0,0,0));
 		
-		mind.setBar(bar);
+		panel.setBar(bar);
 	
         // boton volver al menu
 		
@@ -115,7 +117,7 @@ public class Aplication extends javax.swing.JFrame {
         // Mente de los enemigos
 		
         PanelEnemies panelEnemies = new PanelEnemies(map);
-        mind.add(panelEnemies);
+        panel.add(panelEnemies);
         panelEnemies.setBounds(0, 0, 800, 600);
 		
         // Establece las Mentes al mapa

@@ -1,6 +1,5 @@
 package ProyectoX.Frames_Minds;
 
-import java.awt.Color;
 import java.awt.Graphics;
 import java.awt.Graphics2D;
 import java.awt.Toolkit;
@@ -10,13 +9,10 @@ import java.awt.event.KeyListener;
 import java.awt.event.KeyEvent;
 import java.util.ArrayList;
 
-import javax.swing.BorderFactory;
-import javax.swing.JButton;
 import javax.swing.JLabel;
 import javax.swing.JOptionPane;
 import javax.swing.Timer;
 import javax.swing.JPanel;
-import javax.swing.WindowConstants;
 
 import ProyectoX.Disparos.Disparo;
 import ProyectoX.Explosiones.Explosion;
@@ -28,32 +24,21 @@ import ProyectoX.Naves.Jugador.Resistente;
 import ProyectoX.Naves.Jugador.Veloz;
 import ProyectoX.PowerUps.PowerUp;
 
-public class Mind extends JPanel implements ActionListener {
+public class Mind implements ActionListener {
 	
     private Timer timer;
     private Jugador jugador;
     private final int delay = 15;
     private Mapa mapa;
+    private PanelJugador panel;
     private boolean stop;
     private int delayFinal;
     private int contDelay;
-    private JPanel bar;
-    
    
 
-	private JLabel puntaje;
-	private JLabel labelVida;
-	private JLabel contadorEnemigos;
-
-    public Mind(Mapa map, int select) {
+    public Mind(Mapa map, PanelJugador panel, int select) {
     	
-    	setOpaque(false);
-        
-        setLayout(null);
-        addKeyListener(new TAdapter());
-        setFocusable(true);
-        //setBackground(Color.BLACK);
-        setDoubleBuffered(true);
+    	this.panel = panel;
         
         mapa = map;
         crearJugador(select);
@@ -64,83 +49,6 @@ public class Mind extends JPanel implements ActionListener {
         timer = new Timer(delay, this);
         timer.start();
         
-    }
-    
-    public void setBar(JPanel bar) {
-		this.bar = bar;
-        puntaje = new JLabel("Puntaje: "+ 0);
-		puntaje.setBounds(800-150, 0, 350, 50);
-		bar.add(puntaje);
-		
-		labelVida = new JLabel("Vida: " + jugador.getVida());
-		labelVida.setBounds(800-250, 0, 100, 50);
-		bar.add(labelVida);
-		
-		contadorEnemigos = new JLabel("Enemigos restantes: " + mapa.cantEnemies());
-		contadorEnemigos.setBounds(800-500, 0, 250, 50);
-		bar.add(contadorEnemigos);
-		
-		//quit.setBackground(new java.awt.Color(0,0,0));
-		//labelVida.setPreferredSize(new java.awt.Dimension(14, 7));
-		labelVida.setFont(new java.awt.Font("Segoe UI",0,20));
-		labelVida.setForeground(new java.awt.Color(255,0,0));
-		puntaje.setFont(new java.awt.Font("Segoe UI",0,20));
-		puntaje.setForeground(new java.awt.Color(0,0,255));
-		contadorEnemigos.setFont(new java.awt.Font("Segoe UI",0,20));
-		contadorEnemigos.setForeground(new java.awt.Color(0,255,0));
-    
-    }
-    
-    public synchronized void paint(Graphics g) {
-	        super.paint(g);
-	        
-
-	        // Pinta el jugador
-	        Graphics2D g2d = (Graphics2D)g;
-	        
-	        if (jugador.getVisible())
-	        	g2d.drawImage(jugador.getImage(), jugador.getX(), jugador.getY(), this);
-	        
-	        Jugador aux = jugador.getDefensa();
-	        
-	        if (aux != null){
-	        	if(aux.getVisible())
-	        		g2d.drawImage(aux.getImage(), aux.getX(), aux.getY(), this);
-	        	else
-	        		jugador.dropDefensa();
-	        }
-	        
-	        // arreglo de disparos
-	        ArrayList ms = mapa.getMisilesJugador();
-	
-	        //repinta los disparos
-	        for (int i = 0; i < ms.size(); i++ ) {
-	            Disparo m = (Disparo) ms.get(i);
-	            g2d.drawImage(m.getImage(), m.getX(), m.getY(), this);
-	        }
-	        
-	        //pinta las explosiones	        
-	        ms = mapa.explosiones();
-	        for (int i = 0; i < ms.size(); i++ ) {
-	            Explosion m = (Explosion) ms.get(i);
-	            g2d.drawImage(m.getImage(), m.getX(), m.getY(), this);
-	            if(!m.getVisible()) {
-	            	ms.remove(i);
-	            }
-	        }
-	        
-	        //repinta los powerUps
-	        ms = mapa.getPowers();
-	        
-	        for (int j = 0; j < ms.size(); j++ ) {
-	            PowerUp pw = (PowerUp) ms.get(j);
-	            g2d.drawImage(pw.getImage(), pw.getX(), pw.getY(), this);
-            }
-	
-	        Toolkit.getDefaultToolkit().sync();
-	        g.dispose();
-	        
-	       
     }
 
     public void actionPerformed(ActionEvent e) {
@@ -164,7 +72,7 @@ public class Mind extends JPanel implements ActionListener {
         		if(contDelay >= delayFinal){
         			mapa.stop();
         			JOptionPane dialog = new JOptionPane();
-        			dialog.showMessageDialog(null, puntaje.getText() + "\nVuelva al menu de seleccion para comenzar nuevamente", "FIN DEL JUEGO", JOptionPane.INFORMATION_MESSAGE);
+        		//	dialog.showMessageDialog(null, puntaje.getText() + "\nVuelva al menu de seleccion para comenzar nuevamente", "FIN DEL JUEGO", JOptionPane.INFORMATION_MESSAGE);
         		}
         	}
         }
@@ -172,7 +80,7 @@ public class Mind extends JPanel implements ActionListener {
         	jugador.setVisible();
         }
         
-       	repaint();  
+       	panel.repaint();  
     }
     
     private synchronized void colisionPowerUp() {
@@ -215,16 +123,16 @@ public class Mind extends JPanel implements ActionListener {
                 	if (m.isVisible()){
                 		enemigo.setVida(m.getDamage());
                 	}
-                	puntaje.setText("Puntaje: " + jugador.getPuntaje());
+             //   	puntaje.setText("Puntaje: " + jugador.getPuntaje());
                 	m.setVisible();
                 	mapa.addExposion(m.newExplosion(enemigo.getY() + enemigo.getHeight()));
                 }
                 
             }
         }
-    	puntaje.setText("Puntaje: " + jugador.getPuntaje());
-    	labelVida.setText("Vida: " + jugador.getVida());
-		contadorEnemigos.setText("Enemigos restantes: " + mapa.cantEnemies());
+  //  	puntaje.setText("Puntaje: " + jugador.getPuntaje());
+  //  	labelVida.setText("Vida: " + jugador.getVida());
+//		contadorEnemigos.setText("Enemigos restantes: " + mapa.cantEnemies());
     	
     }
     
@@ -275,27 +183,7 @@ public class Mind extends JPanel implements ActionListener {
     	}
     }
 
-    private class TAdapter implements KeyListener {
-
-        public void keyReleased(KeyEvent e) {
-        	jugador.keyReleased(e);
-        	if(e.getKeyCode() == KeyEvent.VK_SPACE) {
-        		jugador.setDisCero();
-            }
-        }
-
-        public void keyPressed(KeyEvent e) {
-        	jugador.keyPressed(e);
-        	if(e.getKeyCode() == KeyEvent.VK_SPACE) {
-        		jugador.setDis();
-            }
-        	
-        }
-
-		public void keyTyped(KeyEvent arg0) {
-			// Es necesaria poner esta función porque implementa a una interfaz TAdapter, no realiza nada
-		}
-    }
+    
     
     public Jugador getJugador() {
     	return jugador;

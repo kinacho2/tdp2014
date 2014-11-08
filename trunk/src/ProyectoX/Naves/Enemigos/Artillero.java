@@ -23,6 +23,7 @@ public class Artillero extends Enemigo {
 		y = -defaultHeight;
 		this.up = up;
 		puntaje = 50;
+		setFrecuenciaDeDisparo(5,20);
 	}
 
 	@Override
