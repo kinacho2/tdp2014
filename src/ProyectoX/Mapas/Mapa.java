@@ -43,8 +43,9 @@ public abstract class Mapa{
 	protected ArrayList powerUps;
 	protected int cantEnemies;
 	protected Random rn;
-	protected boolean jefe =false;
+	protected boolean estaJefe =false;
 	protected EnemiesBuilder enBuilder;
+	protected Jefe jefe;
 	
 	protected Image imagenFondo;
 	private int x = -50;
@@ -148,12 +149,28 @@ public abstract class Mapa{
 	 * Crea un nuevo enemigo aleatoriamente
 	 */
 	public Enemigo nextEnemigo(){
-		Enemigo m = enBuilder.getNextEnemigo();
+		Enemigo m;
+		if(indiceEnemigos < cantEnemies) {	
+			m = enBuilder.getNextEnemigo();
+			
+			m.setJugador(jugador);
+	        m.setMapa(this);
+	        indiceEnemigos++;  
+		} else {
+			if(!estaJefe){
+				m = jefe;
+				mindEnemies.addBoss(jefe);
+				estaJefe = true;
+				m.setJugador(jugador);
+				m.setMapa(this);
+				m = null;
+				
+			}
+			else{
+				m = null;
+			}
+		}
 		
-		m.setJugador(jugador);
-        m.setMapa(this);
-        indiceEnemigos++;
-        
         return m;
 	}
 	

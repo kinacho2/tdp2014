@@ -23,6 +23,7 @@ import ProyectoX.Naves.Jugador.Normal;
 import ProyectoX.Naves.Jugador.Resistente;
 import ProyectoX.Naves.Jugador.Veloz;
 import ProyectoX.PowerUps.PowerUp;
+import ProyectoX.Sound.Reproductor;
 
 public class Mind implements ActionListener {
 	
@@ -48,7 +49,7 @@ public class Mind implements ActionListener {
         
         timer = new Timer(delay, this);
         timer.start();
-        
+        Reproductor rep = new Reproductor("/ProyectoX/sounds/music/Enclave.mp3",true);
     }
 
     public void actionPerformed(ActionEvent e) {
@@ -123,17 +124,14 @@ public class Mind implements ActionListener {
                 	if (m.isVisible()){
                 		enemigo.setVida(m.getDamage());
                 	}
-             //   	puntaje.setText("Puntaje: " + jugador.getPuntaje());
+                	panel.actualizarPuntaje();
                 	m.setVisible();
                 	mapa.addExposion(m.newExplosion(enemigo.getY() + enemigo.getHeight()));
                 }
                 
             }
         }
-  //  	puntaje.setText("Puntaje: " + jugador.getPuntaje());
-  //  	labelVida.setText("Vida: " + jugador.getVida());
-//		contadorEnemigos.setText("Enemigos restantes: " + mapa.cantEnemies());
-    	
+  	
     }
     
     // Mueve los disparos visibles de los enemigos y los que no son removidos; además verifica si algún disparo colisionó
