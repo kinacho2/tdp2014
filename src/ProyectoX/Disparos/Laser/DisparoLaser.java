@@ -89,7 +89,7 @@ public abstract class DisparoLaser extends Disparo {
 	}
 	
 	public Explosion newExplosion(int altura) {
-		return new Explosion(x + width/2, altura - width/2, explosion, width, width);
+		return new Explosion(x + width/2, altura - width/2, explosion, 10, 10);
 	}
 	
 	//al impactar no debe desaparecer por lo que el setVisible es redefinido
