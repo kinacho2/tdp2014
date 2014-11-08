@@ -30,7 +30,7 @@ public class PUPBuilder {
 		}else{
 			up = new Vida(x, y);
 		}
-		up = new Ayudante(x,y);
+		up = new Laser(x,y);
 		return up;
 	}
 	
