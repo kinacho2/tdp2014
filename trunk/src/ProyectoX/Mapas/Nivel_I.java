@@ -9,6 +9,7 @@ import javax.swing.ImageIcon;
 import ProyectoX.Naves.Enemigos.EnemiesBuilder;
 import ProyectoX.Naves.Enemigos.Enemigo;
 import ProyectoX.Naves.Enemigos.Jefes.Jefe;
+import ProyectoX.Naves.Enemigos.Jefes.JefeAvion;
 import ProyectoX.Naves.Enemigos.Jefes.JefeTanque;
 import ProyectoX.PowerUps.PUPBuilder;
 
@@ -21,26 +22,27 @@ public class Nivel_I extends Mapa{
 	public Nivel_I(){
 		super();
 		rn = new Random(7);
-		cantEnemies = 101;
+		cantEnemies = 4;
 		power = new PUPBuilder(7);
 		enBuilder = new EnemiesBuilder(5);
 		ImageIcon ii = new ImageIcon(fondo);
 		imagenFondo = ii.getImage();
 		
 		y = initY;
+		jefe = new JefeAvion(); 
 		
 	}
 
-	
+	/*
 	public Enemigo nextEnemigo() {
 		Enemigo m;
 		if(indiceEnemigos < cantEnemies) {	
 			m = super.nextEnemigo();    
 		} else {
-			if(!jefe){
+			if(!estaJefe){
 				m = new JefeTanque();
 				mindEnemies.addBoss((Jefe)m);
-				jefe = true;
+				estaJefe = true;
 				m.setJugador(jugador);
 				m.setMapa(this);
 				m = null;
@@ -52,7 +54,7 @@ public class Nivel_I extends Mapa{
 		}
 		
 		return m;
-	}
+	}*/
 	
 	public int getY(){
 		if(delay % delayVel  == 0){

@@ -115,7 +115,12 @@ public class PanelJugador extends JPanel implements ActionListener{
             PowerUp pw = (PowerUp) ms.get(j);
             g2d.drawImage(pw.getImage(), pw.getX(), pw.getY(), this);
         }
-
+        
+      	puntaje.setText("Puntaje: " + jugador.getPuntaje());
+        labelVida.setText("Vida: " + jugador.getVida());
+		contadorEnemigos.setText("Enemigos restantes: " + mapa.cantEnemies());
+         
+        
         Toolkit.getDefaultToolkit().sync();
         g.dispose();
         
@@ -145,8 +150,11 @@ public class PanelJugador extends JPanel implements ActionListener{
 		}
     }
 
+	public void actualizarPuntaje(){
+        puntaje.setText("Puntaje: " + jugador.getPuntaje());
 
-	@Override
+	}
+	
 	public void actionPerformed(ActionEvent event) {
 		
 		mind.actionPerformed(event);
