@@ -159,5 +159,9 @@ public class PanelJugador extends JPanel implements ActionListener{
 		
 		mind.actionPerformed(event);
 	}
+
+	public Mind getMind() {
+		return mind;
+	}
 	
 }

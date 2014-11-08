@@ -7,12 +7,14 @@ import javax.swing.ImageIcon;
 
 import ProyectoX.Explosiones.Explosion;
 import ProyectoX.Naves.Nave;
+import ProyectoX.Sound.Sonido;
 
 
 public class Disparo {
 
 	private static final URL url = Disparo.class.getClassLoader().getResource("ProyectoX/img/Disparos/Basico/Basico.png");
 	private static final URL explode = Disparo.class.getClassLoader().getResource("ProyectoX/img/Explosiones/pequena.gif");
+	protected String sonido;
 	
 	protected int x, y;
     protected Image image;
@@ -53,7 +55,7 @@ public class Disparo {
         this.y = y - height/2;
         damage = 10;
         velocidad = missileSpeed;
-        
+        sonido = "/ProyectoX/sounds/mul.mp3";
         
     }
 
@@ -133,6 +135,11 @@ public class Disparo {
 	
 	public Disparo nextLevel(){
 		return new Disparo(x,y,dx,dy,velocidad);
+	}
+
+
+	public Sonido getSound() {
+		return new Sonido(sonido,false);
 	}
 	
 }

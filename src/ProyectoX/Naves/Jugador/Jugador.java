@@ -108,7 +108,9 @@ public class Jugador extends Nave {
     	Disparo[] array = arma.cloneNivel();
     	if(puedeDisparar()){
     		for(int i = 0;i<array.length;i++){
-    			mapa.addDisparoJugador(array[i]);
+    			Disparo dis = array[i];
+    			mapa.addDisparoJugador(dis);
+    			reproductor.addSound(dis.getSound());
     		}
     	}
     }

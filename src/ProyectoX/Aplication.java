@@ -122,7 +122,7 @@ public class Aplication extends javax.swing.JFrame {
 		
         // Establece las Mentes al mapa
         
-        map.setMind(mind);
+        map.setMind(panel.getMind());
         map.setMindEnemies(panelEnemies.getMindEnemies());
 		
         
