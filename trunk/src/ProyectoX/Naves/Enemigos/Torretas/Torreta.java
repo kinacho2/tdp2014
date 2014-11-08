@@ -19,6 +19,7 @@ public abstract class Torreta extends Enemigo {
 		y = yy;
 		velocidadMisil = -6;
 		puntaje = 10;
+		setFrecuenciaDeDisparo(5 , 13);
 	}
 
 	public void disparar() {
