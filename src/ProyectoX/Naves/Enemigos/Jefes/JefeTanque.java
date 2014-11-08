@@ -32,7 +32,7 @@ public class JefeTanque extends Jefe{
 	
 	private static final int defaultWidth = 320;
 	private static final int defaultHeight = 1376;
-	private static final int defaultVel = 3;
+	private static final int defaultVel = 2;
 	
 	private boolean primero = true;
 	private boolean segundo = true;
