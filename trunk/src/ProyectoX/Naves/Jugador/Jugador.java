@@ -110,8 +110,9 @@ public class Jugador extends Nave {
     		for(int i = 0;i<array.length;i++){
     			Disparo dis = array[i];
     			mapa.addDisparoJugador(dis);
-    			reproductor.addSound(dis.getSound());
+    			
     		}
+    		reproductor.addSound(array[0].getSound());
     	}
     }
 
