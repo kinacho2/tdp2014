@@ -28,10 +28,10 @@ public class PanelEnemies extends JPanel {
 	
 	public synchronized void paint(Graphics g) {
 		 
-	        super.paint(g);
+	        //super.paint(g);
 
 	        Graphics2D g2d = (Graphics2D) g;
-	   
+	   /*
 	        g2d.drawImage(mapa.getImage(), mapa.getX(), mapa.getY(), this);
 	        
 	        ArrayList enemigos = mind.getEnemies();
@@ -60,7 +60,7 @@ public class PanelEnemies extends JPanel {
 		            }
 	            
 	        }
-	 
+	 */
 
 	        Toolkit.getDefaultToolkit().sync();
 	        g.dispose();

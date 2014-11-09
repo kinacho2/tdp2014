@@ -7,11 +7,13 @@ import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 import java.awt.event.KeyEvent;
 import java.awt.event.KeyListener;
+import java.awt.geom.AffineTransform;
 import java.util.ArrayList;
 
 import javax.swing.JLabel;
 import javax.swing.JPanel;
 
+import ProyectoX.Naves.Enemigos.Enemigo;
 import ProyectoX.Naves.Jugador.Jugador;
 import ProyectoX.PowerUps.PowerUp;
 import ProyectoX.Disparos.Disparo;
@@ -75,45 +77,88 @@ public class PanelJugador extends JPanel implements ActionListener{
         
 
         // Pinta el jugador
-        Graphics2D g2d = (Graphics2D)g;
+        Graphics2D g2d = (Graphics2D) g;
         
-        if (jugador.getVisible())
-        	g2d.drawImage(jugador.getImage(), jugador.getX(), jugador.getY(), this);
+        g2d.drawImage(mapa.getImage(), mapa.getX(), mapa.getY(), this);
+
         
-        Jugador aux = jugador.getDefensa();
+       
         
-        if (aux != null){
-        	if(aux.getVisible())
-        		g2d.drawImage(aux.getImage(), aux.getX(), aux.getY(), this);
-        	else
-        		jugador.dropDefensa();
+        
+        
+        //repinta los powerUps
+        ArrayList ms = mapa.getPowers();
+        
+        for (int j = 0; j < ms.size(); j++ ) {
+            PowerUp pw = (PowerUp) ms.get(j);
+            g2d.drawImage(pw.getImage(), pw.getX(), pw.getY(), this);
         }
         
-        // arreglo de disparos
-        ArrayList ms = mapa.getMisilesJugador();
+        ArrayList enemigos = mapa.getEnemies();
+        
+        //repinta los enemigos
+        for (int i = 0; i < enemigos.size(); i++ ) {
+            Enemigo m = (Enemigo) enemigos.get(i);
+            AffineTransform tx = m.getRotacion();
+            g2d.setTransform(tx);
+            g2d.drawImage(m.getImage(), m.getX(), m.getY(), this);
+            
+        }
+        
+     // arreglo de disparos del jugador
+        ms = mapa.getMisilesJugador();
 
         //repinta los disparos
         for (int i = 0; i < ms.size(); i++ ) {
             Disparo m = (Disparo) ms.get(i);
+            AffineTransform tx = AffineTransform.getRotateInstance(0, m.getX() , m.getY());
+            g2d.setTransform(tx);
             g2d.drawImage(m.getImage(), m.getX(), m.getY(), this);
+        }
+        
+       
+        
+        ms = mapa.getMisilesEnemigos();
+        
+        //mueve, repinta y elimina los disparos en caso de que ya no sean visibles
+        for (int j = 0; j < ms.size(); j++ ) {
+            Disparo misil = (Disparo) ms.get(j);
+	        if(misil.isVisible()) {
+	         	AffineTransform tx = AffineTransform.getRotateInstance(0, misil.getX() , misil.getY());
+		        g2d.setTransform(tx);
+		        g2d.drawImage(misil.getImage(), misil.getX(), misil.getY(), this);
+	        } 
+            
         }
         
         //pinta las explosiones	        
         ms = mapa.explosiones();
         for (int i = 0; i < ms.size(); i++ ) {
             Explosion m = (Explosion) ms.get(i);
+            AffineTransform tx = AffineTransform.getRotateInstance(0, m.getX() , m.getY());
+            g2d.setTransform(tx);
             g2d.drawImage(m.getImage(), m.getX(), m.getY(), this);
             if(!m.getVisible()) {
             	ms.remove(i);
             }
         }
         
-        //repinta los powerUps
-        ms = mapa.getPowers();
+        if (jugador.getVisible()){
+        	AffineTransform tx = AffineTransform.getRotateInstance(0, jugador.getX() , jugador.getY());
+            g2d.setTransform(tx);
+            
+        	g2d.drawImage(jugador.getImage(), jugador.getX(), jugador.getY(), this);
+        }
+        Jugador aux = jugador.getDefensa();
         
-        for (int j = 0; j < ms.size(); j++ ) {
-            PowerUp pw = (PowerUp) ms.get(j);
-            g2d.drawImage(pw.getImage(), pw.getX(), pw.getY(), this);
+        if (aux != null){
+        	if(aux.getVisible()){
+        		AffineTransform tx = AffineTransform.getRotateInstance(0, aux.getX() , aux.getY());
+            	g2d.setTransform(tx);
+        		g2d.drawImage(aux.getImage(), aux.getX(), aux.getY(), this);
+        	}
+        	else
+        		jugador.dropDefensa();
         }
         
       	puntaje.setText("Puntaje: " + jugador.getPuntaje());
@@ -146,7 +191,7 @@ public class PanelJugador extends JPanel implements ActionListener{
         }
 
 		public void keyTyped(KeyEvent arg0) {
-			// Es necesaria poner esta función porque implementa a una interfaz TAdapter, no realiza nada
+			// Es necesaria poner esta funciï¿½n porque implementa a una interfaz TAdapter, no realiza nada
 		}
     }
 
