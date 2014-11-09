@@ -1,59 +1,91 @@
 package ProyectoX.Sound;
 
-import java.io.File;
+import java.io.IOException;
 import java.io.InputStream;
+import java.net.URL;
 
 import javazoom.jl.decoder.JavaLayerException;
 import javazoom.jl.player.Player;
 
-public class Sonido extends Thread{
+import javax.sound.sampled.*;
+import javax.swing.*;
+
+
+public class Sonido{
 	
 	
-    private Player player;
+    private Clip player;
     private boolean bucle;
-    private boolean stop = false;
+   
+
+	private boolean stop = false;
     private boolean reproduciendo = false;
-    private String sl; 
+    private String sound; 
 
     public Sonido(String sl, boolean bucle) {
-    		this.sl = sl;
-		this.start();
-		this.bucle = bucle;		
-    }
+    	 
+    		 this.sound = "ProyectoX/sounds/music/Enclave.mp3";
+    			
+    		 this.bucle = bucle;	
+    		 //InputStream arch = this.getClass().getResourceAsStream(sound);
+
+    	      try {
+    	         // Open an audio input stream.
+    	    	 InputStream arch = this.getClass().getResourceAsStream(sound);
+ 
+    	         //AudioInputStream audioIn = AudioSystem.getAudioInputStream(this.getClass().getResourceAsStream(sound));
+    	         // Get a sound clip resource.
+    	         player = AudioSystem.getClip();
+    	         // Open audio clip and load samples from the audio input stream.
+    	         player.open(AudioSystem.getAudioInputStream(arch));
+    	         player.start();
+    	      } catch (UnsupportedAudioFileException e) {
+    	         e.printStackTrace();
+    	 
+    	      } catch (LineUnavailableException e) {
+    	         e.printStackTrace();
+    	      } catch (IOException e) {
+				// TODO Auto-generated catch block
+				e.printStackTrace();
+			}
+    		
+    	 }
+    
     
     public void play() {
-        try {
-        	InputStream arch = this.getClass().getResourceAsStream(sl);
-			player = new Player(arch);
-			player.play();
-		} catch (JavaLayerException e) {
-			e.printStackTrace();
-		}
+        
+        	reproduciendo = true;
+			
+		//	player.play();
+		
     }
 
     public void Stop() throws Exception {
     	stop = true;
-    }
-    
-    public void run(){
-    	while(!stop){
-    		if(!reproduciendo){
-    			play();    
-    			reproduciendo = true;
-    		}
-    		
-    		if(player.isComplete()){
-    			if (bucle)
-    				reproduciendo = false;
-    			else
-    				stop = true;
-    		}
-    		
-    	}
-    	
+    	//player.close();
     }
     
     public boolean getStop(){
     	return stop;
     }
+    
+    public Clip getPlayer(){
+    	return player;
+    }
+
+	public boolean isReproduciendo() {
+		return reproduciendo;
+	}
+
+	public void setReproduciendo(boolean reproduciendo) {
+		this.reproduciendo = reproduciendo;
+	}
+	
+	 public boolean isBucle() {
+		return bucle;
+	}
+	 
+	 public void run(){
+		 play();
+	 }
 }
