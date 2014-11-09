@@ -87,7 +87,7 @@ public class Disparo {
             setVisible();
     }
     
-    // Determina si el disparo colisionó con una nave
+    // Determina si el disparo colisionï¿½ con una nave
     public synchronized boolean colision(Nave nave) {
     	boolean A,B,C,D,E,F,G,H, fColision; 
 		
@@ -105,7 +105,7 @@ public class Disparo {
 		return  nave.getVisible() && fColision;
 	}
     
-    // Establece que el disparo no está visible en la pantalla
+    // Establece que el disparo no estï¿½ visible en la pantalla
     public void setVisible() {
     	visible = false;
     }
@@ -138,8 +138,9 @@ public class Disparo {
 	}
 
 
-	public Sonido getSound() {
-		return new Sonido(sonido,false);
+	public String getSound() {
+		//return new Sonido(sonido,false);
+		return sonido;
 	}
 	
 }

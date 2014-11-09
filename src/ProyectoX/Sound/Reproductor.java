@@ -3,21 +3,22 @@ package ProyectoX.Sound;
 import java.util.ArrayList;
  
 
-public class Reproductor extends Thread{
+public class Reproductor{
 
 	 private boolean stop = false;
 	
 	private ArrayList sonidos;
+
+	private int cant = 0;
 	
 	public Reproductor(){
 		sonidos = new ArrayList();
-		this.start();
+	
 	}
 	
-	public void addSound(Sonido sound){
-		if(sound!=null)
+	public void addSound(String sound){
 		sonidos.add(sound);
-		//sound.play();
+    	Sonido sn = new Sonido(sound);
 	}
 	
 	public void verificarStop(){
@@ -30,26 +31,5 @@ public class Reproductor extends Thread{
 		*/
 	}
 	
-    public void run(){
-    	while(!stop){
-    		for(int i = 0; i< sonidos.size(); i++){
-	    		Sonido sn = (Sonido) sonidos.get(i);
-	    		
-	    		if(!sn.isReproduciendo()){
-	    			//sn.start();    
-	    		}
-	    		else{
-		    		if(sn.getPlayer().isActive()){
-		    			if (sn.isBucle())
-		    				sn.setReproduciendo(false);
-		    			else{
-		    				sonidos.remove(i);
-		    			}
-		    		}
-	    		}
-    		}
-    	}
-    	
-    }
 
 }
