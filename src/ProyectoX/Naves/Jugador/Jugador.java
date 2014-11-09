@@ -30,7 +30,7 @@ public class Jugador extends Nave {
 		setJugador(this);
 		velocidadMisil = 20;
 		power = "";
-		bombas = 1;
+		bombas = 2000;
 		puntaje = 0;
 		arma = new Disparo(x + width/2 , y, 0, 1, velocidadMisil);
     	

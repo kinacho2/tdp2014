@@ -16,8 +16,8 @@ public class JefeAvion extends Jefe{
 	protected static final String boundsSimple = "/ProyectoX/img/Enemigo/JefeAvion/posicionesTorretasSimples.txt";
 	
 	
-	private static final int defaultWidth = 1275;
-	private static final int defaultHeight = 636;
+	private static final int defaultWidth = 127;
+	private static final int defaultHeight = 63;
 	private static final int defaultVel = 2;
 	
 	private boolean primero = true;
