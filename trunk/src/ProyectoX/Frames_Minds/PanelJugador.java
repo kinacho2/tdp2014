@@ -33,7 +33,8 @@ public class PanelJugador extends JPanel implements ActionListener{
 	private JLabel contadorEnemigos;
 	
 	public PanelJugador(Mapa map, int select){
-		mind = new Mind(map, this, select);
+		mind = new Mind( this, select);
+		map.setMind(mind);
 		jugador = mind.getJugador();
 		mapa = map;
 		setOpaque(false);
@@ -207,6 +208,11 @@ public class PanelJugador extends JPanel implements ActionListener{
 
 	public Mind getMind() {
 		return mind;
+	}
+
+	public void setMapa(Mapa map) {
+		mapa = map;
+		
 	}
 	
 }

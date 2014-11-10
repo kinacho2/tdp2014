@@ -67,7 +67,7 @@ public class Jugador extends Nave {
         }
         if (key == KeyEvent.VK_X){
         	if(bombas > 0){
-        		mapa.addDisparoJugador(new MisilBomba(x + width/2, y, mapa));
+        		mapa.addDisparoJugador(new MisilBomba(x + width/2, y, mapa, reproductor));
         		bombas--;
         	}
         }

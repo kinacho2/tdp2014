@@ -38,11 +38,11 @@ public class Mind implements ActionListener {
     private Reproductor reproductor;
    
 
-    public Mind(Mapa map, PanelJugador panel, int select) {
+    public Mind(PanelJugador panel, int select) {
     	
     	this.panel = panel;
         
-        mapa = map;
+        //mapa = map;
         crearJugador(select);
         stop = false;
         delayFinal = jugador.getExplosion().getDelay();
@@ -195,9 +195,6 @@ public class Mind implements ActionListener {
     	} else if (select == 3) {
         	jugador = new Resistente();
     	}
-        jugador.setMapa(mapa);
-        mapa.setJugador(jugador);
-        mapa.setNewJugador(jugador);
         jugador.setMinHeight(530);
         
     }
@@ -210,6 +207,14 @@ public class Mind implements ActionListener {
 		reproductor = rep;
 		jugador.addReproductor(reproductor);
 		
+	}
+	
+	public void setMapa(Mapa map){
+		mapa = map;
+		panel.setMapa(map);
+		map.setJugador(jugador);
+		map.setNewJugador(jugador);
+		jugador.setMapa(map);
 	}
 
 }

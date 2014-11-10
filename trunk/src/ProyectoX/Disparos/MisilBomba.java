@@ -9,6 +9,8 @@ import ProyectoX.Explosiones.Explosion;
 import ProyectoX.Mapas.Mapa;
 import ProyectoX.Naves.Nave;
 import ProyectoX.Naves.Jugador.Jugador;
+import ProyectoX.Sound.Reproductor;
+import ProyectoX.Sound.Sonido;
 
 public class MisilBomba extends Disparo{
 
@@ -17,7 +19,9 @@ public class MisilBomba extends Disparo{
 	private static final URL explode = Disparo.class.getClassLoader().getResource("ProyectoX/img/Explosiones/bomba.gif");
 	private static final URL destroy = Disparo.class.getClassLoader().getResource("ProyectoX/img/Explosiones/nave.gif");
 	
-	
+	private static final String sonidoExplosion = "/ProyectoX/sounds/bombExplode.mp3";
+	private static final String thunder = "/ProyectoX/sounds/thunder.mp3";
+
 	
 	private static final int defaultWidth = 10;
 	private static final int defaultHeight = 30;
@@ -42,7 +46,7 @@ public class MisilBomba extends Disparo{
 	
 	private Mapa mapa;
 	
-	public MisilBomba(int x, int y, Mapa mapa) {
+	public MisilBomba(int x, int y, Mapa mapa, Reproductor rep) {
 		super(x, y, 0, 0, 1);
 		ImageIcon ii =  new ImageIcon(url);
 		misil = ii.getImage().getScaledInstance(defaultWidth, defaultHeight, Image.SCALE_DEFAULT);
@@ -64,6 +68,8 @@ public class MisilBomba extends Disparo{
 		this.mapa = mapa;
 		
 		damage = 2000;
+		
+		this.rep = rep;
 		
 	}
 	
@@ -91,7 +97,7 @@ public class MisilBomba extends Disparo{
 				//la imagen pasa a tener otro ancho y alto
 				width = defaultWidth2;
 				height = defaultHeight2;
-				
+				rep.addSound(new Sonido(sonidoExplosion,false));
 				//se ajusta el x e y a la nueva imagen
 				x = x - defaultWidth2/2 + defaultWidth /2;
 				y = y - defaultHeight2/2 + defaultHeight/2;
@@ -108,7 +114,7 @@ public class MisilBomba extends Disparo{
 					Explosion aux = new Explosion(400, 300, new ImageIcon(explode), 800, 600);
 					aux.setDelay(2000);
 					mapa.addExposion(aux);
-					
+					rep.addSound(new Sonido(thunder,false));
 				}
 				//al llegar este tiempo se le indica al mapa que destruya los enemigos en pantalla a excepsion del Jefe
 				if(now - init > maxDelay){

@@ -17,14 +17,14 @@ public class MindEnemies extends Thread  {
 	private Random ran;
 	private boolean stop;
 	
-	public MindEnemies(PanelEnemies p, Mapa map) {
+	public MindEnemies(PanelEnemies p) {
 		enemies = new ArrayList();
 		panel = p;
 		
 		stop = false;
 		
 		ran=new Random(0);
-		mapa=map;
+		//mapa=map;
 		
 	}
 	
@@ -83,6 +83,11 @@ public class MindEnemies extends Thread  {
 			enemies.add(en.get(i));
 		}
 		
+	}
+	
+	public void setMapa(Mapa map){
+		mapa = map;
+		panel.setMapa(map);
 	}
 }
 

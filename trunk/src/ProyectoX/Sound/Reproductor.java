@@ -12,7 +12,7 @@ public class Reproductor{
 	private int cant = 0;
 	
 	public Reproductor(){
-	
+		
 	}
 	
 	public void addSound(Sonido sound){

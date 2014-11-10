@@ -4,6 +4,7 @@ import java.io.File;
 import java.io.FileInputStream;
 import java.io.InputStream;
 
+import javazoom.jl.decoder.JavaLayerException;
 import javazoom.jl.player.Player;
 
 public class Sonido extends Thread {
@@ -11,11 +12,16 @@ public class Sonido extends Thread {
 	protected String file;
 	protected boolean loop;
 	protected boolean comenzar = false;
+	private boolean skip = true;
 	protected Player playMP3;
+	protected boolean contador = false;
+	protected long init;
+	protected int delay;
 	
 	public Sonido( String file , boolean loop) {
 		this.file = file;
 		this.loop = loop;
+		delay = 1000;
 		this.start();
 	}
 
@@ -25,14 +31,20 @@ public class Sonido extends Thread {
 			
 			
 			do{
+				
 				if(!comenzar){
 					InputStream fis = this.getClass().getResourceAsStream(file);
 					crearPlayer(fis);
 					comenzar = true;
 				}
+				
+				
 				if(playMP3.isComplete()){
 					comenzar = false;
 				}
+				
+				
+				
 			}
 			while (loop);
 		
