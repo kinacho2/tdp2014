@@ -40,29 +40,6 @@ public class Nivel_I extends Mapa{
 		reproductor.addSound(new Sonido(sonido,true));
 		
 	}
-
-	/*
-	public Enemigo nextEnemigo() {
-		Enemigo m;
-		if(indiceEnemigos < cantEnemies) {	
-			m = super.nextEnemigo();    
-		} else {
-			if(!estaJefe){
-				m = new JefeTanque();
-				mindEnemies.addBoss((Jefe)m);
-				estaJefe = true;
-				m.setJugador(jugador);
-				m.setMapa(this);
-				m = null;
-				
-			}
-			else{
-				m = null;
-			}
-		}
-		
-		return m;
-	}*/
 	
 	public int getY(){
 		if(delay % delayVel  == 0){
@@ -75,6 +52,16 @@ public class Nivel_I extends Mapa{
 		
 		delay = (delay + 1) % delayVel;
 		return y;
+	}
+
+	@Override
+	public Mapa nextMapa() {
+		Mapa map = new Nivel_II();
+		map.setMind(mind);
+		map.setMindEnemies(mindEnemies);
+		mind.setMapa(map);
+		mindEnemies.setMapa(map);
+		return map;
 	}
 	
 }

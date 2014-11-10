@@ -108,12 +108,14 @@ public abstract class Mapa{
 	
 	public void setMind(Mind mind) {
 		this.mind = mind;
+		mind.setMapa(this);
 		mind.addReproductor(reproductor);
 
 	}
 
 	public void setMindEnemies(MindEnemies mindEnemies) {
 		this.mindEnemies = mindEnemies;
+		mindEnemies.setMapa(this);
 	}
 	
 	public int sizeMisilesEnemigos() {
@@ -238,7 +240,7 @@ public abstract class Mapa{
 		return y;
 	}
 	
-	
+	public abstract Mapa nextMapa();
 	
 	
 }

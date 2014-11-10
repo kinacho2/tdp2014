@@ -19,7 +19,8 @@ public class PanelEnemies extends JPanel {
 	
 
 	public PanelEnemies(Mapa map ) {
-		mind = new MindEnemies(this,map);
+		mind = new MindEnemies(this);
+		map.setMindEnemies(mind);
 		mapa = map;
 		setLayout(null);
         setOpaque(false);
@@ -69,6 +70,11 @@ public class PanelEnemies extends JPanel {
 	 
 	public MindEnemies getMindEnemies() {
 		 return mind;
+	}
+
+	public void setMapa(Mapa map) {
+		mapa = map;
+		
 	}
 
 }
