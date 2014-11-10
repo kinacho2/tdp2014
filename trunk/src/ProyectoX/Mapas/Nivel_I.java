@@ -18,7 +18,9 @@ public class Nivel_I extends Mapa{
 	
 	protected static final URL fondo = (Mapa.class.getClassLoader().getResource("ProyectoX/img/Fondos/fondoNivel1.png"));
 	protected static final int initY = -8072 + 600;
-	protected static final String soundJefe = "/ProyectoX/sounds/music/Enclave.mp3";
+	protected static final String soundBoss = "/ProyectoX/sounds/music/level1boss.mp3";
+	protected static final String sound = "/ProyectoX/sounds/music/level1.mp3";
+
 	
 	public Nivel_I(){
 		super();
@@ -32,7 +34,11 @@ public class Nivel_I extends Mapa{
 		y = initY;
 		jefe = new JefeTanque(); 
 		jefe.addReproductor(reproductor);
-		reproductor.addSound(soundJefe);
+		sonido = sound;
+		sonidoJefe = soundBoss;
+		
+		reproductor.addSound(new Sonido(sonido,true));
+		
 	}
 
 	/*

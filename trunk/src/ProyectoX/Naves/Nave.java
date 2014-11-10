@@ -224,6 +224,7 @@ public abstract class Nave {
 	
 	public void addReproductor(Reproductor rep){
 		reproductor = rep;
+		
 	}
 }
 

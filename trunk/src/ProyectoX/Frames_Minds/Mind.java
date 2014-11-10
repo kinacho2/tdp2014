@@ -80,7 +80,6 @@ public class Mind implements ActionListener {
         if(jugador.getVida() <= 0){
         	jugador.setVisible();
         }
-        reproductor.verificarStop();
        	panel.repaint();  
     }
     

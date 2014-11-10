@@ -10,6 +10,7 @@ import ProyectoX.Disparos.MisilBomba;
 import ProyectoX.Explosiones.Explosion;
 import ProyectoX.Naves.Nave;
 import ProyectoX.Naves.Jugador.Defensa.Defensa;
+import ProyectoX.Sound.Reproductor;
 
 public class Jugador extends Nave {
 	protected ImageIcon icon;
@@ -106,6 +107,7 @@ public class Jugador extends Nave {
     
     public void disparar() {
     	arma.setPosicion(x + width/2, y + height/2);
+    	
     	Disparo[] array = arma.cloneNivel();
     	if(puedeDisparar()){
     		for(int i = 0;i<array.length;i++){
@@ -113,8 +115,9 @@ public class Jugador extends Nave {
     			mapa.addDisparoJugador(dis);
     			
     		}
-    		reproductor.addSound(array[0].getSound());
+    		
     	}
+    	arma.getSound();
     }
 
 	 public void move() {
@@ -176,6 +179,7 @@ public class Jugador extends Nave {
 	
 	public void setNewDisparo(Disparo d){
 		arma = d;
+		arma.setReproductor(reproductor);
 	}
 	
 	public Disparo getDisparo(){
@@ -200,5 +204,10 @@ public class Jugador extends Nave {
 	public void setBomba(){
 		if (bombas <= 3)
 			bombas ++;
+	}
+	
+	public void addReproductor(Reproductor rep){
+		super.addReproductor(rep);
+		arma.setReproductor(reproductor);
 	}
 }
