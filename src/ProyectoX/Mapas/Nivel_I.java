@@ -25,7 +25,7 @@ public class Nivel_I extends Mapa{
 	public Nivel_I(){
 		super();
 		rn = new Random(7);
-		cantEnemies = 10;
+		cantEnemies = 101;
 		power = new PUPBuilder(7);
 		enBuilder = new EnemiesBuilder(5);
 		ImageIcon ii = new ImageIcon(fondo);
@@ -37,6 +37,7 @@ public class Nivel_I extends Mapa{
 		sonido = sound;
 		sonidoJefe = soundBoss;
 		
+		reproductor.stop();
 		reproductor.addSound(new Sonido(sonido,true));
 		
 	}

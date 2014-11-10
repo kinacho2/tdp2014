@@ -267,7 +267,6 @@ public abstract class Mapa{
 			o.setX(rn.nextInt(700));
 			objetosEnPantalla.add(o.clone());
 		}
-		System.out.println(objetosEnPantalla.size());
 		return objetosEnPantalla;
 	}
 	
