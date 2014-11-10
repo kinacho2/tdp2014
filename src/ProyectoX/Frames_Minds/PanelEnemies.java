@@ -10,6 +10,7 @@ import javax.swing.JPanel;
 
 import ProyectoX.Disparos.Disparo;
 import ProyectoX.Mapas.Mapa;
+import ProyectoX.Mapas.Objeto;
 import ProyectoX.Naves.Enemigos.Enemigo;
 
 public class PanelEnemies extends JPanel {
@@ -32,6 +33,20 @@ public class PanelEnemies extends JPanel {
 	        //super.paint(g);
 
 	        Graphics2D g2d = (Graphics2D) g;
+	        
+	        g2d.drawImage(mapa.getImage(), mapa.getX(), mapa.getY(), this);
+
+	        ArrayList ms = mapa.getObjeto();
+	        
+	        for(int i = 0; i<ms.size(); i++){
+	        	Objeto o = (Objeto) ms.get(i);
+	        	if(o.getVisible()){
+	                g2d.drawImage(o.getImage(), o.getX(), o.getY(), this);
+	                o.move();
+	        	}
+	        	else
+	        		ms.remove(i);
+	        }
 	   /*
 	        g2d.drawImage(mapa.getImage(), mapa.getX(), mapa.getY(), this);
 	        

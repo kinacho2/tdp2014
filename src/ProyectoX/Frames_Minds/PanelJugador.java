@@ -19,6 +19,7 @@ import ProyectoX.PowerUps.PowerUp;
 import ProyectoX.Disparos.Disparo;
 import ProyectoX.Explosiones.Explosion;
 import ProyectoX.Mapas.Mapa;
+import ProyectoX.Mapas.Objeto;
 
 public class PanelJugador extends JPanel implements ActionListener{
 
@@ -80,8 +81,6 @@ public class PanelJugador extends JPanel implements ActionListener{
         // Pinta el jugador
         Graphics2D g2d = (Graphics2D) g;
         
-        g2d.drawImage(mapa.getImage(), mapa.getX(), mapa.getY(), this);
-
         
        
         

@@ -1,9 +1,15 @@
  package ProyectoX.Mapas;
 
 import java.awt.Image;
+import java.net.URL;
 import java.util.ArrayList;
 import java.util.Random;
 
+
+
+
+
+import javax.swing.ImageIcon;
 
 import ProyectoX.Disparos.Disparo;
 import ProyectoX.Explosiones.Explosion;
@@ -21,6 +27,8 @@ import ProyectoX.Sound.Sonido;
 
 public abstract class Mapa{
 	
+	protected static final String nube = "ProyectoX/img/Fondos/nubes/nubes";
+
 	
 	protected Reproductor reproductor;
 	protected ArrayList misilesEnemigos;
@@ -42,6 +50,8 @@ public abstract class Mapa{
 	protected Jefe jefe;
 	
 	protected Image imagenFondo;
+	protected ArrayList objetos;
+	protected ArrayList objetosEnPantalla;
 	private int x = -50;
 	protected int y;
 	protected int delay;
@@ -62,10 +72,18 @@ public abstract class Mapa{
 		
 		explosiones = new ArrayList();
 		
-		
 		powerUps = new ArrayList();
 		
 		reproductor = new Reproductor();
+		
+		objetos = new ArrayList();
+		objetosEnPantalla = new ArrayList();
+		rn = new Random();
+		for(int i = 1; i<= 5; i++){
+			ImageIcon ii = new ImageIcon((Mapa.class.getClassLoader().getResource(nube+i+".png")));
+			Objeto o = new Objeto(ii, rn.nextInt(700),-800,0,1,1);
+			objetos.add(o);
+		}
 		
 		
 	}
@@ -242,6 +260,16 @@ public abstract class Mapa{
 	
 	public abstract Mapa nextMapa();
 	
+	public ArrayList getObjeto(){
+		
+		if(rn.nextInt()%500 == 2){
+			Objeto o = (Objeto)objetos.get(rn.nextInt(5));
+			o.setX(rn.nextInt(700));
+			objetosEnPantalla.add(o.clone());
+		}
+		System.out.println(objetosEnPantalla.size());
+		return objetosEnPantalla;
+	}
 	
 }
 

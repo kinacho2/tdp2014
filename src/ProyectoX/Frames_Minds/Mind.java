@@ -42,7 +42,7 @@ public class Mind implements ActionListener {
     	
     	this.panel = panel;
         
-        //mapa = map;
+        
         crearJugador(select);
         stop = false;
         delayFinal = jugador.getExplosion().getDelay();
