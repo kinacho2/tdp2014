@@ -5,31 +5,26 @@ import java.util.ArrayList;
 
 public class Reproductor{
 
-	 private boolean stop = false;
+	private boolean stop = false;
 	
-	private ArrayList sonidos;
+	private Sonido sonido;
 
 	private int cant = 0;
 	
 	public Reproductor(){
-		sonidos = new ArrayList();
 	
 	}
 	
-	public void addSound(String sound){
-		sonidos.add(sound);
-    	Sonido sn = new Sonido(sound);
+	public void addSound(Sonido sound){
+		if(sound.getLoop())
+			sonido = sound;
 	}
 	
-	public void verificarStop(){
-		/*for(int i = 0; i< sonidos.size(); i++){
-			Sonido sn = (Sonido) sonidos.get(i);
-			if(sn.getStop()){
-				
-			}
+	public void stop(){
+		if(sonido!=null){
+			sonido.stopedd();
+			//sonido.destroy();
 		}
-		*/
 	}
 	
-
 }

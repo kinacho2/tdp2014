@@ -9,23 +9,53 @@ import javazoom.jl.player.Player;
 public class Sonido extends Thread {
 	
 	protected String file;
+	protected boolean loop;
+	protected boolean comenzar = false;
+	protected Player playMP3;
 	
-	public Sonido( String file ) {
+	public Sonido( String file , boolean loop) {
 		this.file = file;
+		this.loop = loop;
 		this.start();
 	}
 
 	@Override
 	public void run() {
+		
+			
+			
+			do{
+				if(!comenzar){
+					InputStream fis = this.getClass().getResourceAsStream(file);
+					crearPlayer(fis);
+					comenzar = true;
+				}
+				if(playMP3.isComplete()){
+					comenzar = false;
+				}
+			}
+			while (loop);
+		
+	}
+	
+	private void crearPlayer(InputStream fis ){
 		try{
-			InputStream fis = this.getClass().getResourceAsStream(file);
-			Player playMP3 = new Player(fis);
-		    playMP3.play();
+			playMP3 = new Player(fis);
+			playMP3.play();
 		}
 		catch(Exception ex)
 		{  
 			ex.printStackTrace();
 		}
+	}
+	
+	public boolean getLoop(){
+		return loop;
+	}
+	
+	public void stopedd(){
+		loop = false;
+		playMP3.close();
 	}
 
 }

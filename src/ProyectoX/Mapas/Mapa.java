@@ -1,32 +1,23 @@
  package ProyectoX.Mapas;
 
-import java.awt.Graphics;
-import java.awt.Graphics2D;
 import java.awt.Image;
-import java.awt.Toolkit;
-import java.awt.geom.AffineTransform;
 import java.util.ArrayList;
 import java.util.Random;
 
-import javax.swing.JOptionPane;
-import javax.swing.JPanel;
 
 import ProyectoX.Disparos.Disparo;
 import ProyectoX.Explosiones.Explosion;
 import ProyectoX.Frames_Minds.Mind;
 import ProyectoX.Frames_Minds.MindEnemies;
-import ProyectoX.Naves.Enemigos.Artillero;
-import ProyectoX.Naves.Enemigos.Basico;
-import ProyectoX.Naves.Enemigos.Bombardero;
 import ProyectoX.Naves.Enemigos.EnemiesBuilder;
 import ProyectoX.Naves.Enemigos.Enemigo;
-import ProyectoX.Naves.Enemigos.Kamikaze;
 import ProyectoX.Naves.Enemigos.Jefes.*;
 import ProyectoX.Naves.Jugador.Jugador;
 import ProyectoX.PowerUps.Bomba;
 import ProyectoX.PowerUps.PUPBuilder;
 import ProyectoX.PowerUps.PowerUp;
 import ProyectoX.Sound.Reproductor;
+import ProyectoX.Sound.Sonido;
 
 public abstract class Mapa{
 	
@@ -55,7 +46,8 @@ public abstract class Mapa{
 	protected int y;
 	protected int delay;
 	protected int delayVel = 7;
-	
+	protected String sonido;
+	protected String sonidoJefe;
 	
 	public Mapa() {
 		
@@ -74,6 +66,8 @@ public abstract class Mapa{
 		powerUps = new ArrayList();
 		
 		reproductor = new Reproductor();
+		
+		
 	}
 	
 	public int cantEnemies(){
@@ -165,6 +159,8 @@ public abstract class Mapa{
 	        indiceEnemigos++;  
 		} else {
 			if(!estaJefe){
+				reproductor.stop();
+				reproductor.addSound(new Sonido(sonidoJefe,true));
 				m = jefe;
 				mindEnemies.addBoss(jefe);
 				estaJefe = true;

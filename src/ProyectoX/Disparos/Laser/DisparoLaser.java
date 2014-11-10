@@ -8,6 +8,8 @@ import ProyectoX.Disparos.Disparo;
 import ProyectoX.Explosiones.Explosion;
 import ProyectoX.Naves.Nave;
 import ProyectoX.Naves.Jugador.Jugador;
+import ProyectoX.Sound.Reproductor;
+import ProyectoX.Sound.Sonido;
 
 public abstract class DisparoLaser extends Disparo {
 	
@@ -43,6 +45,7 @@ public abstract class DisparoLaser extends Disparo {
 		init = System.currentTimeMillis();
 		minDuracion = 200;
 		maxDuracion = 1500;
+		sonido =  "/ProyectoX/sounds/laserChargue.mp3";
 		
 	}
 
@@ -66,6 +69,8 @@ public abstract class DisparoLaser extends Disparo {
 				laser = second.getImage();
 				this.height = second.getIconHeight();
 				this.width = second.getIconWidth();
+				sonido =  "/ProyectoX/sounds/laser.mp3";
+				getSound();
 				move();
 				control = false;
 			}
@@ -111,4 +116,6 @@ public abstract class DisparoLaser extends Disparo {
 		minDuracion = min;
 		this.impacto = impacto;
 	}
+	
+	
 }

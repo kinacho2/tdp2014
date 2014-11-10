@@ -31,6 +31,7 @@ public class LaserLVII extends DisparoLaser{
 	public Disparo[] cloneNivel(){
 		Disparo[] toRet = new Disparo[1];
 		toRet[0] = new LaserLVII(jugador);
+		toRet[0].setReproductor(rep);
 		return toRet;
 	}
 	

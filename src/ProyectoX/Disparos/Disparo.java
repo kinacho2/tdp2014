@@ -7,6 +7,7 @@ import javax.swing.ImageIcon;
 
 import ProyectoX.Explosiones.Explosion;
 import ProyectoX.Naves.Nave;
+import ProyectoX.Sound.Reproductor;
 import ProyectoX.Sound.Sonido;
 
 
@@ -34,6 +35,7 @@ public class Disparo {
     private int minHeight = 600 + height;
 	private int maxWidth = 800 + width;
 	private int minWidth = -width*2;
+	protected Reproductor rep;
     
     
     public Disparo(int x, int y, double dx, double dy, int missileSpeed) {
@@ -55,7 +57,7 @@ public class Disparo {
         this.y = y - height/2;
         damage = 10;
         velocidad = missileSpeed;
-        sonido = "/ProyectoX/sounds/mul.mp3";
+        sonido = "/ProyectoX/sounds/fire.mp3";
         
     }
 
@@ -121,6 +123,7 @@ public class Disparo {
 		// establece la cantidad de disapros por nivel
 		Disparo[] d = new Disparo[1];
 		d[0] = new Disparo(x, y, dx, dy, velocidad);
+		d[0].setReproductor(rep);
 		return d ;
 	}
 	
@@ -138,10 +141,12 @@ public class Disparo {
 	}
 
 
-	public String getSound() {
-		//return new Sonido(sonido,false);
-		return sonido;
+	public void getSound() {
+		rep.addSound(new Sonido(sonido,false)) ;
 	}
 	
+	public void setReproductor(Reproductor rep){
+		this.rep = rep;
+	}
 }
 
