@@ -25,19 +25,19 @@ public class Nivel_I extends Mapa{
 	public Nivel_I(){
 		super();
 		rn = new Random(7);
-		cantEnemies = 101;
+		cantEnemies = 4;
 		power = new PUPBuilder(7);
 		enBuilder = new EnemiesBuilder(5);
 		ImageIcon ii = new ImageIcon(fondo);
 		imagenFondo = ii.getImage();
-		
+		x = -50;
 		y = initY;
 		jefe = new JefeTanque(); 
 		jefe.addReproductor(reproductor);
 		sonido = sound;
 		sonidoJefe = soundBoss;
 		
-		reproductor.stop();
+		
 		reproductor.addSound(new Sonido(sonido,true));
 		
 	}
@@ -57,6 +57,7 @@ public class Nivel_I extends Mapa{
 
 	@Override
 	public Mapa nextMapa() {
+		reproductor.stop();
 		Mapa map = new Nivel_II();
 		map.setMind(mind);
 		map.setMindEnemies(mindEnemies);

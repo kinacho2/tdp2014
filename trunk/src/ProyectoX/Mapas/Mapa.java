@@ -52,7 +52,7 @@ public abstract class Mapa{
 	protected Image imagenFondo;
 	protected ArrayList objetos;
 	protected ArrayList objetosEnPantalla;
-	private int x = -50;
+	protected int x;
 	protected int y;
 	protected int delay;
 	protected int delayVel = 7;
@@ -225,6 +225,7 @@ public abstract class Mapa{
 	public void stop() {
 		mind.stop();
 		mindEnemies.setStop();
+		reproductor.stop();
 		
 	}
 	

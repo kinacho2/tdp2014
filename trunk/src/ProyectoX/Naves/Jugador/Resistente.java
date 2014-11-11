@@ -19,8 +19,7 @@ public class Resistente extends Jugador {
 	
 	public Resistente(){
 		super(defaultVida,defaultVel,new ImageIcon(url),new ImageIcon(urlDer),new ImageIcon(urlIzq));
-		x = 400;
-		y = 450;
+		
 		arma = new MultiplicadorLVI(x, y , 0, 1);
 		power = "mul";
 	}
@@ -28,6 +27,13 @@ public class Resistente extends Jugador {
 	public static String getEstadisticas(){
 		ImageIcon icon = new ImageIcon(url);
 		return ("<html>VIDA: "+defaultVida+"<br>VELOCIDAD: "+defaultVel+"<br>POTENCIA INICIAL: "+2+"<br>ALTO: "+icon.getIconHeight()+"<br>ANCHO: "+icon.getIconWidth()+"</html>");
+	}
+	
+	public void reset(){
+		super.reset();
+		vida = defaultVida;
+		setNewDisparo( new MultiplicadorLVI(x, y , 0, 1));
+		power = "mul";
 	}
 	
 }

@@ -1,27 +1,13 @@
 package ProyectoX.Naves.Enemigos.Jefes;
 
-import java.net.URISyntaxException;
 import java.net.URL;
 
 import javax.swing.ImageIcon;
-import javax.swing.JOptionPane;
 
 import ProyectoX.Naves.Nave;
 import ProyectoX.Naves.Enemigos.Torretas.FabricaTorretasDobles;
 import ProyectoX.Naves.Enemigos.Torretas.FabricaTorretasSimples;
 import ProyectoX.Naves.Enemigos.Torretas.Torreta;
-import ProyectoX.Naves.Jugador.Jugador;
-
-import java.net.URL;
-import java.util.ArrayList;
-import java.io.BufferedReader;
-import java.io.DataInputStream;
-import java.io.File;
-import java.io.FileInputStream;
-import java.io.FileNotFoundException;
-import java.io.FileReader;
-import java.io.FilterInputStream;
-import java.io.IOException;
 
 public class JefeTanque extends Jefe{
 
@@ -35,7 +21,6 @@ public class JefeTanque extends Jefe{
 	private static final int defaultVel = 2;
 	
 	private boolean primero = true;
-	private boolean segundo = true;
 	
 	
 	public JefeTanque() {

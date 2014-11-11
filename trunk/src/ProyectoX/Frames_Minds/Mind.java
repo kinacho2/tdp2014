@@ -71,8 +71,12 @@ public class Mind implements ActionListener {
         	} else {
         		contDelay += delay;
         		if(contDelay >= delayFinal){
-        			mapa.stop();
-        			JOptionPane dialog = new JOptionPane();
+        			stop = false;
+        			jugador.reset();
+        			contDelay = 0;
+        			
+        		//	mapa.stop();
+        		//	JOptionPane dialog = new JOptionPane();
         		//	dialog.showMessageDialog(null, puntaje.getText() + "\nVuelva al menu de seleccion para comenzar nuevamente", "FIN DEL JUEGO", JOptionPane.INFORMATION_MESSAGE);
         		}
         	}
