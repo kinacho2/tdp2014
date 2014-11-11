@@ -50,6 +50,7 @@ public abstract class Jugador extends Nave {
             if(puedeDisparar() && getVisible()){
             	disparar();
             }
+            setDis();
         }
        
         if (key == KeyEvent.VK_A) {
@@ -103,6 +104,10 @@ public abstract class Jugador extends Nave {
             dy = 0;
         }
         
+        if (key == KeyEvent.VK_SPACE) {
+            setDisCero();
+        }
+        
         if(defensa!=null){
         	defensa.keyReleased(e);
         }
@@ -113,12 +118,12 @@ public abstract class Jugador extends Nave {
     	arma.setPosicion(x + width/2, y + height/2);
     	
     	Disparo[] array = arma.cloneNivel();
-    	if(puedeDisparar()){
+    	//if(puedeDisparar()){
     		for(int i = 0;i<array.length;i++){
     			Disparo dis = array[i];
     			mapa.addDisparoJugador(dis);
     			
-    		}
+    		//}
     		
     	}
     	arma.getSound();
@@ -195,6 +200,7 @@ public abstract class Jugador extends Nave {
 			defensa.remplazo();
 		}
 		defensa = def;
+		defensa.addReproductor(reproductor);
 	}
 	
 	public Defensa getDefensa(){

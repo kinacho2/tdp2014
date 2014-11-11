@@ -27,9 +27,11 @@ public class NaveAyudante extends Defensa {
 		width = defaultWidth;
 		setJugador(jugador);
 		setMapa(jugador.getMapa());
+		bombas = 0;
 		setNewDisparo(new MultiplicadorLVI(x, y, dx, dy));
 		setIndex(mapa.getJugador().size());
 		mapa.setNewJugador(this);
+		setFrecuenciaDeDisparo(0,7);
 	}
 	
 	public void setVisible(){
@@ -43,4 +45,14 @@ public class NaveAyudante extends Defensa {
 		x = jugador.getX() - 50;
 		y = jugador.getY() + 20;
 	}
+	
+	public void disparar(){
+		if(puedeDisparar() && getVisible() && jugador.getVisible()){
+			super.disparar();
+		}
+		//setDis();
+	}
+	
+	
+	
 }

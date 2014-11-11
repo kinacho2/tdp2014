@@ -60,6 +60,7 @@ public class Kamikaze extends Enemigo {
 	public void disparar() {
 		if(puedeDisparar() && y < 350) {
 			Disparo d = apuntarYDisparar();
+			addSonido();
 			mapa.addDisparoEnemigo(d);
 		}
 	}

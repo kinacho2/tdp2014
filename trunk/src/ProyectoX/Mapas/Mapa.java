@@ -179,7 +179,7 @@ public abstract class Mapa{
 	        indiceEnemigos++;  
 		} else {
 			if(!estaJefe){
-				reproductor.stop();
+				reproductor.stop(10000);
 				reproductor.addSound(new Sonido(sonidoJefe,true));
 				m = jefe;
 				mindEnemies.addBoss(jefe);
@@ -225,7 +225,7 @@ public abstract class Mapa{
 	public void stop() {
 		mind.stop();
 		mindEnemies.setStop();
-		reproductor.stop();
+		reproductor.stop(0);
 		
 	}
 	

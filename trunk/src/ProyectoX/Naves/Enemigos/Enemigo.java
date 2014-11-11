@@ -9,9 +9,11 @@ import ProyectoX.Explosiones.Explosion;
 import ProyectoX.Naves.Nave;
 import ProyectoX.Naves.Jugador.Jugador;
 import ProyectoX.PowerUps.PowerUp;
+import ProyectoX.Sound.Sonido;
 
 public abstract class Enemigo extends Nave {
 	protected static final URL explode = (Nave.class.getClassLoader().getResource("ProyectoX/img/Explosiones/nave.gif"));
+	protected static final String sonido = "/ProyectoX/sounds/disparo.mp3";
 	
 	
 	protected PowerUp power; 
@@ -96,5 +98,9 @@ public abstract class Enemigo extends Nave {
 	public int bomba(){
 		setVisible();
 		return getPuntaje();
+	}
+	
+	protected void addSonido(){
+		reproductor.addSound(new Sonido(sonido,false));
 	}
 }

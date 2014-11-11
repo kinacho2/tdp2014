@@ -66,8 +66,10 @@ public class Basico extends Enemigo {
 	}
 
 	public void disparar() {
-	    if(puedeDisparar())
+	    if(puedeDisparar()){
 	    	mapa.addDisparoEnemigo(new Disparo(x + width/2 , y + height, 0, 1, velocidadMisil));
+	    	addSonido();
+	    }
 	}
 	
 	

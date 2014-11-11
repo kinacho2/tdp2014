@@ -25,7 +25,7 @@ public class Nivel_I extends Mapa{
 	public Nivel_I(){
 		super();
 		rn = new Random(7);
-		cantEnemies = 4;
+		cantEnemies = 101;
 		power = new PUPBuilder(7);
 		enBuilder = new EnemiesBuilder(5);
 		ImageIcon ii = new ImageIcon(fondo);
@@ -57,7 +57,7 @@ public class Nivel_I extends Mapa{
 
 	@Override
 	public Mapa nextMapa() {
-		reproductor.stop();
+		reproductor.stop(0);
 		Mapa map = new Nivel_II();
 		map.setMind(mind);
 		map.setMindEnemies(mindEnemies);

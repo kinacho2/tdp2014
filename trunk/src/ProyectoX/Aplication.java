@@ -4,6 +4,8 @@ import java.awt.BorderLayout;
 import java.awt.Image;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
+import java.awt.event.KeyEvent;
+import java.awt.event.KeyListener;
 
 import javax.swing.BorderFactory;
 import javax.swing.ImageIcon;
@@ -22,9 +24,12 @@ import ProyectoX.Naves.Nave;
 import ProyectoX.Naves.Jugador.Normal;
 import ProyectoX.Naves.Jugador.Resistente;
 import ProyectoX.Naves.Jugador.Veloz;
+import ProyectoX.Sound.Reproductor;
+import ProyectoX.Sound.Sonido;
 
 import java.awt.event.WindowAdapter;
 import java.awt.event.WindowEvent;
+import java.util.Random;
 
 
 /**
@@ -59,11 +64,15 @@ public class Aplication extends javax.swing.JFrame {
 	private Mapa map;
 	private JPanel bar;
 	private JButton volverMenu;
-	
-	
+	private static final String sound = "/ProyectoX/sounds/music/menu_";
+	private Reproductor rep;
+	private Random rn;
+	int round = 0;
 
 	 public Aplication() {
-		 
+		rep = new Reproductor();
+		rn = new Random();
+		rep.addSound(new Sonido(sound+rn.nextInt(4)+".mp3",true));
 		initGUI();
     }
 
@@ -75,7 +84,7 @@ public class Aplication extends javax.swing.JFrame {
     //inicializa el panel del juego
     
     private void initGame(int select){
-    	
+    	rep.stop(100);
     	game = new JPanel();
     	
     	map = new Nivel_I();
@@ -84,8 +93,6 @@ public class Aplication extends javax.swing.JFrame {
 		
 		
 		panel = new PanelJugador(map,select);
-		
-		
 		
 		
 		game.add(panel);
@@ -119,12 +126,6 @@ public class Aplication extends javax.swing.JFrame {
         PanelEnemies panelEnemies = new PanelEnemies(map);
         panel.add(panelEnemies);
         panelEnemies.setBounds(0, 0, 800, 600);
-		
-        // Establece las Mentes al mapa
-        
-        map.setMind(panel.getMind());
-        map.setMindEnemies(panelEnemies.getMindEnemies());
-		
         
         // Inicia el hilo de los Enemigos
       
@@ -185,10 +186,12 @@ public class Aplication extends javax.swing.JFrame {
 	//inicializa el segundi panel para seleccionar tipo de nave
 	
 	private void initMain(){
+		
 		main = new JPanel();
 		getContentPane().add(main);
 		main.setLayout(null);
 		main.setBackground(new java.awt.Color(0,0,0));
+		
 		{
 			veloz = new JButton();
 			main.add(veloz);
@@ -225,8 +228,7 @@ public class Aplication extends javax.swing.JFrame {
 			ImageIcon icon = new ImageIcon(Nave.class.getClassLoader().getResource("ProyectoX/img/Jugador/veloz.gif"));
 			labelVeloz.setIcon(icon);
 			labelVeloz.setBounds(175 + icon.getIconWidth() / 2, 88, icon.getIconWidth(), 64);
-			labelVeloz.setBackground(new java.awt.Color(155,155,155));
-			labelVeloz.setOpaque(true);
+			labelVeloz.setOpaque(false);
 			
 			velozStatics = new JLabel();
 			main.add(velozStatics);
@@ -234,8 +236,7 @@ public class Aplication extends javax.swing.JFrame {
 			velozStatics.setForeground(new java.awt.Color(0,255,0));
 			velozStatics.setText(Veloz.getEstadisticas());
 			velozStatics.setBounds(80, 88, 164, 64);
-			velozStatics.setBackground(new java.awt.Color(155,155,155));
-			velozStatics.setOpaque(true);
+			velozStatics.setOpaque(false);
 			
 		}
 		{
@@ -244,8 +245,7 @@ public class Aplication extends javax.swing.JFrame {
 			ImageIcon icon = new ImageIcon(Nave.class.getClassLoader().getResource("ProyectoX/img/Jugador/normal.gif"));
 			labelNormal.setIcon(icon);
 			labelNormal.setBounds(175 + icon.getIconWidth() / 2, 188, icon.getIconWidth(), 64);
-			labelNormal.setOpaque(true);
-			labelNormal.setBackground(new java.awt.Color(155,155,155));
+			labelNormal.setOpaque(false);
 			
 			normalStatics = new JLabel();
 			main.add(normalStatics);
@@ -253,8 +253,7 @@ public class Aplication extends javax.swing.JFrame {
 			normalStatics.setForeground(new java.awt.Color(0,255,0));
 			normalStatics.setText(Normal.getEstadisticas());
 			normalStatics.setBounds(80, 188, 164, 64);
-			normalStatics.setBackground(new java.awt.Color(155,155,155));
-			normalStatics.setOpaque(true);
+			normalStatics.setOpaque(false);
 			
 		}
 		{
@@ -263,8 +262,7 @@ public class Aplication extends javax.swing.JFrame {
 			ImageIcon icon = new ImageIcon(Nave.class.getClassLoader().getResource("ProyectoX/img/Jugador/resistente.gif"));
 			labelResistente.setIcon(icon);
 			labelResistente.setBounds(175, 288, icon.getIconWidth(), 64);
-			labelResistente.setBackground(new java.awt.Color(155,155,155));
-			labelResistente.setOpaque(true);
+			labelResistente.setOpaque(false);
 			
 			resistenteStatics = new JLabel();
 			main.add(resistenteStatics);
@@ -272,8 +270,7 @@ public class Aplication extends javax.swing.JFrame {
 			resistenteStatics.setForeground(new java.awt.Color(0,255,0));
 			resistenteStatics.setText(Resistente.getEstadisticas());
 			resistenteStatics.setBounds(80, 288, 164, 64);
-			resistenteStatics.setBackground(new java.awt.Color(155,155,155));
-			resistenteStatics.setOpaque(true);
+			resistenteStatics.setOpaque(false);
 		}
 		{
 			atras = new JButton();
@@ -287,8 +284,10 @@ public class Aplication extends javax.swing.JFrame {
 			atras.setForeground(new java.awt.Color(0,255,0));
 			atras.addActionListener(new OyenteAtras());
 		}
+		round = 0;
+		veloz.addKeyListener(new OyenteBotonesMain());
 	
-}
+	}
 	
 	private class OyenteQuit implements ActionListener{
 
@@ -384,11 +383,65 @@ public class Aplication extends javax.swing.JFrame {
     			setVisible(false);
     			initMain();
     			setVisible(true);
+        		rep.addSound(new Sonido(sound+rn.nextInt(4)+".mp3",true));
+
             }
             
+    		
 		}
 	}
 	
+	private class OyenteBotonesMain implements KeyListener{
+
+		@Override
+		public void keyPressed(KeyEvent k) {
+			int key = k.getKeyCode();
+			if (key == KeyEvent.VK_DOWN){
+				round = (round + 1) % 3;
+			}
+			if (key == KeyEvent.VK_UP){
+				round = (round - 1) % 3;
+			}
+			JButton aux = null;
+			if(round == 0){
+				veloz.setSelected(true);
+				aux = veloz;
+			}
+			if(round == 1){
+				normal.setSelected(true);
+				aux = normal;
+			}
+			if(round == 2){
+				resistente.setSelected(true);
+				aux = resistente;
+			}
+			
+			veloz.setBackground(new java.awt.Color(0,0,0));
+			normal.setBackground(new java.awt.Color(0,0,0));
+			resistente.setBackground(new java.awt.Color(0,0,0));
+			aux.setBackground(new java.awt.Color(0,50,200));
+			
+			
+			
+			if (key == KeyEvent.VK_ENTER || key == KeyEvent.VK_SPACE){
+				aux.doClick();
+			}
+			
+			
+		}
+
+		@Override
+		public void keyReleased(KeyEvent k) {
+			// TODO Auto-generated method stub
+			
+		}
+
+		@Override
+		public void keyTyped(KeyEvent k) {
+			// TODO Auto-generated method stub
+			
+		}
+	}
 	
 	private void cerrarJuego() {
 		this.dispose();

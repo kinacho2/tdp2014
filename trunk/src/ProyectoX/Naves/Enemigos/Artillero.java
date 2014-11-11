@@ -31,10 +31,10 @@ public class Artillero extends Enemigo {
 		return up;
 	}
 
-	@Override
 	public void disparar() {
 		if(puedeDisparar() && y<500){
 			Disparo d = apuntarYDisparar();
+			addSonido();
 			//d.setPosicion(d.getX(), d.getY() - defaultHeight/2);
 			mapa.addDisparoEnemigo(d);
 		}
