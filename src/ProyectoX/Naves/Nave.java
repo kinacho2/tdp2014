@@ -93,7 +93,7 @@ public abstract class Nave {
      */
     
     public void setDis() {
-    	dis= (dis+1) % longDis;
+    	dis = (dis+1) % longDis;
     }
     
     /*
@@ -101,11 +101,12 @@ public abstract class Nave {
      */
     
     public void setDisCero() {
-    	dis=0;
+    	dis = 0;
     }
     
     protected boolean puedeDisparar() {
     	return dis % longDis == 0;
+    	
     }
     
     public abstract void disparar();

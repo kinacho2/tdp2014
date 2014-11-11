@@ -12,42 +12,45 @@ public class Sonido extends Thread {
 	protected String file;
 	protected boolean loop;
 	protected boolean comenzar = false;
-	private boolean skip = true;
+	private boolean skip = false;
 	protected Player playMP3;
-	protected boolean contador = false;
 	protected long init;
 	protected int delay;
+	protected boolean stop = false;
 	
 	public Sonido( String file , boolean loop) {
 		this.file = file;
 		this.loop = loop;
-		delay = 1000;
+		this.start();
+	}
+	
+	public Sonido( Player mp, int delay) {
+		this.delay = delay;
+		skip = true;
+		playMP3 = mp;
 		this.start();
 	}
 
-	@Override
 	public void run() {
-		
-			
-			
-			do{
-				
-				if(!comenzar){
+			if(!skip)
+				do{
 					InputStream fis = this.getClass().getResourceAsStream(file);
 					crearPlayer(fis);
+				}
+				while (loop);
+			else{
+				
+				if(!comenzar){
+					init = System.currentTimeMillis();
 					comenzar = true;
 				}
-				
-				
-				if(playMP3.isComplete()){
-					comenzar = false;
+				while(!stop){
+					if(System.currentTimeMillis() - init >= delay){
+						playMP3.close();
+						stop = true;
+					}
 				}
-				
-				
-				
 			}
-			while (loop);
-		
 	}
 	
 	private void crearPlayer(InputStream fis ){
@@ -65,9 +68,9 @@ public class Sonido extends Thread {
 		return loop;
 	}
 	
-	public void stopedd(){
+	public void stopedd(int delay){
+		new Sonido(playMP3,delay);
 		loop = false;
-		playMP3.close();
 	}
 
 }

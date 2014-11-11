@@ -11,17 +11,16 @@ import ProyectoX.Naves.Enemigos.Torretas.Torreta;
 
 public class JefeAvion extends Jefe{
 
-	protected static final URL url = (Nave.class.getClassLoader().getResource("ProyectoX/img/Enemigo/JefeAvion/JefeAvion.gif"));
+	protected static final URL url = (Nave.class.getClassLoader().getResource("ProyectoX/img/Enemigo/JefeAvion/JefeAvion.png"));
 	protected static final String boundsDouble = "/ProyectoX/img/Enemigo/JefeAvion/posicionesTorretasDobles.txt";
 	protected static final String boundsSimple = "/ProyectoX/img/Enemigo/JefeAvion/posicionesTorretasSimples.txt";
 	
 	
-	private static final int defaultWidth = 127;
-	private static final int defaultHeight = 63;
+	private static final int defaultWidth = 1275;
+	private static final int defaultHeight = 636;
 	private static final int defaultVel = 2;
 	
 	private boolean primero = true;
-	private boolean segundo = true;
 	
 	
 	public JefeAvion() {

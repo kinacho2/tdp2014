@@ -137,6 +137,7 @@ public class Bombardero extends Enemigo {
 		
 		if(puedeDisparar() && y < 350) {
 			Disparo d = apuntarYDisparar();
+			addSonido();
 			d.setPosicion(d.getX(), d.getY() - defaultHeight/2);
 			mapa.addDisparoEnemigo(d);
 		}

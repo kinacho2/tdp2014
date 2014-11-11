@@ -63,8 +63,6 @@ public class PanelJugador extends JPanel implements ActionListener{
 		contadorEnemigos.setBounds(800-500, 0, 250, 50);
 		bar.add(contadorEnemigos);
 		
-		//quit.setBackground(new java.awt.Color(0,0,0));
-		//labelVida.setPreferredSize(new java.awt.Dimension(14, 7));
 		labelVida.setFont(new java.awt.Font("Segoe UI",0,20));
 		labelVida.setForeground(new java.awt.Color(255,0,0));
 		puntaje.setFont(new java.awt.Font("Segoe UI",0,20));
@@ -78,12 +76,8 @@ public class PanelJugador extends JPanel implements ActionListener{
         super.paint(g);
         
 
-        // Pinta el jugador
+        
         Graphics2D g2d = (Graphics2D) g;
-        
-        
-       
-        
         
         
         //repinta los powerUps
@@ -142,11 +136,10 @@ public class PanelJugador extends JPanel implements ActionListener{
             	ms.remove(i);
             }
         }
-        
+        // Pinta el jugador
         if (jugador.getVisible()){
         	AffineTransform tx = AffineTransform.getRotateInstance(0, jugador.getX() , jugador.getY());
             g2d.setTransform(tx);
-            
         	g2d.drawImage(jugador.getImage(), jugador.getX(), jugador.getY(), this);
         }
         Jugador aux = jugador.getDefensa();
@@ -177,21 +170,16 @@ public class PanelJugador extends JPanel implements ActionListener{
 
         public void keyReleased(KeyEvent e) {
         	jugador.keyReleased(e);
-        	if(e.getKeyCode() == KeyEvent.VK_SPACE) {
-        		jugador.setDisCero();
-            }
+        	
         }
 
         public void keyPressed(KeyEvent e) {
         	jugador.keyPressed(e);
-        	if(e.getKeyCode() == KeyEvent.VK_SPACE) {
-        		jugador.setDis();
-            }
         	
         }
 
 		public void keyTyped(KeyEvent arg0) {
-			// Es necesaria poner esta funci�n porque implementa a una interfaz TAdapter, no realiza nada
+			// Es necesaria poner esta funcion porque implementa a una interfaz TAdapter, no realiza nada
 		}
     }
 
@@ -203,10 +191,6 @@ public class PanelJugador extends JPanel implements ActionListener{
 	public void actionPerformed(ActionEvent event) {
 		
 		mind.actionPerformed(event);
-	}
-
-	public Mind getMind() {
-		return mind;
 	}
 
 	public void setMapa(Mapa map) {

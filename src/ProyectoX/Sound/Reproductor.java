@@ -20,10 +20,9 @@ public class Reproductor{
 			sonido = sound;
 	}
 	
-	public void stop(){
+	public void stop(int delay){
 		if(sonido!=null){
-			sonido.stopedd();
-			//sonido.destroy();
+			sonido.stopedd(delay);
 		}
 	}
 	
