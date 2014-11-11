@@ -55,13 +55,7 @@ public abstract class DisparoLaser extends Disparo {
 	
 	public synchronized boolean colision(Nave nave){
 		boolean A, B, C, D, I, F, toRet = false;
-		A = x < nave.getX() && x + width > nave.getX() + nave.getWidth();
-		B = x + width < nave.getX() + nave.getWidth() && x > nave.getX();
-		C = y + height > nave.getY() + nave.getHeight();
-		D = x > nave.getX() &&  x < nave.getX() + nave.getWidth();
-		I =  x + width < nave.getX() &&  x + width > nave.getX();
 		
-		F = nave.getY() + nave.getHeight()/2 > 0;
 		
 		long aux = System.currentTimeMillis();
 		if(aux  - init > minDuracion){
@@ -74,6 +68,20 @@ public abstract class DisparoLaser extends Disparo {
 				move();
 				control = false;
 			}
+			//laser cubre al enemigo
+			A = x < nave.getX() && x + width > nave.getX() + nave.getWidth();
+			//laser pasa por el centro del enemigo
+			B = x + width < nave.getX() + nave.getWidth() && x > nave.getX();
+			//enemigo adelante del jugador (al alcance del laser)
+			C = y + height > nave.getY() + nave.getHeight();
+			//laser golpea el extremo derecho del enemigo
+			D = x > nave.getX() &&  x < nave.getX() + nave.getWidth();
+			//laser golpea el extremo derecho del enemigo
+			I =  x + width > nave.getX() &&  x + width < nave.getX() + nave.getWidth();
+			
+			//enemigo en pantalla
+			F = nave.getY() + nave.getHeight()/2 > 0;
+			
 			toRet = (A || B || D || I) && C && F;
 			
 		}

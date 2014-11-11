@@ -4,6 +4,7 @@ import java.net.URL;
 
 import javax.swing.ImageIcon;
 
+import ProyectoX.Disparos.Disparo;
 import ProyectoX.Naves.Nave;
 
 
@@ -17,8 +18,7 @@ public class Normal extends Jugador {
 
 	public Normal(){
 		super(defaultVida,defaultVel,new ImageIcon(url),new ImageIcon(urlDer),new ImageIcon(urlIzq));
-		x = 400;
-		y = 450;
+		
 		
 	}
 	
@@ -26,6 +26,13 @@ public class Normal extends Jugador {
 		ImageIcon icon = new ImageIcon(url);
 		
 		return ("<html>VIDA: "+defaultVida+"<br>VELOCIDAD: "+defaultVel+"<br>POTENCIA INICIAL: "+1+"<br>ALTO: "+icon.getIconHeight()+"<br>ANCHO: "+icon.getIconWidth()+"</html>");
+	}
+
+
+	public void reset() {
+		super.reset();
+		vida = defaultVida;
+		setNewDisparo(new Disparo(x + width/2 , y, 0, 1, velocidadMisil));
 	}
 	
 }

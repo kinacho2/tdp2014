@@ -12,7 +12,7 @@ import ProyectoX.Naves.Nave;
 import ProyectoX.Naves.Jugador.Defensa.Defensa;
 import ProyectoX.Sound.Reproductor;
 
-public class Jugador extends Nave {
+public abstract class Jugador extends Nave {
 	protected ImageIcon icon;
 	protected ImageIcon iconDer;
 	protected ImageIcon iconIzq;
@@ -24,6 +24,10 @@ public class Jugador extends Nave {
 	
 	public Jugador(int vida, int vel, ImageIcon icon, ImageIcon iconDer, ImageIcon iconIzq){
 		super(vida, vel, icon, new ImageIcon(explode), icon.getIconWidth(), icon.getIconHeight());
+		
+		x = 400;
+		y = 450;
+		
 		this.icon = icon;
 		this.iconDer = iconDer;
 		this.iconIzq = iconIzq;
@@ -210,4 +214,14 @@ public class Jugador extends Nave {
 		super.addReproductor(rep);
 		arma.setReproductor(reproductor);
 	}
+	
+	public void reset(){
+		x = 400;
+		y = 450;
+		dropDefensa();
+		power = "";
+		bombas = 1;
+		visible = true;
+	}
+	
 }

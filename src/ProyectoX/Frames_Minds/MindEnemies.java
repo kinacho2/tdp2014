@@ -16,6 +16,11 @@ public class MindEnemies extends Thread  {
 	private Mapa mapa;
 	private Random ran;
 	private boolean stop;
+	private boolean jefe = false;
+	private boolean muerteJefe = false; 
+	private long init;
+	private int delay = 8000;
+	
 	
 	public MindEnemies(PanelEnemies p) {
 		enemies = new ArrayList();
@@ -59,6 +64,21 @@ public class MindEnemies extends Thread  {
 		        }
 		        mapa.setEnemies(enemies);
 				panel.repaint();
+				
+				if(jefe){
+					if(enemies.size() == 0 && !muerteJefe){
+						muerteJefe = true;
+						init = System.currentTimeMillis();
+					}
+					if(muerteJefe){
+						if(System.currentTimeMillis() - init > delay){
+							mapa.nextMapa();
+							jefe = false;
+							muerteJefe = false;
+						}
+					}
+				}
+				
 			}
 		
 		} catch (InterruptedException e) {
@@ -78,6 +98,7 @@ public class MindEnemies extends Thread  {
 	public void addBoss(Jefe boss){
 		enemies.add(boss);
 		ArrayList en = boss.getTorretas();
+		jefe = true;
 		
 		for(int i=0; i<en.size(); i++){
 			enemies.add(en.get(i));

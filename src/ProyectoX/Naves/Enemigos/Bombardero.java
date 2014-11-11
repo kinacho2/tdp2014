@@ -7,18 +7,22 @@ import javax.swing.ImageIcon;
 
 import ProyectoX.Disparos.Disparo;
 import ProyectoX.Naves.Nave;
+import ProyectoX.Sound.Reproductor;
+import ProyectoX.Sound.Sonido;
 
 public class Bombardero extends Enemigo {
 	
 	
 	protected static final URL url = (Nave.class.getClassLoader().getResource("ProyectoX/img/Enemigo/bombardero.png"));
-
+	private static final String alarm = "/ProyectoX/sounds/alarm.mp3";
+	
+	
 	private static final int defaultWidth = 192;
 	private static final int defaultHeight = 168;
 	private static final int defaultVel = 3;
 	private static final int defaultVida = 200;
 	
-	
+	private boolean noSound = true;
 	
 	//altura de inicio del segundo patron
 	private int defaultY = 250;
@@ -52,7 +56,7 @@ public class Bombardero extends Enemigo {
 			posInicialX = 45;
 			
 		} else {
-			posInicialX = maxWidth - 45 - velocidad*20;
+			posInicialX = maxWidth - 45 - velocidad*20 - height*2;
 			
 		}
 		x = posInicialX;
@@ -61,6 +65,11 @@ public class Bombardero extends Enemigo {
 	}
 	
 	public void move() {
+		
+		if (y >= 550 && noSound){
+			reproductor.addSound(new Sonido(alarm,false));
+			noSound = false;
+		}
 		
 		if( y > defaultY ) {
 			//se acerca al centro desde abajo
@@ -142,5 +151,7 @@ public class Bombardero extends Enemigo {
 	public boolean isEspecial() {
 		return true;
 	}
+	
+	
 	
 }

@@ -21,7 +21,7 @@ public class LaserLVII extends DisparoLaser{
 		
 		damage = 5;
 		
-		setDelays(250, 1499, 5);
+		setDelays(500, 1499, 5);
 	}
 	
 	public Disparo nextLevel(){

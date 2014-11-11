@@ -84,7 +84,7 @@ public class Aplication extends javax.swing.JFrame {
 		
 		
 		panel = new PanelJugador(map,select);
-		//mind = new Mind(map,select);
+		
 		
 		
 		
