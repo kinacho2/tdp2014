@@ -15,9 +15,7 @@ public abstract class Defensa extends Jugador{
 		index = i;
 	}
 
-	public void remplazo() {
-		mapa.removeJugador(this);
-	}
+	public abstract void remplazo(String s);
 
 	public void setVida(int vd){
 		

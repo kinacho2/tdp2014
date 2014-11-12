@@ -4,8 +4,9 @@ import java.io.File;
 import java.io.FileInputStream;
 import java.io.InputStream;
 
-import javazoom.jl.decoder.JavaLayerException;
-import javazoom.jl.player.Player;
+import ProyectoX.lib.javazoom.jl.decoder.JavaLayerException;
+import ProyectoX.lib.javazoom.jl.player.Player;
+
 
 public class Sonido extends Thread {
 	

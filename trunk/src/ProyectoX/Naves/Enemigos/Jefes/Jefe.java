@@ -19,6 +19,7 @@ import ProyectoX.Naves.Enemigos.Enemigo;
 import ProyectoX.Naves.Enemigos.Torretas.FabricaTorretas;
 import ProyectoX.Naves.Enemigos.Torretas.Torreta;
 import ProyectoX.Naves.Jugador.Jugador;
+import ProyectoX.Sound.Reproductor;
 
 
 
@@ -36,7 +37,6 @@ public abstract class Jefe extends Enemigo{
 
 	protected void cargarArchivoTorretas(String bounds, FabricaTorretas fabrica, int cantTorretas){
 		try {
-			//File file = new File(bounds.toURI());
 			
 			InputStream arch = this.getClass().getResourceAsStream(bounds);
             DataInputStream lector = new DataInputStream(arch);
@@ -120,5 +120,13 @@ public abstract class Jefe extends Enemigo{
 		}
 		//modificar a gusto
 		return 0;
+	}
+	
+	public void addReproductor(Reproductor rep){
+		reproductor = rep;
+		for(int i =0; i<torretas.size(); i++){
+			Torreta torr = (Torreta) torretas.get(i);
+			torr.addReproductor(rep);
+		}
 	}
 }

@@ -104,7 +104,7 @@ public class Disparo {
 		
 		// funcion de colicion que verifica si alguno de los 4 puntos del borde del objeto disparo intersectan con area del objeto pasado por parametro
 		fColision = (A && B || E && F) && (C && D || G && H) ||  !A && !F && ( !H && D || G && H) ||  !C &&  !H && (B &&  !F ||  !A && E);
-		return  nave.getVisible() && fColision;
+		return  isVisible() && nave.getVisible() && fColision;
 	}
     
     // Establece que el disparo no est� visible en la pantalla

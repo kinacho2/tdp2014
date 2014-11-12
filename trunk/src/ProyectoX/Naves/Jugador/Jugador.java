@@ -197,7 +197,7 @@ public abstract class Jugador extends Nave {
 	
 	public void setDefensa(Defensa def){
 		if(defensa != null){
-			defensa.remplazo();
+			defensa.remplazo(def.getPower());
 		}
 		defensa = def;
 		defensa.addReproductor(reproductor);

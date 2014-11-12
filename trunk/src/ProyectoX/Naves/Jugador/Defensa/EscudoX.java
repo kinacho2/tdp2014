@@ -29,7 +29,6 @@ public class EscudoX extends Defensa {
 		height = defaultHeight;
 		width = defaultWidth;
 		
-		
 		setJugador(jugador);
 		
 		bombas = 0;
@@ -40,12 +39,13 @@ public class EscudoX extends Defensa {
 		
 		for(int i = 0; i < enemigos.size(); i++){
 			Enemigo m = (Enemigo) enemigos.get(i);
-			m.setJugador(jugador);
+			m.setJugador(this);
 		}
-		setIndex(mapa.getJugador().size());
-		mapa.setNewJugador(this);
+		
+		power = "x";
+		
 		mapa.setJugador(this);
-		mapa.removeJugador(jugador);
+		
 	}
 	
 	public void setVisible(){
@@ -57,9 +57,8 @@ public class EscudoX extends Defensa {
 			m.setJugador(jugador);
 		}
 		
-		resetJugador();
+		mapa.setJugador(jugador);
 		
-		mapa.removeJugador(this);
 	}
 
 	public void move(){
@@ -71,15 +70,12 @@ public class EscudoX extends Defensa {
 		
 	}
 	
-	public void remplazo() {
-		super.remplazo();
-		resetJugador();
+	public void remplazo(String s) {
+		if(!s.equals(power))
+			mapa.setJugador(jugador);
 	}
 	
-	private void resetJugador(){
-		mapa.setJugador(jugador);
-		mapa.setNewJugador(jugador);
-	}
+	
 	
 	public void setVida(int vd){
 		super.setVida(vd);	

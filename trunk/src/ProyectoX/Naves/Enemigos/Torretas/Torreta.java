@@ -8,6 +8,7 @@ import javax.swing.ImageIcon;
 import ProyectoX.Disparos.Disparo;
 import ProyectoX.Naves.Nave;
 import ProyectoX.Naves.Enemigos.Enemigo;
+import ProyectoX.Sound.Sonido;
 
 public abstract class Torreta extends Enemigo {
 	
@@ -27,6 +28,7 @@ public abstract class Torreta extends Enemigo {
 			Disparo d = apuntarYDisparar();
 			d.setPosicion((int)(d.getX() + (width/2)*Math.sin(rotacion)), (int)(d.getY() -height/2 - (height/2)*Math.cos(rotacion)));
 			mapa.addDisparoEnemigo(d);
+			reproductor.addSound(new Sonido(sonido,false));
 		}
 	}
 
