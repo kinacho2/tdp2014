@@ -1,4 +1,4 @@
-package ProyectoX.Frames_Minds;
+package ProyectoX.Paneles;
 
 import java.awt.Graphics;
 import java.awt.Graphics2D;
@@ -9,6 +9,7 @@ import java.util.ArrayList;
 import javax.swing.JPanel;
 
 import ProyectoX.Disparos.Disparo;
+import ProyectoX.Frames_Minds.MindEnemies;
 import ProyectoX.Mapas.Mapa;
 import ProyectoX.Mapas.Objeto;
 import ProyectoX.Naves.Enemigos.Enemigo;

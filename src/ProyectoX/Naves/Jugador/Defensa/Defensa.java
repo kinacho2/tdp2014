@@ -20,8 +20,9 @@ public abstract class Defensa extends Jugador{
 	}
 
 	public void setVida(int vd){
+		
 		vida-=vd;	
-		if(vida <= -1) 
+		if(vida <= -0) 
 			setVisible();
 		
 	}

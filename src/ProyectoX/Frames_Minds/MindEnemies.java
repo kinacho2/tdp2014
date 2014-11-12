@@ -7,6 +7,7 @@ import ProyectoX.Mapas.Mapa;
 import ProyectoX.Naves.Enemigos.Enemigo;
 import ProyectoX.Naves.Enemigos.Jefes.Jefe;
 import ProyectoX.Naves.Jugador.Jugador;
+import ProyectoX.Paneles.PanelEnemies;
 
 public class MindEnemies extends Thread  {
 

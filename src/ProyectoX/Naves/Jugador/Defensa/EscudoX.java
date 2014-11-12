@@ -14,10 +14,12 @@ import ProyectoX.Naves.Jugador.Jugador;
 public class EscudoX extends Defensa {
 
 	protected static final URL url = (Jugador.class.getClassLoader().getResource("ProyectoX/img/PUP/Escudo/Escudo.gif"));
+	protected static final URL urlWarning = (Jugador.class.getClassLoader().getResource("ProyectoX/img/PUP/Escudo/Escudo_Warning.gif"));
+
 	protected static final int defaultVida = 200;
 	protected static final int defaultWidth = 64;
 	protected static final int defaultHeight = 64;
-	
+	private boolean warning = false;
 	
 	public EscudoX(Jugador jugador){
 		super(defaultVida, jugador.getVelocidad(),  new ImageIcon(url), new ImageIcon(url), new ImageIcon(url));
@@ -79,4 +81,20 @@ public class EscudoX extends Defensa {
 		mapa.setNewJugador(jugador);
 	}
 	
+	public void setVida(int vd){
+		super.setVida(vd);	
+		
+		if(vida <= 50) 
+			setWarning();
+		
+	}
+	
+	private void setWarning(){
+		if(!warning){
+			icon = new ImageIcon(urlWarning);
+			iconDer = new ImageIcon(urlWarning);
+			iconIzq = new ImageIcon(urlWarning);
+			warning = true;
+		}
+	}
 }
