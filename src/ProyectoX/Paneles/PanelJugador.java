@@ -18,9 +18,9 @@ import ProyectoX.Naves.Jugador.Jugador;
 import ProyectoX.PowerUps.PowerUp;
 import ProyectoX.Disparos.Disparo;
 import ProyectoX.Explosiones.Explosion;
-import ProyectoX.Frames_Minds.Mind;
 import ProyectoX.Mapas.Mapa;
 import ProyectoX.Mapas.Objeto;
+import ProyectoX.Minds.Mind;
 
 public class PanelJugador extends JPanel implements ActionListener{
 

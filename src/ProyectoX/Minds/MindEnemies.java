@@ -1,4 +1,4 @@
-package ProyectoX.Frames_Minds;
+package ProyectoX.Minds;
 
 import java.util.ArrayList;
 import java.util.Random;

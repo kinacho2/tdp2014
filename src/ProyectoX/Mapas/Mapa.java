@@ -13,8 +13,8 @@ import javax.swing.ImageIcon;
 
 import ProyectoX.Disparos.Disparo;
 import ProyectoX.Explosiones.Explosion;
-import ProyectoX.Frames_Minds.Mind;
-import ProyectoX.Frames_Minds.MindEnemies;
+import ProyectoX.Minds.Mind;
+import ProyectoX.Minds.MindEnemies;
 import ProyectoX.Naves.Enemigos.EnemiesBuilder;
 import ProyectoX.Naves.Enemigos.Enemigo;
 import ProyectoX.Naves.Enemigos.Jefes.*;

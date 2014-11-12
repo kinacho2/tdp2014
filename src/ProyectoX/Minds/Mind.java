@@ -1,4 +1,4 @@
-package ProyectoX.Frames_Minds;
+package ProyectoX.Minds;
 
 import java.awt.Graphics;
 import java.awt.Graphics2D;
