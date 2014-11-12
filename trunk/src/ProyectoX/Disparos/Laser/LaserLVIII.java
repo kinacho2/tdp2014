@@ -9,7 +9,7 @@ import ProyectoX.Naves.Jugador.Jugador;
 
 public class LaserLVIII extends DisparoLaser{
 
-	private static final URL url = Disparo.class.getClassLoader().getResource("ProyectoX/img/Disparos/Laser/laser2.gif");
+	private static final URL url = Disparo.class.getClassLoader().getResource("ProyectoX/img/Disparos/Laser/laser3.gif");
 	private static final URL urlCarga = Disparo.class.getClassLoader().getResource("ProyectoX/img/Disparos/Laser/laser1_carga.gif");
 	
 	

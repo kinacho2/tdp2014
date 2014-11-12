@@ -1,6 +1,7 @@
 package ProyectoX;
 
 import java.awt.BorderLayout;
+import java.awt.Component;
 import java.awt.Image;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
@@ -10,14 +11,15 @@ import java.awt.event.KeyListener;
 import javax.swing.BorderFactory;
 import javax.swing.ImageIcon;
 import javax.swing.JButton;
+import javax.swing.JComponent;
 import javax.swing.JFrame;
 import javax.swing.JLabel;
 import javax.swing.JOptionPane;
 import javax.swing.JPanel;
 
 import ProyectoX.Frames_Minds.Mind;
-import ProyectoX.Frames_Minds.PanelEnemies;
-import ProyectoX.Frames_Minds.PanelJugador;
+import ProyectoX.Paneles.PanelEnemies;
+import ProyectoX.Paneles.PanelJugador;
 import ProyectoX.Mapas.Mapa;
 import ProyectoX.Mapas.Nivel_I;
 import ProyectoX.Naves.Nave;
@@ -448,5 +450,10 @@ public class Aplication extends javax.swing.JFrame {
 		System.exit(0);
 		
 	}
-	
+	/*
+	private void setFocusable(){
+		JPanel j = new JPanel();
+		j.
+	}
+	*/
 }

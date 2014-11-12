@@ -22,6 +22,7 @@ import ProyectoX.Naves.Jugador.Jugador;
 import ProyectoX.Naves.Jugador.Normal;
 import ProyectoX.Naves.Jugador.Resistente;
 import ProyectoX.Naves.Jugador.Veloz;
+import ProyectoX.Paneles.PanelJugador;
 import ProyectoX.PowerUps.PowerUp;
 import ProyectoX.Sound.Reproductor;
 
@@ -153,16 +154,20 @@ public class Mind implements ActionListener {
             misil.move();
             for(int i = 0; i < jugadores.size(); i++){
            		Jugador aux = (Jugador) jugadores.get(i);
-           		if (misil.colision(aux)) {
-           			if (misil.isVisible()) {
-           				aux.setVida(misil.getDamage());
-           				misil.setVisible();
-           				mapa.addExposion(misil.newExplosion(jugador.getY()));
-	            	}
-           			else{
-           				ms.remove(misil);
-           			}
-	            }
+           		if(aux.getVisible())
+	           		if (misil.colision(aux)) {
+	           			if (misil.isVisible()) {
+	           				aux.setVida(misil.getDamage());
+	           				misil.setVisible();
+	           				mapa.addExposion(misil.newExplosion(jugador.getY()));
+		            	}
+	           			else{
+	           				ms.remove(misil);
+	           			}
+		            }
+           		if(aux != jugador && !aux.getVisible()){
+           			jugadores.remove(i);
+           		}
 	        }
        	}
        	

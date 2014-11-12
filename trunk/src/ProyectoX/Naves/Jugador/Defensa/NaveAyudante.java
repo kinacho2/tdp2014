@@ -50,7 +50,6 @@ public class NaveAyudante extends Defensa {
 		if(puedeDisparar() && getVisible() && jugador.getVisible()){
 			super.disparar();
 		}
-		//setDis();
 	}
 	
 	

@@ -172,7 +172,7 @@ public abstract class Nave {
 		
 		// funcion de colicion que verifica si uno o mas puntos del borde del objeto nave intersectan con el borde del objeto que ejecuta la funcion
 		fColision = (A && B || E && F) && (C && D || G && H) ||  !A && !F && ( !H && D || G && H) ||  !C &&  !H && (B &&  !F ||  !A && E);
-		return  nave.getVisible() && fColision;
+		return  getVisible() && nave.getVisible() && fColision;
 				
 				
 	}
