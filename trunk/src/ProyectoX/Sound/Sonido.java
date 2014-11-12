@@ -1,10 +1,6 @@
 package ProyectoX.Sound;
 
-import java.io.File;
-import java.io.FileInputStream;
 import java.io.InputStream;
-
-import ProyectoX.lib.javazoom.jl.decoder.JavaLayerException;
 import ProyectoX.lib.javazoom.jl.player.Player;
 
 
