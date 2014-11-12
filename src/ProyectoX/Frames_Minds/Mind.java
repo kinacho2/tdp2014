@@ -145,30 +145,29 @@ public class Mind implements ActionListener {
     	// arreglo de disparos de los enemigos que se encuentran en el mapa
     	ArrayList ms = mapa.getMisilesEnemigos();
     	
-       	ArrayList jugadores = mapa.getJugador();
+       	Jugador aux ;
+       	
+       	
         
         // verifica si algun misil del enemigo colisiono con el jugador o alguna de sus defensas
        
         for (int j = 0; j < ms.size(); j++ ) {
             Disparo misil = (Disparo) ms.get(j);
             misil.move();
-            for(int i = 0; i < jugadores.size(); i++){
-           		Jugador aux = (Jugador) jugadores.get(i);
-           		if(aux.getVisible())
-	           		if (misil.colision(aux)) {
-	           			if (misil.isVisible()) {
-	           				aux.setVida(misil.getDamage());
-	           				misil.setVisible();
-	           				mapa.addExposion(misil.newExplosion(jugador.getY()));
-		            	}
-	           			else{
-	           				ms.remove(misil);
-	           			}
-		            }
-           		if(aux != jugador && !aux.getVisible()){
-           			jugadores.remove(i);
-           		}
-	        }
+            aux = mapa.getJugador();
+       		if(aux.getVisible())
+           		if (misil.colision(aux)) {
+           			if (misil.isVisible()) {
+           				aux.setVida(misil.getDamage());
+           				misil.setVisible();
+           				mapa.addExposion(misil.newExplosion(aux.getY()));
+	            	}
+           			else{
+           				ms.remove(misil);
+           			}
+	            }
+           		
+	        
        	}
        	
     	
@@ -222,7 +221,6 @@ public class Mind implements ActionListener {
 		mapa = map;
 		panel.setMapa(map);
 		map.setJugador(jugador);
-		map.setNewJugador(jugador);
 		jugador.setMapa(map);
 	}
 

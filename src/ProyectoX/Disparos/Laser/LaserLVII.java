@@ -14,7 +14,7 @@ public class LaserLVII extends DisparoLaser{
 	
 
 	public LaserLVII(Jugador jugador) {
-		super(26, 800, new ImageIcon(urlCarga), new ImageIcon(url), jugador);
+		super(22, 800, new ImageIcon(urlCarga), new ImageIcon(url), jugador);
 		
 		x = jugador.getX() + jugador.getWidth()/2 - width/2;
 		y = jugador.getY() - height;
