@@ -9,9 +9,9 @@ import java.util.ArrayList;
 import javax.swing.JPanel;
 
 import ProyectoX.Disparos.Disparo;
-import ProyectoX.Frames_Minds.MindEnemies;
 import ProyectoX.Mapas.Mapa;
 import ProyectoX.Mapas.Objeto;
+import ProyectoX.Minds.MindEnemies;
 import ProyectoX.Naves.Enemigos.Enemigo;
 
 public class PanelEnemies extends JPanel {
