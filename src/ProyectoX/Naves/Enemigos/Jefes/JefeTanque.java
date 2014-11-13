@@ -40,46 +40,4 @@ public class JefeTanque extends Jefe{
 		
 	}
 
-	
-
-	public void move() {
-		if(torretas.size() == 0){
-			jugador.setPuntaje(puntaje);
-			mapa.addPower(400, 200, true);
-			setVisible();
-			width = defaultWidth;
-			height = defaultHeight;
-			
-		}
-		
-		if(y < 100 && primero){
-			y +=velocidad;
-			for(int i=0; i<torretas.size(); i++){
-				Torreta t =(Torreta)torretas.get(i);
-				t.setPosition(0, +velocidad);
-				if(!t.getVisible()){
-					torretas.remove(i);
-				}
-			}
-		}
-		else{
-			primero = false;
-			if(y + defaultHeight > 100){
-				y-=velocidad;
-				for(int i=0; i<torretas.size(); i++){
-					Torreta t =(Torreta)torretas.get(i);
-					t.setPosition(0, -velocidad);
-					if(!t.getVisible()){
-						torretas.remove(i);
-					}
-				}
-			}
-			else
-				primero = true;
-		}
-		
-	}
-
-	
-	
 }

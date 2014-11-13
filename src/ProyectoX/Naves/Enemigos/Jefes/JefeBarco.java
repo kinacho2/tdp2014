@@ -12,15 +12,13 @@ import ProyectoX.Naves.Enemigos.Torretas.Torreta;
 public class JefeBarco extends Jefe{
 
 	protected static final URL url = (Nave.class.getClassLoader().getResource("ProyectoX/img/Enemigo/JefeBarco/JefeBarco.png"));
-	protected static final String boundsDouble = "/ProyectoX/img/Enemigo/JefeTanque/posicionesTorretasDobles.txt";
-	protected static final String boundsSimple = "/ProyectoX/img/Enemigo/JefeTanque/posicionesTorretasSimples.txt";
+	protected static final String boundsDouble = "/ProyectoX/img/Enemigo/JefeBarco/posicionesTorretasDobles.txt";
+	protected static final String boundsSimple = "/ProyectoX/img/Enemigo/JefeBarco/posicionesTorretasSimples.txt";
 	
 	
 	private static final int defaultWidth = 385;
 	private static final int defaultHeight = 2494;
-	private static final int defaultVel = 2;
-	
-	private boolean primero = true;
+	private static final int defaultVel = 10;
 	
 	
 	public JefeBarco() {
@@ -30,56 +28,14 @@ public class JefeBarco extends Jefe{
 		y = - defaultHeight;
 		
 		int cantTorretasDobles = 9;
-		int cantTorretasSimples = 5;
+		int cantTorretasSimples = 6;
 		
 		cargarArchivoTorretas(boundsDouble, new FabricaTorretasDobles(), cantTorretasDobles);
 		cargarArchivoTorretas(boundsSimple, new FabricaTorretasSimples(), cantTorretasSimples);
-		
-		puntaje = 500;
+		puntaje = 600;
 			
 		
 	}
-
-	
-
-	public void move() {
-		if(torretas.size() == 0){
-			jugador.setPuntaje(puntaje);
-			mapa.addPower(400, 200, true);
-			setVisible();
-			width = defaultWidth;
-			height = defaultHeight;
-			
-		}
-		
-		if(y < 100 && primero){
-			y +=velocidad;
-			for(int i=0; i<torretas.size(); i++){
-				Torreta t =(Torreta)torretas.get(i);
-				t.setPosition(0, +velocidad);
-				if(!t.getVisible()){
-					torretas.remove(i);
-				}
-			}
-		}
-		else{
-			primero = false;
-			if(y + defaultHeight > 100){
-				y-=velocidad;
-				for(int i=0; i<torretas.size(); i++){
-					Torreta t =(Torreta)torretas.get(i);
-					t.setPosition(0, -velocidad);
-					if(!t.getVisible()){
-						torretas.remove(i);
-					}
-				}
-			}
-			else
-				primero = true;
-		}
-		
-	}
-
 	
 	
 }

@@ -50,7 +50,6 @@ public class PanelInit extends JPanel{
 	
 	private class OyenteQuit implements ActionListener{
 
-		@Override
 		public void actionPerformed(ActionEvent arg0) {
 			
             int verd;
@@ -72,7 +71,7 @@ public class PanelInit extends JPanel{
 		public void actionPerformed(ActionEvent arg0) {
 			
             setVisible(false);
-            //api.initMain();
+            api.initMain();
             
 		}
 	}

@@ -8,6 +8,7 @@ import javax.swing.ImageIcon;
 import ProyectoX.Disparos.Disparo;
 import ProyectoX.Disparos.MisilBomba;
 import ProyectoX.Explosiones.Explosion;
+import ProyectoX.Mapas.Mapa;
 import ProyectoX.Naves.Nave;
 import ProyectoX.Naves.Jugador.Defensa.Defensa;
 import ProyectoX.Sound.Reproductor;
@@ -228,6 +229,13 @@ public abstract class Jugador extends Nave {
 		power = "";
 		bombas = 1;
 		visible = true;
+	}
+	
+	public void setMapa(Mapa map){
+		super.setMapa(map);
+		if(defensa!=null){
+			defensa.setMapa(map);
+		}
 	}
 	
 }
