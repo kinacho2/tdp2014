@@ -171,16 +171,20 @@ public abstract class Mapa{
 	        indiceEnemigos++;  
 		} else {
 			if(!estaJefe){
-				reproductor.stop(1000);
-				reproductor.addSound(new Sonido(sonidoJefe,true));
-				m = jefe;
-				mindEnemies.addBoss(jefe);
-				estaJefe = true;
-				m.setJugador(jugador);
-				m.setMapa(this);
-				m.addReproductor(reproductor);
-				m = null;
-				
+				if(enemiesInWindow.size() == 0){
+					reproductor.stop(1000);
+					reproductor.addSound(new Sonido(sonidoJefe,true));
+					m = jefe;
+					mindEnemies.addBoss(jefe);
+					estaJefe = true;
+					m.setJugador(jugador);
+					m.setMapa(this);
+					m.addReproductor(reproductor);
+					m = null;
+				}
+				else{
+					m = null;
+				}
 			}
 			else{
 				m = null;

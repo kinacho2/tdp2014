@@ -79,6 +79,13 @@ public class JefeAvion extends Jefe{
 		
 	}
 
+
+	@Override
+	public int getMovimiento() {
+		// TODO Auto-generated method stub
+		return 0;
+	}
+
 	
 	
 	

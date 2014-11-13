@@ -1,36 +1,28 @@
 package ProyectoX;
 
 import java.awt.BorderLayout;
-import java.awt.Component;
-import java.awt.Image;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
-import java.awt.event.KeyEvent;
-import java.awt.event.KeyListener;
-
 import javax.swing.BorderFactory;
-import javax.swing.ImageIcon;
 import javax.swing.JButton;
-import javax.swing.JComponent;
 import javax.swing.JFrame;
 import javax.swing.JLabel;
 import javax.swing.JOptionPane;
 import javax.swing.JPanel;
 
 import ProyectoX.Paneles.PanelEnemies;
+import ProyectoX.Paneles.PanelInit;
 import ProyectoX.Paneles.PanelJugador;
+import ProyectoX.Paneles.PanelSelect;
 import ProyectoX.Mapas.Mapa;
 import ProyectoX.Mapas.Nivel_I;
-import ProyectoX.Minds.Mind;
-import ProyectoX.Naves.Nave;
-import ProyectoX.Naves.Jugador.Normal;
-import ProyectoX.Naves.Jugador.Resistente;
-import ProyectoX.Naves.Jugador.Veloz;
+import ProyectoX.Mapas.Nivel_II;
 import ProyectoX.Sound.Reproductor;
 import ProyectoX.Sound.Sonido;
 
 import java.awt.event.WindowAdapter;
 import java.awt.event.WindowEvent;
+import java.net.URL;
 import java.util.Random;
 
 
@@ -49,19 +41,8 @@ import java.util.Random;
 public class Aplication extends javax.swing.JFrame {
 	
 	private JPanel principal;
-	private JButton resistente;
-	private JButton atras;
-	private JLabel labelResistente;
-	private JLabel labelNormal;
-	private JLabel labelVeloz;
-	private JLabel resistenteStatics, normalStatics, velozStatics;
-	private JButton normal;
-	private JButton veloz;
-	private JButton quit;
-	private JButton newGame;
 	private JPanel main;
 	private JPanel game;
-	private Mind mind;
 	private PanelJugador panel;
 	private Mapa map;
 	private JPanel bar;
@@ -85,17 +66,18 @@ public class Aplication extends javax.swing.JFrame {
 	    
     //inicializa el panel del juego
     
-    private void initGame(int select){
+    public void initGame(int select){
     	rep.stop(100);
+    	setVisible(false);
+    	
     	game = new JPanel();
     	
-    	map = new Nivel_I();
+    	map = new Nivel_II();
 		getContentPane().add(game, BorderLayout.CENTER);
 		game.setBackground(new java.awt.Color(0,0,0));
 		
-		
+		//panel del jugador
 		panel = new PanelJugador(map,select);
-		
 		
 		game.add(panel);
 		panel.setLayout(null);
@@ -123,24 +105,21 @@ public class Aplication extends javax.swing.JFrame {
 		bar.add(volverMenu);
 		
 		
-        // Mente de los enemigos
+        // panel de los enemigos
 		
         PanelEnemies panelEnemies = new PanelEnemies(map);
         panel.add(panelEnemies);
         panelEnemies.setBounds(0, 0, 800, 600);
         
         // Inicia el hilo de los Enemigos
-      
+        setVisible(true);
         panelEnemies.getMindEnemies().start();
         
 	}
 	    
-  //inicializa el primer panel para iniciar o salir del juego
-    
+  
     private void initGUI() {
-		
     	initPrimerPanel();
-		
 		setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
         setSize(800, 600);
         setLocationRelativeTo(null);
@@ -152,225 +131,29 @@ public class Aplication extends javax.swing.JFrame {
 				cerrarJuego();
 			}
 		});
-		
+        
+	}
+    
+    //inicializa el primer panel para iniciar o salir del juego
+    
+	public void initPrimerPanel(){
+		setVisible(false);
+		principal = new PanelInit(this);
+		add(principal);
+		setVisible(true);
 	}
 	
-	private void initPrimerPanel(){
-		principal = new JPanel();
-		getContentPane().add(principal);
-		principal.setLayout(null);
-		principal.setBackground(new java.awt.Color(0,0,0));
-		{
-			newGame = new JButton();
-			principal.add(newGame);
-			newGame.setText("JUEGO NUEVO");
-			newGame.setBounds(400 - 288/2, 90, 288, 50);
-			newGame.setForeground(new java.awt.Color(0,255,0));
-			newGame.setBackground(new java.awt.Color(0,0,0));
-			newGame.setBorder(BorderFactory.createCompoundBorder(null,null));
-			newGame.setFont(new java.awt.Font("Segoe UI",0,20));
-			newGame.addActionListener(new OyenteNuevoJuego());
-		}
-		{
-			quit = new JButton();
-			principal.add(quit);
-			quit.setText("SALIR");
-			quit.setBounds(400 - 288/2, 177, 288, 50);
-			quit.setBackground(new java.awt.Color(0,0,0));
-			quit.setForeground(new java.awt.Color(0,255,0));
-			quit.setPreferredSize(new java.awt.Dimension(14, 7));
-			quit.setFont(new java.awt.Font("Segoe UI",0,20));
-			quit.setBorder(BorderFactory.createCompoundBorder(null, null));
-			quit.addActionListener(new OyenteQuit());
-		}
-	}
+	//inicializa el segundo panel para seleccionar tipo de nave
 	
-	//inicializa el segundi panel para seleccionar tipo de nave
-	
-	private void initMain(){
-		
-		main = new JPanel();
-		getContentPane().add(main);
-		main.setLayout(null);
-		main.setBackground(new java.awt.Color(0,0,0));
-		
-		{
-			veloz = new JButton();
-			main.add(veloz);
-			veloz.setText("Veloz");
-			veloz.setBounds(400 - 288/2, 88, 288, 64);
-			veloz.setBackground(new java.awt.Color(0,0,0));
-			veloz.setFont(new java.awt.Font("Segoe UI",0,20));
-			veloz.setForeground(new java.awt.Color(0,255,0));
-			veloz.addActionListener(new OyenteVeloz());
-		}
-		{
-			normal = new JButton();
-			main.add(normal);
-			normal.setText("Normal");
-			normal.setBounds(256, 188, 288, 64);
-			normal.setFont(new java.awt.Font("Segoe UI",0,20));
-			normal.setForeground(new java.awt.Color(0,255,0));
-			normal.setBackground(new java.awt.Color(0,0,0));
-			normal.addActionListener(new OyenteNormal());
-		}
-		{
-			resistente = new JButton();
-			main.add(resistente);
-			resistente.setText("Resistente");
-			resistente.setBounds(400 - 288/2, 288, 288, 64);
-			resistente.setBackground(new java.awt.Color(0,0,0));
-			resistente.setForeground(new java.awt.Color(0,255,0));
-			resistente.setFont(new java.awt.Font("Segoe UI",0,20));
-			resistente.addActionListener(new OyenteResistente());
-		}
-		{
-			labelVeloz = new JLabel();
-			main.add(labelVeloz);
-			ImageIcon icon = new ImageIcon(Nave.class.getClassLoader().getResource("ProyectoX/img/Jugador/veloz.gif"));
-			labelVeloz.setIcon(icon);
-			labelVeloz.setBounds(175 + icon.getIconWidth() / 2, 88, icon.getIconWidth(), 64);
-			labelVeloz.setOpaque(false);
-			
-			velozStatics = new JLabel();
-			main.add(velozStatics);
-			velozStatics.setFont(new java.awt.Font("Segoe UI",0,9));
-			velozStatics.setForeground(new java.awt.Color(0,255,0));
-			velozStatics.setText(Veloz.getEstadisticas());
-			velozStatics.setBounds(80, 88, 164, 64);
-			velozStatics.setOpaque(false);
-			
-		}
-		{
-			labelNormal = new JLabel();
-			main.add(labelNormal);
-			ImageIcon icon = new ImageIcon(Nave.class.getClassLoader().getResource("ProyectoX/img/Jugador/normal.gif"));
-			labelNormal.setIcon(icon);
-			labelNormal.setBounds(175 + icon.getIconWidth() / 2, 188, icon.getIconWidth(), 64);
-			labelNormal.setOpaque(false);
-			
-			normalStatics = new JLabel();
-			main.add(normalStatics);
-			normalStatics.setFont(new java.awt.Font("Segoe UI",0,9));
-			normalStatics.setForeground(new java.awt.Color(0,255,0));
-			normalStatics.setText(Normal.getEstadisticas());
-			normalStatics.setBounds(80, 188, 164, 64);
-			normalStatics.setOpaque(false);
-			
-		}
-		{
-			labelResistente = new JLabel();
-			main.add(labelResistente);
-			ImageIcon icon = new ImageIcon(Nave.class.getClassLoader().getResource("ProyectoX/img/Jugador/resistente.gif"));
-			labelResistente.setIcon(icon);
-			labelResistente.setBounds(175, 288, icon.getIconWidth(), 64);
-			labelResistente.setOpaque(false);
-			
-			resistenteStatics = new JLabel();
-			main.add(resistenteStatics);
-			resistenteStatics.setFont(new java.awt.Font("Segoe UI",0,9));
-			resistenteStatics.setForeground(new java.awt.Color(0,255,0));
-			resistenteStatics.setText(Resistente.getEstadisticas());
-			resistenteStatics.setBounds(80, 288, 164, 64);
-			resistenteStatics.setOpaque(false);
-		}
-		{
-			atras = new JButton();
-			main.add(atras);
-			ImageIcon ii = new ImageIcon(Nave.class.getClassLoader().getResource("ProyectoX/img/Menu_barras/back.png"));
-			atras.setIcon(new ImageIcon(ii.getImage().getScaledInstance(61,44,Image.SCALE_DEFAULT)));
-			
-			atras.setBounds(70, 461, 61, 44);
-			atras.setBackground(new java.awt.Color(0,0,0));
-			atras.setFont(new java.awt.Font("Segoe UI",0,20));
-			atras.setForeground(new java.awt.Color(0,255,0));
-			atras.addActionListener(new OyenteAtras());
-		}
-		round = 0;
-		veloz.addKeyListener(new OyenteBotonesMain());
-	
-	}
-	
-	private class OyenteQuit implements ActionListener{
-
-		@Override
-		public void actionPerformed(ActionEvent arg0) {
-			
-            int verd;
-            
-            JOptionPane dialogo = new JOptionPane();
-            
-            verd = dialogo.showConfirmDialog(null, "Desea salir del juego?", "Atencion",JOptionPane.YES_NO_OPTION);
-			
-            if(verd == 0){
-            	System.exit(0);
-            }
-            
-		}
-	}
-		
-	private class OyenteNuevoJuego implements ActionListener{
-
-		@Override
-		public void actionPerformed(ActionEvent arg0) {
-			
-            principal.setVisible(false);
-            setVisible(false);
-            initMain();
-            setVisible(true);
-            
-		}
-	}
-	
-	private class OyenteVeloz implements ActionListener{
-
-		@Override
-		public void actionPerformed(ActionEvent arg0) {
-			main.setVisible(false);
-			setVisible(false);
-			initGame(1);
-			setVisible(true);
-			
-		}
-	}
-	
-	private class OyenteNormal implements ActionListener{
-
-		@Override
-		public void actionPerformed(ActionEvent arg0) {
-			main.setVisible(false);
-			setVisible(false);
-			initGame(2);
-			setVisible(true);
-            
-		}
-	}
-	
-	private class OyenteResistente implements ActionListener{
-
-		@Override
-		public void actionPerformed(ActionEvent arg0) {
-			main.setVisible(false);
-			setVisible(false);
-			initGame(3);
-			setVisible(true);
-           
-		}
-	}
-	
-	private class OyenteAtras implements ActionListener{
-
-		@Override
-		public void actionPerformed(ActionEvent arg0) {
-			
-			main.setVisible(false);
-			initPrimerPanel();
-		}
+	public void initMain(){
+		setVisible(false);
+		main = new PanelSelect(this);
+		add(main);
+		setVisible(true);
 	}
 	
 	private class OyenteVolver implements ActionListener{
 
-		@Override
 		public void actionPerformed(ActionEvent arg0) {
 			
             int verd;
@@ -393,67 +176,10 @@ public class Aplication extends javax.swing.JFrame {
 		}
 	}
 	
-	private class OyenteBotonesMain implements KeyListener{
-
-		@Override
-		public void keyPressed(KeyEvent k) {
-			int key = k.getKeyCode();
-			if (key == KeyEvent.VK_DOWN){
-				round = (round + 1) % 3;
-			}
-			if (key == KeyEvent.VK_UP){
-				round = (round - 1) % 3;
-			}
-			JButton aux = null;
-			if(round == 0){
-				veloz.setSelected(true);
-				aux = veloz;
-			}
-			if(round == 1){
-				normal.setSelected(true);
-				aux = normal;
-			}
-			if(round == 2){
-				resistente.setSelected(true);
-				aux = resistente;
-			}
-			
-			veloz.setBackground(new java.awt.Color(0,0,0));
-			normal.setBackground(new java.awt.Color(0,0,0));
-			resistente.setBackground(new java.awt.Color(0,0,0));
-			aux.setBackground(new java.awt.Color(0,50,200));
-			
-			
-			
-			if (key == KeyEvent.VK_ENTER || key == KeyEvent.VK_SPACE){
-				aux.doClick();
-			}
-			
-			
-		}
-
-		@Override
-		public void keyReleased(KeyEvent k) {
-			// TODO Auto-generated method stub
-			
-		}
-
-		@Override
-		public void keyTyped(KeyEvent k) {
-			// TODO Auto-generated method stub
-			
-		}
-	}
-	
 	private void cerrarJuego() {
 		this.dispose();
 		System.exit(0);
 		
 	}
-	/*
-	private void setFocusable(){
-		JPanel j = new JPanel();
-		j.
-	}
-	*/
+	
 }

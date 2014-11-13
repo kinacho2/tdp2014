@@ -14,7 +14,8 @@ public abstract class PowerUp {
 	private int velocidad = 1;
 	private int width = 20;
 	private int height = 20;
-	boolean visible = true;
+	private boolean visible = true;
+	protected int puntaje = 50;
 	
 	public PowerUp(int x, int y, ImageIcon ii){
 		image = ii.getImage().getScaledInstance(25,25,Image.SCALE_DEFAULT);
@@ -28,7 +29,7 @@ public abstract class PowerUp {
 	
 	
 	
-	public boolean colision(ProyectoX.Naves.Jugador.Jugador jugador){
+	public boolean colision(Jugador jugador){
 		boolean A,B,C,D,E,F,G,H, fColision, toReturn; 
 		
 		A = x >= jugador.getX();
@@ -44,6 +45,7 @@ public abstract class PowerUp {
 		fColision = (A && B || E && F) && (C && D || G && H);
 		if(jugador.getVisible() && fColision){
 			efecto(jugador);
+			jugador.setPuntaje(puntaje);
 			toReturn = true;
 		}
 		else if(y > 650){

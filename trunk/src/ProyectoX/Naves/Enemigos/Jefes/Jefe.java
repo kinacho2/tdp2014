@@ -25,11 +25,15 @@ import ProyectoX.Sound.Reproductor;
 
 public abstract class Jefe extends Enemigo{
 	
-	
+	private boolean primero = true;
 	protected ArrayList torretas;
+	protected int defaultWidth;
+	protected int defaultHeight;
 
 	public Jefe(int vida, int vel, ImageIcon ii, int w, int h) {
 		super(vida, vel, ii, w, h);
+		defaultWidth = w;
+		defaultHeight = h;
 		torretas = new ArrayList();
 		width = 0;
 		height = 0;
@@ -48,7 +52,9 @@ public abstract class Jefe extends Enemigo{
 				
 				while(c!=' '){
 					ss+=c;
+					//System.out.println(c);
 					c = (char) lector.read();
+					
 				}
 				
 				
@@ -58,6 +64,7 @@ public abstract class Jefe extends Enemigo{
 				while(c!=' '){
 					ss+=c;
 					c = (char) lector.read();
+					
 				}
 				int dy =  new Integer(ss).intValue();
 				
@@ -129,4 +136,76 @@ public abstract class Jefe extends Enemigo{
 			torr.addReproductor(rep);
 		}
 	}
+
+	public int getMovimiento() {
+		
+		return primero?1:-1;
+	}
+	
+	protected int torretaMasBaja(boolean pos){
+		int res = 0;
+		if(torretas.size() > 0){
+			int i = 0;
+			Torreta aux = (Torreta) torretas.get(i);
+			res = aux.getY();
+			while(i+1 < torretas.size()){
+				aux = (Torreta) torretas.get(i);
+				if(pos){
+					if(res < aux.getY()){
+						res = aux.getY();
+					}
+				}
+				else{
+					if(res > aux.getY()){
+						res = aux.getY();
+					}
+				}
+				i++;
+			}
+		}
+		//System.out.println(pos);
+		return res;
+		
+		
+	}
+	
+	public void move() {
+		if(torretas.size() == 0){
+			jugador.setPuntaje(puntaje);
+			mapa.addPower(400, 200, true);
+			setVisible();
+			width = defaultWidth;
+			height = defaultHeight;
+			
+		}
+		else
+			if(torretaMasBaja(false) < 200 && primero){
+				y +=velocidad;
+				for(int i=0; i<torretas.size(); i++){
+					Torreta t =(Torreta)torretas.get(i);
+					t.setPosition(0, +velocidad);
+					if(!t.getVisible()){
+						torretas.remove(i);
+					}
+				}
+			}
+			else{
+				primero = false;
+				if(torretaMasBaja(true) > -100){
+					y-=velocidad;
+					for(int i=0; i<torretas.size(); i++){
+						Torreta t =(Torreta)torretas.get(i);
+						t.setPosition(0, -velocidad);
+						if(!t.getVisible()){
+							torretas.remove(i);
+						}
+					}
+				}
+				else
+					primero = true;
+			}
+		
+	}
+	
+	
 }

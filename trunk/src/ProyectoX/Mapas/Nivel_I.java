@@ -62,6 +62,7 @@ public class Nivel_I extends Mapa{
 		map.setMindEnemies(mindEnemies);
 		mind.setMapa(map);
 		mindEnemies.setMapa(map);
+		map.setJugador(jugador);
 		return map;
 	}
 	
