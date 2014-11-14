@@ -16,6 +16,7 @@ public class Disparo {
 	private static final URL url = Disparo.class.getClassLoader().getResource("ProyectoX/img/Disparos/Basico/Basico.png");
 	private static final URL explode = Disparo.class.getClassLoader().getResource("ProyectoX/img/Explosiones/pequena.gif");
 	protected String sonido;
+	protected String golpe = "/ProyectoX/sounds/bala_golpeando.mp3";
 	
 	protected int x, y;
     protected Image image;
@@ -103,8 +104,13 @@ public class Disparo {
 		H = (y + height) <= (nave.getY() + nave.getHeight());
 		
 		// funcion de colicion que verifica si alguno de los 4 puntos del borde del objeto disparo intersectan con area del objeto pasado por parametro
-		fColision = (A && B || E && F) && (C && D || G && H) ||  !A && !F && ( !H && D || G && H) ||  !C &&  !H && (B &&  !F ||  !A && E);
-		return  isVisible() && nave.getVisible() && fColision;
+		fColision = (A && B || E && F) && (C && D || G && H) ||  !A && !F && ( !H && D || G && H) ||  !C &&  !H && (B &&  !F ||  !A && E) && isVisible() && nave.getVisible();
+		if(fColision){
+			if(rep!=null)
+				rep.addSound(new Sonido(golpe,false)) ;
+		}
+		
+		return fColision;
 	}
     
     // Establece que el disparo no est� visible en la pantalla
@@ -147,6 +153,12 @@ public class Disparo {
 	
 	public void setReproductor(Reproductor rep){
 		this.rep = rep;
+	}
+	
+	protected void setearReproductor(Disparo[] d){
+		for(int i = 0; i<d.length; i++){
+			d[i].setReproductor(rep);
+		}
 	}
 }
 

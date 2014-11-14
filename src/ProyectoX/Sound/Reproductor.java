@@ -4,12 +4,8 @@ import java.util.ArrayList;
  
 
 public class Reproductor{
-
-	private boolean stop = false;
 	
 	private Sonido sonido;
-
-	private int cant = 0;
 	
 	public Reproductor(){
 		
@@ -24,6 +20,10 @@ public class Reproductor{
 		if(sonido!=null){
 			sonido.stopedd(delay);
 		}
+	}
+	
+	public void setSilence(boolean silence){
+		
 	}
 	
 }

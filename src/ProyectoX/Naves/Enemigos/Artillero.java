@@ -37,6 +37,7 @@ public class Artillero extends Enemigo {
 	public void disparar() {
 		if(puedeDisparar() && y<500){
 			Disparo d = apuntarYDisparar();
+			d.setReproductor(reproductor);
 			addSonido();
 			//d.setPosicion(d.getX(), d.getY() - defaultHeight/2);
 			mapa.addDisparoEnemigo(d);

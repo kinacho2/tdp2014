@@ -10,6 +10,7 @@ import ProyectoX.Frames.Explosion;
 import ProyectoX.Mapas.Mapa;
 import ProyectoX.Naves.Jugador.Jugador;
 import ProyectoX.Sound.Reproductor;
+import ProyectoX.Sound.Sonido;
 
 public abstract class Nave {
 	
@@ -205,6 +206,7 @@ public abstract class Nave {
 	
 	public abstract Explosion getExplosion();
 	
+	
 	protected boolean fueraDePantalla() {
 		return (x < minWidth || x > maxWidth || y > minHeight || y < maxHeight);
 	}
@@ -226,6 +228,12 @@ public abstract class Nave {
 	public void addReproductor(Reproductor rep){
 		reproductor = rep;
 		
+	}
+	
+	protected abstract String getSonidoExplosion();
+	
+	protected void addSonidoExplosion(){
+		reproductor.addSound(new Sonido(getSonidoExplosion(),false));
 	}
 }
 

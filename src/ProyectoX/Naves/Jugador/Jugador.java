@@ -22,6 +22,7 @@ public abstract class Jugador extends Nave {
 	protected Disparo arma;
 	private Defensa defensa;
 	protected int bombas;
+	private String explodeSound = "/ProyectoX/sounds/explode.mp3";
 	
 	public Jugador(int vida, int vel, ImageIcon icon, ImageIcon iconDer, ImageIcon iconIzq){
 		super(vida, vel, icon, new ImageIcon(explode), icon.getIconWidth(), icon.getIconHeight());
@@ -236,6 +237,10 @@ public abstract class Jugador extends Nave {
 		if(defensa!=null){
 			defensa.setMapa(map);
 		}
+	}
+	
+	protected String getSonidoExplosion(){
+		return explodeSound;
 	}
 	
 }
