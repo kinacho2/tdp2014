@@ -170,40 +170,43 @@ public abstract class Jefe extends Enemigo{
 	}
 	
 	public void move() {
-		if(torretas.size() == 0){
-			jugador.setPuntaje(puntaje);
-			mapa.addPower(400, 200, true);
-			setVisible();
-			width = defaultWidth;
-			height = defaultHeight;
-			
-		}
-		else
-			if(torretaMasBaja(false) < 200 && primero){
-				y +=velocidad;
-				for(int i=0; i<torretas.size(); i++){
-					Torreta t =(Torreta)torretas.get(i);
-					t.setPosition(0, +velocidad);
-					if(!t.getVisible()){
-						torretas.remove(i);
-					}
-				}
+		if(puedeMoverse()){
+			if(torretas.size() == 0){
+				jugador.setPuntaje(puntaje);
+				mapa.addPower(400, 200, true);
+				setVisible();
+				width = defaultWidth;
+				height = defaultHeight;
+				
 			}
-			else{
-				primero = false;
-				if(torretaMasBaja(true) > -100){
-					y-=velocidad;
+			else
+				if(torretaMasBaja(false) < 200 && primero){
+					y +=velocidad;
 					for(int i=0; i<torretas.size(); i++){
 						Torreta t =(Torreta)torretas.get(i);
-						t.setPosition(0, -velocidad);
+						t.setPosition(0, +velocidad);
 						if(!t.getVisible()){
 							torretas.remove(i);
 						}
 					}
 				}
-				else
-					primero = true;
-			}
+				else{
+					primero = false;
+					if(torretaMasBaja(true) > -100){
+						y-=velocidad;
+						for(int i=0; i<torretas.size(); i++){
+							Torreta t =(Torreta)torretas.get(i);
+							t.setPosition(0, -velocidad);
+							if(!t.getVisible()){
+								torretas.remove(i);
+							}
+						}
+					}
+					else
+						primero = true;
+				}
+		}
+		setMove();
 		
 	}
 	

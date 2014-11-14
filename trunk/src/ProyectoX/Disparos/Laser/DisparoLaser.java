@@ -5,7 +5,7 @@ import java.awt.Image;
 import javax.swing.ImageIcon;
 
 import ProyectoX.Disparos.Disparo;
-import ProyectoX.Explosiones.Explosion;
+import ProyectoX.Frames.Explosion;
 import ProyectoX.Naves.Nave;
 import ProyectoX.Naves.Jugador.Jugador;
 import ProyectoX.Sound.Reproductor;

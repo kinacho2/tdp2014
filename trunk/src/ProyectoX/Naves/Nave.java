@@ -6,7 +6,7 @@ import java.awt.geom.AffineTransform;
 
 import javax.swing.ImageIcon;
 
-import ProyectoX.Explosiones.Explosion;
+import ProyectoX.Frames.Explosion;
 import ProyectoX.Mapas.Mapa;
 import ProyectoX.Naves.Jugador.Jugador;
 import ProyectoX.Sound.Reproductor;

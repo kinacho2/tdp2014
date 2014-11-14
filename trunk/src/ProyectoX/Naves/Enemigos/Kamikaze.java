@@ -24,36 +24,38 @@ public class Kamikaze extends Enemigo {
 		y = -defaultHeight;
 		Random rand = new Random();
 		x = rand.nextInt(800);
-		setFrecuenciaDeDisparo(7,30);
+		setFrecuenciaDeDisparo(7,80);
 		this.up = up;
 		puntaje = 35;
 	}
 	
 	public synchronized void move() {
-		
-		if (y < 300) {
-			dx = jugador.getX() - x;
-			dy = jugador.getY() - y;
-			double mod = Math.sqrt(dy*dy+dx*dx);
-			setRotacion();
-			
-			//centra la direccion del Enemigo hacia el jugador
-			dx += jugador.getWidth() / 2;
-			dy += jugador.getHeight() / 2;
-			
-			if (dx != 0 || dy != 0) {
-				dx = dx / mod;
-				dy = dy / mod;
+		if(puedeMoverse()){
+			if (y < 300) {
+				dx = jugador.getX() - x;
+				dy = jugador.getY() - y;
+				double mod = Math.sqrt(dy*dy+dx*dx);
+				setRotacion();
+				
+				//centra la direccion del Enemigo hacia el jugador
+				dx += jugador.getWidth() / 2;
+				dy += jugador.getHeight() / 2;
+				
+				if (dx != 0 || dy != 0) {
+					dx = dx / mod;
+					dy = dy / mod;
+				} else {
+					dy = 0.1d;
+					dx = 0.1d;
+				}
+				y += dy * velocidad;
+				x += dx * velocidad;
 			} else {
-				dy = 0.1d;
-				dx = 0.1d;
+				y += dy * velocidad;
+				x += dx * velocidad;
 			}
-			y += dy * velocidad;
-			x += dx * velocidad;
-		} else {
-			y += dy * velocidad;
-			x += dx * velocidad;
 		}
+		setMove();
 		verificarColision();
 	}
 	

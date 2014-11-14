@@ -12,7 +12,8 @@ import java.util.Random;
 import javax.swing.ImageIcon;
 
 import ProyectoX.Disparos.Disparo;
-import ProyectoX.Explosiones.Explosion;
+import ProyectoX.Frames.Explosion;
+import ProyectoX.Frames.Objeto;
 import ProyectoX.Minds.Mind;
 import ProyectoX.Minds.MindEnemies;
 import ProyectoX.Naves.Enemigos.EnemiesBuilder;

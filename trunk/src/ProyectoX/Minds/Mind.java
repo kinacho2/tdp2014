@@ -15,7 +15,7 @@ import javax.swing.Timer;
 import javax.swing.JPanel;
 
 import ProyectoX.Disparos.Disparo;
-import ProyectoX.Explosiones.Explosion;
+import ProyectoX.Frames.Explosion;
 import ProyectoX.Mapas.Mapa;
 import ProyectoX.Naves.Enemigos.Enemigo;
 import ProyectoX.Naves.Jugador.Jugador;
@@ -55,13 +55,9 @@ public class Mind implements ActionListener {
 
     public void actionPerformed(ActionEvent e) {
     	
-    	disparosJugador();
-    	
     	disparosEnemigos();
     	
     	colisionPowerUp();
-    	
-    	verificarColisionDefensa(jugador.getDefensa());
         
         if(jugador.getVisible()) {
         	jugador.move(); 
@@ -75,10 +71,6 @@ public class Mind implements ActionListener {
         			stop = false;
         			jugador.reset();
         			contDelay = 0;
-        			
-        		//	mapa.stop();
-        		//	JOptionPane dialog = new JOptionPane();
-        		//	dialog.showMessageDialog(null, puntaje.getText() + "\nVuelva al menu de seleccion para comenzar nuevamente", "FIN DEL JUEGO", JOptionPane.INFORMATION_MESSAGE);
         		}
         	}
         }
@@ -104,42 +96,9 @@ public class Mind implements ActionListener {
 	        }
 	    }
 	}
-
-	// Mueve los disparos visibles de jugador y los que no son removidos; además verifica si algún disparo colisionó
-    // con algún enemigo
-    private synchronized void disparosJugador() {
-    	// arreglo de disparos de jugador y de enemigos que se encuentran en el mapa
-        ArrayList ms = mapa.getMisilesJugador();
-        ArrayList enemigos = mapa.getEnemies();
-        
-        // mueve los misiles del jugador y remueve los que no estan visibles  
-        for (int i = 0; i < ms.size(); i++) {
-        	Disparo m = (Disparo) ms.get(i);
-            if (m.isVisible())
-                m.move();
-            else 
-            	mapa.removerDisparoJugador(i);
-            
-            // verifica si algun misil del jugador colisiono a un enemigo
-            for (int j = 0; j < enemigos.size(); j++) {
-            	Enemigo enemigo = (Enemigo) enemigos.get(j);
-            	
-            	if (m.colision(enemigo)) {
-                	if (m.isVisible()){
-                		enemigo.setVida(m.getDamage());
-                	}
-                	panel.actualizarPuntaje();
-                	m.setVisible();
-                	mapa.addExposion(m.newExplosion(enemigo.getY() + enemigo.getHeight()));
-                }
-                
-            }
-        }
-  	
-    }
     
-    // Mueve los disparos visibles de los enemigos y los que no son removidos; además verifica si algún disparo colisionó
-    // con algún enemigo
+    // Mueve los disparos visibles de los enemigos y los que no son removidos; además verifica si algún disparo colisiono
+    // con algún jugador
     private synchronized void disparosEnemigos() {
     	
     	// arreglo de disparos de los enemigos que se encuentran en el mapa
@@ -147,48 +106,41 @@ public class Mind implements ActionListener {
     	
        	Jugador aux ;
        	
-        
+        Jugador def = jugador.getDefensa();
         
         // verifica si algun misil del enemigo colisiono con el jugador o alguna de sus defensas
        
         for (int j = 0; j < ms.size(); j++ ) {
             Disparo misil = (Disparo) ms.get(j);
-            misil.move();
-            aux = mapa.getJugador();
-       		if(aux.getVisible())
-           		if (misil.colision(aux)) {
-           			if (misil.isVisible()) {
-           				aux.setVida(misil.getDamage());
-           				misil.setVisible();
-           				mapa.addExposion(misil.newExplosion(aux.getY()));
-	            	}
-           			else{
-           				ms.remove(misil);
-           			}
-	            }
-           		
-	        
+            if(misil!=null){
+	            misil.move();
+	            aux = mapa.getJugador();
+	       		if(aux.getVisible())
+	           		if (misil.colision(aux)) {
+	           			if (misil.isVisible()) {
+	           				aux.setVida(misil.getDamage());
+	           				misil.setVisible();
+	           				mapa.addExposion(misil.newExplosion(aux.getY()));
+		            	}
+	           			else{
+	           				ms.remove(misil);
+	           			}
+		            }
+	       		if(def != null && def.getVisible())
+	           		if (misil.colision(def)) {
+	           			if (misil.isVisible()) {
+	           				def.setVida(misil.getDamage());
+	           				misil.setVisible();
+	           				mapa.addExposion(misil.newExplosion(def.getY()));
+		            	}
+	           			else{
+	           				ms.remove(misil);
+	           			}
+		            }
+            }
        	}
        	
-    	
     }
-    
-    private synchronized void verificarColisionDefensa(Jugador def){
-    	if(def != null){
-    		ArrayList enemigos = mapa.getEnemies();
-    		for (int j = 0; j < enemigos.size(); j++) {
-            	Enemigo enemigo = (Enemigo) enemigos.get(j);
-            
-            	if(def != null && enemigo.colision(def)){
-            		int danio = def.getDamageColision();
-            		def.setVida(enemigo.getDamageColision());
-            		enemigo.setVida( danio);
-            	}
-    		}
-    	}
-    }
-
-    
     
     public Jugador getJugador() {
     	return jugador;

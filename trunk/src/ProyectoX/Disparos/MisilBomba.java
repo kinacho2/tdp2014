@@ -5,7 +5,7 @@ import java.net.URL;
 
 import javax.swing.ImageIcon;
 
-import ProyectoX.Explosiones.Explosion;
+import ProyectoX.Frames.Explosion;
 import ProyectoX.Mapas.Mapa;
 import ProyectoX.Naves.Nave;
 import ProyectoX.Naves.Jugador.Jugador;
