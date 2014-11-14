@@ -67,7 +67,7 @@ public class Bombardero extends Enemigo {
 	public void move() {
 		if(puedeMoverse()){
 			if (y >= 550 && noSound){
-				reproductor.addSound(new Sonido(alarm,false));
+				reproductor.addSound(alarm,false);
 				noSound = false;
 			}
 			

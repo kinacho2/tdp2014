@@ -190,7 +190,7 @@ public class PanelSelect extends JPanel{
 		public void actionPerformed(ActionEvent arg0) {
 			setVisible(false);
 			//setVisible(false);
-			api.initGame(1);
+			api.showSplashBeforeGame(1);
 			//setVisible(true);
 			
 		}
@@ -202,7 +202,7 @@ public class PanelSelect extends JPanel{
 		public void actionPerformed(ActionEvent arg0) {
 			setVisible(false);
 			//setVisible(false);
-			api.initGame(2);
+			api.showSplashBeforeGame(2);
 			//setVisible(true);
             
 		}
@@ -214,7 +214,7 @@ public class PanelSelect extends JPanel{
 		public void actionPerformed(ActionEvent arg0) {
 			setVisible(false);
 			//setVisible(false);
-			api.showSplash(3);
+			api.showSplashBeforeGame(3);
 			//setVisible(true);
            
 		}

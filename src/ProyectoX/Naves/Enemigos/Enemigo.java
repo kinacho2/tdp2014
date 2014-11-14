@@ -114,7 +114,7 @@ public abstract class Enemigo extends Nave {
 	}
 	
 	protected void addSonido(){
-		reproductor.addSound(new Sonido(sonido,false));
+		reproductor.addSound(sonido,false);
 	}
 	
 	protected boolean puedeMoverse(){

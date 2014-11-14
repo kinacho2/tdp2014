@@ -36,7 +36,7 @@ public class Nivel_III extends Mapa{
 		sonidoJefe = soundBoss;
 		
 		
-		reproductor.addSound(new Sonido(sonido,true));
+		reproductor.addSound(sonido,true);
 		
 	}
 	

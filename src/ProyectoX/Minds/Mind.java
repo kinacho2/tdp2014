@@ -37,6 +37,7 @@ public class Mind implements ActionListener {
     private int delayFinal;
     private int contDelay;
     private Reproductor reproductor;
+    private boolean pause = false;
    
 
     public Mind(PanelJugador panel, int select) {
@@ -55,29 +56,31 @@ public class Mind implements ActionListener {
 
     public void actionPerformed(ActionEvent e) {
     	
-    	disparosEnemigos();
-    	
-    	colisionPowerUp();
-        
-        if(jugador.getVisible()) {
-        	jugador.move(); 
-        } else {
-        	if(!stop) {
-        		mapa.addExposion(jugador.getExplosion());
-        		stop = true;
-        	} else {
-        		contDelay += delay;
-        		if(contDelay >= delayFinal){
-        			stop = false;
-        			jugador.reset();
-        			contDelay = 0;
-        		}
-        	}
-        }
-        if(jugador.getVida() <= 0){
-        	jugador.setVisible();
-        }
-       	panel.repaint();  
+    	if(!pause){
+	    	disparosEnemigos();
+	    	
+	    	colisionPowerUp();
+	        
+	        if(jugador.getVisible()) {
+	        	jugador.move(); 
+	        } else {
+	        	if(!stop) {
+	        		mapa.addExposion(jugador.getExplosion());
+	        		stop = true;
+	        	} else {
+	        		contDelay += delay;
+	        		if(contDelay >= delayFinal){
+	        			stop = false;
+	        			jugador.reset();
+	        			contDelay = 0;
+	        		}
+	        	}
+	        }
+	        if(jugador.getVida() <= 0){
+	        	jugador.setVisible();
+	        }
+	       	panel.repaint();  
+    	}
     }
     
     private synchronized void colisionPowerUp() {
@@ -176,4 +179,9 @@ public class Mind implements ActionListener {
 		jugador.setMapa(map);
 	}
 
+	public void pause(boolean arg){
+		mapa.pause(arg);
+		jugador.pause(arg);
+		pause = arg;
+	}
 }

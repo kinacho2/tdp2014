@@ -97,7 +97,7 @@ public class MisilBomba extends Disparo{
 				//la imagen pasa a tener otro ancho y alto
 				width = defaultWidth2;
 				height = defaultHeight2;
-				rep.addSound(new Sonido(sonidoExplosion,false));
+				rep.addSound(sonidoExplosion,false);
 				//se ajusta el x e y a la nueva imagen
 				x = x - defaultWidth2/2 + defaultWidth /2;
 				y = y - defaultHeight2/2 + defaultHeight/2;
@@ -114,7 +114,7 @@ public class MisilBomba extends Disparo{
 					Explosion aux = new Explosion(400, 300, new ImageIcon(explode), 800, 600);
 					aux.setDelay(2000);
 					mapa.addExposion(aux);
-					rep.addSound(new Sonido(thunder,false));
+					rep.addSound(thunder,false);
 				}
 				//al llegar este tiempo se le indica al mapa que destruya los enemigos en pantalla a excepsion del Jefe
 				if(now - init > maxDelay){

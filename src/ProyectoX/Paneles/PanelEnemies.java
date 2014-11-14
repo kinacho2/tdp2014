@@ -36,7 +36,7 @@ public class PanelEnemies extends JPanel {
 	        Graphics2D g2d = (Graphics2D) g;
 	        
 	        g2d.drawImage(mapa.getImage(), mapa.getX(), mapa.getY(), this);
-
+	        
 	       
 	  
 	        ArrayList enemigos = mind.getEnemies();

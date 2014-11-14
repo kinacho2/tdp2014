@@ -22,7 +22,7 @@ public class MindEnemies extends Thread  {
 	private boolean muerteJefe = false; 
 	private long init;
 	private int delay = 8000;
-	
+	private boolean pause = false;
 	
 	public MindEnemies(PanelEnemies p) {
 		enemies = new ArrayList();
@@ -38,47 +38,50 @@ public class MindEnemies extends Thread  {
 	public void run() {
 		try {
 			while (!stop) {
-				enemies = mapa.getEnemies();
+				
 				MindEnemies.sleep(20);
 				
-				//calcula la probabilidad de aparicion de los enemigos en pantalla
-				
-				disparosJugador();
-				
-				if(ran.nextInt(88)==0){
-					Enemigo m = mapa.nextEnemigo();
-					if(m!=null){
-						enemies.add(m);
+				if(!pause){
+					enemies = mapa.getEnemies();
+					//calcula la probabilidad de aparicion de los enemigos en pantalla
+					
+					disparosJugador();
+					
+					if(ran.nextInt(88)==0){
+						Enemigo m = mapa.nextEnemigo();
+						if(m!=null){
+							enemies.add(m);
+						}
 					}
-				}
-
-				//mueve y remueve, en caso de ser necesario, las naves enemigas
-				
-		        for (int i = 0; i < enemies.size(); i++ ) {
-		            Enemigo m = (Enemigo) enemies.get(i);
-		            m.move();
-		            if (!m.getVisible()){
-		            	enemies.remove(i);
-		            	mapa.addExposion(m.getExplosion());
-		            	
-		            }
-		            //dispara y aumenta un contador ciclico que retrasa la distancia entre la ejecucion de los disparos
-		            m.disparar();
-		            m.setDis();
-		        }
-		        mapa.setEnemies(enemies);
-				panel.repaint();
-				
-				if(jefe){
-					if(enemies.size() == 0 && !muerteJefe){
-						muerteJefe = true;
-						init = System.currentTimeMillis();
-					}
-					if(muerteJefe){
-						if(System.currentTimeMillis() - init > delay){
-							mapa.nextMapa();
-							jefe = false;
-							muerteJefe = false;
+	
+					//mueve y remueve, en caso de ser necesario, las naves enemigas
+					
+			        for (int i = 0; i < enemies.size(); i++ ) {
+			            Enemigo m = (Enemigo) enemies.get(i);
+			            m.move();
+			            if (!m.getVisible()){
+			            	enemies.remove(i);
+			            	mapa.addExposion(m.getExplosion());
+			            	
+			            }
+			            //dispara y aumenta un contador ciclico que retrasa la distancia entre la ejecucion de los disparos
+			            m.disparar();
+			            m.setDis();
+			        }
+			        mapa.setEnemies(enemies);
+					panel.repaint();
+					
+					if(jefe){
+						if(enemies.size() == 0 && !muerteJefe){
+							muerteJefe = true;
+							init = System.currentTimeMillis();
+						}
+						if(muerteJefe){
+							if(System.currentTimeMillis() - init > delay){
+								mapa.nextMapa();
+								jefe = false;
+								muerteJefe = false;
+							}
 						}
 					}
 				}
@@ -148,6 +151,10 @@ public class MindEnemies extends Thread  {
 	public void setMapa(Mapa map){
 		mapa = map;
 		panel.setMapa(map);
+	}
+	
+	public void pause(boolean arg){
+		pause = arg;
 	}
 }
 

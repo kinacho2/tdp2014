@@ -32,19 +32,20 @@ public class Nivel_I extends Mapa{
 		imagenFondo = ii.getImage();
 		x = -50;
 		y = initY;
+
 		jefe = new JefeTanque(); 
 		jefe.addReproductor(reproductor);
 		sonido = sound;
 		sonidoJefe = soundBoss;
 		
 		
-		reproductor.addSound(new Sonido(sonido,true));
+		reproductor.addSound(sonido,true);
 		
 	}
 	
 	public int getY(){
 		if(delay % delayVel  == 0){
-			y++;
+			y += dy;
 			if(y  >= 0 ){
 				y = initY;
 			}

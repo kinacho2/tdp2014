@@ -23,6 +23,7 @@ public abstract class Jugador extends Nave {
 	private Defensa defensa;
 	protected int bombas;
 	private String explodeSound = "/ProyectoX/sounds/explode.mp3";
+	private boolean pause;
 	
 	public Jugador(int vida, int vel, ImageIcon icon, ImageIcon iconDer, ImageIcon iconIzq){
 		super(vida, vel, icon, new ImageIcon(explode), icon.getIconWidth(), icon.getIconHeight());
@@ -45,74 +46,77 @@ public abstract class Jugador extends Nave {
 	}
 	
 	public void keyPressed(KeyEvent e) {
-		
-        int key = e.getKeyCode();
-        
-        if (key == KeyEvent.VK_SPACE) {
-            if(puedeDisparar() && getVisible()){
-            	disparar();
-            }
-            setDis();
-        }
-       
-        if (key == KeyEvent.VK_A) {
-        	dx = -velocidad;
-            image = iconIzq.getImage();
-        }
-        
-        if (key == KeyEvent.VK_D) {
-        	dx = velocidad;
-            image = iconDer.getImage();
-        }
-       
-        if (key == KeyEvent.VK_W) {
-        	dy = -velocidad;
-        }
-        
-        if (key == KeyEvent.VK_S) {
-        	dy = velocidad;
-        }
-        if (key == KeyEvent.VK_X){
-        	if(bombas > 0){
-        		mapa.addDisparoJugador(new MisilBomba(x + width/2, y, mapa, reproductor));
-        		bombas--;
-        	}
-        }
-        
-        
-        if(defensa!=null){
-        	defensa.keyPressed(e);
-        }
+		if(!pause){
+	        int key = e.getKeyCode();
+	        
+	        if (key == KeyEvent.VK_SPACE) {
+	            if(puedeDisparar() && getVisible()){
+	            	disparar();
+	            }
+	            setDis();
+	        }
+	       
+	        if (key == KeyEvent.VK_A) {
+	        	dx = -velocidad;
+	            image = iconIzq.getImage();
+	        }
+	        
+	        if (key == KeyEvent.VK_D) {
+	        	dx = velocidad;
+	            image = iconDer.getImage();
+	        }
+	       
+	        if (key == KeyEvent.VK_W) {
+	        	dy = -velocidad;
+	        }
+	        
+	        if (key == KeyEvent.VK_S) {
+	        	dy = velocidad;
+	        }
+	        if (key == KeyEvent.VK_X){
+	        	if(bombas > 0){
+	        		mapa.addDisparoJugador(new MisilBomba(x + width/2, y, mapa, reproductor));
+	        		bombas--;
+	        	}
+	        }
+	        
+	        
+	        if(defensa!=null){
+	        	defensa.keyPressed(e);
+	        }
+		}
     }
 
     public void keyReleased(KeyEvent e) {
-        int key = e.getKeyCode();
-
-        if (key == KeyEvent.VK_A) {
-            dx = 0;
-            image = icon.getImage();
-        }
-      
-        if (key == KeyEvent.VK_D) {
-            dx = 0;
-            image = icon.getImage();
-        }
-        
-        if (key == KeyEvent.VK_W) {
-            dy = 0;
-        }
-       
-        if (key == KeyEvent.VK_S) {
-            dy = 0;
-        }
-        
-        if (key == KeyEvent.VK_SPACE) {
-            setDisCero();
-        }
-        
-        if(defensa!=null){
-        	defensa.keyReleased(e);
-        }
+    	if(!pause){
+	        int key = e.getKeyCode();
+	
+	        if (key == KeyEvent.VK_A) {
+	            dx = 0;
+	            image = icon.getImage();
+	        }
+	      
+	        if (key == KeyEvent.VK_D) {
+	            dx = 0;
+	            image = icon.getImage();
+	        }
+	        
+	        if (key == KeyEvent.VK_W) {
+	            dy = 0;
+	        }
+	       
+	        if (key == KeyEvent.VK_S) {
+	            dy = 0;
+	        }
+	        
+	        if (key == KeyEvent.VK_SPACE) {
+	            setDisCero();
+	        }
+	        
+	        if(defensa!=null){
+	        	defensa.keyReleased(e);
+	        }
+    	}
         
     }
     
@@ -241,6 +245,10 @@ public abstract class Jugador extends Nave {
 	
 	protected String getSonidoExplosion(){
 		return explodeSound;
+	}
+	
+	public void pause(boolean arg){
+		pause = arg;
 	}
 	
 }
