@@ -18,12 +18,15 @@ public class Artillero extends Enemigo {
 	private boolean up;
 	private boolean primerMovimiento = true;
 	
+	private int delay = 4;
+	private int cont;
+	
 	public Artillero(boolean up){
 		super(defaultVida,defaultVel,up? new ImageIcon(urlUp): new ImageIcon(url),defaultWidth,defaultHeight);
 		y = -defaultHeight;
 		this.up = up;
 		puntaje = 50;
-		setFrecuenciaDeDisparo(5,20);
+		setFrecuenciaDeDisparo(5,70);
 	}
 
 	@Override
@@ -42,12 +45,15 @@ public class Artillero extends Enemigo {
 
 	@Override
 	public void move() {
-		if(primerMovimiento){
-			x = jugador.getX();
-			primerMovimiento = false;
+		if(puedeMoverse()){
+			if(primerMovimiento){
+				x = jugador.getX();
+				primerMovimiento = false;
+			}
+			
+			y += velocidad;
 		}
-		
-		y += velocidad;
+		setMove();
 		verificarColision();
 		setRotacion();
 	}

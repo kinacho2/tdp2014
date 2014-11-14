@@ -3,6 +3,7 @@ package ProyectoX.Minds;
 import java.util.ArrayList;
 import java.util.Random;
 
+import ProyectoX.Disparos.Disparo;
 import ProyectoX.Mapas.Mapa;
 import ProyectoX.Naves.Enemigos.Enemigo;
 import ProyectoX.Naves.Enemigos.Jefes.Jefe;
@@ -38,11 +39,13 @@ public class MindEnemies extends Thread  {
 		try {
 			while (!stop) {
 				enemies = mapa.getEnemies();
-				MindEnemies.sleep(75);
+				MindEnemies.sleep(20);
 				
 				//calcula la probabilidad de aparicion de los enemigos en pantalla
 				
-				if(ran.nextInt(20)==0){
+				disparosJugador();
+				
+				if(ran.nextInt(88)==0){
 					Enemigo m = mapa.nextEnemigo();
 					if(m!=null){
 						enemies.add(m);
@@ -87,6 +90,41 @@ public class MindEnemies extends Thread  {
 		}
 		
 	}
+	
+	// Mueve los disparos visibles de jugador y los que no son removidos; además verifica si algún disparo colisionó
+    // con algún enemigo
+    private synchronized void disparosJugador() {
+    	// arreglo de disparos de jugador y de enemigos que se encuentran en el mapa
+        ArrayList ms = mapa.getMisilesJugador();
+        ArrayList enemigos = mapa.getEnemies();
+        
+        // mueve los misiles del jugador y remueve los que no estan visibles  
+        for (int i = 0; i < ms.size(); i++) {
+        	Disparo m = (Disparo) ms.get(i);
+            if (m.isVisible())
+                m.move();
+            else 
+            	mapa.removerDisparoJugador(i);
+            
+            // verifica si algun misil del jugador colisiono a un enemigo
+            for (int j = 0; j < enemigos.size(); j++) {
+            	Enemigo enemigo = (Enemigo) enemigos.get(j);
+            	
+            	if (m.colision(enemigo)) {
+                	if (m.isVisible()){
+                		enemigo.setVida(m.getDamage());
+                	}
+                	m.setVisible();
+                	mapa.addExposion(m.newExplosion(enemigo.getY() + enemigo.getHeight()));
+                }
+                
+            }
+        }
+  	
+    }
+	
+	
+	
 
 	public ArrayList getEnemies() {
 		return enemies;

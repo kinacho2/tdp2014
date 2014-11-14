@@ -39,24 +39,24 @@ public class Basico extends Enemigo {
 		}
 		
 		this.up = up;
-		setFrecuenciaDeDisparo(10,30);
+		setFrecuenciaDeDisparo(10,80);
 		puntaje = 25;
 	}
 	
 	// mueve al enemigo en forma parabólica 
 	public void move() {
-		
-		y += alturaMinima;
-		alturaMinima -= 1;
-		if (posInicialX <= 100)
-			x += velocidad;
-		else
-			x -= velocidad;
-		
-		dx=-2*x;
-		dy=0;
-		
-		//setRotacion();
+		if(puedeMoverse()){
+			y += alturaMinima;
+			alturaMinima -= 1;
+			if (posInicialX <= 100)
+				x += velocidad;
+			else
+				x -= velocidad;
+			
+			dx=-2*x;
+			dy=0;
+		}
+		setMove();
 		verificarColision();
 		
 	}

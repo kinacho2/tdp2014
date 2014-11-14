@@ -1,4 +1,4 @@
-package ProyectoX.Mapas;
+package ProyectoX.Frames;
 
 import java.awt.Image;
 

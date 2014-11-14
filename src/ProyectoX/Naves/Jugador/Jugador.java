@@ -7,7 +7,7 @@ import javax.swing.ImageIcon;
 
 import ProyectoX.Disparos.Disparo;
 import ProyectoX.Disparos.MisilBomba;
-import ProyectoX.Explosiones.Explosion;
+import ProyectoX.Frames.Explosion;
 import ProyectoX.Mapas.Mapa;
 import ProyectoX.Naves.Nave;
 import ProyectoX.Naves.Jugador.Defensa.Defensa;

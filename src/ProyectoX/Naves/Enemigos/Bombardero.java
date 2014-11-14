@@ -41,7 +41,7 @@ public class Bombardero extends Enemigo {
 	private boolean tercero = true;
 	
 	//variables que controlan un patron de disparo
-	private int delayDisparo = 10;
+	private int delayDisparo = 50;
 	private int bombarderoDis = 0;
 	
 	public Bombardero(boolean init) {
@@ -49,7 +49,7 @@ public class Bombardero extends Enemigo {
 		
 		cont=0;
 		y = minHeight;
-		setFrecuenciaDeDisparo(delayDisparo+1,delayDisparo*4);
+		setFrecuenciaDeDisparo(delayDisparo+1,delayDisparo*3);
 		
 
 		if (init) {
@@ -65,69 +65,71 @@ public class Bombardero extends Enemigo {
 	}
 	
 	public void move() {
-		
-		if (y >= 550 && noSound){
-			reproductor.addSound(new Sonido(alarm,false));
-			noSound = false;
-		}
-		
-		if( y > defaultY ) {
-			//se acerca al centro desde abajo
-			y -= velocidad;
-		} else {
-			if( x < posInicialX + velocidad * 20 && primero ) {
-				//se mueve en diagonal hacia arriba a la derecha
-				x += velocidad;
+		if(puedeMoverse()){
+			if (y >= 550 && noSound){
+				reproductor.addSound(new Sonido(alarm,false));
+				noSound = false;
+			}
+			
+			if( y > defaultY ) {
+				//se acerca al centro desde abajo
 				y -= velocidad;
-				if(x >= posInicialX + velocidad * 20 ) {
-					cont++;
-				}
 			} else {
-				//se setea el primer movimiento en false y se mueve hacia la izquierda horizontalmente
-				primero = false;
-				if(x > posInicialX && segundo) {
-					x -= velocidad;
-					if(x <= posInicialX) {
+				if( x < posInicialX + velocidad * 20 && primero ) {
+					//se mueve en diagonal hacia arriba a la derecha
+					x += velocidad;
+					y -= velocidad;
+					if(x >= posInicialX + velocidad * 20 ) {
 						cont++;
 					}
 				} else {
-					//se setea el segundo movimiento en false y se mueve en diagonal hacia la derecha y abajo
-					segundo = false;
-					if(x < posInicialX + velocidad * 20 && tercero) {
-						x += velocidad;
-						y += velocidad;
-						if(x >= posInicialX + velocidad * 20) {
+					//se setea el primer movimiento en false y se mueve hacia la izquierda horizontalmente
+					primero = false;
+					if(x > posInicialX && segundo) {
+						x -= velocidad;
+						if(x <= posInicialX) {
 							cont++;
 						}
 					} else {
-						//se setea el tercer movimiento en false y se mueve hacia la izquierda horizontalmente
-						tercero = false;
-						if(x > posInicialX) {
-							x -= velocidad;
-							if(x <= posInicialX) {
+						//se setea el segundo movimiento en false y se mueve en diagonal hacia la derecha y abajo
+						segundo = false;
+						if(x < posInicialX + velocidad * 20 && tercero) {
+							x += velocidad;
+							y += velocidad;
+							if(x >= posInicialX + velocidad * 20) {
 								cont++;
-							}		
+							}
 						} else {
-							//se setean los tres movimientos en true para su repeticion
-							primero = true;
-							segundo = true;
-							tercero = true;
+							//se setea el tercer movimiento en false y se mueve hacia la izquierda horizontalmente
+							tercero = false;
+							if(x > posInicialX) {
+								x -= velocidad;
+								if(x <= posInicialX) {
+									cont++;
+								}		
+							} else {
+								//se setean los tres movimientos en true para su repeticion
+								primero = true;
+								segundo = true;
+								tercero = true;
+							}
 						}
 					}
 				}
-			}
-		
-			if (cont >= 8) {
-				/*
-				cuenta la cantidad de rebotes en los bordes del patron de movimiento
-				en el momento que es 8 es decir que realizo el patron 2 veces parte hacia arriba rebotando
-				en los bordes verticales
-				*/
-				if(y > (-100  -defaultWidth) ) {
-					y -= velocidad;
+			
+				if (cont >= 8) {
+					/*
+					cuenta la cantidad de rebotes en los bordes del patron de movimiento
+					en el momento que es 8 es decir que realizo el patron 2 veces parte hacia arriba rebotando
+					en los bordes verticales
+					*/
+					if(y > (-100  -defaultWidth) ) {
+						y -= velocidad;
+					}
 				}
 			}
 		}
+		setMove();
 		verificarColision();	
 	}
 	
@@ -145,7 +147,7 @@ public class Bombardero extends Enemigo {
 	
 	public boolean puedeDisparar() {
 		bombarderoDis = (bombarderoDis + 1) % (delayDisparo*3);
-		return super.puedeDisparar() || (bombarderoDis%2 == 0 && bombarderoDis <= delayDisparo);
+		return super.puedeDisparar() || (bombarderoDis % 8 == 0 && bombarderoDis <= delayDisparo);
 	}
 
 	// El bombardero siempre será espcial; es decir, devolverá un PowerUp cuando sea destruido 

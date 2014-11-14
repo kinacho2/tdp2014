@@ -1,4 +1,4 @@
-package ProyectoX.Explosiones;
+package ProyectoX.Frames;
 
 import java.awt.Image;
 import javax.swing.ImageIcon;

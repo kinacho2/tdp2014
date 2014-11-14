@@ -18,7 +18,7 @@ public class JefeBarco extends Jefe{
 	
 	private static final int defaultWidth = 385;
 	private static final int defaultHeight = 2494;
-	private static final int defaultVel = 10;
+	private static final int defaultVel = 2;
 	
 	
 	public JefeBarco() {

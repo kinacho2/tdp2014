@@ -5,7 +5,7 @@ import java.net.URL;
 import javax.swing.ImageIcon;
 
 import ProyectoX.Disparos.Disparo;
-import ProyectoX.Explosiones.Explosion;
+import ProyectoX.Frames.Explosion;
 import ProyectoX.Naves.Nave;
 import ProyectoX.Naves.Jugador.Jugador;
 import ProyectoX.PowerUps.PowerUp;
@@ -17,6 +17,9 @@ public abstract class Enemigo extends Nave {
 	
 	
 	protected PowerUp power; 
+	
+	private int delay = 4;
+	private int cont;
 	
 	
 	public Enemigo(int vida, int vel, ImageIcon ii,int w, int h) {
@@ -32,6 +35,15 @@ public abstract class Enemigo extends Nave {
 			int vd = jugador.getDamageColision();
 			jugador.setVida(vida);
 			setVida(vd);	
+		}
+		
+		Jugador aux = jugador.getDefensa();
+		if(aux != null){
+			if (colision(aux)) {
+				int vd = aux.getDamageColision();
+				aux.setVida(vida);
+				setVida(vd);	
+			}
 		}
 		
 		// establece que el eneimgo no está en la pantalla, por lo que no está visible
@@ -102,5 +114,13 @@ public abstract class Enemigo extends Nave {
 	
 	protected void addSonido(){
 		reproductor.addSound(new Sonido(sonido,false));
+	}
+	
+	protected boolean puedeMoverse(){
+		return cont % delay == 0;
+	}
+	
+	protected void setMove(){
+		cont = (cont + 1) % delay;
 	}
 }
