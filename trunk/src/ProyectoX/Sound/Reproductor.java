@@ -11,8 +11,9 @@ public class Reproductor{
 		
 	}
 	
-	public void addSound(Sonido sound){
-		if(sound.getLoop())
+	public void addSound(String path, boolean loop){
+		Sonido sound = new Sonido(path, loop);
+		if(loop)
 			sonido = sound;
 	}
 	

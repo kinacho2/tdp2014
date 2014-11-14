@@ -30,17 +30,17 @@ public class Nivel_II extends Mapa{
 		imagenFondo = ii.getImage();
 		x = -50;
 		y = initY;
+		
 		jefe = new JefeBarco(); 
 		jefe.addReproductor(reproductor);
 		sonido = sound;
 		sonidoJefe = soundBoss;
 		
 		
-		reproductor.addSound(new Sonido(sonido,true));
+		reproductor.addSound(sonido,true);
 		
 	}
 
-	@Override
 	public Mapa nextMapa() {
 		reproductor.stop(0);
 		Mapa map = new Nivel_III();
@@ -54,7 +54,7 @@ public class Nivel_II extends Mapa{
 	
 	public int getY(){
 		if(delay % delayVel  == 0){
-			y = y + jefe.getMovimiento();
+			y += dy;
 			if(y  >= 0 ){
 				y = initY;
 			}

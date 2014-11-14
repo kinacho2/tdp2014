@@ -55,6 +55,7 @@ public abstract class Mapa{
 	protected ArrayList objetosEnPantalla;
 	protected int x;
 	protected int y;
+	protected int dy = 1;
 	protected int delay;
 	protected int delayVel = 7;
 	protected String sonido;
@@ -174,7 +175,7 @@ public abstract class Mapa{
 			if(!estaJefe){
 				if(enemiesInWindow.size() == 0){
 					reproductor.stop(1000);
-					reproductor.addSound(new Sonido(sonidoJefe,true));
+					reproductor.addSound(sonidoJefe,true);
 					m = jefe;
 					mindEnemies.addBoss(jefe);
 					estaJefe = true;
@@ -267,6 +268,14 @@ public abstract class Mapa{
 			objetosEnPantalla.add(o.clone());
 		}
 		return objetosEnPantalla;
+	}
+
+	public void pause(boolean arg) {
+		mindEnemies.pause(arg);
+		if(arg)
+			dy = 0;
+		else
+			dy = 1;
 	}
 	
 }

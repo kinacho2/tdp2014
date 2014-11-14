@@ -58,7 +58,7 @@ public class Aplication extends javax.swing.JFrame {
 	 public Aplication() {
 		rep = new Reproductor();
 		rn = new Random();
-		rep.addSound(new Sonido(sound+rn.nextInt(4)+".mp3",true));
+		rep.addSound(sound+rn.nextInt(4)+".mp3",true);
 		initGUI();
     }
 
@@ -69,7 +69,7 @@ public class Aplication extends javax.swing.JFrame {
 	    
     //inicializa el panel del juego
     
-    public void showSplash(int select){
+    public void showSplashBeforeGame(int select){
     	setVisible(false);
     	MenteSplash spl = new MenteSplash( 5000, url, this, select);
     	spl.start();
@@ -182,7 +182,7 @@ public class Aplication extends javax.swing.JFrame {
     			setVisible(false);
     			initMain();
     			setVisible(true);
-        		rep.addSound(new Sonido(sound+rn.nextInt(4)+".mp3",true));
+        		rep.addSound(sound+rn.nextInt(4)+".mp3",true);
 
             }
             

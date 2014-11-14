@@ -33,6 +33,7 @@ public class PanelJugador extends JPanel implements ActionListener{
 	private JLabel puntaje;
 	private JLabel labelVida;
 	private JLabel contadorEnemigos;
+	private boolean pause = false;
 	
 	public PanelJugador(Mapa map, int select){
 		mind = new Mind( this, select);
@@ -157,6 +158,16 @@ public class PanelJugador extends JPanel implements ActionListener{
 
         public void keyPressed(KeyEvent e) {
         	jugador.keyPressed(e);
+        	
+        	 int key = e.getKeyCode();
+             
+             if (key == KeyEvent.VK_P) {
+            	 if(!pause)
+            		 pause = true;
+            	 else
+            		 pause = false;
+            	 mind.pause(pause);
+             }
         	
         }
 

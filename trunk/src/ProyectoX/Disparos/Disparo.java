@@ -107,7 +107,7 @@ public class Disparo {
 		fColision = (A && B || E && F) && (C && D || G && H) ||  !A && !F && ( !H && D || G && H) ||  !C &&  !H && (B &&  !F ||  !A && E) && isVisible() && nave.getVisible();
 		if(fColision){
 			if(rep!=null)
-				rep.addSound(new Sonido(golpe,false)) ;
+				rep.addSound(golpe,false) ;
 		}
 		
 		return fColision;
@@ -148,7 +148,7 @@ public class Disparo {
 
 
 	public void getSound() {
-		rep.addSound(new Sonido(sonido,false)) ;
+		rep.addSound(sonido,false) ;
 	}
 	
 	public void setReproductor(Reproductor rep){
