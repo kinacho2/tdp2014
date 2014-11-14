@@ -14,6 +14,8 @@ import ProyectoX.Paneles.PanelEnemies;
 import ProyectoX.Paneles.PanelInit;
 import ProyectoX.Paneles.PanelJugador;
 import ProyectoX.Paneles.PanelSelect;
+import ProyectoX.Frames.MenteSplash;
+import ProyectoX.Frames.SplashScreen;
 import ProyectoX.Mapas.Mapa;
 import ProyectoX.Mapas.Nivel_I;
 import ProyectoX.Mapas.Nivel_II;
@@ -50,7 +52,8 @@ public class Aplication extends javax.swing.JFrame {
 	private static final String sound = "/ProyectoX/sounds/music/menu_";
 	private Reproductor rep;
 	private Random rn;
-	int round = 0;
+	private int round = 0;
+	private URL url = (Aplication.class.getClassLoader().getResource("ProyectoX/img/Fondos/fondoNivel1.png"));
 
 	 public Aplication() {
 		rep = new Reproductor();
@@ -66,9 +69,17 @@ public class Aplication extends javax.swing.JFrame {
 	    
     //inicializa el panel del juego
     
+    public void showSplash(int select){
+    	setVisible(false);
+    	MenteSplash spl = new MenteSplash( 5000, url, this, select);
+    	spl.start();
+    }
+    
     public void initGame(int select){
     	rep.stop(100);
+    	
     	setVisible(false);
+    	
     	
     	game = new JPanel();
     	
@@ -111,14 +122,17 @@ public class Aplication extends javax.swing.JFrame {
         panel.add(panelEnemies);
         panelEnemies.setBounds(0, 0, 800, 600);
         
+        
         // Inicia el hilo de los Enemigos
         setVisible(true);
+       
         panelEnemies.getMindEnemies().start();
         
 	}
 	    
   
     private void initGUI() {
+    	
     	initPrimerPanel();
 		setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
         setSize(800, 600);

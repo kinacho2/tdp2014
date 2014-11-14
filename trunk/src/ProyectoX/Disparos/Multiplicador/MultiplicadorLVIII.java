@@ -21,6 +21,7 @@ public class MultiplicadorLVIII extends DisparoMultiplicador{
 		d[2] = new Disparo(x, y, -0.4d, dy, velocidad);
 		d[3] = new Disparo(x, y + 30, 0.4d, -dy, velocidad);
 		d[4] = new Disparo(x, y + 30, -0.4d, -dy, velocidad);
+		setearReproductor(d);
 		return d;
 	}
 

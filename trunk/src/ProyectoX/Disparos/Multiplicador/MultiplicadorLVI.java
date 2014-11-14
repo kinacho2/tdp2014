@@ -19,7 +19,8 @@ public class MultiplicadorLVI extends DisparoMultiplicador{
 		
 		d[0] = new Disparo(x  - 10 , y, 0, 1, velocidad);
 		d[1] = new Disparo(x  + 10 , y, 0, 1, velocidad);
-	
+		
+		setearReproductor(d);
 		
 		return d;
 	}

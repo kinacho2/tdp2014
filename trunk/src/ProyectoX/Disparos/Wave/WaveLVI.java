@@ -22,7 +22,7 @@ public class WaveLVI extends DisparoWave{
 		d[0] = new DisparoWave(x  - 10 , y, 2, 1);
 		d[1] = new DisparoWave(x  + 10 , y, -2, 1);
 	
-		
+		setearReproductor(d);
 		return d;
 	}
 

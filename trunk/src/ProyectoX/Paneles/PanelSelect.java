@@ -214,7 +214,7 @@ public class PanelSelect extends JPanel{
 		public void actionPerformed(ActionEvent arg0) {
 			setVisible(false);
 			//setVisible(false);
-			api.initGame(3);
+			api.showSplash(3);
 			//setVisible(true);
            
 		}

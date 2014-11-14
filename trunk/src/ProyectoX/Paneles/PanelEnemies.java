@@ -31,7 +31,7 @@ public class PanelEnemies extends JPanel {
 	
 	public synchronized void paint(Graphics g) {
 		 
-	        //super.paint(g);
+	        super.paint(g);
 
 	        Graphics2D g2d = (Graphics2D) g;
 	        
