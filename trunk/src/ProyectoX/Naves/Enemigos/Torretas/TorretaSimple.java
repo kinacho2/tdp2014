@@ -18,6 +18,7 @@ public class TorretaSimple extends Torreta{
 	public TorretaSimple(int xx, int yy) {
 		super(defaultVida, new ImageIcon(url), xx, yy, defaultWidth, defaultHeight);
 		
+		height = 30;
 	} 
 	
 	

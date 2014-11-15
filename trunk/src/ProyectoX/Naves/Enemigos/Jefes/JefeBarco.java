@@ -6,6 +6,7 @@ import javax.swing.ImageIcon;
 
 import ProyectoX.Naves.Nave;
 import ProyectoX.Naves.Enemigos.Torretas.FabricaTorretasDobles;
+import ProyectoX.Naves.Enemigos.Torretas.FabricaTorretasGrandes;
 import ProyectoX.Naves.Enemigos.Torretas.FabricaTorretasSimples;
 import ProyectoX.Naves.Enemigos.Torretas.Torreta;
 
@@ -14,6 +15,7 @@ public class JefeBarco extends Jefe{
 	protected static final URL url = (Nave.class.getClassLoader().getResource("ProyectoX/img/Enemigo/JefeBarco/JefeBarco.png"));
 	protected static final String boundsDouble = "/ProyectoX/img/Enemigo/JefeBarco/posicionesTorretasDobles.txt";
 	protected static final String boundsSimple = "/ProyectoX/img/Enemigo/JefeBarco/posicionesTorretasSimples.txt";
+	protected static final String boundsGrande = "/ProyectoX/img/Enemigo/JefeBarco/posicionesTorretasGrandes.txt";
 	
 	
 	private static final int defaultWidth = 385;
@@ -28,10 +30,12 @@ public class JefeBarco extends Jefe{
 		y = - defaultHeight;
 		
 		int cantTorretasDobles = 10;
-		int cantTorretasSimples = 9;
+		int cantTorretasSimples = 5;
+		int cantTorretasGrandes = 4;
 		
 		cargarArchivoTorretas(boundsDouble, new FabricaTorretasDobles(), cantTorretasDobles);
 		cargarArchivoTorretas(boundsSimple, new FabricaTorretasSimples(), cantTorretasSimples);
+		cargarArchivoTorretas(boundsGrande, new FabricaTorretasGrandes(), cantTorretasGrandes);
 		puntaje = 600;
 			
 		

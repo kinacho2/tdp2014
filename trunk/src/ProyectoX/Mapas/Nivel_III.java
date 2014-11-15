@@ -23,7 +23,7 @@ public class Nivel_III extends Mapa{
 	public Nivel_III(){
 		super();
 		rn = new Random(13);
-		cantEnemies = 201;
+		cantEnemies = 1;
 		power = new PUPBuilder(16);
 		enBuilder = new EnemiesBuilder(19);
 		ImageIcon ii = new ImageIcon(fondo);
