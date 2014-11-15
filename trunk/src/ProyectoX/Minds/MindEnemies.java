@@ -9,6 +9,7 @@ import ProyectoX.Naves.Enemigos.Enemigo;
 import ProyectoX.Naves.Enemigos.Jefes.Jefe;
 import ProyectoX.Naves.Jugador.Jugador;
 import ProyectoX.Paneles.PanelEnemies;
+import ProyectoX.Sound.Reproductor;
 
 public class MindEnemies extends Thread  {
 
@@ -23,6 +24,8 @@ public class MindEnemies extends Thread  {
 	private long init;
 	private int delay = 8000;
 	private boolean pause = false;
+	private Reproductor rep;
+	private String outro = "/ProyectoX/sounds/music/outro.mp3";
 	
 	public MindEnemies(PanelEnemies p) {
 		enemies = new ArrayList();
@@ -78,7 +81,9 @@ public class MindEnemies extends Thread  {
 						}
 						if(muerteJefe){
 							if(System.currentTimeMillis() - init > delay){
-								mapa.nextMapa();
+								rep.stop(100);
+								rep.addSound(outro, true);
+								panel.jefeMuerto();
 								jefe = false;
 								muerteJefe = false;
 							}
@@ -155,6 +160,10 @@ public class MindEnemies extends Thread  {
 	
 	public void pause(boolean arg){
 		pause = arg;
+	}
+	
+	public void setReproductor(Reproductor rep){
+		this.rep = rep;
 	}
 }
 

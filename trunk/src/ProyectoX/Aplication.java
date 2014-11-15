@@ -11,6 +11,7 @@ import javax.swing.JOptionPane;
 import javax.swing.JPanel;
 
 import ProyectoX.Paneles.PanelEnemies;
+import ProyectoX.Paneles.PanelGame;
 import ProyectoX.Paneles.PanelInit;
 import ProyectoX.Paneles.PanelJugador;
 import ProyectoX.Paneles.PanelSelect;
@@ -45,14 +46,10 @@ public class Aplication extends javax.swing.JFrame {
 	private JPanel principal;
 	private JPanel main;
 	private JPanel game;
-	private PanelJugador panel;
-	private Mapa map;
-	private JPanel bar;
-	private JButton volverMenu;
 	private static final String sound = "/ProyectoX/sounds/music/menu_";
 	private Reproductor rep;
 	private Random rn;
-	private int round = 0;
+	
 	private URL url = (Aplication.class.getClassLoader().getResource("ProyectoX/img/Fondos/fondoNivel1.png"));
 
 	 public Aplication() {
@@ -71,7 +68,7 @@ public class Aplication extends javax.swing.JFrame {
     
     public void showSplashBeforeGame(int select){
     	setVisible(false);
-    	MenteSplash spl = new MenteSplash( 5000, url, this, select);
+    	MenteSplash spl = new MenteSplash(5000, url, this, select);
     	spl.start();
     }
     
@@ -80,53 +77,11 @@ public class Aplication extends javax.swing.JFrame {
     	
     	setVisible(false);
     	
-    	
-    	game = new JPanel();
-    	
-    	map = new Nivel_II();
-		getContentPane().add(game, BorderLayout.CENTER);
-		game.setBackground(new java.awt.Color(0,0,0));
-		
-		//panel del jugador
-		panel = new PanelJugador(map,select);
-		
-		game.add(panel);
-		panel.setLayout(null);
-		panel.setPreferredSize(new java.awt.Dimension(800, 520));
-		
-		// Barra de estado
-	
-		bar = new JPanel();
-		game.add(bar);
-		bar.setLayout(null);
-		bar.setPreferredSize(new java.awt.Dimension(800, 50));
-		bar.setBackground(new java.awt.Color(0,0,0));
-		
-		panel.setBar(bar);
-	
-        // boton volver al menu
-		
-		volverMenu = new JButton("Salir al Menu");
-		volverMenu.addActionListener(new OyenteVolver());
-		volverMenu.setBounds(25, 11, 150, 25);
-		volverMenu.setForeground(new java.awt.Color(0,255,0));
-		volverMenu.setBackground(new java.awt.Color(0,0,0));
-		volverMenu.setBorder(BorderFactory.createCompoundBorder(null,null));
-		volverMenu.setFont(new java.awt.Font("Segoe UI",0,20));
-		bar.add(volverMenu);
-		
-		
-        // panel de los enemigos
-		
-        PanelEnemies panelEnemies = new PanelEnemies(map);
-        panel.add(panelEnemies);
-        panelEnemies.setBounds(0, 0, 800, 600);
+    	game = new PanelGame(this,select,rep);    
         
-        
-        // Inicia el hilo de los Enemigos
         setVisible(true);
        
-        panelEnemies.getMindEnemies().start();
+        
         
 	}
 	    
@@ -166,29 +121,7 @@ public class Aplication extends javax.swing.JFrame {
 		setVisible(true);
 	}
 	
-	private class OyenteVolver implements ActionListener{
-
-		public void actionPerformed(ActionEvent arg0) {
-			
-            int verd;
-            
-            JOptionPane dialogo = new JOptionPane();
-            
-            verd = dialogo.showConfirmDialog(null, "Desea volver al menu principal?", "Atencion",JOptionPane.YES_NO_OPTION);
-			
-            if(verd == 0){
-            	map.stop();
-            	game.setVisible(false);
-    			setVisible(false);
-    			initMain();
-    			setVisible(true);
-        		rep.addSound(sound+rn.nextInt(4)+".mp3",true);
-
-            }
-            
-    		
-		}
-	}
+	
 	
 	private void cerrarJuego() {
 		this.dispose();

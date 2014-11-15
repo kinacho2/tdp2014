@@ -10,7 +10,7 @@ import javax.swing.JPanel;
 
 import ProyectoX.Aplication;
 
-public class PanelInit extends JPanel{
+public class PanelInit extends AbstractPanel{
 
 	private Aplication api;
 	private JButton quit;
@@ -74,5 +74,11 @@ public class PanelInit extends JPanel{
             api.initMain();
             
 		}
+	}
+
+	@Override
+	public void function(int select) {
+		// TODO Auto-generated method stub
+		
 	}
 }

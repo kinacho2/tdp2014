@@ -233,7 +233,8 @@ public abstract class Nave {
 	protected abstract String getSonidoExplosion();
 	
 	protected void addSonidoExplosion(){
-		reproductor.addSound(getSonidoExplosion(),false);
+		if(!fueraDePantalla())
+			reproductor.addSound(getSonidoExplosion(),false);
 	}
 }
 

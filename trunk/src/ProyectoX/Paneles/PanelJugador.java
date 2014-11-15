@@ -22,7 +22,7 @@ import ProyectoX.Frames.Objeto;
 import ProyectoX.Mapas.Mapa;
 import ProyectoX.Minds.Mind;
 
-public class PanelJugador extends JPanel implements ActionListener{
+public class PanelJugador extends AbstractPanel implements ActionListener{
 
 	private Mind mind;
 	private Mapa mapa;
@@ -188,6 +188,12 @@ public class PanelJugador extends JPanel implements ActionListener{
 
 	public void setMapa(Mapa map) {
 		mapa = map;
+		
+	}
+
+	@Override
+	public void function(int select) {
+		// TODO Auto-generated method stub
 		
 	}
 	
