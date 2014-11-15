@@ -80,8 +80,6 @@ public class Aplication extends javax.swing.JFrame {
     	game = new PanelGame(this,select,rep);    
         
         setVisible(true);
-       
-        
         
 	}
 	    

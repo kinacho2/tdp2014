@@ -27,8 +27,8 @@ public class JefeBarco extends Jefe{
 		x = 400 - defaultWidth/2;
 		y = - defaultHeight;
 		
-		int cantTorretasDobles = 9;
-		int cantTorretasSimples = 6;
+		int cantTorretasDobles = 10;
+		int cantTorretasSimples = 9;
 		
 		cargarArchivoTorretas(boundsDouble, new FabricaTorretasDobles(), cantTorretasDobles);
 		cargarArchivoTorretas(boundsSimple, new FabricaTorretasSimples(), cantTorretasSimples);
