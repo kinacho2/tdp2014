@@ -157,11 +157,11 @@ public class PanelSelect extends AbstractPanel{
 				veloz.setSelected(true);
 				aux = veloz;
 			}
-			if(round == 1){
+			if(round == 1 || round == -2){
 				normal.setSelected(true);
 				aux = normal;
 			}
-			if(round == 2){
+			if(round == 2 || round == -1){
 				resistente.setSelected(true);
 				aux = resistente;
 			}

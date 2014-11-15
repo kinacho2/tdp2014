@@ -14,6 +14,7 @@ import ProyectoX.Aplication;
 import ProyectoX.Mapas.Mapa;
 import ProyectoX.Mapas.Nivel_I;
 import ProyectoX.Mapas.Nivel_II;
+import ProyectoX.Mapas.Nivel_III;
 import ProyectoX.Sound.Reproductor;
 
 
@@ -33,7 +34,7 @@ public class PanelGame extends AbstractPanel{
 		this.rep = rep;
 		rn = new Random();
 		
-		map = new Nivel_II();
+		map = new Nivel_III();
 		api.add(this, BorderLayout.CENTER);
 		setBackground(new java.awt.Color(0,0,0));
 		

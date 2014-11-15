@@ -74,7 +74,7 @@ public abstract class Jefe extends Enemigo{
 		}
 	}
 	public void disparar() {
-		
+		verificarColision();
 	}
 
 	public boolean isEspecial() {
