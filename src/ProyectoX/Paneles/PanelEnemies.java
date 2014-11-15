@@ -4,23 +4,29 @@ import java.awt.Graphics;
 import java.awt.Graphics2D;
 import java.awt.Toolkit;
 import java.awt.geom.AffineTransform;
+import java.net.URL;
 import java.util.ArrayList;
 
 import javax.swing.JPanel;
 
+import ProyectoX.Aplication;
 import ProyectoX.Disparos.Disparo;
+import ProyectoX.Frames.MenteSplash;
 import ProyectoX.Frames.Objeto;
 import ProyectoX.Mapas.Mapa;
 import ProyectoX.Minds.MindEnemies;
 import ProyectoX.Naves.Enemigos.Enemigo;
 
-public class PanelEnemies extends JPanel {
+public class PanelEnemies extends AbstractPanel {
 
 	protected MindEnemies mind;
 	protected Mapa mapa;
-	
+	private URL url = (Aplication.class.getClassLoader().getResource("ProyectoX/img/Fondos/fondoNivel1.png"));
+	private Aplication api;
 
-	public PanelEnemies(Mapa map ) {
+	public PanelEnemies(Mapa map, Aplication api) {
+		
+		this.api = api;
 		mind = new MindEnemies(this);
 		map.setMindEnemies(mind);
 		mapa = map;
@@ -78,6 +84,20 @@ public class PanelEnemies extends JPanel {
 
 	public void setMapa(Mapa map) {
 		mapa = map;
+		
+	}
+
+	@Override
+	public void function(int select) {
+		mapa.nextMapa();
+		api.setVisible(true);
+	}
+
+	public void jefeMuerto() {
+		
+		api.setVisible(false);
+		MenteSplash mente = new MenteSplash(5000,url,this,5);
+		mente.start();
 		
 	}
 

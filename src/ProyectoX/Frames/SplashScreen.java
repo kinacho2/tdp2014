@@ -29,28 +29,10 @@ public class SplashScreen extends JWindow {
 	public void showSplash() {
 		this.setLocationByPlatform(true);
 		
-
-		
 		int width = 800;
 		int height = 600;
 		setBackground(new java.awt.Color(0,0,0));
 		setLayout(null);
-		
-		JLabel copyrt = new JLabel("", JLabel.CENTER);
-		copyrt.setFont(new Font("Sans-Serif", Font.BOLD, 12));
-		copyrt.setForeground(new java.awt.Color(255,42,00));
-		copyrt.setText("Chaos Wind");
-		copyrt.setBounds(18, 405, 464, 43);
-		//add(copyrt);
-
-		 
-		jLabelTitle = new JLabel();
-		jLabelTitle.setText("Chaos Wind");
-		jLabelTitle.setFont(new java.awt.Font("Ubuntu",0,72));
-		jLabelTitle.setHorizontalAlignment(SwingConstants.CENTER);
-		jLabelTitle.setForeground(new java.awt.Color(255,45,0));
-		jLabelTitle.setBounds(0, 298, 437, 157);
-		//add(jLabelTitle);
 		
 		image = (new ImageIcon(path).getImage().getScaledInstance(800, 600, Image.SCALE_DEFAULT));
 		 
@@ -66,7 +48,6 @@ public class SplashScreen extends JWindow {
 			try {
 				Thread.sleep(100);
 			} catch (InterruptedException e) {
-				// TODO Auto-generated catch block
 				e.printStackTrace();
 			}
 			repaint();

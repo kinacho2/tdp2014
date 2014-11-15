@@ -128,6 +128,7 @@ public abstract class Mapa{
 	public void setMindEnemies(MindEnemies mindEnemies) {
 		this.mindEnemies = mindEnemies;
 		mindEnemies.setMapa(this);
+		mindEnemies.setReproductor(reproductor);
 	}
 	
 	public int sizeMisilesEnemigos() {

@@ -14,7 +14,7 @@ import ProyectoX.Sound.Sonido;
 public abstract class Enemigo extends Nave {
 	protected static final URL explode = (Nave.class.getClassLoader().getResource("ProyectoX/img/Explosiones/nave.gif"));
 	protected static final String sonido = "/ProyectoX/sounds/disparo.mp3";
-	private String explodeSound = "/ProyectoX/sounds/explode.mp3";
+	private String explodeSound = "/ProyectoX/sounds/explode2.mp3";
 	
 	protected PowerUp power; 
 	
