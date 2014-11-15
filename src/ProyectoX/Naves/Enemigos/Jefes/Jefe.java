@@ -52,7 +52,6 @@ public abstract class Jefe extends Enemigo{
 				
 				while(c!=' '){
 					ss+=c;
-					//System.out.println(c);
 					c = (char) lector.read();
 					
 				}
@@ -111,21 +110,7 @@ public abstract class Jefe extends Enemigo{
 		}
 	}
 	
-	public synchronized int bomba(){
-		if(torretas.size() > 2){
-			Random rn = new Random(4);
-			Enemigo m = (Enemigo) torretas.get(rn.nextInt(torretas.size()));
-			m.setVisible();
-			m = (Enemigo) torretas.get(rn.nextInt(torretas.size()));
-			m.setVisible();
-		}
-		else{
-			for(int i = 0; i < torretas.size(); i++){
-				Enemigo m = (Enemigo) torretas.get(i);
-				m.setVisible();
-			}
-		}
-		//modificar a gusto
+	public int bomba(){
 		return 0;
 	}
 	
@@ -163,7 +148,6 @@ public abstract class Jefe extends Enemigo{
 				i++;
 			}
 		}
-		//System.out.println(pos);
 		return res;
 		
 		

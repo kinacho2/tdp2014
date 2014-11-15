@@ -4,17 +4,20 @@ import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 
 import javax.swing.BorderFactory;
+import javax.swing.ImageIcon;
 import javax.swing.JButton;
+import javax.swing.JLabel;
 import javax.swing.JOptionPane;
-import javax.swing.JPanel;
 
 import ProyectoX.Aplication;
+import ProyectoX.Naves.Nave;
 
 public class PanelInit extends AbstractPanel{
 
 	private Aplication api;
 	private JButton quit;
 	private JButton newGame;
+	private JLabel fondo;
 	
 	public PanelInit(Aplication api){
 		super();
@@ -22,6 +25,7 @@ public class PanelInit extends AbstractPanel{
 		
 		setLayout(null);
 		setBackground(new java.awt.Color(0,0,0));
+		
 		
 		{
 			newGame = new JButton();
@@ -46,6 +50,14 @@ public class PanelInit extends AbstractPanel{
 			quit.setBorder(BorderFactory.createCompoundBorder(null, null));
 			quit.addActionListener(new OyenteQuit());
 		}
+		{
+			
+			ImageIcon icon = new ImageIcon(Nave.class.getClassLoader().getResource("ProyectoX/img/Menu_barras/menu.gif"));
+			fondo = new JLabel(icon);
+			fondo.setBounds(0, 0, 800, 600);
+			add(fondo);
+		}
+		
 	}
 	
 	private class OyenteQuit implements ActionListener{

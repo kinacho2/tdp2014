@@ -58,7 +58,13 @@ public abstract class Torreta extends Enemigo {
     }
 	
 	public int bomba(){
-		return 0;
+		int p = 0;
+		if(!fueraDePantalla()){
+			setVisible();
+			p = puntaje;
+		}
+		return p;
+		
 	}
 	
 	

@@ -27,7 +27,7 @@ public class PanelSelect extends AbstractPanel{
 	private JLabel labelResistente;
 	private JLabel labelNormal;
 	private JLabel labelVeloz;
-	private JLabel resistenteStatics, normalStatics, velozStatics;
+	private JLabel resistenteStatics, normalStatics, velozStatics, fondo;
 	private Aplication api;
 	private int round = 0;
 	
@@ -129,6 +129,13 @@ public class PanelSelect extends AbstractPanel{
 			atras.setFont(new java.awt.Font("Segoe UI",0,20));
 			atras.setForeground(new java.awt.Color(0,255,0));
 			atras.addActionListener(new OyenteAtras());
+		}
+		{
+			
+			ImageIcon icon = new ImageIcon(Nave.class.getClassLoader().getResource("ProyectoX/img/Menu_barras/menu.gif"));
+			fondo = new JLabel(icon);
+			fondo.setBounds(0, 0, 800, 600);
+			add(fondo);
 		}
 		round = 0;
 		veloz.addKeyListener(new OyenteBotonesMain());
