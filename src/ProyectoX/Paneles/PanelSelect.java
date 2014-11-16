@@ -135,6 +135,7 @@ public class PanelSelect extends AbstractPanel{
 			ImageIcon icon = new ImageIcon(Nave.class.getClassLoader().getResource("ProyectoX/img/Menu_barras/menu.gif"));
 			fondo = new JLabel(icon);
 			fondo.setBounds(0, 0, 800, 600);
+			fondo.setBorder(null);
 			add(fondo);
 		}
 		round = 0;

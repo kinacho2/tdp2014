@@ -2,6 +2,7 @@ package ProyectoX.Naves.Enemigos.Torretas;
 
 import java.awt.geom.AffineTransform;
 import java.net.URL;
+import java.util.Random;
 
 import javax.swing.ImageIcon;
 
@@ -20,7 +21,8 @@ public abstract class Torreta extends Enemigo {
 		y = yy;
 		velocidadMisil = -6;
 		puntaje = 10;
-		setFrecuenciaDeDisparo(5 , 50);
+		Random rn = new Random();
+		setFrecuenciaDeDisparo(rn.nextInt(50) , 50);
 	}
 
 	public void disparar() {

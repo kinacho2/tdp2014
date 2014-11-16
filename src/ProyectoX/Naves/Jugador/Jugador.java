@@ -14,6 +14,7 @@ import ProyectoX.Naves.Jugador.Defensa.Defensa;
 import ProyectoX.Sound.Reproductor;
 
 public abstract class Jugador extends Nave {
+	protected int hearts = 3;
 	protected ImageIcon icon;
 	protected ImageIcon iconDer;
 	protected ImageIcon iconIzq;
@@ -24,12 +25,16 @@ public abstract class Jugador extends Nave {
 	protected int bombas;
 	private String explodeSound = "/ProyectoX/sounds/explode.mp3";
 	private boolean pause;
+	private long init;
+	private int invulnerable = 5000;
 	
 	public Jugador(int vida, int vel, ImageIcon icon, ImageIcon iconDer, ImageIcon iconIzq){
 		super(vida, vel, icon, new ImageIcon(explode), icon.getIconWidth(), icon.getIconHeight());
 		
 		x = 400;
 		y = 450;
+		
+		init = System.currentTimeMillis();
 		
 		this.icon = icon;
 		this.iconDer = iconDer;
@@ -163,12 +168,14 @@ public abstract class Jugador extends Nave {
 	 }
 
 	public void setVida(int vd) {
-		if(vida > 0)
-			vida-=vd;		
-		if(vida > 100)
-			vida = 100;
-		if(vida <= -1) 
-			setVisible();
+		if(System.currentTimeMillis() - init > invulnerable){
+			if(vida > 0)
+				vida-=vd;		
+			if(vida > 100)
+				vida = 100;
+			if(vida <= -1) 
+				setVisible();
+		}
 	}
 	 
 	@Override
@@ -228,6 +235,8 @@ public abstract class Jugador extends Nave {
 	}
 	
 	public void reset(){
+		hearts--;
+		init = System.currentTimeMillis();
 		x = 400;
 		y = 450;
 		dropDefensa();
@@ -249,6 +258,14 @@ public abstract class Jugador extends Nave {
 	
 	public void pause(boolean arg){
 		pause = arg;
+	}
+
+	public int getHearts() {
+		return hearts;
+	}
+
+	public void setHearts() {
+		hearts ++;
 	}
 	
 }
