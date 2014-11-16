@@ -18,7 +18,7 @@ public abstract class Enemigo extends Nave {
 	
 	protected PowerUp power; 
 	
-	private int delay = 4;
+	protected int delay = 4;
 	private int cont;
 	
 	

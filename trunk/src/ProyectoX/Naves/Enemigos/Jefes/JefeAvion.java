@@ -1,6 +1,7 @@
 package ProyectoX.Naves.Enemigos.Jefes;
 
 import java.net.URL;
+import java.util.Random;
 
 import javax.swing.ImageIcon;
 
@@ -14,13 +15,15 @@ public class JefeAvion extends Jefe{
 	protected static final URL url = (Nave.class.getClassLoader().getResource("ProyectoX/img/Enemigo/JefeAvion/JefeAvion.png"));
 	protected static final String boundsDouble = "/ProyectoX/img/Enemigo/JefeAvion/posicionesTorretasDobles.txt";
 	protected static final String boundsSimple = "/ProyectoX/img/Enemigo/JefeAvion/posicionesTorretasSimples.txt";
-	
+	private static final String alarm = "/ProyectoX/sounds/alarm.mp3";
+
 	
 	private static final int defaultWidth = 1275;
 	private static final int defaultHeight = 636;
 	private static final int defaultVel = 2;
 	
-	private final int hm = 46;
+	
+	private final int hm = 55;
 	private final int h1 = 584;
 	private final int h1a = 522;
 	private final int h2 = 500;
@@ -38,22 +41,29 @@ public class JefeAvion extends Jefe{
 	private final int h5w1 = 0;
 	private final int h5w2 = 1275;
 	
-	private boolean primero = true;
-	private boolean segundo = true;
-	private boolean tercero = true;
-	private boolean cuarto = true;
-	private boolean quinto = true;
-	
+	private boolean primero = false;
+	private boolean segundo = false;
+	private boolean tercero =  false;
+	private boolean cuarto = false;
+	private boolean quinto = false;
+	private boolean sexto = false;
+	private boolean septimo = false;
+	private boolean octavo = false;
+	private int control = 3;
+	private boolean random = true;
+	private Random rn;
+	private long init;
+	private int delay = 5000;
 	
 	public JefeAvion() {
 		super(2000, defaultVel, new ImageIcon(url), defaultWidth, defaultHeight);
-		
+		rn = new Random();
 		x = 400 - defaultWidth/2;
 		y = - defaultHeight;
-		
-		int cantTorretasDobles = 9;
-		int cantTorretasSimples = 5;
-		
+		delay = 2;
+		int cantTorretasDobles = 10;
+		int cantTorretasSimples = 7;
+		init = System.currentTimeMillis();
 		cargarArchivoTorretas(boundsDouble, new FabricaTorretasDobles(), cantTorretasDobles);
 		cargarArchivoTorretas(boundsSimple, new FabricaTorretasSimples(), cantTorretasSimples);
 		
@@ -70,39 +80,168 @@ public class JefeAvion extends Jefe{
 			height = defaultHeight;
 			
 		}
-		
-		if(y + defaultHeight < 400 && primero){
-			y +=velocidad;
-			for(int i=0; i<torretas.size(); i++){
-				Torreta t =(Torreta)torretas.get(i);
-				t.setPosition(0, +velocidad);
-				if(!t.getVisible()){
-					torretas.remove(i);
+		if(System.currentTimeMillis() - init > delay)
+			if(puedeMoverse()){
+				if(random){
+					int select = -1;
+					boolean move = false;
+					while(!move){
+						select = rn.nextInt(4);
+						if(select == 0 || select == 3){
+							move = true;
+						}
+						if(select == 2 && hayTorretas(x + defaultWidth/2 + 100, x+defaultWidth)){
+							move = true;
+						}
+						if(select == 1 && hayTorretas(x, x+defaultWidth/2 - 100)){
+							move = true;
+						}
+					} 
+				
+					
+					control = select;
+	
+					int auxX = x;
+					int auxY = y;
+					
+					if(select == 0){
+						primero = segundo = true;
+						x = -237;
+						y = -defaultHeight;
+						velocidad = 4;
+					}
+					if(select == 1){
+						tercero = cuarto = true;
+						x = 800;
+						y = 0;
+						velocidad = 3;
+					}
+					if(select == 2){
+						quinto = sexto = true;
+						x = - defaultWidth;
+						y = 0;
+						velocidad = 3;
+					}
+					if(select == 3){
+						septimo = octavo = true;
+						x = -237;
+						y = 800;
+						velocidad = 5;
+						reproductor.addSound(alarm, false);
+					}
+					actualizarTorretas(x-auxX, y-auxY);
+					
+					random = false;
 				}
-			}
-		}
-		else{
-			primero = false;
-			if(y + defaultHeight > -100){
-				y-=velocidad;
-				for(int i=0; i<torretas.size(); i++){
-					Torreta t =(Torreta)torretas.get(i);
-					t.setPosition(0, -velocidad);
-					if(!t.getVisible()){
-						torretas.remove(i);
+				
+				
+				//movimiento de arriba a abajo
+				if(!tercero && !cuarto && !quinto && !sexto && !septimo && !octavo)
+				if(primero && y + defaultHeight < 500){
+					y +=velocidad;
+					actualizarTorretas(0, +velocidad);
+				}
+				else{
+					primero = false;
+					if(y + defaultHeight > -100 && segundo){
+						y-=velocidad;
+						actualizarTorretas(0, -velocidad);
+					}
+					else {
+						segundo = false;
+						random = true;
+						init = System.currentTimeMillis();
+					}
+				}
+				
+				//movimiento de derecha a izquierda
+				if(!primero && !segundo && !quinto && !sexto && !septimo && !octavo)
+				if(tercero && x > 250){	
+					x-=velocidad;
+					actualizarTorretas(-velocidad,0);
+				}
+				else{
+					tercero = false;
+					if(x < 900 && cuarto){
+						x+=velocidad;
+						actualizarTorretas(velocidad,0);
+					}
+					else{
+						cuarto = false;
+						random = true;
+						init = System.currentTimeMillis();
+					}
+				
+				}
+				
+				//movimiento de izquierda a derecha
+				if(!primero && !segundo && !tercero && !cuarto && !septimo && !octavo)
+				if(quinto && x + defaultWidth < 550){
+					
+					x+=velocidad;
+					actualizarTorretas(velocidad,0);
+				}
+				else{
+					quinto = false;
+					if(x + defaultWidth > -100 && sexto){
+						x-=velocidad;
+						actualizarTorretas(-velocidad,0);
+					}
+					else{
+						sexto = false;
+						random = true;
+						init = System.currentTimeMillis();
+					}
+				}
+				
+				//movimiento de abajo a arriba
+				if(!primero && !segundo && !tercero && !cuarto && !quinto && !sexto)
+				if(septimo && y > 250){
+					y-=velocidad;
+					actualizarTorretas(0,-velocidad);
+				}
+				else{
+					septimo = false;
+					if(y < 700 && octavo){
+						y+=velocidad;
+						actualizarTorretas(0,velocidad);
+					}
+					else{
+						octavo = false;
+						random = true;
+						init = System.currentTimeMillis();
 					}
 				}
 			}
-			else
-				primero = true;
-		}
-		
+		setMove();
 	}
 
+	private void actualizarTorretas(int dx, int dy){
+		for(int i=0; i<torretas.size(); i++){
+			Torreta t =(Torreta)torretas.get(i);
+			t.setPosition(dx, dy);
+			if(!t.getVisible()){
+				torretas.remove(i);
+			}
+		}
+	}
+	
+	private boolean hayTorretas(int x1,int x2){
+		boolean ret = false;
+		int i = 0;
+		while(!ret && i < torretas.size()){
+			Torreta aux = (Torreta) torretas.get(i);
+			ret = aux.getX() > x1 && aux.getX() < x2;
+			i++;
+		}
+		return ret;
+	}
+	
 
 	public int getMovimiento() {
 		return 0;
 	}
+	
 
 	public boolean colision(Nave nave) {
 		

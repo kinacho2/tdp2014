@@ -106,7 +106,7 @@ public abstract class Nave {
     }
     
     protected boolean puedeDisparar() {
-    	return dis % longDis == 0;
+    	return !fueraDePantalla() && dis % longDis == 0;
     	
     }
     

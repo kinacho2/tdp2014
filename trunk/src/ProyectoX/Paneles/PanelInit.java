@@ -52,7 +52,7 @@ public class PanelInit extends AbstractPanel{
 		}
 		{
 			
-			ImageIcon icon = new ImageIcon(Nave.class.getClassLoader().getResource("ProyectoX/img/Menu_barras/menu.gif"));
+			ImageIcon icon = new ImageIcon(PanelInit.class.getClassLoader().getResource("ProyectoX/img/Menu_barras/menu.gif"));
 			fondo = new JLabel(icon);
 			fondo.setBounds(0, 0, 800, 600);
 			add(fondo);

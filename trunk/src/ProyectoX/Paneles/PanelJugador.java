@@ -2,6 +2,7 @@ package ProyectoX.Paneles;
 
 import java.awt.Graphics;
 import java.awt.Graphics2D;
+import java.awt.Image;
 import java.awt.Toolkit;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
@@ -10,6 +11,7 @@ import java.awt.event.KeyListener;
 import java.awt.geom.AffineTransform;
 import java.util.ArrayList;
 
+import javax.swing.ImageIcon;
 import javax.swing.JLabel;
 import javax.swing.JPanel;
 
@@ -29,7 +31,9 @@ public class PanelJugador extends AbstractPanel implements ActionListener{
 	private Jugador jugador;
 	
 	private JPanel bar;
-	    
+	
+	private JLabel heart;
+	private JLabel cantHearts;
 	private JLabel puntaje;
 	private JLabel labelVida;
 	private JLabel contadorEnemigos;
@@ -62,7 +66,7 @@ public class PanelJugador extends AbstractPanel implements ActionListener{
 		bar.add(labelVida);
 		
 		contadorEnemigos = new JLabel("Enemigos restantes: " + mapa.cantEnemies());
-		contadorEnemigos.setBounds(800-500, 0, 250, 50);
+		contadorEnemigos.setBounds(800-480, 0, 250, 50);
 		bar.add(contadorEnemigos);
 		
 		labelVida.setFont(new java.awt.Font("Segoe UI",0,20));
@@ -71,7 +75,20 @@ public class PanelJugador extends AbstractPanel implements ActionListener{
 		puntaje.setForeground(new java.awt.Color(0,0,255));
 		contadorEnemigos.setFont(new java.awt.Font("Segoe UI",0,20));
 		contadorEnemigos.setForeground(new java.awt.Color(0,255,0));
-    
+		
+		ImageIcon ii = new ImageIcon(PanelInit.class.getClassLoader().getResource("ProyectoX/img/Menu_barras/heart.png"));
+		ImageIcon aux = new ImageIcon(ii.getImage().getScaledInstance(20, 20, Image.SCALE_DEFAULT));
+		heart = new JLabel(aux);
+		heart.setBounds(800-600, 0, 50, 50);
+		bar.add(heart);
+		
+		cantHearts = new JLabel("3");
+		cantHearts.setBounds(800-550, -10, 50, 50);
+		bar.add(cantHearts);
+		
+		cantHearts.setFont(new java.awt.Font("Segoe UI",0,20));
+		cantHearts.setForeground(new java.awt.Color(255,0,0));
+		
     }
 	
 	public synchronized void paint(Graphics g) {
@@ -140,7 +157,7 @@ public class PanelJugador extends AbstractPanel implements ActionListener{
       	puntaje.setText("Puntaje: " + jugador.getPuntaje());
         labelVida.setText("Vida: " + jugador.getVida());
 		contadorEnemigos.setText("Enemigos restantes: " + mapa.cantEnemies());
-         
+		cantHearts.setText(""+jugador.getHearts());
         
         Toolkit.getDefaultToolkit().sync();
         g.dispose();
