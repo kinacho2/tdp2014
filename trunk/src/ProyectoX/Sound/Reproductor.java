@@ -4,17 +4,17 @@ import java.util.ArrayList;
  
 
 public class Reproductor{
+	private boolean enabled = true;
 	
 	private Sonido sonido;
-	
-	public Reproductor(){
-		
-	}
+	private int current = 0;
 	
 	public void addSound(String path, boolean loop){
-		Sonido sound = new Sonido(path, loop);
-		if(loop)
-			sonido = sound;
+		if(enabled){
+			Sonido sound = new Sonido(path, loop);
+			if(loop)
+				sonido = sound;
+		}
 	}
 	
 	public void stop(int delay){
@@ -23,8 +23,14 @@ public class Reproductor{
 		}
 	}
 	
-	public void setSilence(boolean silence){
-		
+	public void setEnabled(boolean arg){
+		enabled = arg;
+		if(!arg){
+			stop(0);
+		}
+		else{
+			sonido = new Sonido(sonido.getPath(),true);
+		}
 	}
 	
 }

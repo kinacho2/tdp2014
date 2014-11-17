@@ -14,7 +14,7 @@ import ProyectoX.Naves.Jugador.Defensa.Defensa;
 import ProyectoX.Sound.Reproductor;
 
 public abstract class Jugador extends Nave {
-	protected int hearts = 3;
+	protected int hearts = 0;
 	protected ImageIcon icon;
 	protected ImageIcon iconDer;
 	protected ImageIcon iconIzq;
@@ -267,5 +267,7 @@ public abstract class Jugador extends Nave {
 	public void setHearts() {
 		hearts ++;
 	}
-	
+	public boolean isInvulnerable(){
+		return System.currentTimeMillis() - init <= invulnerable;
+	}
 }

@@ -9,8 +9,15 @@ import java.util.Random;
 
 
 
-import javax.swing.ImageIcon;
 
+
+
+
+
+import javax.swing.ImageIcon;
+import javax.swing.JPanel;
+
+import ProyectoX.Aplication;
 import ProyectoX.Disparos.Disparo;
 import ProyectoX.Frames.Explosion;
 import ProyectoX.Frames.Objeto;
@@ -20,6 +27,9 @@ import ProyectoX.Naves.Enemigos.EnemiesBuilder;
 import ProyectoX.Naves.Enemigos.Enemigo;
 import ProyectoX.Naves.Enemigos.Jefes.*;
 import ProyectoX.Naves.Jugador.Jugador;
+import ProyectoX.Paneles.AbstractPanel;
+import ProyectoX.Paneles.PanelGame;
+import ProyectoX.Paneles.PanelGameOver;
 import ProyectoX.PowerUps.Bomba;
 import ProyectoX.PowerUps.PUPBuilder;
 import ProyectoX.PowerUps.PowerUp;
@@ -29,8 +39,9 @@ import ProyectoX.Sound.Sonido;
 public abstract class Mapa{
 	
 	protected static final String nube = "ProyectoX/img/Fondos/nubes/nubes";
-
 	
+	protected Aplication api;
+	protected JPanel panel;
 	protected Reproductor reproductor;
 	protected ArrayList misilesEnemigos;
 	protected ArrayList misilesJugador;
@@ -60,9 +71,13 @@ public abstract class Mapa{
 	protected int delayVel = 7;
 	protected String sonido;
 	protected String sonidoJefe;
+
+
+	protected PanelGame game;
 	
-	public Mapa() {
-		
+	public Mapa(Aplication api, PanelGame  game) {
+		this.game = game;
+		this.api = api;
 		// Arreglo de disparos
 		misilesEnemigos = new ArrayList();
 		misilesJugador = new ArrayList();
@@ -259,7 +274,7 @@ public abstract class Mapa{
 		return y;
 	}
 	
-	public abstract Mapa nextMapa();
+	public abstract void nextMapa();
 	
 	public ArrayList getObjeto(){
 		
@@ -277,6 +292,26 @@ public abstract class Mapa{
 			dy = 0;
 		else
 			dy = 1;
+	}
+
+	public void reset(){
+		jugador.setHearts();
+		jugador.setHearts();
+		jugador.setHearts();
+		panel.setVisible(false);
+		api.setVisible(false);
+		game.setVisible(true);
+		mind.pause(false);
+		pause(false);
+		api.setVisible(true);
+	}
+	
+	public void gameOver(){
+		pause(true);
+		mind.pause(true);
+		game.setVisible(false);
+		reproductor.stop(0);
+		panel = new PanelGameOver(api,this);
 	}
 	
 }

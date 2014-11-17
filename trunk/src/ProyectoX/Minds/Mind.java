@@ -79,6 +79,9 @@ public class Mind implements ActionListener {
 	        if(jugador.getVida() <= 0){
 	        	jugador.setVisible();
 	        }
+	        if(jugador.getHearts()<0){
+	        	mapa.gameOver();
+	        }
 	       	panel.repaint();  
     	}
     }
@@ -183,5 +186,9 @@ public class Mind implements ActionListener {
 		mapa.pause(arg);
 		jugador.pause(arg);
 		pause = arg;
+	}
+	
+	public void silencio(boolean arg){
+		reproductor.setEnabled(arg);
 	}
 }

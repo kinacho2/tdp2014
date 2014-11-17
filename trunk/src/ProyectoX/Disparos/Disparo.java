@@ -104,7 +104,7 @@ public class Disparo {
 		H = (y + height) <= (nave.getY() + nave.getHeight());
 		
 		// funcion de colicion que verifica si alguno de los 4 puntos del borde del objeto disparo intersectan con area del objeto pasado por parametro
-		fColision = (A && B || E && F) && (C && D || G && H) ||  !A && !F && ( !H && D || G && H) ||  !C &&  !H && (B &&  !F ||  !A && E) && isVisible() && nave.getVisible();
+		fColision = (A && B || E && F) && (C && D || G && H) ||  !A && !F && ( !H && D || G && H) ||  !C &&  !H && (B &&  !F ||  !A && E) && !nave.isInvulnerable() && isVisible() && nave.getVisible();
 		if(fColision){
 			if(rep!=null)
 				rep.addSound(golpe,false) ;

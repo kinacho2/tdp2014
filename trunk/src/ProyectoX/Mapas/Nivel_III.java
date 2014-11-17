@@ -5,9 +5,12 @@ import java.util.Random;
 
 import javax.swing.ImageIcon;
 
+import ProyectoX.Aplication;
+import ProyectoX.Frames.MenteSplash;
 import ProyectoX.Naves.Enemigos.EnemiesBuilder;
 import ProyectoX.Naves.Enemigos.Jefes.JefeAvion;
 import ProyectoX.Naves.Enemigos.Jefes.JefeBarco;
+import ProyectoX.Paneles.PanelGame;
 import ProyectoX.PowerUps.PUPBuilder;
 import ProyectoX.Sound.Sonido;
 
@@ -20,10 +23,10 @@ public class Nivel_III extends Mapa{
 
 	
 
-	public Nivel_III(){
-		super();
+	public Nivel_III(Aplication api, PanelGame game){
+		super(api,game);
 		rn = new Random(13);
-		cantEnemies = 1;
+		cantEnemies = 50;
 		power = new PUPBuilder(16);
 		enBuilder = new EnemiesBuilder(19);
 		ImageIcon ii = new ImageIcon(fondo);
@@ -54,8 +57,22 @@ public class Nivel_III extends Mapa{
 	}
 
 	
-	public Mapa nextMapa() {
-		return null;
+	public void nextMapa() {
+		MenteSplash spl = new MenteSplash(5000, fondo, game, 1);
+    	spl.start();
+ 
+	}
+
+	@Override
+	public void reset() {
+		reproductor.stop(0);
+		Mapa map = new Nivel_III(api,game);
+		map.setMind(mind);
+		map.setMindEnemies(mindEnemies);
+		mind.setMapa(map);
+		mindEnemies.setMapa(map);
+		map.setJugador(jugador);
+		super.reset();
 	}
 
 }

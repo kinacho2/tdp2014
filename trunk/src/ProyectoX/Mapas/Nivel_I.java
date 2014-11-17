@@ -6,11 +6,13 @@ import java.util.Random;
 
 import javax.swing.ImageIcon;
 
+import ProyectoX.Aplication;
 import ProyectoX.Naves.Enemigos.EnemiesBuilder;
 import ProyectoX.Naves.Enemigos.Enemigo;
 import ProyectoX.Naves.Enemigos.Jefes.Jefe;
 import ProyectoX.Naves.Enemigos.Jefes.JefeAvion;
 import ProyectoX.Naves.Enemigos.Jefes.JefeTanque;
+import ProyectoX.Paneles.PanelGame;
 import ProyectoX.PowerUps.PUPBuilder;
 import ProyectoX.Sound.Sonido;
 
@@ -22,10 +24,10 @@ public class Nivel_I extends Mapa{
 	protected static final String sound = "/ProyectoX/sounds/music/level1.mp3";
 
 	
-	public Nivel_I(){
-		super();
+	public Nivel_I(Aplication api, PanelGame game){
+		super(api,game);
 		rn = new Random(7);
-		cantEnemies = 1;
+		cantEnemies = 50;
 		power = new PUPBuilder(7);
 		enBuilder = new EnemiesBuilder(5);
 		ImageIcon ii = new ImageIcon(fondo);
@@ -56,15 +58,26 @@ public class Nivel_I extends Mapa{
 		return y;
 	}
 
-	public Mapa nextMapa() {
+	public void nextMapa() {
 		reproductor.stop(0);
-		Mapa map = new Nivel_II();
+		Mapa map = new Nivel_II(api,game);
 		map.setMind(mind);
 		map.setMindEnemies(mindEnemies);
 		mind.setMapa(map);
 		mindEnemies.setMapa(map);
 		map.setJugador(jugador);
-		return map;
+	}
+
+	@Override
+	public void reset() {
+		reproductor.stop(0);
+		Mapa map = new Nivel_I(api,game);
+		map.setMind(mind);
+		map.setMindEnemies(mindEnemies);
+		mind.setMapa(map);
+		mindEnemies.setMapa(map);
+		map.setJugador(jugador);
+		super.reset();
 	}
 	
 }

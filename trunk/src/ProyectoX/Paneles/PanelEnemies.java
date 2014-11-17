@@ -17,7 +17,7 @@ import ProyectoX.Mapas.Mapa;
 import ProyectoX.Minds.MindEnemies;
 import ProyectoX.Naves.Enemigos.Enemigo;
 
-public class PanelEnemies extends AbstractPanel {
+public class PanelEnemies  extends JPanel implements AbstractPanel {
 
 	protected MindEnemies mind;
 	protected Mapa mapa;

@@ -5,9 +5,11 @@ import java.util.Random;
 
 import javax.swing.ImageIcon;
 
+import ProyectoX.Aplication;
 import ProyectoX.Naves.Enemigos.EnemiesBuilder;
 import ProyectoX.Naves.Enemigos.Jefes.JefeBarco;
 import ProyectoX.Naves.Enemigos.Jefes.JefeTanque;
+import ProyectoX.Paneles.PanelGame;
 import ProyectoX.PowerUps.PUPBuilder;
 import ProyectoX.Sound.Sonido;
 
@@ -20,10 +22,10 @@ public class Nivel_II extends Mapa{
 
 	
 	
-	public Nivel_II(){
-		super();
+	public Nivel_II(Aplication api, PanelGame game){
+		super(api,game);
 		rn = new Random(13);
-		cantEnemies = 1;
+		cantEnemies = 50;
 		power = new PUPBuilder(6);
 		enBuilder = new EnemiesBuilder(9);
 		ImageIcon ii = new ImageIcon(fondo);
@@ -41,15 +43,14 @@ public class Nivel_II extends Mapa{
 		
 	}
 
-	public Mapa nextMapa() {
+	public void nextMapa() {
 		reproductor.stop(0);
-		Mapa map = new Nivel_III();
+		Mapa map = new Nivel_III(api,game);
 		map.setMind(mind);
 		map.setMindEnemies(mindEnemies);
 		mind.setMapa(map);
 		mindEnemies.setMapa(map);
 		map.setJugador(jugador);
-		return map;
 	}
 	
 	public int getY(){
@@ -63,5 +64,17 @@ public class Nivel_II extends Mapa{
 		
 		delay = (delay + 1) % delayVel;
 		return y;
+	}
+
+	@Override
+	public void reset() {
+		reproductor.stop(0);
+		Mapa map = new Nivel_II(api,game);
+		map.setMind(mind);
+		map.setMindEnemies(mindEnemies);
+		mind.setMapa(map);
+		mindEnemies.setMapa(map);
+		map.setJugador(jugador);
+		super.reset();
 	}
 }
