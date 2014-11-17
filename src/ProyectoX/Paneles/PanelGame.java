@@ -34,7 +34,7 @@ public class PanelGame  extends JPanel implements AbstractPanel {
 		this.rep = rep;
 		rn = new Random();
 		
-		map = new Nivel_I(api, this);
+		map = new Nivel_III(api, this);
 		api.add(this, BorderLayout.CENTER);
 		setBackground(new java.awt.Color(0,0,0));
 		
@@ -101,7 +101,8 @@ public class PanelGame  extends JPanel implements AbstractPanel {
 
 	@Override
 	public void function(int select) {
-		api.initMain(rep);
+		map.stop();
+		api.initPrimerPanel();
 	}
 
 }

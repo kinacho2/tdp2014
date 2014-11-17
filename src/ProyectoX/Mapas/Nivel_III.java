@@ -26,7 +26,7 @@ public class Nivel_III extends Mapa{
 	public Nivel_III(Aplication api, PanelGame game){
 		super(api,game);
 		rn = new Random(13);
-		cantEnemies = 50;
+		cantEnemies = 1;
 		power = new PUPBuilder(16);
 		enBuilder = new EnemiesBuilder(19);
 		ImageIcon ii = new ImageIcon(fondo);
@@ -58,6 +58,7 @@ public class Nivel_III extends Mapa{
 
 	
 	public void nextMapa() {
+		game.setVisible(false);
 		MenteSplash spl = new MenteSplash(5000, fondo, game, 1);
     	spl.start();
  
