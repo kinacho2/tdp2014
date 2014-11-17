@@ -14,7 +14,7 @@ import ProyectoX.Naves.Jugador.Defensa.Defensa;
 import ProyectoX.Sound.Reproductor;
 
 public abstract class Jugador extends Nave {
-	protected int hearts = 0;
+	protected int hearts = 6;
 	protected ImageIcon icon;
 	protected ImageIcon iconDer;
 	protected ImageIcon iconIzq;
@@ -43,7 +43,7 @@ public abstract class Jugador extends Nave {
 		setJugador(this);
 		velocidadMisil = 20;
 		power = "";
-		bombas = 5;
+		bombas = 20;
 		
 		puntaje = 0;
 		arma = new Disparo(x + width/2 , y, 0, 1, velocidadMisil);
