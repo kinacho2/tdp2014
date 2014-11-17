@@ -12,6 +12,13 @@ public class MenteSplash extends Thread{
 	private int select;
 	private AbstractPanel panel;
 	
+	/**
+	 * Constructor de la clase MenteSplash
+	 * @param duracion duracion del SplashScreen
+	 * @param url imagen que mostrara el SplashScreen
+	 * @param api la aplicacion que ejecutara el siguiente metodo al terminarse el SplashScreen
+	 * @param select indica la nave que selecciono el jugador
+	 */
 	public MenteSplash(int duracion, URL url, Aplication api, int select){
 		splash = new SplashScreen(duracion, url);
 		this.api = api;
@@ -19,16 +26,27 @@ public class MenteSplash extends Thread{
 		panel = null;
 	}
 	
-	public MenteSplash(int duracion, URL url, AbstractPanel panel, int select){
+	/**
+	 * Constructor de la clase MenteSplash
+	 * @param duracion duracion del SplashScreen
+	 * @param url imagen que mostrara el SplashScreen
+	 * @param panel AbstractPanel que ejecutara la siguiente funcion al finalizar el SplashScreen
+	 */
+	
+	public MenteSplash(int duracion, URL url, AbstractPanel panel){
 		splash = new SplashScreen(duracion, url);
-		this.select = select;
 		this.panel = panel;
 	}
+	
+	/**
+	 * redefine run() de la clase Thread
+	 * ejecuta el SplashScreen y luego que este finalize ejecuta la siguiente funcion
+	 */
 	
 	public void run(){
 		splash.showSplash();
 		if(panel != null)
-			panel.function(select);
+			panel.function();
 		else
 			api.initGame(select);
 	}

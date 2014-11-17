@@ -25,7 +25,7 @@ public class Laser extends PowerUp {
 			jugador.setNewDisparo(jugador.getDisparo().nextLevel());
 		}
 		else{
-			jugador.setNewDisparo(new LaserLVI(jugador));
+			jugador.setNewDisparo(new LaserLVI(jugador,1));
 			jugador.setPower(power);
 		}
 		

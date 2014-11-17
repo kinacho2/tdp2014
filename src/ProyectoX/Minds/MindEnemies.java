@@ -71,8 +71,7 @@ public class MindEnemies extends Thread  {
 			            m.disparar();
 			            m.setDis();
 			        }
-			        mapa.setEnemies(enemies);
-					panel.repaint();
+			        panel.repaint();
 					
 					if(jefe){
 						if(enemies.size() == 0 && !muerteJefe){
@@ -109,24 +108,26 @@ public class MindEnemies extends Thread  {
         // mueve los misiles del jugador y remueve los que no estan visibles  
         for (int i = 0; i < ms.size(); i++) {
         	Disparo m = (Disparo) ms.get(i);
-            if (m.isVisible())
+            if (m.isVisible()){
                 m.move();
+                for (int j = 0; j < enemigos.size(); j++) {
+                	Enemigo enemigo = (Enemigo) enemigos.get(j);
+                	
+                	if (m.colision(enemigo)) {
+                    	if (m.isVisible()){
+                    		enemigo.setVida(m.getDamage());
+                    	}
+                    	m.setVisible();
+                    	mapa.addExposion(m.newExplosion(enemigo.getY() + enemigo.getHeight()));
+                    }
+                    
+                }
+            }
             else 
             	mapa.removerDisparoJugador(i);
             
             // verifica si algun misil del jugador colisiono a un enemigo
-            for (int j = 0; j < enemigos.size(); j++) {
-            	Enemigo enemigo = (Enemigo) enemigos.get(j);
-            	
-            	if (m.colision(enemigo)) {
-                	if (m.isVisible()){
-                		enemigo.setVida(m.getDamage());
-                	}
-                	m.setVisible();
-                	mapa.addExposion(m.newExplosion(enemigo.getY() + enemigo.getHeight()));
-                }
-                
-            }
+           
         }
   	
     }
@@ -164,6 +165,11 @@ public class MindEnemies extends Thread  {
 	
 	public void setReproductor(Reproductor rep){
 		this.rep = rep;
+	}
+
+	public void setEstaJefe() {
+		jefe = false;
+		
 	}
 }
 

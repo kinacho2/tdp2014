@@ -4,13 +4,33 @@ import ProyectoX.Disparos.Disparo;
 
 public class MultiplicadorLVIII extends DisparoMultiplicador{
 
+	
+	/**
+	 * Constructor de la clase MultiplicadorLVIII
+	 * @param x coordenada x
+	 * @param y coordenada y
+	 * @param dx diferencial x
+	 * @param dy diferencial y
+	 */
+	
 	public MultiplicadorLVIII(int x, int y, double dx, double dy) {
 		super(x, y, dx, dy);
 	}
 	
+	/**
+	 * redefine nextLevel() de la clase Disparo
+	 * retorna una instancia si mismo
+	 * @return instancia de Disparo de tipo dinamico MultiplicadorLVIII
+	 */
+	
 	public Disparo nextLevel(){
 		return new MultiplicadorLVIII(x,y,dx,dy);
 	}
+	
+	/**
+	 * redefine cloneNivel() de la clase Disparo
+	 * @return Disparo[] con 5 elementos
+	 */
 	
 	public Disparo[] cloneNivel(){
 		Disparo[] d = new Disparo[5];

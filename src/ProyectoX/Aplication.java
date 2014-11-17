@@ -31,18 +31,10 @@ import java.util.Random;
 
 
 /**
-* This code was edited or generated using CloudGarden's Jigloo
-* SWT/Swing GUI Builder, which is free for non-commercial
-* use. If Jigloo is being used commercially (ie, by a corporation,
-* company or business for any purpose whatever) then you
-* should purchase a license for each developer using Jigloo.
-* Please visit www.cloudgarden.com for details.
-* Use of Jigloo implies acceptance of these licensing terms.
-* A COMMERCIAL LICENSE HAS NOT BEEN PURCHASED FOR
-* THIS MACHINE, SO JIGLOO OR THIS CODE CANNOT BE USED
-* LEGALLY FOR ANY CORPORATE OR COMMERCIAL PURPOSE.
+ * @author Borek Andrea, Figliuolo Nestor, Gaviot Joaquin
 */
 public class Aplication extends javax.swing.JFrame {
+	
 	
 	private JPanel principal;
 	private JPanel main;
@@ -53,6 +45,10 @@ public class Aplication extends javax.swing.JFrame {
 	
 	private URL url = (Aplication.class.getClassLoader().getResource("ProyectoX/img/Fondos/fondoNivel1.png"));
 
+	/**
+	 * Constructor de la clase Aplication 
+	 * inicia el reproductor y la GUI
+	 */
 	 public Aplication() {
 		rep = new Reproductor();
 		rn = new Random();
@@ -65,12 +61,23 @@ public class Aplication extends javax.swing.JFrame {
     }
 	    
     //inicializa el panel del juego
+    /**
+     * Metodo que crea una SplashScreen antes de iniciar el juego
+     * y procede a iniciar el juego con el parametro select
+     * @param select indica la nave que usara el jugador
+     */
     
     public void showSplashBeforeGame(int select){
     	setVisible(false);
     	MenteSplash spl = new MenteSplash(5000, url, this, select);
     	spl.start();
     }
+    
+    /**
+     * Metodo que inicializa el panel de juego,
+     * es llamado por la SplashScrren anterior
+     * @param select indica la nave que usara el jugador
+     */
     
     public void initGame(int select){
     	rep.stop(100);
@@ -83,6 +90,9 @@ public class Aplication extends javax.swing.JFrame {
         
 	}
 	    
+    /**
+     * inicializa el Frame y crea el primer panel del juego
+     */
   
     private void initGUI() {
     	
@@ -101,7 +111,9 @@ public class Aplication extends javax.swing.JFrame {
         
 	}
     
-    //inicializa el primer panel para iniciar o salir del juego
+    /**
+     * inicializa el primer panel para iniciar o salir del juego
+     */
     
 	public void initPrimerPanel(){
 		rep.addSound(sound+rn.nextInt(4)+".mp3",true);
@@ -111,7 +123,12 @@ public class Aplication extends javax.swing.JFrame {
 		setVisible(true);
 	}
 	
-	//inicializa el segundo panel para seleccionar tipo de nave
+	/**
+	 * inicializa el segundo panel para seleccionar tipo de nave
+	 * @param rep es de tipo Reproductor, como el metodo se llamara desde afuera
+	 * de la clase Aplication se debe setear el nuevo reproductor para controlar los hilos 
+	 * del sonido
+	 */
 	
 	public void initMain(Reproductor rep){
 		this.rep = rep;
@@ -121,13 +138,20 @@ public class Aplication extends javax.swing.JFrame {
 		setVisible(true);
 	}
 	
-	
+	/**
+	 * cierra el juego en forma segura
+	 */
 	
 	private void cerrarJuego() {
 		this.dispose();
 		System.exit(0);
 		
 	}
+	
+	/**
+	 * retorna el atributo rep de tipo Reproductor
+	 * @return instancia de Reproductor
+	 */
 	public Reproductor getReproductor(){
 		return rep;
 	}

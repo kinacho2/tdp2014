@@ -71,14 +71,18 @@ public abstract class Mapa{
 	protected int delayVel = 7;
 	protected String sonido;
 	protected String sonidoJefe;
-
-
 	protected PanelGame game;
+	
+	/**
+	 * Constructor de la clase Mapa
+	 * @param api la aplicacion que ejecutara el siguiente metodo al terminarse el SplashScreen
+	 * @param game el panel donde se dibuja el juego
+	 */
 	
 	public Mapa(Aplication api, PanelGame  game) {
 		this.game = game;
 		this.api = api;
-		// Arreglo de disparos
+		
 		misilesEnemigos = new ArrayList();
 		misilesJugador = new ArrayList();
 		
@@ -105,33 +109,48 @@ public abstract class Mapa{
 		
 	}
 	
+	/**
+	 * retorna la cantidad de enemigos que resta por eliminar
+	 * @return entero que simboliza la cantidad de enemigos
+	 */
+	
 	public int cantEnemies(){
 		return cantEnemies - indiceEnemigos + enemiesInWindow.size();
 	}
+	
+	/**
+	 * retorna un ArrayList con los enemigos en pantalla
+	 * @return ArrayList de Enemigo
+	 */
 	
 	public ArrayList getEnemies() {
 		return enemiesInWindow;
 	}
 	
-	public void setEnemies(ArrayList enemies) {
-		this.enemiesInWindow = enemies;
-	}
 
-	//retorna al jugador principal, que en caso de tener escudo es el mismo escudo
+	/**
+	 * retorna al jugador principal, que en caso de tener escudo es el mismo escudo
+	 * @return instancia de Jugador que contiene el Mapa
+	 */
 
 	
 	public Jugador getJugador() {
 		return jugador;
 	}
 	
-	//se setea un nuevo jugador al mapa
+	/**
+	 * se setea un nuevo jugador al mapa
+	 * @param jugador el nuevo jugador del Mapa
+	 */
 	
 	public void setJugador(Jugador jugador){
 		this.jugador = jugador;
 	}
 	
-
-	
+	/**
+	 * setea la nueva Mind al mapa y setea el mapa y el reproductor a la Mind
+	 * @param mind controla el hilo de juego principal y al jugador
+	 */
 	
 	public void setMind(Mind mind) {
 		this.mind = mind;
@@ -139,6 +158,11 @@ public abstract class Mapa{
 		mind.addReproductor(reproductor);
 
 	}
+	
+	/**
+	 * setea la nueva MindEnemies al mapa y setea el mapa y el reproductor a la MindEnemies
+	 * @param mindEnemies controla el hilo de los enemigos
+	 */
 
 	public void setMindEnemies(MindEnemies mindEnemies) {
 		this.mindEnemies = mindEnemies;
@@ -146,38 +170,57 @@ public abstract class Mapa{
 		mindEnemies.setReproductor(reproductor);
 	}
 	
-	public int sizeMisilesEnemigos() {
-		return misilesEnemigos.size();
-	}
-	
-	public int sizeMisilesJugador() {
-		return misilesJugador.size();
-	}
+	/**
+	 * agrega un nuevo Disparo enemigo al Mapa
+	 * @param d nuevo Disparo del Enemigo
+	 */
 	
 	public void addDisparoEnemigo(Disparo d) {
 		misilesEnemigos.add(d);
 	}
+	
+	/**
+	 * agrega un nuevo Disparo jugador al Mapa
+	 * @param d nuevo Disparo del Jugador
+	 */
 	
 	public void addDisparoJugador(Disparo d) {
 		misilesJugador.add(d);
 		
 	}
 	
+	/**
+	 * remueve el Disparo del Jugador que se encuentra en el indice i
+	 * @param i indice del arreglo
+	 */
+	
 	public void removerDisparoJugador(int i) {
 		misilesJugador.remove(i);
 	}
+	
+	/**
+	 * retorna una ArrayList con los Disparos enemigos
+	 * @return ArrayList de Disparo
+	 */
 
 	public ArrayList getMisilesEnemigos() {
 		return misilesEnemigos;
 	}
+	
+	/**
+	 * retorna una ArrayList con los Disparos del jugador
+	 * @return ArrayList de Disparo
+	 */
 
 	public ArrayList getMisilesJugador() {
 		return misilesJugador;
 		
 	}
-	/*
+	/**
 	 * Crea un nuevo enemigo aleatoriamente
+	 * en caso de no haber mas enemigos se setea el jefe a la MindEnemies
 	 */
+	
 	public Enemigo nextEnemigo(){
 		Enemigo m;
 		if(indiceEnemigos < cantEnemies) {	
@@ -212,20 +255,38 @@ public abstract class Mapa{
         return m;
 	}
 	
-	/*
-	 * Agrega el explosion ex a la lista de explosivos 
+	/**
+	 * Agrega el explosion ex a la lista de explosiones
+	 * @param ex nueva Explosion que se agrega al mapa
 	 */
 	public void addExposion(Explosion ex) {
 		explosiones.add(ex);
 	}
 	
+	/**
+	 * devuelve las Explosiones que estan en el mapa
+	 * @return ArrayList de Explosiones
+	 */
+	
 	public ArrayList explosiones() {
 		return explosiones;
 	}
 	
+	/**
+	 * devuelve los PowerUP que estan en el mapa
+	 * @return ArrayList de PowerUP
+	 */
+	
 	public ArrayList getPowers(){
 		return powerUps;
 	}
+	
+	/**
+	 * genera un PowerUP aleatoriamente y lo agrega al mapa
+	 * @param x coordenada x
+	 * @param y coordenada y
+	 * @param bomba en caso de ser el jefe el que entrega PowerUP este sera una Bomba
+	 */
 
 	public void addPower(int x, int y, boolean bomba){
 		PowerUp up;
@@ -237,6 +298,9 @@ public abstract class Mapa{
 		powerUps.add(up);
 	}
 	
+	/**
+	 * le indica a los entes del programa que se detengan
+	 */
 	public void stop() {
 		mind.stop();
 		mindEnemies.setStop();
@@ -244,8 +308,9 @@ public abstract class Mapa{
 		
 	}
 	
-	/*
+	/**
 	 * Le indica al mapa que se deben eliminar todos los enemigos de pantalla
+	 * en caso de ser un jefe solo eliminara las torretas que estan en la pantalla
 	*/
 
 	public synchronized void bomba() {
@@ -258,24 +323,46 @@ public abstract class Mapa{
 		
 	}
 	
+	/**
+	 * retorna la imagen del fondo del mapa
+	 * @return instancia de Image
+	 */
+	
 	public Image getImage(){
 		return imagenFondo;
 	}
 	
+	/**
+	 * retorna la coordenada x del fondo
+	 * @return coordenada x
+	 */
+	
 	public int getX(){
 		return x;
 	}
+	/**
+	 * retorna la coordenada y del fondo y la modifica
+	 * @return coordenada y
+	 */
 	
 	public int getY(){
 		if(delay % delayVel  == 0){
-			y++;
+			y += dy;
 		}
 		delay = (delay + 1) % delayVel;
 		return y;
 	}
 	
+	/**
+	 * indica un cambio de nivel 
+	 */
+	
 	public abstract void nextMapa();
 	
+	/**
+	 * agrega un objeto al azar a la lista de objetos de pantalla
+	 * @return ArrayList de Objeto
+	 */
 	public ArrayList getObjeto(){
 		
 		if(rn.nextInt()%500 == 2){
@@ -285,6 +372,11 @@ public abstract class Mapa{
 		}
 		return objetosEnPantalla;
 	}
+	
+	/**
+	 * le indica a los entes del juego que hay una pausa
+	 * @param arg de tipo booleano si es true se setea una pausa si es false se saca la pausa
+	 */
 
 	public void pause(boolean arg) {
 		mindEnemies.pause(arg);
@@ -293,6 +385,10 @@ public abstract class Mapa{
 		else
 			dy = 1;
 	}
+	
+	/**
+	 * hace un reset del nivel
+	 */
 
 	public void reset(){
 		jugador.setHearts();
@@ -302,9 +398,14 @@ public abstract class Mapa{
 		api.setVisible(false);
 		game.setVisible(true);
 		mind.pause(false);
+		mindEnemies.setEstaJefe();
 		pause(false);
 		api.setVisible(true);
 	}
+	
+	/**
+	 * indica que se finalizo el juego
+	 */
 	
 	public void gameOver(){
 		pause(true);
