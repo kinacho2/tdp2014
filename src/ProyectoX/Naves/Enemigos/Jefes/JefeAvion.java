@@ -38,8 +38,8 @@ public class JefeAvion extends Jefe{
 	private final int h3w2 = 860;
 	private final int h4w1 = 298;
 	private final int h4w2 = 975;
-	private final int h5w1 = 0;
-	private final int h5w2 = 1275;
+	private final int h5w1 = 133;
+	private final int h5w2 = 1142;
 	
 	private boolean primero = false;
 	private boolean segundo = false;
