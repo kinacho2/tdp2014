@@ -7,6 +7,7 @@ import javax.swing.ImageIcon;
 
 import ProyectoX.Naves.Nave;
 import ProyectoX.Naves.Enemigos.Torretas.FabricaTorretasDobles;
+import ProyectoX.Naves.Enemigos.Torretas.FabricaTorretasInvisibles;
 import ProyectoX.Naves.Enemigos.Torretas.FabricaTorretasSimples;
 import ProyectoX.Naves.Enemigos.Torretas.Torreta;
 
@@ -15,6 +16,7 @@ public class JefeAvion extends Jefe{
 	protected static final URL url = (Nave.class.getClassLoader().getResource("ProyectoX/img/Enemigo/JefeAvion/JefeAvion.png"));
 	protected static final String boundsDouble = "/ProyectoX/img/Enemigo/JefeAvion/posicionesTorretasDobles.txt";
 	protected static final String boundsSimple = "/ProyectoX/img/Enemigo/JefeAvion/posicionesTorretasSimples.txt";
+	protected static final String boundsInvisible = "/ProyectoX/img/Enemigo/JefeAvion/posicionesTorretasInvisibles.txt";
 	private static final String alarm = "/ProyectoX/sounds/alarm.mp3";
 
 	
@@ -49,7 +51,6 @@ public class JefeAvion extends Jefe{
 	private boolean sexto = false;
 	private boolean septimo = false;
 	private boolean octavo = false;
-	private int control = 3;
 	private boolean random = true;
 	private Random rn;
 	private long init;
@@ -63,10 +64,11 @@ public class JefeAvion extends Jefe{
 		delay = 2;
 		int cantTorretasDobles = 10;
 		int cantTorretasSimples = 7;
+		int cantTorretasInvisibles = 12;
 		init = System.currentTimeMillis();
 		cargarArchivoTorretas(boundsDouble, new FabricaTorretasDobles(), cantTorretasDobles);
 		cargarArchivoTorretas(boundsSimple, new FabricaTorretasSimples(), cantTorretasSimples);
-		
+		cargarArchivoTorretas(boundsInvisible,new FabricaTorretasInvisibles(false), cantTorretasInvisibles);
 		puntaje = 500;
 			
 	}
@@ -90,16 +92,13 @@ public class JefeAvion extends Jefe{
 						if(select == 0 || select == 3){
 							move = true;
 						}
-						if(select == 2 && hayTorretas(x + defaultWidth/2 + 100, x+defaultWidth)){
+						if(select == 2 && hayTorretas(x + defaultWidth/2 + 190, x+defaultWidth)){
 							move = true;
 						}
-						if(select == 1 && hayTorretas(x, x+defaultWidth/2 - 100)){
+						if(select == 1 && hayTorretas(x, x+defaultWidth/2 - 190)){
 							move = true;
 						}
 					} 
-				
-					
-					control = select;
 	
 					int auxX = x;
 					int auxY = y;

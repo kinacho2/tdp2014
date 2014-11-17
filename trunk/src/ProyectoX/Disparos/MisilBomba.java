@@ -46,6 +46,14 @@ public class MisilBomba extends Disparo{
 	
 	private Mapa mapa;
 	
+	/**
+	 * Constructor de la clase MisilBomba
+	 * @param x coordenada x
+	 * @param y coordenada y
+	 * @param mapa el actual Mapa del juego
+	 * @param rep el actual Reproductor del juego
+	 */
+	
 	public MisilBomba(int x, int y, Mapa mapa, Reproductor rep) {
 		super(x, y, 0, 0, 1);
 		ImageIcon ii =  new ImageIcon(url);
@@ -73,10 +81,21 @@ public class MisilBomba extends Disparo{
 		
 	}
 	
+	/**
+	 * redefine a getImage() de la clase Disparo
+	 * retorna la imagen de la instancia
+	 * @return instancia de Image
+	 */
+	
 	public Image getImage(){
 		return misil;
 	}
 	
+	/**
+	 * hace el control y el cambio de imagen y sonido 
+	 * controla el tiempo que permanece la imagen en pantalla
+	 * le indica a la instancia de Mapa que se lanzo una bomba
+	 */
 	
 	public void move(){
 		long now = System.currentTimeMillis();
@@ -125,7 +144,10 @@ public class MisilBomba extends Disparo{
 		}
 	}
 	
-	//al impactar no debe desaparecer por lo que el setVisible es redefinido
+	/**
+	 * redefine setVisible() de la clase Disparo
+	 * al impactar depende del estado en que este no debe desaparecer por lo que el setVisible es redefinido
+	 */
 	
 	public void setVisible(){
 		if(control2){
@@ -133,6 +155,11 @@ public class MisilBomba extends Disparo{
 		}
 	}
 
+	/**
+	 * redefine newExplosion() de la clase disparo
+	 * depende del estado en que este retorna una explosion distinta
+	 * @return instancia de Explosion
+	 */
 	public Explosion newExplosion(int altura){
 		if(control2)
 			return new Explosion(x + width/2, y + height / 2, new ImageIcon(destroy), width, height);

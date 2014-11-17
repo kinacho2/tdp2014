@@ -11,20 +11,28 @@ import java.awt.*;
 import java.net.URL;
 
 import javax.swing.*;
-
+/**
+ * Codigo construido en parte utilizando la clase SplashScreen mostrada en la practica de la materia
+ */
 public class SplashScreen extends JWindow {
 	private int duration;
 	private URL path;
 	private Image image;
-
+	
+	/**
+	 * Constructor de la clase SplashScreen
+	 * @param d entero que indica la duracion del SplashScreen
+	 * @param path la imagen que se mostrara en el Splash
+	 */
 	public SplashScreen(int d, URL path) {
 		duration = d;
 		this.path = path;
 		
 	}
 
-	// A simple little method to show a title screen in the center
-	// of the screen for the amount of time given in the constructor
+	/**
+	 * Inicializa la Screen y permanece en pantalla el tiempo indicado
+	 */
 	public void showSplash() {
 		this.setLocationByPlatform(true);
 		
@@ -56,6 +64,12 @@ public class SplashScreen extends JWindow {
 		setVisible(false);
 
 	}
+	
+	/**
+	 * redefine  paint(Graphics g) de la clase Window
+	 * redibuja en cada iteracion
+	 * @param g 
+	 */
 	
 	public synchronized void paint(Graphics g) {
 		 

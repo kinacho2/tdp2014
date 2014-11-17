@@ -100,7 +100,7 @@ public class PanelGame  extends JPanel implements AbstractPanel {
 	}
 
 	@Override
-	public void function(int select) {
+	public void function() {
 		map.stop();
 		api.initPrimerPanel();
 	}

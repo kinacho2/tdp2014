@@ -4,7 +4,7 @@ import javax.swing.JPanel;
 
 public interface AbstractPanel{
 
-	public abstract void function(int select);
+	public abstract void function();
 	
 	
 }

@@ -14,11 +14,27 @@ public class DisparoWave extends Disparo {
 
 	
 	protected int variacion = 0;
+	
+	/**
+	 * Constructor de la clase DisparoWave
+	 * setea una nueva imagen al Disparo
+	 * @param x coordenada x
+	 * @param y coordenada y
+	 * @param dx diferencial x
+	 * @param dy diferencial y
+	 * 
+	 */
+	
 	public DisparoWave(int x, int y, double dx, double dy) {
 		super(x, y, dx, dy, -10);
 		ImageIcon ii = new ImageIcon(url);
         image = ii.getImage().getScaledInstance(width, height, Image.SCALE_DEFAULT);
 	}
+	
+	/**
+	 * redefine move() de la clase Disparo
+	 * genera un movimiento sinuidal
+	 */
 	
 	public void move(){
 		y = y + (int)(dy*velocidad);

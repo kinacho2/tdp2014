@@ -88,7 +88,7 @@ public class PanelEnemies  extends JPanel implements AbstractPanel {
 	}
 
 	@Override
-	public void function(int select) {
+	public void function() {
 		mapa.nextMapa();
 		api.setVisible(true);
 	}
@@ -96,7 +96,7 @@ public class PanelEnemies  extends JPanel implements AbstractPanel {
 	public void jefeMuerto() {
 		
 		api.setVisible(false);
-		MenteSplash mente = new MenteSplash(5000,url,this,5);
+		MenteSplash mente = new MenteSplash(5000,url,this);
 		mente.start();
 		
 	}

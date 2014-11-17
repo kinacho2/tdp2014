@@ -62,22 +62,45 @@ public class Disparo {
         
     }
 
+    /**
+     * retorna la imagen del Disparo
+     * @return instancia de Image
+     */
 
     public Image getImage() {
         return image;
     }
+    
+    /**
+     * retorna la posicion en x del Disparo
+     * @return entero x
+     */
 
     public int getX() {
         return x;
     }
+    
+    /**
+     * retorna la posicion en y del Disparo
+     * @return entero y
+     */
 
     public int getY() {
         return y;
     }
 
+    /**
+     * indica si el Disparo esta visible en pantalla
+     * @return boolean visible
+     */
     public boolean isVisible() {
         return visible ;
     }
+    
+    /**
+     * modifica los valores de x e y dependiendo de los valores de dx y dy 
+     * que funcionan como diferenciales
+     */
 
     public void move() {
         y -= dy * velocidad;
@@ -85,12 +108,18 @@ public class Disparo {
         verificarColisionBorde();
     }
     
+    /**
+     * verifica si el disparo salio de la pantalla y setea la visivilidad en false
+     */
+    
     protected void verificarColisionBorde(){
     	if (y < maxHeight || y >  minHeight || x < minWidth || x > maxWidth)
             setVisible();
     }
     
-    // Determina si el disparo colision� con una nave
+    /**
+     *  Determina si el disparo colisiono con la nave pasada por parametro
+     */
     public synchronized boolean colision(Nave nave) {
     	boolean A,B,C,D,E,F,G,H, fColision; 
 		
@@ -113,47 +142,84 @@ public class Disparo {
 		return fColision;
 	}
     
-    // Establece que el disparo no est� visible en la pantalla
+    /**
+     *  Establece que el disparo no esta visible en la pantalla
+     */
     public void setVisible() {
     	visible = false;
     }
 
-    // devuelve el damage del disparo
+    /**
+     *  devuelve el damage del disparo
+     * @return entero damage
+     */
 	public int getDamage() {
 		return damage;
 	}
 	
-	// clona el tipo disparo para poder disparar en serie
+	/**
+	 *  clona el tipo disparo y lo devuelve en un arreglo de disparos
+	 * @return Disparo[] con 1 elemento
+	 */
 	public Disparo[] cloneNivel() {
 		
-		// establece la cantidad de disapros por nivel
 		Disparo[] d = new Disparo[1];
 		d[0] = new Disparo(x, y, dx, dy, velocidad);
 		d[0].setReproductor(rep);
 		return d ;
 	}
 	
+	/**
+	 * devuelve una instancia de la clase Explosion que depende del Disparo
+	 * @param altura la altura a la que se produce la explosion, en esta clase queda sin uso
+	 * @return instancia de Explosion
+	 */
+	
 	public Explosion newExplosion(int altura) {
 		return new Explosion(x + width/2, y + height / 2, explosion, width, height);
 	}
 	
+	/**
+	 * setea la posicion del disapro en las coordenadas determinadas
+	 * @param x coordenada x
+	 * @param y coordenada y
+	 */
 	public void setPosicion(int x, int y) {
 		this.x = x;
 		this.y = y;
 	}
+	
+	/**
+	 * Retorna el siguiente nivel del disparo 
+	 * en esta clase base es el mismo disparo
+	 * @return instancia de Disparo
+	 */
 	
 	public Disparo nextLevel(){
 		return new Disparo(x,y,dx,dy,velocidad);
 	}
 
 
+	/**
+	 * agrega un sonido nuevo al reproductor
+	 */
 	public void getSound() {
 		rep.addSound(sonido,false) ;
 	}
 	
+	/**
+	 * Setea un nuevo reproductor
+	 * @param rep de tipo Reproductor
+	 */
+	
 	public void setReproductor(Reproductor rep){
 		this.rep = rep;
 	}
+	
+	/**
+	 * setea una instancia de Reproductor a cada Disparo del arreglo d
+	 * @param d arreglo de disparos
+	 */
 	
 	protected void setearReproductor(Disparo[] d){
 		for(int i = 0; i<d.length; i++){

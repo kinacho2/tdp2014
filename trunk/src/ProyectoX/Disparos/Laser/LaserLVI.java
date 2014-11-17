@@ -5,6 +5,7 @@ import java.net.URL;
 import javax.swing.ImageIcon;
 
 import ProyectoX.Disparos.Disparo;
+import ProyectoX.Naves.Nave;
 import ProyectoX.Naves.Jugador.Jugador;
 
 public class LaserLVI extends DisparoLaser{
@@ -13,25 +14,42 @@ public class LaserLVI extends DisparoLaser{
 	private static final URL url = Disparo.class.getClassLoader().getResource("ProyectoX/img/Disparos/Laser/laser1.gif");
 	private static final URL urlCarga = Disparo.class.getClassLoader().getResource("ProyectoX/img/Disparos/Laser/laser1_carga.gif");
 	
+	/**
+	 * Constructor de la clase LaserLVI
+	 * @param nave Nave que efectua el DisparoLaser
+	 * @param dy direccion del laser
+	 */
 	
-	public LaserLVI(Jugador jugador) {
-		super(13, 800, new ImageIcon(urlCarga), new ImageIcon(url), jugador);
+	public LaserLVI(Nave nave, double dy) {
+		super(dy, 13, 800, new ImageIcon(urlCarga), new ImageIcon(url), nave);
 		
-		x = jugador.getX() + jugador.getWidth()/2 - width/2;
-		y = jugador.getY() - height;
+		x = nave.getX() + nave.getWidth()/2 - width/2;
+		y = nave.getY() - (int)dy*height;
 		
 		damage = 3;
 		
 		setDelays(200, 1199, 7);
 	}
 	
+	/**
+	 * redefine nextLevel() de la clase Disparo
+	 * retorna una instancia de LaserLVII que simboliza el siguiente nivel de LaserLVI
+	 * @return instancia de Disparo de tipo dinamico LaserLVII
+	 */
+	
 	public Disparo nextLevel(){
-		return new LaserLVII(jugador);
+		return new LaserLVII(nave, dy);
 	}
+	
+	/**
+	 * redefine cloneNivel() de la clase Disparo
+	 * clona el tipo disparo y lo devuelve en un arreglo de disparos
+	 * @return Disparo[] con 1 elemento de tipo dinamico LaserLVI
+	 */
 	
 	public Disparo[] cloneNivel(){
 		Disparo[] toRet = new Disparo[1];
-		toRet[0] = new LaserLVI(jugador);
+		toRet[0] = new LaserLVI(nave,dy);
 		toRet[0].setReproductor(rep);
 		return toRet;
 	}
