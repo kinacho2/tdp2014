@@ -9,9 +9,12 @@ import java.awt.event.ActionListener;
 import java.awt.event.KeyEvent;
 import java.awt.event.KeyListener;
 import java.awt.geom.AffineTransform;
+import java.net.URL;
 import java.util.ArrayList;
 
+import javax.swing.BorderFactory;
 import javax.swing.ImageIcon;
+import javax.swing.JButton;
 import javax.swing.JLabel;
 import javax.swing.JPanel;
 
@@ -24,20 +27,25 @@ import ProyectoX.Frames.Objeto;
 import ProyectoX.Mapas.Mapa;
 import ProyectoX.Minds.Mind;
 
-public class PanelJugador extends AbstractPanel implements ActionListener{
+public class PanelJugador  extends JPanel implements ActionListener{
 
+	private static final URL urlEn = (PanelInit.class.getClassLoader().getResource("ProyectoX/img/Menu_barras/sonido-enabled.jpg"));
+	private static final URL urlDis = (PanelInit.class.getClassLoader().getResource("ProyectoX/img/Menu_barras/sonido-disabled.png"));
+	
 	private Mind mind;
 	private Mapa mapa;
 	private Jugador jugador;
 	
 	private JPanel bar;
-	
+	private JButton sonido;
+	private ImageIcon en, dis;
 	private JLabel heart;
 	private JLabel cantHearts;
 	private JLabel puntaje;
 	private JLabel labelVida;
 	private JLabel contadorEnemigos;
 	private boolean pause = false;
+	private boolean enabled = true;
 	
 	public PanelJugador(Mapa map, int select){
 		mind = new Mind( this, select);
@@ -58,15 +66,15 @@ public class PanelJugador extends AbstractPanel implements ActionListener{
 	public void setBar(JPanel bar) {
 		this.bar = bar;
         puntaje = new JLabel("Puntaje: "+ 0);
-		puntaje.setBounds(800-150, 0, 350, 50);
+		puntaje.setBounds(800-150, 0, 350, 35);
 		bar.add(puntaje);
 		
 		labelVida = new JLabel("Vida: " + jugador.getVida());
-		labelVida.setBounds(800-250, 0, 100, 50);
+		labelVida.setBounds(800-250, 0, 100, 35);
 		bar.add(labelVida);
 		
 		contadorEnemigos = new JLabel("Enemigos restantes: " + mapa.cantEnemies());
-		contadorEnemigos.setBounds(800-480, 0, 250, 50);
+		contadorEnemigos.setBounds(800-480, 0, 250, 35);
 		bar.add(contadorEnemigos);
 		
 		labelVida.setFont(new java.awt.Font("Segoe UI",0,20));
@@ -79,15 +87,30 @@ public class PanelJugador extends AbstractPanel implements ActionListener{
 		ImageIcon ii = new ImageIcon(PanelInit.class.getClassLoader().getResource("ProyectoX/img/Menu_barras/heart.png"));
 		ImageIcon aux = new ImageIcon(ii.getImage().getScaledInstance(20, 20, Image.SCALE_DEFAULT));
 		heart = new JLabel(aux);
-		heart.setBounds(800-600, 0, 50, 50);
+		heart.setBounds(800-600, 0, 50, 35);
 		bar.add(heart);
 		
 		cantHearts = new JLabel("3");
-		cantHearts.setBounds(800-550, -10, 50, 50);
+		cantHearts.setBounds(800-550, -3, 50, 35);
 		bar.add(cantHearts);
 		
 		cantHearts.setFont(new java.awt.Font("Segoe UI",0,20));
 		cantHearts.setForeground(new java.awt.Color(255,0,0));
+		
+		sonido = new JButton("");
+		dis = new ImageIcon(urlDis);
+		dis = new ImageIcon(dis.getImage().getScaledInstance(25, 25, Image.SCALE_DEFAULT));
+		en = new ImageIcon(urlEn);
+		en = new ImageIcon(en.getImage().getScaledInstance(25, 25, Image.SCALE_DEFAULT));
+		sonido.setIcon(en);
+		sonido.setBounds(70, 0, 25, 25);
+		sonido.setForeground(new java.awt.Color(0,255,0));
+		sonido.setBackground(new java.awt.Color(0,0,0));
+		sonido.setBorder(BorderFactory.createCompoundBorder(null,null));
+		sonido.setFont(new java.awt.Font("Segoe UI",0,20));
+		sonido.setFocusable(false);
+		sonido.addActionListener(new OyenteSonido());
+		bar.add(sonido);
 		
     }
 	
@@ -207,10 +230,21 @@ public class PanelJugador extends AbstractPanel implements ActionListener{
 		mapa = map;
 		
 	}
+	
+	private class OyenteSonido implements ActionListener{
 
-	@Override
-	public void function(int select) {
-		// TODO Auto-generated method stub
+		@Override
+		public void actionPerformed(ActionEvent arg0) {
+			mind.silencio(!enabled);
+			enabled = !enabled;
+			if(enabled){
+				sonido.setIcon(en);
+			}
+			else{
+				sonido.setIcon(dis);
+			}
+			
+		}
 		
 	}
 	

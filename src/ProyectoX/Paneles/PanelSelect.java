@@ -17,7 +17,7 @@ import ProyectoX.Naves.Jugador.Normal;
 import ProyectoX.Naves.Jugador.Resistente;
 import ProyectoX.Naves.Jugador.Veloz;
 
-public class PanelSelect extends AbstractPanel{
+public class PanelSelect  extends JPanel {
 
 	private JButton resistente;
 	
@@ -238,10 +238,5 @@ public class PanelSelect extends AbstractPanel{
 		}
 	}
 
-	@Override
-	public void function(int select) {
-		// TODO Auto-generated method stub
-		
-	}
 	
 }

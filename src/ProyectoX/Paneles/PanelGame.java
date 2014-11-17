@@ -18,7 +18,7 @@ import ProyectoX.Mapas.Nivel_III;
 import ProyectoX.Sound.Reproductor;
 
 
-public class PanelGame extends AbstractPanel{
+public class PanelGame  extends JPanel implements AbstractPanel {
 	
 	private static final String sound = "/ProyectoX/sounds/music/menu_";
 	private PanelJugador panel;
@@ -27,14 +27,14 @@ public class PanelGame extends AbstractPanel{
 	private Mapa map;
 	private Aplication api;
 	private Reproductor rep;
-	Random rn ;
+	private Random rn ;
 	
 	public PanelGame(Aplication api, int select, Reproductor rep){
 		this.api = api;
 		this.rep = rep;
 		rn = new Random();
 		
-		map = new Nivel_III();
+		map = new Nivel_I(api, this);
 		api.add(this, BorderLayout.CENTER);
 		setBackground(new java.awt.Color(0,0,0));
 		
@@ -43,23 +43,23 @@ public class PanelGame extends AbstractPanel{
 		
 		add(panel);
 		panel.setLayout(null);
-		panel.setPreferredSize(new java.awt.Dimension(800, 520));
+		panel.setPreferredSize(new java.awt.Dimension(800, 530));
 		
 		// Barra de estado
 	
 		bar = new JPanel();
 		add(bar);
 		bar.setLayout(null);
-		bar.setPreferredSize(new java.awt.Dimension(800, 50));
+		bar.setPreferredSize(new java.awt.Dimension(800, 35));
 		bar.setBackground(new java.awt.Color(0,0,0));
 		
 		panel.setBar(bar);
 	
         // boton volver al menu
 		
-		volverMenu = new JButton("Salir al Menu");
+		volverMenu = new JButton("Salir");
 		volverMenu.addActionListener(new OyenteVolver());
-		volverMenu.setBounds(25, 11, 150, 25);
+		volverMenu.setBounds(10, 0, 50, 25);
 		volverMenu.setForeground(new java.awt.Color(0,255,0));
 		volverMenu.setBackground(new java.awt.Color(0,0,0));
 		volverMenu.setBorder(BorderFactory.createCompoundBorder(null,null));
@@ -90,7 +90,7 @@ public class PanelGame extends AbstractPanel{
             if(verd == 0){
             	map.stop();
             	setVisible(false);
-    			api.initMain();
+    			api.initMain(rep);
         		rep.addSound(sound+rn.nextInt(4)+".mp3",true);
 
             }
@@ -101,8 +101,7 @@ public class PanelGame extends AbstractPanel{
 
 	@Override
 	public void function(int select) {
-		// TODO Auto-generated method stub
-		
+		api.initMain(rep);
 	}
 
 }

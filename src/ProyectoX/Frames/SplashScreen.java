@@ -14,7 +14,6 @@ import javax.swing.*;
 
 public class SplashScreen extends JWindow {
 	private int duration;
-	private JLabel jLabelTitle;
 	private URL path;
 	private Image image;
 

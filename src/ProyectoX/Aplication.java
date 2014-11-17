@@ -3,6 +3,7 @@ package ProyectoX;
 import java.awt.BorderLayout;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
+
 import javax.swing.BorderFactory;
 import javax.swing.JButton;
 import javax.swing.JFrame;
@@ -55,7 +56,6 @@ public class Aplication extends javax.swing.JFrame {
 	 public Aplication() {
 		rep = new Reproductor();
 		rn = new Random();
-		rep.addSound(sound+rn.nextInt(4)+".mp3",true);
 		initGUI();
     }
 
@@ -104,6 +104,7 @@ public class Aplication extends javax.swing.JFrame {
     //inicializa el primer panel para iniciar o salir del juego
     
 	public void initPrimerPanel(){
+		rep.addSound(sound+rn.nextInt(4)+".mp3",true);
 		setVisible(false);
 		principal = new PanelInit(this);
 		add(principal);
@@ -112,7 +113,8 @@ public class Aplication extends javax.swing.JFrame {
 	
 	//inicializa el segundo panel para seleccionar tipo de nave
 	
-	public void initMain(){
+	public void initMain(Reproductor rep){
+		this.rep = rep;
 		setVisible(false);
 		main = new PanelSelect(this);
 		add(main);
@@ -125,6 +127,9 @@ public class Aplication extends javax.swing.JFrame {
 		this.dispose();
 		System.exit(0);
 		
+	}
+	public Reproductor getReproductor(){
+		return rep;
 	}
 	
 }

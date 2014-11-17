@@ -128,4 +128,8 @@ public abstract class Enemigo extends Nave {
 	protected String getSonidoExplosion(){
 		return explodeSound;
 	}
+	
+	public boolean isInvulnerable(){
+		return false;
+	}
 }

@@ -173,7 +173,7 @@ public abstract class Nave {
 		
 		// funcion de colicion que verifica si uno o mas puntos del borde del objeto nave intersectan con el borde del objeto que ejecuta la funcion
 		fColision = (A && B || E && F) && (C && D || G && H) ||  !A && !F && ( !H && D || G && H) ||  !C &&  !H && (B &&  !F ||  !A && E);
-		return  getVisible() && nave.getVisible() && fColision;
+		return !nave.isInvulnerable() && getVisible() && nave.getVisible() && fColision;
 				
 				
 	}
@@ -236,5 +236,6 @@ public abstract class Nave {
 		if(!fueraDePantalla())
 			reproductor.addSound(getSonidoExplosion(),false);
 	}
+	public abstract boolean isInvulnerable();
 }
 

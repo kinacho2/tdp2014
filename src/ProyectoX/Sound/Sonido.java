@@ -1,6 +1,8 @@
 package ProyectoX.Sound;
 
 import java.io.InputStream;
+
+import ProyectoX.lib.javazoom.jl.decoder.JavaLayerException;
 import ProyectoX.lib.javazoom.jl.player.Player;
 
 
@@ -50,7 +52,7 @@ public class Sonido extends Thread {
 			}
 	}
 	
-	private void crearPlayer(InputStream fis ){
+	private void crearPlayer(InputStream fis){
 		try{
 			playMP3 = new Player(fis);
 			playMP3.play();
@@ -70,4 +72,7 @@ public class Sonido extends Thread {
 		loop = false;
 	}
 
+	public String getPath(){
+		return file;
+	}
 }

@@ -8,11 +8,12 @@ import javax.swing.ImageIcon;
 import javax.swing.JButton;
 import javax.swing.JLabel;
 import javax.swing.JOptionPane;
+import javax.swing.JPanel;
 
 import ProyectoX.Aplication;
 import ProyectoX.Naves.Nave;
 
-public class PanelInit extends AbstractPanel{
+public class PanelInit   extends JPanel {
 
 	private Aplication api;
 	private JButton quit;
@@ -83,14 +84,9 @@ public class PanelInit extends AbstractPanel{
 		public void actionPerformed(ActionEvent arg0) {
 			
             setVisible(false);
-            api.initMain();
+            api.initMain(api.getReproductor());
             
 		}
 	}
 
-	@Override
-	public void function(int select) {
-		// TODO Auto-generated method stub
-		
-	}
 }
