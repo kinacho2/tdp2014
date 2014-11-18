@@ -387,7 +387,7 @@ public abstract class Mapa{
 	}
 	
 	/**
-	 * hace un reset del nivel
+	 * hace un reset del nivel se encarga de sacar la pausa a los entes del juego
 	 */
 
 	public void reset(){

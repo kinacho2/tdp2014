@@ -23,6 +23,11 @@ public class Nivel_I extends Mapa{
 	protected static final String soundBoss = "/ProyectoX/sounds/music/level1boss.mp3";
 	protected static final String sound = "/ProyectoX/sounds/music/level1.mp3";
 
+	/**
+	 * Constructor de la clase Mapa
+	 * @param api la aplicacion que ejecutara el siguiente metodo al terminarse el SplashScreen
+	 * @param game el panel donde se dibuja el juego
+	 */
 	
 	public Nivel_I(Aplication api, PanelGame game){
 		super(api,game);
@@ -45,6 +50,12 @@ public class Nivel_I extends Mapa{
 		
 	}
 	
+	/**
+	 * redefine getY() de la clase Mapa
+	 * retorna la coordenada y del fondo y la modifica si el fondo llego a su fin vuelve a empezar
+	 * @return coordenada y
+	 */
+	
 	public int getY(){
 		if(delay % delayVel  == 0){
 			y += dy;
@@ -58,6 +69,11 @@ public class Nivel_I extends Mapa{
 		return y;
 	}
 
+	
+	/**
+	 * crea y setea a todos los entes del juego el nuevo mapa que es el siguiente nivel
+	 */
+	
 	public void nextMapa() {
 		reproductor.stop(0);
 		Mapa map = new Nivel_II(api,game);
@@ -68,7 +84,10 @@ public class Nivel_I extends Mapa{
 		map.setJugador(jugador);
 	}
 
-	@Override
+	/**
+	 * redefine reset() de la clase Mapa
+	 * hace un reset del nivel y llama a la funcion reset de Mapa
+	 */
 	public void reset() {
 		reproductor.stop(0);
 		Mapa map = new Nivel_I(api,game);

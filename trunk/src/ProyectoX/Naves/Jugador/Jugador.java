@@ -1,5 +1,6 @@
 package ProyectoX.Naves.Jugador;
 
+import java.awt.Image;
 import java.awt.event.KeyEvent;
 import java.net.URL;
 
@@ -20,6 +21,9 @@ public abstract class Jugador extends Nave {
 	protected ImageIcon iconIzq;
 	protected String power;
 	protected static URL explode = (Nave.class.getClassLoader().getResource("ProyectoX/img/Explosiones/player.gif"));
+	protected static Image invisible = new ImageIcon((Nave.class.getClassLoader().getResource("ProyectoX/img/Enemigo/Torreta/invisible.png"))).getImage();
+	protected Image aux;
+	private boolean cambio = false;
 	protected Disparo arma;
 	private Defensa defensa;
 	protected int bombas;
@@ -27,6 +31,16 @@ public abstract class Jugador extends Nave {
 	private boolean pause;
 	private long init;
 	private int invulnerable = 5000;
+	
+	/**
+	 * Cosntructor de la clase Jugador
+	 * basado en el codigo http://zetcode.com/tutorials/javagamestutorial/movingsprites/ para mover el jugador
+	 * @param vida
+	 * @param vel
+	 * @param icon
+	 * @param iconDer
+	 * @param iconIzq
+	 */
 	
 	public Jugador(int vida, int vel, ImageIcon icon, ImageIcon iconDer, ImageIcon iconIzq){
 		super(vida, vel, icon, new ImageIcon(explode), icon.getIconWidth(), icon.getIconHeight());
@@ -47,6 +61,8 @@ public abstract class Jugador extends Nave {
 		
 		puntaje = 0;
 		arma = new Disparo(x + width/2 , y, 0, 1, velocidadMisil);
+		
+		boolean cambio = false;
     	
 	}
 	
@@ -268,6 +284,23 @@ public abstract class Jugador extends Nave {
 		hearts ++;
 	}
 	public boolean isInvulnerable(){
-		return System.currentTimeMillis() - init <= invulnerable;
+		boolean toRet = System.currentTimeMillis() - init <= invulnerable;
+		if(!toRet){
+			cambio = false;
+		}else{
+			if(!cambio){
+				cambio = true;
+				aux = image;
+				image = invisible;
+				
+			}
+			
+			else{
+				cambio = false;
+				image = aux;
+			}
+		}
+		
+		return toRet;
 	}
 }
