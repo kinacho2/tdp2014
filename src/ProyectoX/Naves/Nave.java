@@ -23,8 +23,7 @@ public abstract class Nave {
    //variables para la imagen
 	protected int height;
 	protected int width;
-	//angulo en radianes
-	protected double rotacion = 0.0;
+	
 	protected Image image;
 	protected Image explosion;
 	protected boolean visible;
@@ -47,7 +46,6 @@ public abstract class Nave {
     protected int minWidth;
 	
 	
-	// basado en el codigo http://zetcode.com/tutorials/javagamestutorial/movingsprites/ para mover el jugador
 	public Nave(int vida, int vel, ImageIcon icon, ImageIcon explosion, int w, int h) {
 		height = h;
 		width = w;
@@ -89,7 +87,7 @@ public abstract class Nave {
 		return image;
 	}
     
-    /*
+    /**
      * aumenta en 1 el delay de los disparos
      */
     
@@ -97,7 +95,7 @@ public abstract class Nave {
     	dis = (dis+1) % longDis;
     }
     
-    /*
+    /**
      * setea el delay en 0
      */
     
@@ -115,40 +113,6 @@ public abstract class Nave {
     public Dimension getPreferredSize() 
     {
         return new Dimension(width, height);
-    }
- 
-    public AffineTransform getRotacion() 
-    {
-        return AffineTransform.getRotateInstance(rotacion, getX() + getWidth()/2, getY() + getHeight()/2);
-    }
-     
-    public void setRotacion() 
-    {
-    	double mod = Math.sqrt(dx*dx+dy*dy);
-		double cos = Math.abs(Math.acos(dx/mod));
-		double sin = Math.abs(Math.asin(dx/mod));
-		double pi = Math.PI;
-		
-		//funcion de rotacion de imagen
-		if(dx==0)
-			if(dy<0)
-				rotacion = 0;
-			else
-				rotacion = (pi);
-		else if (dx > 0)
-			if (dy == 0)
-				rotacion = (pi/2);
-			else if(dy < 0)
-				rotacion = (sin);
-			else
-				rotacion = (pi/2+cos);	
-		else if (dy == 0)
-			rotacion = ((3/2)*pi);
-				
-		else if(dy>0)
-			rotacion = (pi+sin);
-		else
-			rotacion = (pi/2-cos);
     }
     
     public int getHeight() {
@@ -236,6 +200,7 @@ public abstract class Nave {
 		if(!fueraDePantalla())
 			reproductor.addSound(getSonidoExplosion(),false);
 	}
+	
 	public abstract boolean isInvulnerable();
 }
 

@@ -42,16 +42,12 @@ public class Nivel_II extends Mapa{
 		reproductor.addSound(sonido,true);
 		
 	}
-
-	public void nextMapa() {
-		reproductor.stop(0);
-		Mapa map = new Nivel_III(api,game);
-		map.setMind(mind);
-		map.setMindEnemies(mindEnemies);
-		mind.setMapa(map);
-		mindEnemies.setMapa(map);
-		map.setJugador(jugador);
-	}
+	
+	/**
+	 * redefine getY() de la clase Mapa
+	 * retorna la coordenada y del fondo y la modifica si el fondo llego a su fin vuelve a empezar
+	 * @return coordenada y
+	 */
 	
 	public int getY(){
 		if(delay % delayVel  == 0){
@@ -65,8 +61,26 @@ public class Nivel_II extends Mapa{
 		delay = (delay + 1) % delayVel;
 		return y;
 	}
+	
+	/**
+	 * crea y setea a todos los entes del juego el nuevo mapa que es el siguiente nivel
+	 */
 
-	@Override
+	public void nextMapa() {
+		reproductor.stop(0);
+		Mapa map = new Nivel_III(api,game);
+		map.setMind(mind);
+		map.setMindEnemies(mindEnemies);
+		mind.setMapa(map);
+		mindEnemies.setMapa(map);
+		map.setJugador(jugador);
+	}
+
+	/**
+	 * redefine reset() de la clase Mapa
+	 * hace un reset del nivel y llama a la funcion reset de Mapa
+	 */
+	
 	public void reset() {
 		reproductor.stop(0);
 		Mapa map = new Nivel_II(api,game);

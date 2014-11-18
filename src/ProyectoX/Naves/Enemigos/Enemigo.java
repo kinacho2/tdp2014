@@ -1,5 +1,6 @@
 package ProyectoX.Naves.Enemigos;
 
+import java.awt.geom.AffineTransform;
 import java.net.URL;
 
 import javax.swing.ImageIcon;
@@ -15,6 +16,9 @@ public abstract class Enemigo extends Nave {
 	protected static final URL explode = (Nave.class.getClassLoader().getResource("ProyectoX/img/Explosiones/nave.gif"));
 	protected static final String sonido = "/ProyectoX/sounds/disparo.mp3";
 	private String explodeSound = "/ProyectoX/sounds/explode2.mp3";
+	
+	//angulo de rotacion en radianes
+	protected double rotacion = 0.0;
 	
 	protected PowerUp power; 
 	
@@ -83,6 +87,40 @@ public abstract class Enemigo extends Nave {
 		addSonidoExplosion();
 		return new Explosion(x + width/2, y + height/2, new ImageIcon(explode), width, height);
 	}
+	
+	 public AffineTransform getRotacion() 
+	    {
+	        return AffineTransform.getRotateInstance(rotacion, getX() + getWidth()/2, getY() + getHeight()/2);
+	    }
+	     
+	    public void setRotacion() 
+	    {
+	    	double mod = Math.sqrt(dx*dx+dy*dy);
+			double cos = Math.abs(Math.acos(dx/mod));
+			double sin = Math.abs(Math.asin(dx/mod));
+			double pi = Math.PI;
+			
+			//funcion de rotacion de imagen
+			if(dx==0)
+				if(dy<0)
+					rotacion = 0;
+				else
+					rotacion = (pi);
+			else if (dx > 0)
+				if (dy == 0)
+					rotacion = (pi/2);
+				else if(dy < 0)
+					rotacion = (sin);
+				else
+					rotacion = (pi/2+cos);	
+			else if (dy == 0)
+				rotacion = ((3/2)*pi);
+					
+			else if(dy>0)
+				rotacion = (pi+sin);
+			else
+				rotacion = (pi/2-cos);
+	    }
 
 
 	public int getPuntaje() {

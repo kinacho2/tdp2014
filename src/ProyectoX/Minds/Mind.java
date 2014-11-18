@@ -39,6 +39,11 @@ public class Mind implements ActionListener {
     private Reproductor reproductor;
     private boolean pause = false;
    
+    /**
+     * Constructor de la clase Mind
+     * @param panel JPanel donde se dibuja el jugador, los disparos enemigos, los objetosm, los powerup y las explosiones
+     * @param select indica el tipo de nave elegida por el jugador
+     */
 
     public Mind(PanelJugador panel, int select) {
     	
@@ -53,6 +58,13 @@ public class Mind implements ActionListener {
         timer = new Timer(delay, this);
         timer.start();
     }
+    
+    /**
+     * define actionPerformed(ActionEvent e) de la interface ActionListener
+     * controla el hilo principal del juego, mueve los objetos y verifica las colisiones que le corresponde
+     * (PowerUP, Jugador y Defensa, Disparos enemigos)
+     * controla tambien las muertes del juegador
+     */
 
     public void actionPerformed(ActionEvent e) {
     	
@@ -86,6 +98,10 @@ public class Mind implements ActionListener {
     	}
     }
     
+    /**
+     * verifica si el Jugador colisiona con un PowerUP
+     */
+    
     private synchronized void colisionPowerUp() {
 		ArrayList powers = mapa.getPowers();
 		
@@ -103,8 +119,10 @@ public class Mind implements ActionListener {
 	    }
 	}
     
-    // Mueve los disparos visibles de los enemigos y los que no son removidos; además verifica si algún disparo colisiono
-    // con algún jugador
+    /**
+     * Mueve los disparos visibles de los enemigos y los que no son removidos
+     * además verifica si algún disparo colisiono con algún jugador
+     */
     private synchronized void disparosEnemigos() {
     	
     	// arreglo de disparos de los enemigos que se encuentran en el mapa
@@ -148,11 +166,20 @@ public class Mind implements ActionListener {
        	
     }
     
+    /**
+     * retorna el jugador principal del juego
+     * @return instancia de Jugador
+     */
+    
     public Jugador getJugador() {
     	return jugador;
     }
     
-    // Selección del tipo de nave
+    /**
+     * Se crea un Jugador de acuerdo a la selección del tipo de nave
+     * @param select indica el tipo de nave elegida
+     */
+    
     public void crearJugador(int select) {
     	if (select == 1) {
         	jugador = new Veloz();
@@ -165,9 +192,17 @@ public class Mind implements ActionListener {
         
     }
     
+    /**
+     * detiene el hilo del juego
+     */
+    
     public void stop() {
     	timer.stop();
     }
+    /**
+     * setea un nuevo reproductor a la clase
+     * @param rep de tipo Reproductor el nuevo reproductor de la clase
+     */
 
 	public void addReproductor(Reproductor rep) {
 		reproductor = rep;
@@ -175,18 +210,33 @@ public class Mind implements ActionListener {
 		
 	}
 	
+	/**
+	 * setea un nuevo Mapa a la clase
+	 * @param map de tipo Mapa nuevo mapa de la clase
+	 */
+	
 	public void setMapa(Mapa map){
 		mapa = map;
 		panel.setMapa(map);
 		map.setJugador(jugador);
 		jugador.setMapa(map);
 	}
+	
+	/**
+	 * pausa o reanuda el juego
+	 * @param arg booleano si es true se pausa el juego, si es false se reanuda
+	 */
 
 	public void pause(boolean arg){
 		mapa.pause(arg);
 		jugador.pause(arg);
 		pause = arg;
 	}
+	
+	/**
+	 * silencia o reanuda el sonido
+	 * @param arg booleano si es true se silencia el reproductor, caso contrario se inicia el sonido
+	 */
 	
 	public void silencio(boolean arg){
 		reproductor.setEnabled(arg);

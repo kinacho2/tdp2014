@@ -27,6 +27,10 @@ public class MindEnemies extends Thread  {
 	private Reproductor rep;
 	private String outro = "/ProyectoX/sounds/music/outro.mp3";
 	
+	/**
+	 * Constructor de la clase MindEnemies
+	 * @param p JPanel donde se dibujan los enemigos, el fondo y los disparos del jugador
+	 */
 	public MindEnemies(PanelEnemies p) {
 		enemies = new ArrayList();
 		panel = p;
@@ -37,6 +41,12 @@ public class MindEnemies extends Thread  {
 		//mapa=map;
 		
 	}
+	
+	/**
+	 * redefine run() de la clase Thread
+	 * controla el bucle de los enemigos, mueve y remueve los objetos que le corresponden
+	 * (Enemigos, Disparos del jugador y Jefe)
+	 */
 	
 	public void run() {
 		try {
@@ -98,8 +108,11 @@ public class MindEnemies extends Thread  {
 		
 	}
 	
-	// Mueve los disparos visibles de jugador y los que no son removidos; además verifica si algún disparo colisionó
-    // con algún enemigo
+	/**
+	 *  Mueve los disparos visibles de jugador y los que no son removidos
+	 *  además verifica si algún disparo colisiono con algún enemigo
+	 */
+	
     private synchronized void disparosJugador() {
     	// arreglo de disparos de jugador y de enemigos que se encuentran en el mapa
         ArrayList ms = mapa.getMisilesJugador();
@@ -132,17 +145,28 @@ public class MindEnemies extends Thread  {
   	
     }
 	
-	
+	/**
+	 * retorna un ArrayList con los enemigos en pantalla
+	 * @return ArrayList de Enemigo
+	 */
 	
 
 	public ArrayList getEnemies() {
 		return enemies;
 	}
 	
+	/**
+	 * le indica al hilo que debe detenerse
+	 */
+	
 	public void setStop(){
 		stop=true;
 	}
 
+	/**
+	 * agrega un Jefe al arreglo de enemigos en pantalla y tambien sus torretas
+	 * @param boss de tipo Jefe el ultimo Enemigo del nivel
+	 */
 	public void addBoss(Jefe boss){
 		enemies.add(boss);
 		ArrayList en = boss.getTorretas();
@@ -154,18 +178,38 @@ public class MindEnemies extends Thread  {
 		
 	}
 	
+	/**
+	 * setea un nuevo Mapa a la clase 
+	 * @param map nuevo mapa de la clase
+	 */
+	
 	public void setMapa(Mapa map){
 		mapa = map;
 		panel.setMapa(map);
 	}
 	
+	/**
+	 * pausa o reanuda el hilo
+	 * @param arg booleano si es true se pausa el juego, si es false se reanuda
+	 */
+	
 	public void pause(boolean arg){
 		pause = arg;
 	}
 	
+	/**
+	 * setea un nuevo Reproductor a la clase
+	 * @param rep nuevo Reproductor de la clase
+	 */
+	
 	public void setReproductor(Reproductor rep){
 		this.rep = rep;
 	}
+	
+	/**
+	 * en caso de morir el jugador ante el Jefe se debe setear el booleano,
+	 * que controla la aparicion del Jefe y su muerte, en false
+	 */
 
 	public void setEstaJefe() {
 		jefe = false;

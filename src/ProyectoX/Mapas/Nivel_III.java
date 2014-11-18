@@ -43,9 +43,15 @@ public class Nivel_III extends Mapa{
 		
 	}
 	
+	/**
+	 * redefine getY() de la clase Mapa
+	 * retorna la coordenada y del fondo y la modifica si el fondo llego a su fin vuelve a empezar
+	 * @return coordenada y
+	 */
+	
 	public int getY(){
 		if(delay % delayVel  == 0){
-			y++;
+			y += dy;
 			if(y  >= 0 ){
 				y = initY;
 			}
@@ -56,6 +62,9 @@ public class Nivel_III extends Mapa{
 		return y;
 	}
 
+	/**
+	 * crea una SplashScreen para el final del juego y redirige el hilo al primer panel del juego
+	 */
 	
 	public void nextMapa() {
 		game.setVisible(false);
@@ -64,7 +73,11 @@ public class Nivel_III extends Mapa{
  
 	}
 
-	@Override
+	/**
+	 * redefine reset() de la clase Mapa
+	 * hace un reset del nivel y llama a la funcion reset de Mapa
+	 */
+	
 	public void reset() {
 		reproductor.stop(0);
 		Mapa map = new Nivel_III(api,game);
