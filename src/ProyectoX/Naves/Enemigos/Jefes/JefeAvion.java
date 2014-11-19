@@ -2,9 +2,7 @@ package ProyectoX.Naves.Enemigos.Jefes;
 
 import java.net.URL;
 import java.util.Random;
-
 import javax.swing.ImageIcon;
-
 import ProyectoX.Frames.Explosion;
 import ProyectoX.Naves.Nave;
 import ProyectoX.Naves.Enemigos.Torretas.FabricaTorretasDobles;
