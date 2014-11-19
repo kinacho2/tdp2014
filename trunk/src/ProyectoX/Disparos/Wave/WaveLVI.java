@@ -22,7 +22,7 @@ public class WaveLVI extends DisparoWave{
 	}
 	
 	/**
-	 * redefine nextLevel() de la clase Disparo
+	 * redefine nextLevel() de la clase DisparoJugador
 	 * retorna una instancia de WaveLVII que simboliza el siguiente nivel de WaveLVI
 	 * @return instancia de Disparo de tipo dinamico WaveLVII
 	 */

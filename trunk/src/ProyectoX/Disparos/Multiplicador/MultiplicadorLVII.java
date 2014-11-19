@@ -20,7 +20,7 @@ public class MultiplicadorLVII extends DisparoMultiplicador{
 	}
 	
 	/**
-	 * redefine nextLevel() de la clase Disparo
+	 * redefine nextLevel() de la clase DisparoJugador
 	 * retorna una instancia de MultiplicadorLVIII que simboliza el siguiente nivel de MultiplicadorLVII
 	 * @return instancia de Disparo de tipo dinamico MultiplicadorLVIII
 	 */

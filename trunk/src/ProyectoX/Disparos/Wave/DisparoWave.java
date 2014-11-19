@@ -45,6 +45,11 @@ public class DisparoWave extends DisparoJugador {
 		verificarColisionBorde();
 	}
 	
+	/**
+	 * redefine getWave() de la clase DisparoJugador
+	 * retorna el siguiente nivel de la instancia
+	 */
+	
 	public DisparoJugador getWave(){
 		return nextLevel();
 	}
