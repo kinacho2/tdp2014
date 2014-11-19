@@ -20,7 +20,7 @@ public class WaveLVIII extends DisparoWave {
 	}
 	
 	/**
-	 * redefine nextLevel() de la clase Disparo
+	 * redefine nextLevel() de la clase DisparoJugador
 	 * retorna una instancia si mismo
 	 * @return instancia de Disparo de tipo dinamico WaveLVIII
 	 */

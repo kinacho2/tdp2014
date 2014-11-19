@@ -20,6 +20,10 @@ public abstract class DisparoMultiplicador extends DisparoJugador {
 		super(x, y, dx, dy, 20, nave);
 	}
 	
+	/**
+	 * redefine getMultiplicador() de la clase DisparoJugador
+	 * retorna el siguiente nivel de la instancia
+	 */
 	public DisparoJugador getMultiplicador(){
 		return nextLevel();
 	}

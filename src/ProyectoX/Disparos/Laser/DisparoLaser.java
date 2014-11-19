@@ -165,6 +165,11 @@ public abstract class DisparoLaser extends DisparoJugador {
 		this.impacto = impacto;
 	}
 	
+	/**
+	 * redefine getLaser() de la clase DisparoJugador
+	 * retorna el siguiente nivel de la instancia
+	 */
+	
 	public DisparoJugador getLaser(){
 		return nextLevel();
 	}
