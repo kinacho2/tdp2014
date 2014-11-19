@@ -1,22 +1,20 @@
 package ProyectoX.Naves.Enemigos;
 
 import java.net.URL;
-import java.util.Random;
-
 import javax.swing.ImageIcon;
-
 import ProyectoX.Disparos.Disparo;
 import ProyectoX.Naves.Nave;
-import ProyectoX.Sound.Reproductor;
-import ProyectoX.Sound.Sonido;
+
+/**
+ * Bombardero es un Enemigo que aparece desde abajo describiendo un movimiento especifico
+ * dispara rafagas de Disparos hacia el jugador y luego se marcha por la parte superior
+ * @author Borek Andrea, Figliuolo Nestor, Gaviot Joaquin
+*/
 
 public class Bombardero extends Enemigo {
-	
-	
 	protected static final URL url = (Nave.class.getClassLoader().getResource("ProyectoX/img/Enemigo/bombardero.png"));
 	private static final String alarm = "/ProyectoX/sounds/alarm.mp3";
-	
-	
+
 	private static final int defaultWidth = 192;
 	private static final int defaultHeight = 168;
 	private static final int defaultVel = 3;

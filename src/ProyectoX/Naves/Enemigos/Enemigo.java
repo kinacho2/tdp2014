@@ -2,14 +2,17 @@ package ProyectoX.Naves.Enemigos;
 
 import java.awt.geom.AffineTransform;
 import java.net.URL;
-
 import javax.swing.ImageIcon;
-
 import ProyectoX.Disparos.Disparo;
 import ProyectoX.Frames.Explosion;
 import ProyectoX.Naves.Nave;
 import ProyectoX.Naves.Jugador.Jugador;
 import ProyectoX.PowerUps.PowerUp;
+
+/**
+ * Clase que representa a los enemigos en pantalla
+ * @author Borek Andrea, Figliuolo Nestor, Gaviot Joaquin
+*/
 
 public abstract class Enemigo extends Nave {
 	protected static final URL explode = (Nave.class.getClassLoader().getResource("ProyectoX/img/Explosiones/nave.gif"));
@@ -25,13 +28,23 @@ public abstract class Enemigo extends Nave {
 	private int cont;
 	
 	
+	/**
+	 * Constructor de la clase Enemigo
+	 * @param vida, cantidad de vida del Enemigo
+	 * @param vel la cantidad de pixeles que se mueve por iteracion
+	 * @param ii,ImageIcon que contiene la Image del Enemigo
+	 * @param w, ancho del Enemigo
+	 * @param h, alto del Enemigo
+	 */
 	public Enemigo(int vida, int vel, ImageIcon ii,int w, int h) {
 		super(vida,vel, ii, new ImageIcon(explode), w, h);
 		velocidadMisil = -7;
-		
-		
 	}
 	
+	/**
+	 * verifica la colision con el Jugador y le resta vida a ambos
+	 * tambien verifica la colision con la Defensa del Jugador
+	 */
 	
 	public void verificarColision() {
 		if (colision(jugador)) {
@@ -56,11 +69,10 @@ public abstract class Enemigo extends Nave {
 		
 	}
 	
-	public Jugador getJugador() {
-		return jugador;
-	}
-	
-	public abstract void disparar(); 
+	/**
+	 * debe ser definida por cada tipo de Enemigo
+	 * @return true si el enemigo es especial, false en caso contrario
+	 */
 	
 	public abstract boolean isEspecial();
 	
@@ -82,51 +94,74 @@ public abstract class Enemigo extends Nave {
 		return new Disparo(x + width/2 , y + height, -dxAux, dyAux, velocidadMisil);
 	}
 	
+	/**
+	 * devuelve una instancia de la clase Explosion
+	 * @return instancia de Explosion
+	 */
+	
 	public Explosion getExplosion() {
 		addSonidoExplosion();
 		return new Explosion(x + width/2, y + height/2, new ImageIcon(explode), width, height);
 	}
 	
-	 public AffineTransform getRotacion() 
-	    {
-	        return AffineTransform.getRotateInstance(rotacion, getX() + getWidth()/2, getY() + getHeight()/2);
-	    }
+	/**
+	 * crea un AffineTransform con un determinado centro y eje de rotacion para rotar la imagen del Enemigo 
+	 * @return instancia de AffineTransform
+	 */
+	
+	public AffineTransform getRotacion(){
+		return AffineTransform.getRotateInstance(rotacion, getX() + getWidth()/2, getY() + getHeight()/2);
+	}
+	
+	/**
+	 * calcula el angulo de rotacion del Enemigo dependiendo de la ubicacion del Jugador
+	 */
 	     
-	    public void setRotacion() 
-	    {
-	    	double mod = Math.sqrt(dx*dx+dy*dy);
-			double cos = Math.abs(Math.acos(dx/mod));
-			double sin = Math.abs(Math.asin(dx/mod));
-			double pi = Math.PI;
-			
-			//funcion de rotacion de imagen
-			if(dx==0)
-				if(dy<0)
-					rotacion = 0;
-				else
-					rotacion = (pi);
-			else if (dx > 0)
-				if (dy == 0)
-					rotacion = (pi/2);
-				else if(dy < 0)
-					rotacion = (sin);
-				else
-					rotacion = (pi/2+cos);	
-			else if (dy == 0)
-				rotacion = ((3/2)*pi);
-					
-			else if(dy>0)
-				rotacion = (pi+sin);
+    protected void setRotacion() 
+    {
+    	double mod = Math.sqrt(dx*dx+dy*dy);
+		double cos = Math.abs(Math.acos(dx/mod));
+		double sin = Math.abs(Math.asin(dx/mod));
+		double pi = Math.PI;
+		
+		//funcion de rotacion de imagen
+		if(dx==0)
+			if(dy<0)
+				rotacion = 0;
 			else
-				rotacion = (pi/2-cos);
-	    }
+				rotacion = (pi);
+		else if (dx > 0)
+			if (dy == 0)
+				rotacion = (pi/2);
+			else if(dy < 0)
+				rotacion = (sin);
+			else
+				rotacion = (pi/2+cos);	
+		else if (dy == 0)
+			rotacion = ((3/2)*pi);
+				
+		else if(dy>0)
+			rotacion = (pi+sin);
+		else
+			rotacion = (pi/2-cos);
+    }
 
+    /**
+     * retorna el puntaje asociado a cada instancia de Enemigo
+     * @return entero que representa al puntaje
+     */
 
 	public int getPuntaje() {
 		return puntaje;
 	}
 	
-	public synchronized void setVida(int vd) {
+	/**
+	 * le resta al Enemigo la cantidad de vida pasada por parametro
+	 * si la vida es menor que 0 le quita la visibilidad, le da puntaje al jugador y, si es especial, agrega un PowerUP nuevo al mapa
+	 * @param vd entero 
+	 */
+	
+	public void setVida(int vd) {
 		vida -= vd;
 		if(vida <= 0 && getVisible()) {
 			setVisible();
@@ -137,35 +172,54 @@ public abstract class Enemigo extends Nave {
 		}
 	}
 	
-	public void setPower(PowerUp power){
-		this.power = power;
-	}
-	
-	public PowerUp getPower(){
-		return power;
-	}
+	/**
+	 * leindica al enemigo que se lanzo una Bomba
+	 * @return el puntaje asociado a cada Enemigo
+	 */
 	
 	public int bomba(){
 		setVisible();
 		return getPuntaje();
 	}
 	
+	/**
+	 * agrega un sonido de Disparo al Reproductor 
+	 */
+	
 	protected void addSonido(){
 		reproductor.addSound(sonido,false);
 	}
+	
+	/**
+	 * esta funcion se utilizapara relentizar la velocidad de los Enemigos
+	 * @return true si el contador circlico es 0, false en caso contrario
+	 */
 	
 	protected boolean puedeMoverse(){
 		return cont % delay == 0;
 	}
 	
+	/**
+	 * aumenta el contador circlico para crear un delay en el movimiento
+	 */
+	
 	protected void setMove(){
 		cont = (cont + 1) % delay;
 	}
+	
+	/**
+	 * retorna la ubicacion relativa donde esta el sonido de la Explosion del Enemigo
+	 * @return path relativo
+	 */
 	
 	protected String getSonidoExplosion(){
 		return explodeSound;
 	}
 	
+	/**
+	 * retorna siempre falso dado que un Enemigo nunca es invulnerable
+	 * @return false
+	 */
 	public boolean isInvulnerable(){
 		return false;
 	}

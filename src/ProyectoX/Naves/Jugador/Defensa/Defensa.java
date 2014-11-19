@@ -30,4 +30,8 @@ public abstract class Defensa extends Jugador{
 	public Defensa getEscudo(){
 		return new EscudoX(jugador);
 	}
+	
+	public boolean isInvulnerable(){
+		return false;
+	}
 }

@@ -1,18 +1,10 @@
 package ProyectoX.Naves.Enemigos.Jefes;
 
 import java.io.DataInputStream;
-import java.io.File;
-import java.io.FileInputStream;
 import java.io.IOException;
 import java.io.InputStream;
-import java.net.URISyntaxException;
-import java.net.URL;
 import java.util.ArrayList;
-import java.util.Random;
-
 import javax.swing.ImageIcon;
-import javax.swing.JOptionPane;
-
 import ProyectoX.Mapas.Mapa;
 import ProyectoX.Naves.Nave;
 import ProyectoX.Naves.Enemigos.Enemigo;
@@ -21,7 +13,11 @@ import ProyectoX.Naves.Enemigos.Torretas.Torreta;
 import ProyectoX.Naves.Jugador.Jugador;
 import ProyectoX.Sound.Reproductor;
 
-
+/**
+  * Jefe es la clase que representa a los Jefes del juego, hay uno por cada nivel,
+  * tienen patrones de movimiento determinados y un arreglo de Enemigos de tipo Torreta
+  * @author Borek Andrea, Figliuolo Nestor, Gaviot Joaquin
+ */
 
 public abstract class Jefe extends Enemigo{
 	
@@ -30,6 +26,15 @@ public abstract class Jefe extends Enemigo{
 	protected int defaultWidth;
 	protected int defaultHeight;
 
+	/**
+	 * Constructor de la clase Jefe
+	 * @param vida no se utiliza porque la vida del Jefe son sus Torretas
+	 * @param vel la cantidad de pixeles que se mueve por iteracion
+	 * @param ii ImageIcon que guarda la Image
+	 * @param w ancho
+	 * @param h altura
+	 */
+	
 	public Jefe(int vida, int vel, ImageIcon ii, int w, int h) {
 		super(vida, vel, ii, w, h);
 		defaultWidth = w;
@@ -39,6 +44,14 @@ public abstract class Jefe extends Enemigo{
 		height = 0;
 	}
 
+	/**
+	 * A partir de una fabrica, una ubicacion relativa y una cantidad determinada 
+	 * lee de un fichero las coordenadas x e y de cada Torreta, las crea y las agrega al arreglo de Torretas
+	 * @param bounds path relativo del archivo de texto que contiene las coordenadas de cada Torreta, ordenadas como "x y " 
+	 * @param fabrica de tipo FabricaTorretas es quien genera las torretas a partir de las coordenadas x, y
+	 * @param cantTorretas la cantidad de Torretas que se van a crear asi como tambien la cantidad de numeros que tiene que leer la funcion
+	 */
+	
 	protected void cargarArchivoTorretas(String bounds, FabricaTorretas fabrica, int cantTorretas){
 		try {
 			
@@ -73,18 +86,37 @@ public abstract class Jefe extends Enemigo{
 			
 		}
 	}
+	
+	/**
+	 * no se realiza la accion de disparar por los tanto esta funcion solo verifica las colisiones
+	 */
 	public void disparar() {
 		verificarColision();
 	}
+	
+	/**
+	 * esta funcion retorna siempre false
+	 * @return false
+	 */
 
 	public boolean isEspecial() {
 		return false;
 	}
 	
+	/**
+	 * retorna las torretas que tiene la instancia
+	 * @return ArrayList de Torreta
+	 */
 	
 	public ArrayList getTorretas(){
 		return torretas;
 	}
+	
+	/**
+	 * redefine setJugador de la clase Nave
+	 * setea el Jugador a la instancia y a cada una de sus torretas
+	 * @param jugador nueva instancia de Jugador 
+	 */
 	
 	public void setJugador(Jugador jugador){
 		super.setJugador(jugador);
@@ -94,13 +126,30 @@ public abstract class Jefe extends Enemigo{
 		}
 	}
 	
+	/**
+	 * esta funcion esta vacia debido a que la vida del Jefe son sus Torretas
+	 */
+	
 	public void setVida(int vd){
 		
 	}
 	
+	/**
+	 * esta funcion retorna siempre false
+	 * el Jugador no debe colisionar con el Jefe a menos que se lo especifique
+	 * @param n de tipo Nave
+	 * @return false
+	 */
+	
 	public boolean colision(Nave n){
 		return false;
 	}
+	
+	/**
+	 * redefine setMapa de la clase Nave
+	 * setea el Mapa a la instancia y a cada una de sus torretas
+	 * @param map nueva instancia de Mapa
+	 */
 	
 	public void setMapa(Mapa map){
 		super.setMapa(map);
@@ -110,9 +159,21 @@ public abstract class Jefe extends Enemigo{
 		}
 	}
 	
+	/**
+	 * redefine bomba() de la clase Enemigo
+	 * la bomba no afecta al fefe por lo que esta funcion solo retorna 0
+	 * @return 0
+	 */
+	
 	public int bomba(){
 		return 0;
 	}
+	
+	/**
+	 * redefine addReproductor de la clase Nave
+	 * setea el Reproductor a la instancia y a cada una de sus torretas
+	 * @param rep nueva instancia de Reproductor 
+	 */
 	
 	public void addReproductor(Reproductor rep){
 		reproductor = rep;
@@ -121,11 +182,12 @@ public abstract class Jefe extends Enemigo{
 			torr.addReproductor(rep);
 		}
 	}
-
-	public int getMovimiento() {
-		
-		return primero?1:-1;
-	}
+	
+	/**
+	 * devuelve la posicion en y de la torreta mas baja o mas alta dependiendo del booleano pos
+	 * @param pos booleano, si es true se retorna la coordenada y de la Torreta que esta mas abajo de todas, en caso contrario devuelve la coordenada y de la Torreta que esta mas arriba
+	 * @return coordenada y de la Torreta
+	 */
 	
 	protected int torretaMasBaja(boolean pos){
 		int res = 0;
@@ -153,14 +215,19 @@ public abstract class Jefe extends Enemigo{
 		
 	}
 	
+	/**
+	 * realiza un movimiento de arriba hacia abajo, 
+	 * y luego de abajo hacia arriba dependiendo de 
+	 * la ubicacion de las Torretas visibles,
+	 * mueve las Torretas que contiene y
+	 * tambien comprueba que queden Torretas en el arreglo,
+	 * de no ser asi el Jefe es destruido
+	 */
+	
 	public void move() {
 		if(puedeMoverse()){
 			if(torretas.size() == 0){
-				jugador.setPuntaje(puntaje);
-				mapa.addPower(400, 200, true);
-				setVisible();
-				width = defaultWidth;
-				height = defaultHeight;
+				agregarExplosiones();
 				
 			}
 			else
@@ -194,5 +261,10 @@ public abstract class Jefe extends Enemigo{
 		
 	}
 	
+	/**
+	 * agrega explosiones en determinados lugares del jefe cuando este fue destruido
+	 * ademas le da la puntuacion correspondiente al jugador
+	 */
 	
+	protected abstract void agregarExplosiones();
 }

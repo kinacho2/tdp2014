@@ -2,11 +2,15 @@ package ProyectoX.Naves.Enemigos;
 
 import java.net.URL;
 import java.util.Random;
-
 import javax.swing.ImageIcon;
-
 import ProyectoX.Disparos.Disparo;
 import ProyectoX.Naves.Nave;
+
+/**
+  * Basico es un Enemigo que aparece desde arriba en una coordenada x aleatoria
+  * y baja hasta una altura tambien aleatoria describiendo un movimiento de parabola
+  * @author Borek Andrea, Figliuolo Nestor, Gaviot Joaquin
+ */
 
 public class Basico extends Enemigo {
 

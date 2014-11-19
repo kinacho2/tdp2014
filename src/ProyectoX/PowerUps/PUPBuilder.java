@@ -2,10 +2,20 @@ package ProyectoX.PowerUps;
 
 import java.util.Random;
 
+/**
+ * Esta clase se encarga de crear PowerUP al azar 
+ * dependiendo de la semilla pasada por parametro
+ * y una probabilidad de aparicion dependiente del 
+ * tipo de PowerUP 
+ * @author Borek Andrea, Figliuolo Nestor, Gaviot Joaquin
+ */
 public class PUPBuilder {
 
 	private Random rn;
-	
+	/**
+	 * Constructor de la clase PUPBuilder
+	 * @param rn semilla inicial del Random
+	 */
 	public PUPBuilder(int rn){
 		this.rn = new Random(rn);
 	}
@@ -13,9 +23,9 @@ public class PUPBuilder {
 	public PowerUp getPowerUpRandom(int x, int y){
 		PowerUp up;
 		int aux = rn.nextInt(100);
-		if(aux >= 0 && aux < 13){
+		if(aux >= 0 && aux < 12){
 			up = new Ayudante(x, y);
-		}else if(aux < 26){
+		}else if(aux < 25){
 			up = new Escudo(x, y);
 		}else if(aux < 30){
 			up = new Bomba(x, y);
@@ -30,7 +40,6 @@ public class PUPBuilder {
 		}else{
 			up = new Vida(x, y);
 		}
-		up = new Escudo(x,y);
 		
 		return up;
 	}
