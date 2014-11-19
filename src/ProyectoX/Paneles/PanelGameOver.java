@@ -45,7 +45,7 @@ public class PanelGameOver  extends JPanel {
 			yes = new JButton();
 			add(yes);
 			yes.setText("SI");
-			yes.setBounds(800/2 - 50 - 41, 372, 41, 29);
+			yes.setBounds(800/2 - 50 - 41, 472, 41, 29);
 			yes.setForeground(new java.awt.Color(0,255,0));
 			yes.setBackground(new java.awt.Color(0,0,0));
 			yes.setBorder(BorderFactory.createCompoundBorder(null,null));
@@ -57,7 +57,7 @@ public class PanelGameOver  extends JPanel {
 			no = new JButton();
 			add(no);
 			no.setText("No");
-			no.setBounds(800/2 + 50, 372, 41, 29);
+			no.setBounds(800/2 + 50, 472, 41, 29);
 			no.setForeground(new java.awt.Color(0,255,0));
 			no.setBackground(new java.awt.Color(0,0,0));
 			no.setBorder(BorderFactory.createCompoundBorder(null,null));
@@ -68,7 +68,7 @@ public class PanelGameOver  extends JPanel {
 			label = new JLabel();
 			add(label);
 			label.setText("Desea continuar?");
-			label.setBounds(321, 318, 155, 33);
+			label.setBounds(321, 418, 155, 33);
 			label.setForeground(new java.awt.Color(0,255,0));
 			label.setBackground(new java.awt.Color(0,0,0));
 			label.setBorder(BorderFactory.createCompoundBorder(null,null));

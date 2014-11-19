@@ -20,7 +20,6 @@ public abstract class Jugador extends Nave {
 	protected ImageIcon icon;
 	protected ImageIcon iconDer;
 	protected ImageIcon iconIzq;
-	protected String power;
 	protected static URL explode = (Nave.class.getClassLoader().getResource("ProyectoX/img/Explosiones/player.gif"));
 	protected static Image invisible = new ImageIcon((Nave.class.getClassLoader().getResource("ProyectoX/img/Enemigo/Torreta/invisible.png"))).getImage();
 	protected Image aux;
@@ -57,7 +56,6 @@ public abstract class Jugador extends Nave {
 		velocidad=vel;
 		setJugador(this);
 		velocidadMisil = 20;
-		power = "";
 		bombas = 2;
 		
 		puntaje = 0;
@@ -208,14 +206,6 @@ public abstract class Jugador extends Nave {
 		this.puntaje += puntaje;
 	}
 	
-	public String getPower(){
-		return power;
-	}
-	
-	public void setPower(String power){
-		this.power = power;
-	}
-	
 	public void setNewDisparo(DisparoJugador d){
 		arma = d;
 		arma.setReproductor(reproductor);
@@ -226,9 +216,6 @@ public abstract class Jugador extends Nave {
 	}
 	
 	public void setDefensa(Defensa def){
-		if(defensa != null){
-			defensa.remplazo(def.getPower());
-		}
 		defensa = def;
 		defensa.addReproductor(reproductor);
 	}
@@ -257,7 +244,6 @@ public abstract class Jugador extends Nave {
 		x = 400;
 		y = 450;
 		dropDefensa();
-		power = "";
 		bombas = 1;
 		visible = true;
 	}

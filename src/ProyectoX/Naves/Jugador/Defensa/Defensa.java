@@ -15,13 +15,19 @@ public abstract class Defensa extends Jugador{
 		index = i;
 	}
 
-	public abstract void remplazo(String s);
-
 	public void setVida(int vd){
 		
 		vida-=vd;	
 		if(vida <= -0) 
 			setVisible();
 		
+	}
+	
+	public Defensa getAyudante(){
+		return new NaveAyudante(jugador);
+	}
+	
+	public Defensa getEscudo(){
+		return new EscudoX(jugador);
 	}
 }

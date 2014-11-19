@@ -42,8 +42,6 @@ public class EscudoX extends Defensa {
 			m.setJugador(this);
 		}
 		
-		power = "x";
-		
 		mapa.setJugador(this);
 		
 	}
@@ -68,14 +66,7 @@ public class EscudoX extends Defensa {
 	
 	public void disparar(){
 		
-	}
-	
-	public void remplazo(String s) {
-		if(!s.equals(power))
-			mapa.setJugador(jugador);
-	}
-	
-	
+	}	
 	
 	public void setVida(int vd){
 		super.setVida(vd);	
@@ -92,5 +83,14 @@ public class EscudoX extends Defensa {
 			iconIzq = new ImageIcon(urlWarning);
 			warning = true;
 		}
+	}
+	
+	public Defensa getEscudo(){
+		reset();
+		return this;
+	}
+	
+	public void reset(){
+		vida = defaultVida;
 	}
 }
