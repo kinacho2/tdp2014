@@ -1,12 +1,15 @@
 package ProyectoX.Naves.Enemigos;
 
 import java.net.URL;
-
 import javax.swing.ImageIcon;
-
 import ProyectoX.Disparos.Disparo;
 import ProyectoX.Naves.Nave;
 
+/**
+ * Artillero es un Enemigo que aparece en la coordenada x del jugador por encima de la pantalla
+ * y va moviendose lentamente hacia abajo mientras dispara hacia el jugador
+ * @author Borek Andrea, Figliuolo Nestor, Gaviot Joaquin
+ */
 public class Artillero extends Enemigo {
 
 	protected static final URL url = (Nave.class.getClassLoader().getResource("ProyectoX/img/Enemigo/artillero.png"));
@@ -17,9 +20,6 @@ public class Artillero extends Enemigo {
 	private static final int defaultVida = 50;
 	private boolean up;
 	private boolean primerMovimiento = true;
-	
-	private int delay = 4;
-	private int cont;
 	
 	/**
 	 * Constructor de la clase Artillero

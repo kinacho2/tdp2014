@@ -91,6 +91,14 @@ public class EscudoX extends Defensa {
 	}
 	
 	public void reset(){
+		icon = new ImageIcon(url);
+		iconDer = new ImageIcon(url);
+		iconIzq = new ImageIcon(url);
+		warning = false;
 		vida = defaultVida;
+	}
+	
+	public void setPuntaje(int puntaje){
+		jugador.setPuntaje(puntaje);
 	}
 }

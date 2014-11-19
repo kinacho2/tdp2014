@@ -3,9 +3,7 @@ package ProyectoX.Naves.Jugador;
 import java.awt.Image;
 import java.awt.event.KeyEvent;
 import java.net.URL;
-
 import javax.swing.ImageIcon;
-
 import ProyectoX.Disparos.Disparo;
 import ProyectoX.Disparos.DisparoJugador;
 import ProyectoX.Disparos.MisilBomba;
@@ -15,8 +13,13 @@ import ProyectoX.Naves.Nave;
 import ProyectoX.Naves.Jugador.Defensa.Defensa;
 import ProyectoX.Sound.Reproductor;
 
+/**
+ * 
+ *
+ */
+
 public abstract class Jugador extends Nave {
-	protected int hearts = 6;
+	protected int hearts;
 	protected ImageIcon icon;
 	protected ImageIcon iconDer;
 	protected ImageIcon iconIzq;
@@ -30,7 +33,10 @@ public abstract class Jugador extends Nave {
 	private String explodeSound = "/ProyectoX/sounds/explode.mp3";
 	private boolean pause;
 	private long init;
-	private int invulnerable = 5000;
+	protected int invulnerable = 5000;
+	protected int contPuntaje;
+	//cada 3000 puntos se seteara un nuevo corazon al jugador
+	protected int maxContPuntaje = 3000;
 	
 	/**
 	 * Cosntructor de la clase Jugador
@@ -57,8 +63,8 @@ public abstract class Jugador extends Nave {
 		setJugador(this);
 		velocidadMisil = 20;
 		bombas = 2;
-		
-		puntaje = 0;
+		hearts = 3;
+		puntaje = contPuntaje = 0;
 		arma = new DisparoJugador(x + width/2 , y, 0, 1, velocidadMisil,this);
 		
     	
@@ -193,7 +199,6 @@ public abstract class Jugador extends Nave {
 		}
 	}
 	 
-	@Override
 	public Explosion getExplosion() {
 		return new Explosion(x + width/2, y + height/2, new ImageIcon(explode), width, height);
 	}
@@ -204,6 +209,11 @@ public abstract class Jugador extends Nave {
 
 	public void setPuntaje(int puntaje) {
 		this.puntaje += puntaje;
+		contPuntaje += puntaje;
+		if(contPuntaje > maxContPuntaje){
+			contPuntaje -= maxContPuntaje;
+			setHearts();
+		}
 	}
 	
 	public void setNewDisparo(DisparoJugador d){
@@ -229,7 +239,7 @@ public abstract class Jugador extends Nave {
 	}
 	
 	public void setBomba(){
-		if (bombas <= 3)
+		if (bombas <= 5)
 			bombas ++;
 	}
 	
@@ -270,6 +280,7 @@ public abstract class Jugador extends Nave {
 	public void setHearts() {
 		hearts ++;
 	}
+	
 	public boolean isInvulnerable(){
 		boolean toRet = System.currentTimeMillis() - init <= invulnerable;
 		if(!toRet){

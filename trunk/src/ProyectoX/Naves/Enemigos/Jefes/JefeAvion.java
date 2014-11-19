@@ -66,13 +66,13 @@ public class JefeAvion extends Jefe{
 		x = 400 - defaultWidth/2;
 		y = - defaultHeight;
 		delay = 2;
-		int cantTorretasDobles = 0;//10;
-		int cantTorretasSimples = 1;//7;
-		int cantTorretasInvisibles = 0;//a12;
+		int cantTorretasDobles = 10;
+		int cantTorretasSimples = 7;
+		int cantTorretasInvisibles = 12;
 		init = System.currentTimeMillis();
 		cargarArchivoTorretas(boundsDouble, new FabricaTorretasDobles(), cantTorretasDobles);
 		cargarArchivoTorretas(boundsSimple, new FabricaTorretasSimples(), cantTorretasSimples);
-		cargarArchivoTorretas(boundsInvisible,new FabricaTorretasInvisibles(false), cantTorretasInvisibles);
+		cargarArchivoTorretas(boundsInvisible,new FabricaTorretasInvisibles(), cantTorretasInvisibles);
 		puntaje = 500;
 			
 	}
@@ -235,7 +235,7 @@ public class JefeAvion extends Jefe{
 		return ret;
 	}
 	
-	private void agregarExplosiones(){
+	protected void agregarExplosiones(){
 		if(!control[0]){
 			init = System.currentTimeMillis();
 			control[0] = true;

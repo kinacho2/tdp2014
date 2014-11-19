@@ -15,13 +15,11 @@ public class TorretaInvisible extends Torreta{
 
 	private static final int defaultWidth1 = 34;
 	private static final int defaultHeigth1 = 47;
-	private static final int defaultWidth2 = 34;
-	private static final int defaultHeigth2 = 47;
 	private static final int defaultVida = 150;
 
 
-	public TorretaInvisible(int xx, int yy, boolean grande) {
-		super(defaultVida, new ImageIcon(url), xx, yy, grande?defaultWidth2:defaultWidth1, grande?defaultHeigth2:defaultHeigth1);
+	public TorretaInvisible(int xx, int yy) {
+		super(defaultVida, new ImageIcon(url), xx, yy, defaultWidth1, defaultHeigth1);
 		setFrecuenciaDeDisparo(10,150);
 	}
 	

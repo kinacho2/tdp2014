@@ -8,6 +8,12 @@ import javax.swing.ImageIcon;
 import ProyectoX.Disparos.Disparo;
 import ProyectoX.Naves.Nave;
 
+/**
+ * Kamikaze es un Enemigo que aparece aleatoriamente desde arriba
+ * y va moviendose rapidamente hacia el Jugador mientras dispara hacia el
+ * @author Borek Andrea, Figliuolo Nestor, Gaviot Joaquin
+ */
+
 public class Kamikaze extends Enemigo {
 
 	protected static final URL url = (Nave.class.getClassLoader().getResource("ProyectoX/img/Enemigo/kamikaze.png"));
@@ -18,6 +24,11 @@ public class Kamikaze extends Enemigo {
 	private static final int defaultVel = 10;
 	private static final int defaultVida = 30;
 	private boolean up;
+	
+	/**
+	 * Constructor de la clase Kamikaze
+	 * @param up indica si la instancia es especial
+	 */
 	
 	public Kamikaze(boolean up) {
 		super(defaultVida, defaultVel, up? new ImageIcon(urlUp): new ImageIcon(url), defaultWidth, defaultHeight);
