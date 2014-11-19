@@ -71,10 +71,8 @@ public class Explosion {
 	public boolean getVisible() {
 		boolean visible = true;
 		long now = System.currentTimeMillis();
-		
 		if(now - init > delay)
 			visible = false;
-		
 		return visible;
 	}
 	

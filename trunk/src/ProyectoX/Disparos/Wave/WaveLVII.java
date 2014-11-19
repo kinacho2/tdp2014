@@ -1,7 +1,9 @@
 package ProyectoX.Disparos.Wave;
 
 import ProyectoX.Disparos.Disparo;
+import ProyectoX.Disparos.DisparoJugador;
 import ProyectoX.Disparos.Multiplicador.MultiplicadorLVII;
+import ProyectoX.Naves.Nave;
 
 public class WaveLVII extends DisparoWave{
 
@@ -14,8 +16,9 @@ public class WaveLVII extends DisparoWave{
 	 * @param dy diferencial y
 	 */
 	
-	public WaveLVII(int x, int y, double dx, double dy) {
-		super(x, y, dx, dy);
+	public WaveLVII(int x, int y, double dx, double dy,Nave nave) {
+		super(x, y, dx, dy, nave);
+		
 	}
 
 	/**
@@ -24,8 +27,8 @@ public class WaveLVII extends DisparoWave{
 	 * @return instancia de Disparo de tipo dinamico WaveLVIII
 	 */
 	
-	public Disparo nextLevel(){
-		return new WaveLVIII(x,y,dx,dy);
+	public DisparoJugador nextLevel(){
+		return new WaveLVIII(x,y,dx,dy,nave);
 	}
 	
 	/**
@@ -36,10 +39,10 @@ public class WaveLVII extends DisparoWave{
 	public Disparo[] cloneNivel(){
 		Disparo[] d = new Disparo[4];
 		
-		d[0] = new DisparoWave(x  - 10 , y, 3, 1);
-		d[1] = new DisparoWave(x  + 10 , y, -3, 1);
-		d[2] = new DisparoWave(x  - 10 , y, 2, 1);
-		d[3] = new DisparoWave(x  + 10 , y, -2, 1);
+		d[0] = new DisparoWave(x  - 10 , y, 3, 1,nave);
+		d[1] = new DisparoWave(x  + 10 , y, -3, 1,nave);
+		d[2] = new DisparoWave(x  - 10 , y, 2, 1,nave);
+		d[3] = new DisparoWave(x  + 10 , y, -2, 1,nave);
 		setearReproductor(d);
 		return d;
 	}

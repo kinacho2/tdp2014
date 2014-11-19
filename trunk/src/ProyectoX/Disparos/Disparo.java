@@ -188,16 +188,6 @@ public class Disparo {
 		this.x = x;
 		this.y = y;
 	}
-	
-	/**
-	 * Retorna el siguiente nivel del disparo 
-	 * en esta clase base es el mismo disparo
-	 * @return instancia de Disparo
-	 */
-	
-	public Disparo nextLevel(){
-		return new Disparo(x,y,dx,dy,velocidad);
-	}
 
 
 	/**

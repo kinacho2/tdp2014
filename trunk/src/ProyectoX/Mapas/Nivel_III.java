@@ -18,15 +18,15 @@ public class Nivel_III extends Mapa{
 	
 	protected static final URL fondo = (Mapa.class.getClassLoader().getResource("ProyectoX/img/Fondos/fondoNivel1.png"));
 	protected static final int initY = -8072 + 600;
-	protected static final String soundBoss = "/ProyectoX/sounds/music/level2boss.mp3";
-	protected static final String sound = "/ProyectoX/sounds/music/level2.mp3";
+	protected static final String soundBoss = "/ProyectoX/sounds/music/level3boss.mp3";
+	protected static final String sound = "/ProyectoX/sounds/music/level3.mp3";
 
 	
 
 	public Nivel_III(Aplication api, PanelGame game){
 		super(api,game);
 		rn = new Random(13);
-		cantEnemies = 10;
+		cantEnemies = 1;
 		power = new PUPBuilder(16);
 		enBuilder = new EnemiesBuilder(19);
 		ImageIcon ii = new ImageIcon(fondo);

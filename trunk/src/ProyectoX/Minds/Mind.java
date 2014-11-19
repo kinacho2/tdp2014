@@ -107,16 +107,19 @@ public class Mind implements ActionListener {
 		
 		for (int j = 0; j < powers.size(); j++ ) {
 			PowerUp pw = (PowerUp) powers.get(j);
-	        if (pw.isVisible()) {
+	        if (pw!=null && pw.isVisible()) {
 	        	pw.move();
 	           	if(pw.colision(jugador)){
 	           		pw.setVisible();
 	            }
 	        }
-	        else{
-	        	powers.remove(j);
-	        }
-	    }
+		}
+	    for (int j = 0; j < powers.size(); j++ ) {
+			PowerUp pw = (PowerUp) powers.get(j);
+			if(!pw.isVisible())
+				powers.remove(j);
+		}
+	    
 	}
     
     /**
@@ -140,29 +143,25 @@ public class Mind implements ActionListener {
 	            misil.move();
 	            aux = mapa.getJugador();
 	       		if(aux.getVisible())
-	           		if (misil.colision(aux)) {
-	           			if (misil.isVisible()) {
-	           				aux.setVida(misil.getDamage());
-	           				misil.setVisible();
-	           				mapa.addExposion(misil.newExplosion(aux.getY()));
-		            	}
-	           			else{
-	           				ms.remove(misil);
-	           			}
+	           		if (misil!=null && misil.colision(aux)) {			
+	           			aux.setVida(misil.getDamage());
+	           			misil.setVisible();
+	           			mapa.addExposion(misil.newExplosion(aux.getY()));
 		            }
 	       		if(def != null && def.getVisible())
-	           		if (misil.colision(def)) {
-	           			if (misil.isVisible()) {
-	           				def.setVida(misil.getDamage());
-	           				misil.setVisible();
-	           				mapa.addExposion(misil.newExplosion(def.getY()));
-		            	}
-	           			else{
-	           				ms.remove(misil);
-	           			}
-		            }
+	           		if ( misil.colision(def)) {
+	           			def.setVida(misil.getDamage());
+	           			misil.setVisible();
+	           			mapa.addExposion(misil.newExplosion(def.getY()));
+		           }
             }
        	}
+        for (int j = 0; j < ms.size(); j++ ) {
+            Disparo misil = (Disparo) ms.get(j);
+            if(!misil.isVisible()){
+            	ms.remove(j);
+            }
+        }
        	
     }
     

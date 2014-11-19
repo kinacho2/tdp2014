@@ -43,7 +43,7 @@ public class Aplication extends javax.swing.JFrame {
 	private Reproductor rep;
 	private Random rn;
 	
-	private URL url = (Aplication.class.getClassLoader().getResource("ProyectoX/img/Fondos/fondoNivel1.png"));
+	private URL url = (Aplication.class.getClassLoader().getResource("ProyectoX/img/Menu_barras/historia/bombardero.png"));
 
 	/**
 	 * Constructor de la clase Aplication 
@@ -69,7 +69,7 @@ public class Aplication extends javax.swing.JFrame {
     
     public void showSplashBeforeGame(int select){
     	setVisible(false);
-    	MenteSplash spl = new MenteSplash(5000, url, this, select);
+    	MenteSplash spl = new MenteSplash(15000, url, this, select);
     	spl.start();
     }
     

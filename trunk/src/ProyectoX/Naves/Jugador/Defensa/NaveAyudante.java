@@ -32,7 +32,7 @@ public class NaveAyudante extends Defensa {
 		
 		bombas = 0;
 		
-		setNewDisparo(new MultiplicadorLVI(x, y, dx, dy));
+		setNewDisparo(new MultiplicadorLVI(x, y, dx, dy, this));
 		
 		setFrecuenciaDeDisparo(0,7);
 	}

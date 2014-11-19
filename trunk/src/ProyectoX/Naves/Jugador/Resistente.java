@@ -20,7 +20,7 @@ public class Resistente extends Jugador {
 	public Resistente(){
 		super(defaultVida,defaultVel,new ImageIcon(url),new ImageIcon(urlDer),new ImageIcon(urlIzq));
 		
-		arma = new MultiplicadorLVI(x, y , 0, 1);
+		arma = new MultiplicadorLVI(x, y , 0, 1, this);
 		power = "mul";
 	}
 	
@@ -32,7 +32,7 @@ public class Resistente extends Jugador {
 	public void reset(){
 		super.reset();
 		vida = defaultVida;
-		setNewDisparo( new MultiplicadorLVI(x, y , 0, 1));
+		setNewDisparo( new MultiplicadorLVI(x, y , 0, 1, this));
 		power = "mul";
 	}
 	

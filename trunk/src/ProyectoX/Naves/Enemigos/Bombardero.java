@@ -44,6 +44,11 @@ public class Bombardero extends Enemigo {
 	private int delayDisparo = 50;
 	private int bombarderoDis = 0;
 	
+	/**
+	 * Constructor de la clase Bombardero
+	 * @param init indica el lugar de la pantalla en el que aparece el Bombardero, si es true aparece a la izquierda, sino a la derecha
+	 */
+	
 	public Bombardero(boolean init) {
 		super(defaultVida,defaultVel,new ImageIcon(url),defaultWidth,defaultHeight);
 		
@@ -63,6 +68,12 @@ public class Bombardero extends Enemigo {
 		
 		puntaje = 200;
 	}
+	
+	/**
+	 * redefine move() de la clase Nave
+	 * modifica las coordenadas del Bombardero siguiendo un determinado patron
+	 * ademas verifica la colision
+	 */
 	
 	public void move() {
 		if(puedeMoverse()){
@@ -134,7 +145,12 @@ public class Bombardero extends Enemigo {
 	}
 	
 	
-	// El enemigo dispara directo al jugador
+	/**
+	 * agrega al Mapa un Disparo con direccion hacia el Jugador
+	 * si puede disparar y el Bombardero se encuentra a cierta altura
+	 * ademas agrega el sonido correspondiente a la accion de disparar de la instancia
+	 */
+
 	public void disparar() {
 		
 		if(puedeDisparar() && y < 350) {
@@ -146,16 +162,21 @@ public class Bombardero extends Enemigo {
 		}
 	}
 	
+	/**
+	 * redefine puedeDisparar() de la clase Nave
+	 * @return true si el contador circlico se encuentra en determinadas posiciones, esto produce una rafaga de Disparos
+	 */
+	
 	public boolean puedeDisparar() {
 		bombarderoDis = (bombarderoDis + 1) % (delayDisparo*3);
 		return super.puedeDisparar() || (bombarderoDis % 8 == 0 && bombarderoDis <= delayDisparo);
 	}
 
-	// El bombardero siempre será espcial; es decir, devolverá un PowerUp cuando sea destruido 
+	/**
+	 * redefine isEspecial() de la clase Enemigo
+	 * El bombardero siempre será espcial, es decir, devolverá un PowerUp cuando sea destruido 
+	 */
 	public boolean isEspecial() {
 		return true;
 	}
-	
-	
-	
 }
