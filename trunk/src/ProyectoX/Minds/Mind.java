@@ -1,23 +1,11 @@
 package ProyectoX.Minds;
 
-import java.awt.Graphics;
-import java.awt.Graphics2D;
-import java.awt.Toolkit;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
-import java.awt.event.KeyListener;
-import java.awt.event.KeyEvent;
 import java.util.ArrayList;
-
-import javax.swing.JLabel;
-import javax.swing.JOptionPane;
 import javax.swing.Timer;
-import javax.swing.JPanel;
-
 import ProyectoX.Disparos.Disparo;
-import ProyectoX.Frames.Explosion;
 import ProyectoX.Mapas.Mapa;
-import ProyectoX.Naves.Enemigos.Enemigo;
 import ProyectoX.Naves.Jugador.Jugador;
 import ProyectoX.Naves.Jugador.Normal;
 import ProyectoX.Naves.Jugador.Resistente;
@@ -25,6 +13,13 @@ import ProyectoX.Naves.Jugador.Veloz;
 import ProyectoX.Paneles.PanelJugador;
 import ProyectoX.PowerUps.PowerUp;
 import ProyectoX.Sound.Reproductor;
+
+/**
+ * Hilo que controla los movimientos del jugador, verifica colisiones entre el jugador y los disparos enemigos
+ * las colisiones con powerUP y la muerte del jugador
+ * Ademas se encarga de repintar el PanelJugador
+ * @author Borek Andrea, Figliuolo Nestor, Gaviot Joaquin
+ */
 
 public class Mind implements ActionListener {
 	
@@ -103,6 +98,7 @@ public class Mind implements ActionListener {
      */
     
     private synchronized void colisionPowerUp() {
+    	//Arreglo de PowerUP
 		ArrayList powers = mapa.getPowers();
 		
 		for (int j = 0; j < powers.size(); j++ ) {

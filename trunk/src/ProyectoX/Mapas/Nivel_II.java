@@ -2,16 +2,17 @@ package ProyectoX.Mapas;
 
 import java.net.URL;
 import java.util.Random;
-
 import javax.swing.ImageIcon;
-
 import ProyectoX.Aplication;
 import ProyectoX.Naves.Enemigos.EnemiesBuilder;
 import ProyectoX.Naves.Enemigos.Jefes.JefeBarco;
-import ProyectoX.Naves.Enemigos.Jefes.JefeTanque;
 import ProyectoX.Paneles.PanelGame;
 import ProyectoX.PowerUps.PUPBuilder;
-import ProyectoX.Sound.Sonido;
+
+/**
+ * Segundo nivel del juego
+ * @author Borek Andrea, Figliuolo Nestor, Gaviot Joaquin
+ */
 
 public class Nivel_II extends Mapa{
 	

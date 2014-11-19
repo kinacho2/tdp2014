@@ -1,8 +1,6 @@
 package ProyectoX.Naves;
 
-import java.awt.Dimension;
 import java.awt.Image;
-import java.awt.geom.AffineTransform;
 
 import javax.swing.ImageIcon;
 
@@ -10,7 +8,13 @@ import ProyectoX.Frames.Explosion;
 import ProyectoX.Mapas.Mapa;
 import ProyectoX.Naves.Jugador.Jugador;
 import ProyectoX.Sound.Reproductor;
-import ProyectoX.Sound.Sonido;
+
+/**
+ * Clase que simboliza una nave,
+ * Contiene su imagen, su posicion en pantalla, su ancho y alto,
+ * y sus propiedades
+ * @author Borek Andrea, Figliuolo Nestor, Gaviot Joaquin
+ */
 
 public abstract class Nave {
 	

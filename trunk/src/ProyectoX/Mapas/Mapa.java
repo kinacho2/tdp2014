@@ -1,22 +1,10 @@
  package ProyectoX.Mapas;
 
 import java.awt.Image;
-import java.net.URL;
 import java.util.ArrayList;
 import java.util.Random;
-
-
-
-
-
-
-
-
-
-
 import javax.swing.ImageIcon;
 import javax.swing.JPanel;
-
 import ProyectoX.Aplication;
 import ProyectoX.Disparos.Disparo;
 import ProyectoX.Frames.Explosion;
@@ -34,7 +22,14 @@ import ProyectoX.PowerUps.Bomba;
 import ProyectoX.PowerUps.PUPBuilder;
 import ProyectoX.PowerUps.PowerUp;
 import ProyectoX.Sound.Reproductor;
-import ProyectoX.Sound.Sonido;
+
+/**
+ * Clase que contiene los objetos principales del Juego, Enemigos, PowerUPs, Jugador, Disparos, Mentes, etc
+ * Se encarga de controlar  las pausas, los stop y reset del juego
+ * Contiene ademas el fondo del nivel, la musica y un arreglo de Objetos que son nubes
+ * Junto con sus clases hijas implementa el patron State
+ * @author Borek Andrea, Figliuolo Nestor, Gaviot Joaquin
+ */
 
 public abstract class Mapa{
 	

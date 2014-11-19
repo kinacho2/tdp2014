@@ -9,10 +9,14 @@ import ProyectoX.Aplication;
 import ProyectoX.Frames.MenteSplash;
 import ProyectoX.Naves.Enemigos.EnemiesBuilder;
 import ProyectoX.Naves.Enemigos.Jefes.JefeAvion;
-import ProyectoX.Naves.Enemigos.Jefes.JefeBarco;
 import ProyectoX.Paneles.PanelGame;
 import ProyectoX.PowerUps.PUPBuilder;
-import ProyectoX.Sound.Sonido;
+
+/**
+ * Tercer y ultimo nivel del juego
+ * Se encarga de crear la pantalla final del juego
+ * @author Borek Andrea, Figliuolo Nestor, Gaviot Joaquin
+ */
 
 public class Nivel_III extends Mapa{
 	

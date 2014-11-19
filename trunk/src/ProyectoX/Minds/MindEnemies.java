@@ -7,9 +7,16 @@ import ProyectoX.Disparos.Disparo;
 import ProyectoX.Mapas.Mapa;
 import ProyectoX.Naves.Enemigos.Enemigo;
 import ProyectoX.Naves.Enemigos.Jefes.Jefe;
-import ProyectoX.Naves.Jugador.Jugador;
 import ProyectoX.Paneles.PanelEnemies;
 import ProyectoX.Sound.Reproductor;
+
+/**
+ * Hilo que controla los movimientos de los enemigos, sus acciones, 
+ * las colisiones entre los enemigos y los disparos del jugador,
+ * Se encarga de repintar el PanelEnemigo y
+ * ademas de verificar la muerte del Jefe y cambiar de nivel
+ * @author Borek Andrea, Figliuolo Nestor, Gaviot Joaquin
+ */
 
 public class MindEnemies extends Thread  {
 

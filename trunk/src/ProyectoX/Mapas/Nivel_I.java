@@ -1,6 +1,5 @@
 package ProyectoX.Mapas;
 
-import java.awt.Image;
 import java.net.URL;
 import java.util.Random;
 
@@ -8,13 +7,14 @@ import javax.swing.ImageIcon;
 
 import ProyectoX.Aplication;
 import ProyectoX.Naves.Enemigos.EnemiesBuilder;
-import ProyectoX.Naves.Enemigos.Enemigo;
-import ProyectoX.Naves.Enemigos.Jefes.Jefe;
-import ProyectoX.Naves.Enemigos.Jefes.JefeAvion;
 import ProyectoX.Naves.Enemigos.Jefes.JefeTanque;
 import ProyectoX.Paneles.PanelGame;
 import ProyectoX.PowerUps.PUPBuilder;
-import ProyectoX.Sound.Sonido;
+
+/**
+ * Primer nivel del juego
+ * @author Borek Andrea, Figliuolo Nestor, Gaviot Joaquin
+ */
 
 public class Nivel_I extends Mapa{
 	
@@ -25,6 +25,7 @@ public class Nivel_I extends Mapa{
 
 	/**
 	 * Constructor de la clase Mapa
+	 * se encarga de setear los atributos por defecto para su estado
 	 * @param api la aplicacion que ejecutara el siguiente metodo al terminarse el SplashScreen
 	 * @param game el panel donde se dibuja el juego
 	 */
