@@ -1,13 +1,15 @@
 package ProyectoX.Disparos.Multiplicador;
 
-import ProyectoX.Disparos.Disparo;
 import ProyectoX.Disparos.DisparoJugador;
 import ProyectoX.Naves.Nave;
 
-public abstract class DisparoMultiplicador extends DisparoJugador {
+/**
+ * Clase que multiplica la cantidad de Disparos
+ * @author Borek Andrea, Figliuolo Nestor, Gaviot Joaquin
+ */
 
-	private static final String sound = "/ProyectoX/sounds/mul.mp3";
-			
+public abstract class DisparoMultiplicador extends DisparoJugador {
+		
 	/**
 	 * Constructor de la clase DisparoMultiplicador
 	 * @param x coordenada x

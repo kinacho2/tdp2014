@@ -1,16 +1,16 @@
 package ProyectoX.Disparos.Laser;
 
 import java.awt.Image;
-
 import javax.swing.ImageIcon;
-
-import ProyectoX.Disparos.Disparo;
 import ProyectoX.Disparos.DisparoJugador;
 import ProyectoX.Frames.Explosion;
 import ProyectoX.Naves.Nave;
-import ProyectoX.Naves.Jugador.Jugador;
-import ProyectoX.Sound.Reproductor;
-import ProyectoX.Sound.Sonido;
+
+/**
+ * Clase simboliza un laser, tiene 2 estados uno de carga y uno de disparo que atraviesa toda la pantalla
+ * el laser sigue en todo momento la posicion de la Nave que lo lanza
+ * @author Borek Andrea, Figliuolo Nestor, Gaviot Joaquin
+ */
 
 public abstract class DisparoLaser extends DisparoJugador {
 	

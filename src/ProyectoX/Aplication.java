@@ -1,29 +1,13 @@
 package ProyectoX;
 
-import java.awt.BorderLayout;
-import java.awt.event.ActionEvent;
-import java.awt.event.ActionListener;
 
-import javax.swing.BorderFactory;
-import javax.swing.JButton;
 import javax.swing.JFrame;
-import javax.swing.JLabel;
-import javax.swing.JOptionPane;
 import javax.swing.JPanel;
-
-import ProyectoX.Paneles.PanelEnemies;
 import ProyectoX.Paneles.PanelGame;
 import ProyectoX.Paneles.PanelInit;
-import ProyectoX.Paneles.PanelJugador;
 import ProyectoX.Paneles.PanelSelect;
 import ProyectoX.Frames.MenteSplash;
-import ProyectoX.Frames.SplashScreen;
-import ProyectoX.Mapas.Mapa;
-import ProyectoX.Mapas.Nivel_I;
-import ProyectoX.Mapas.Nivel_II;
 import ProyectoX.Sound.Reproductor;
-import ProyectoX.Sound.Sonido;
-
 import java.awt.event.WindowAdapter;
 import java.awt.event.WindowEvent;
 import java.net.URL;
@@ -31,6 +15,8 @@ import java.util.Random;
 
 
 /**
+ * Clase que contiene el metodo main 
+ * Inicializa paneles
  * @author Borek Andrea, Figliuolo Nestor, Gaviot Joaquin
 */
 public class Aplication extends javax.swing.JFrame {

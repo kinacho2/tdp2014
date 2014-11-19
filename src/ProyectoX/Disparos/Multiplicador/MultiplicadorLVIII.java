@@ -4,9 +4,15 @@ import ProyectoX.Disparos.Disparo;
 import ProyectoX.Disparos.DisparoJugador;
 import ProyectoX.Naves.Nave;
 
+/**
+ * Tercer nivel de DisparoMultiplicador
+ * @author Borek Andrea, Figliuolo Nestor, Gaviot Joaquin
+ */
+
 public class MultiplicadorLVIII extends DisparoMultiplicador{
 
-	
+	private static final String sound = "/ProyectoX/sounds/mul.mp3";
+		
 	/**
 	 * Constructor de la clase MultiplicadorLVIII
 	 * @param x coordenada x
@@ -17,6 +23,7 @@ public class MultiplicadorLVIII extends DisparoMultiplicador{
 	
 	public MultiplicadorLVIII(int x, int y, double dx, double dy, Nave nave) {
 		super(x, y, dx, dy, nave);
+		sonido = sound;
 	}
 	
 	/**
@@ -35,14 +42,16 @@ public class MultiplicadorLVIII extends DisparoMultiplicador{
 	 */
 	
 	public Disparo[] cloneNivel(){
-		Disparo[] d = new Disparo[5];
-		double n = 0;
-		int direccion = 1;
+		Disparo[] d = new Disparo[9];
 		d[0] = new Disparo(x, y, 0, dy, velocidad);
 		d[1] = new Disparo(x, y, 0.4d, dy, velocidad);
 		d[2] = new Disparo(x, y, -0.4d, dy, velocidad);
 		d[3] = new Disparo(x, y + 30, 0.4d, -dy, velocidad);
 		d[4] = new Disparo(x, y + 30, -0.4d, -dy, velocidad);
+		d[5] = new Disparo(x, y + 30, 0.4d, -0.1d, velocidad);
+		d[6] = new Disparo(x, y + 30, -0.4d, -0.1d, velocidad);
+		d[7] = new Disparo(x, y + 30, 0.4d, 0.1d, velocidad);
+		d[8] = new Disparo(x, y + 30, -0.4d, 0.1d, velocidad);
 		setearReproductor(d);
 		return d;
 	}

@@ -3,12 +3,18 @@ package ProyectoX.Frames;
 import java.awt.Image;
 import javax.swing.ImageIcon;
 
+
+/**
+ * Clase que simboliza una explosion
+ * contiene una imagen y un delay de espera que por defecto son 1200 milisegundos
+ * @author Borek Andrea, Figliuolo Nestor, Gaviot Joaquin
+ */
+
 public class Explosion {
 	
 	private Image image;
 	private int x;
 	private int y;
-	private int tiempo ;
 	private int delay;
 	
 	private long init;
@@ -27,7 +33,6 @@ public class Explosion {
 		this.x = x - w/2;
 		this.y = y - h/2;
 
-		tiempo = 0;
 		delay = 1200;
 		
 		init = System.currentTimeMillis();

@@ -1,13 +1,15 @@
 package ProyectoX.Disparos.Laser;
 
 import java.net.URL;
-
 import javax.swing.ImageIcon;
-
 import ProyectoX.Disparos.Disparo;
 import ProyectoX.Disparos.DisparoJugador;
 import ProyectoX.Naves.Nave;
-import ProyectoX.Naves.Jugador.Jugador;
+
+/**
+ * Primer nivel del DisparLaser 
+ * @author Borek Andrea, Figliuolo Nestor, Gaviot Joaquin
+ */
 
 public class LaserLVI extends DisparoLaser{
 

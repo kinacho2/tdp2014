@@ -8,8 +8,12 @@ import javax.swing.ImageIcon;
 import ProyectoX.Frames.Explosion;
 import ProyectoX.Naves.Nave;
 import ProyectoX.Sound.Reproductor;
-import ProyectoX.Sound.Sonido;
 
+/**
+ * Clase que simboliza un disparo, contiene su imagen y posicion en pantalla
+ * Verifica colisiones con instancias de Nave 
+ * @author Borek Andrea, Figliuolo Nestor, Gaviot Joaquin
+ */
 
 public class Disparo {
 
