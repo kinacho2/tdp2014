@@ -1,8 +1,13 @@
 package ProyectoX.Frames;
 
 import java.awt.Image;
-
 import javax.swing.ImageIcon;
+
+/**
+ * Esta clase representa objetos que son parte del ambiente del juego como las nubes
+ * contienen una imagen y su posicion en la pantalla
+ * @author Borek Andrea, Figliuolo Nestor, Gaviot Joaquin
+ */
 
 public class Objeto {
 

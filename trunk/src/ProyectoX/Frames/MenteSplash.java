@@ -1,9 +1,13 @@
 package ProyectoX.Frames;
 
 import java.net.URL;
-
 import ProyectoX.Aplication;
 import ProyectoX.Paneles.AbstractPanel;
+
+/**
+ * Clase Thread que crea una SplashScreen que aparece en el centro de la pantalla
+ * @author Borek Andrea, Figliuolo Nestor, Gaviot Joaquin
+ */
 
 public class MenteSplash extends Thread{
 

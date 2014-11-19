@@ -13,6 +13,8 @@ import java.net.URL;
 import javax.swing.*;
 /**
  * Codigo construido en parte utilizando la clase SplashScreen mostrada en la practica de la materia
+ * contiene una imagen creada a partir de un URL pasado por parametro en su constructor
+ * su funcion es dibujar la imagen en la pantalla y permanecer durante un tiempo determinado
  */
 public class SplashScreen extends JWindow {
 	private int duration;
@@ -65,21 +67,16 @@ public class SplashScreen extends JWindow {
 	
 	/**
 	 * redefine  paint(Graphics g) de la clase Window
-	 * redibuja en cada iteracion
+	 * dibuja en el JWindows la imagen que este contiene
 	 * @param g 
 	 */
 	
 	public synchronized void paint(Graphics g) {
-		 
-
 		  super.paint(g);
-
 	      Graphics2D g2d = (Graphics2D) g;
-	        
 	      g2d.drawImage(image, 0, 0, this);
-
 	      Toolkit.getDefaultToolkit().sync();
-	      //g.dispose();
+	      g.dispose();
 	}
 
 }

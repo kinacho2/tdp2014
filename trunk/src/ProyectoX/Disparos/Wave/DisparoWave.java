@@ -9,11 +9,16 @@ import ProyectoX.Disparos.Disparo;
 import ProyectoX.Disparos.DisparoJugador;
 import ProyectoX.Naves.Nave;
 
+/**
+ * Clase que multiplica y le da un patron de movimiento sinuidal al Disparo
+ * ademas cambia su imagen
+ * @author Borek Andrea, Figliuolo Nestor, Gaviot Joaquin
+ */
 
 public class DisparoWave extends DisparoJugador {
 
 	private static final URL url = Disparo.class.getClassLoader().getResource("ProyectoX/img/Disparos/Wave/wave.png");
-
+	private static final String sound = "/ProyectoX/sounds/mul.mp3";
 	
 	protected int variacion = 0;
 	
@@ -31,6 +36,7 @@ public class DisparoWave extends DisparoJugador {
 		super(x, y, dx, dy, -10,nave);
 		ImageIcon ii = new ImageIcon(url);
         image = ii.getImage().getScaledInstance(width, height, Image.SCALE_DEFAULT);
+        sonido = sound;
 	}
 	
 	/**

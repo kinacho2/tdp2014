@@ -4,6 +4,11 @@ import ProyectoX.Disparos.Disparo;
 import ProyectoX.Disparos.DisparoJugador;
 import ProyectoX.Naves.Nave;
 
+/**
+ * Segundo nivel de DisparoMultiplicador
+ * @author Borek Andrea, Figliuolo Nestor, Gaviot Joaquin
+ */
+
 public class MultiplicadorLVII extends DisparoMultiplicador{
 
 	
@@ -35,12 +40,12 @@ public class MultiplicadorLVII extends DisparoMultiplicador{
 	 */
 	
 	public Disparo[] cloneNivel(){
-		Disparo[] d = new Disparo[3];
-		double n = 0;
-		int direccion = 1;
+		Disparo[] d = new Disparo[5];
 		d[0] = new Disparo(x, y, 0, dy, velocidad);
 		d[1] = new Disparo(x, y, 0.4d, dy, velocidad);
 		d[2] = new Disparo(x, y, -0.4d, dy, velocidad);
+		d[3] = new Disparo(x, y + 30, 0.4d, -dy, velocidad);
+		d[4] = new Disparo(x, y + 30, -0.4d, -dy, velocidad);
 		setearReproductor(d);
 		return d;
 	}

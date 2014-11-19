@@ -4,7 +4,6 @@ import ProyectoX.Disparos.Laser.LaserLVI;
 import ProyectoX.Disparos.Multiplicador.MultiplicadorLVI;
 import ProyectoX.Disparos.Wave.WaveLVI;
 import ProyectoX.Naves.Nave;
-import ProyectoX.Naves.Jugador.Jugador;
 
 /**
  * Clase creada para implementar el patron State
@@ -12,6 +11,7 @@ import ProyectoX.Naves.Jugador.Jugador;
  * Esta clase no se declara abstracta debido a que los Disparos simples 
  * son instancias propias de ella que implementa el mismo comportamiento 
  * que su antesesor Disparo con el agregado del patron State
+ * @author Borek Andrea, Figliuolo Nestor, Gaviot Joaquin
  */
 public class DisparoJugador extends Disparo{
 

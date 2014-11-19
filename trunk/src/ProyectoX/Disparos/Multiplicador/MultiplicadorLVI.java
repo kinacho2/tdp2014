@@ -2,8 +2,12 @@ package ProyectoX.Disparos.Multiplicador;
 
 import ProyectoX.Disparos.Disparo;
 import ProyectoX.Disparos.DisparoJugador;
-import ProyectoX.Disparos.Laser.LaserLVII;
 import ProyectoX.Naves.Nave;
+
+/**
+ * Primer nivel de DisparoMultiplicador
+ * @author Borek Andrea, Figliuolo Nestor, Gaviot Joaquin
+ */
 
 public class MultiplicadorLVI extends DisparoMultiplicador{
 

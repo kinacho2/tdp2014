@@ -2,8 +2,12 @@ package ProyectoX.Disparos.Wave;
 
 import ProyectoX.Disparos.Disparo;
 import ProyectoX.Disparos.DisparoJugador;
-import ProyectoX.Disparos.Multiplicador.MultiplicadorLVII;
 import ProyectoX.Naves.Nave;
+
+/**
+ * Segundo nivel de DisparoWave
+ * @author Borek Andrea, Figliuolo Nestor, Gaviot Joaquin
+ */
 
 public class WaveLVII extends DisparoWave{
 

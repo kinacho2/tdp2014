@@ -2,15 +2,16 @@ package ProyectoX.Disparos;
 
 import java.awt.Image;
 import java.net.URL;
-
 import javax.swing.ImageIcon;
-
 import ProyectoX.Frames.Explosion;
 import ProyectoX.Mapas.Mapa;
-import ProyectoX.Naves.Nave;
-import ProyectoX.Naves.Jugador.Jugador;
 import ProyectoX.Sound.Reproductor;
-import ProyectoX.Sound.Sonido;
+
+/**
+ * Clase que destruye los enemigos en pantalla
+ * Tiene 2 estados, un misil que se convierte, luego de recorrer cierta distancia, en una explosion
+ * @author Borek Andrea, Figliuolo Nestor, Gaviot Joaquin
+ */
 
 public class MisilBomba extends Disparo{
 
