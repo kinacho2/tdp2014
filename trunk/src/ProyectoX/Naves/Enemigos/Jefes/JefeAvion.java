@@ -58,9 +58,7 @@ public class JefeAvion extends Jefe{
 	private long init;
 	private int delay = 5000;
 	
-	private boolean control = false;
-	private boolean control2 = false;
-	private boolean control3 = false;
+	private boolean[] control = {false,false,false,false,false};
 	
 	public JefeAvion() {
 		super(2000, defaultVel, new ImageIcon(url), defaultWidth, defaultHeight);
@@ -81,40 +79,9 @@ public class JefeAvion extends Jefe{
 
 	public void move() {
 		if(torretas.size() == 0){
-			if(!control){
-				init = System.currentTimeMillis();
-				control = true;
-				int[] array = {169, 256, 343, 432, 817, 907, 993, 1083};
-				int expY = 117;
-				int i = 0;
-				URL exp = (Nave.class.getClassLoader().getResource("ProyectoX/img/Explosiones/fuego.gif"));
-				while(i<array.length){
-					Explosion ex = new Explosion(x+array[i],y+expY, new ImageIcon(exp), 32,56);
-					ex.setDelay(5000);
-					mapa.addExposion(ex);
-					i++;
-				}
-			}
-			else{ 
-				if(System.currentTimeMillis() - init > 5000){
-					jugador.setPuntaje(puntaje);
-					mapa.addPower(400, 200, true);
-					setVisible();
-					width = defaultWidth;
-					height = defaultHeight;
-				}
-				if(System.currentTimeMillis() - init > 1000 && !control2){
-					control2 = true;
-					URL exp = (Nave.class.getClassLoader().getResource("ProyectoX/img/Explosiones/player.gif"));
-					mapa.addExposion(new Explosion(x+ 430, y + 250, new ImageIcon(exp), 28, 54));
-					mapa.addExposion(new Explosion(x+ 850, y + 186, new ImageIcon(exp), 35, 65));
-					mapa.addExposion(new Explosion(x+ 660, y + 320, new ImageIcon(exp), 28, 54));
-				}
-			}
-			System.out.println((System.currentTimeMillis() - init > delay));
-			
+			agregarExplosiones();
 		}
-		if(System.currentTimeMillis() - init > delay && !control)
+		if(System.currentTimeMillis() - init > delay && !control[0])
 			if(puedeMoverse()){
 				if(random){
 					int select = -1;
@@ -268,6 +235,80 @@ public class JefeAvion extends Jefe{
 		return ret;
 	}
 	
+	private void agregarExplosiones(){
+		if(!control[0]){
+			init = System.currentTimeMillis();
+			control[0] = true;
+			int[] array = {169, 256, 343, 432, 817, 907, 993, 1083};
+			int expY = 117;
+			int i = 0;
+			URL exp = (Nave.class.getClassLoader().getResource("ProyectoX/img/Explosiones/fuego.gif"));
+			while(i<array.length){
+				Explosion ex = new Explosion(x+array[i],y+expY, new ImageIcon(exp), 32,56);
+				ex.setDelay(5000);
+				mapa.addExposion(ex);
+				i++;
+			}
+		}
+		else{ 
+			if(System.currentTimeMillis() - init > 5000){
+				jugador.setPuntaje(puntaje);
+				mapa.addPower(400, 200, true);
+				setVisible();
+				width = defaultWidth;
+				height = defaultHeight;
+			}
+			if(System.currentTimeMillis() - init > 1000 && !control[1]){
+				control[1] = true;
+				addSonidoExplosion();
+				URL exp = (Nave.class.getClassLoader().getResource("ProyectoX/img/Explosiones/player.gif"));
+				URL exp2 = (Nave.class.getClassLoader().getResource("ProyectoX/img/Explosiones/ExplodeNave.gif"));
+				mapa.addExposion(new Explosion(x+ 430, y + 250, new ImageIcon(exp2), 180, 180));
+				mapa.addExposion(new Explosion(x+ 850, y + 186, new ImageIcon(exp), 265, 265));
+				mapa.addExposion(new Explosion(x+ 660, y + 320, new ImageIcon(exp), 180, 180));
+			}
+			
+			if(System.currentTimeMillis() - init > 1500 && !control[2]){
+				control[2] = true;
+				addSonidoExplosion();
+				URL exp = (Nave.class.getClassLoader().getResource("ProyectoX/img/Explosiones/nave.gif"));
+				URL exp2 = (Nave.class.getClassLoader().getResource("ProyectoX/img/Explosiones/ExplodeNave.gif"));
+				mapa.addExposion(new Explosion(x+ 310, y + 150, new ImageIcon(exp2), 140, 140));
+				mapa.addExposion(new Explosion(x+ 912, y + 289, new ImageIcon(exp), 140, 140));
+				
+			}
+			
+			if(System.currentTimeMillis() - init > 3000 && !control[3]){
+				control[3] = true;
+				addSonidoExplosion();
+				URL exp = (Nave.class.getClassLoader().getResource("ProyectoX/img/Explosiones/nave.gif"));
+				URL exp2 = (Nave.class.getClassLoader().getResource("ProyectoX/img/Explosiones/ExplodeNave.gif"));
+				
+				mapa.addExposion(new Explosion(x+ 120, y + 1100, new ImageIcon(exp), 140, 140));
+				mapa.addExposion(new Explosion(x+ 800, y + 324, new ImageIcon(exp2), 190, 140));
+				mapa.addExposion(new Explosion(x+ 650, y + 424, new ImageIcon(exp2), 190, 140));
+				
+			}
+			
+			if(System.currentTimeMillis() - init > 4000 && !control[4]){
+				control[4] = true;
+				addSonidoExplosion();
+				URL exp = (Nave.class.getClassLoader().getResource("ProyectoX/img/Explosiones/nave.gif"));
+				URL exp2 = (Nave.class.getClassLoader().getResource("ProyectoX/img/Explosiones/ExplodeNave.gif"));
+				URL exp3 = (Nave.class.getClassLoader().getResource("ProyectoX/img/Explosiones/player.gif"));
+
+				mapa.addExposion(new Explosion(x+ 120, y + 1100, new ImageIcon(exp3), 140, 140));
+				mapa.addExposion(new Explosion(x+ 800, y + 324, new ImageIcon(exp2), 190, 140));
+				mapa.addExposion(new Explosion(x+ 650, y + 424, new ImageIcon(exp2), 190, 140));
+				mapa.addExposion(new Explosion(x+ 430, y + 250, new ImageIcon(exp), 180, 180));
+				mapa.addExposion(new Explosion(x+ 850, y + 186, new ImageIcon(exp3), 265, 265));
+				mapa.addExposion(new Explosion(x+ 660, y + 320, new ImageIcon(exp), 180, 180));
+			
+			}
+		}
+		
+	}
+	
 
 	public int getMovimiento() {
 		return 0;
@@ -307,7 +348,7 @@ public class JefeAvion extends Jefe{
 		
 		addSonidoExplosion();
 		Explosion aux = new Explosion(x + width/2, y + height/2, new ImageIcon(explode), width/2, height/2);
-		aux.setDelay(3500);
+		aux.setDelay(3000);
 		return aux;
 	}
 	

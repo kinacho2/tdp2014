@@ -5,6 +5,7 @@ import java.net.URL;
 import javax.swing.ImageIcon;
 
 import ProyectoX.Naves.Jugador.Jugador;
+import ProyectoX.Naves.Jugador.Defensa.Defensa;
 import ProyectoX.Naves.Jugador.Defensa.NaveAyudante;
 
 
@@ -20,7 +21,11 @@ public class Ayudante extends PowerUp {
 
 	@Override
 	protected void efecto(Jugador jugador) {
-		jugador.setDefensa(new NaveAyudante(jugador));
+		Defensa aux = jugador.getDefensa();
+		if(aux != null)
+			jugador.setDefensa(jugador.getDefensa().getAyudante());
+		else
+			jugador.setDefensa(new NaveAyudante(jugador));
 	}
 
 }

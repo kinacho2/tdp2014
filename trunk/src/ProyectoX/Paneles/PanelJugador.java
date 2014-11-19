@@ -17,6 +17,8 @@ import javax.swing.ImageIcon;
 import javax.swing.JButton;
 import javax.swing.JLabel;
 import javax.swing.JPanel;
+import javax.swing.SwingConstants;
+import javax.swing.border.LineBorder;
 
 import ProyectoX.Naves.Enemigos.Enemigo;
 import ProyectoX.Naves.Jugador.Jugador;
@@ -46,6 +48,7 @@ public class PanelJugador  extends JPanel implements ActionListener{
 	private JLabel puntaje;
 	private JLabel labelVida;
 	private JLabel cantVida;
+	private JLabel labelEnemigo;
 	private JLabel contadorEnemigos;
 	private boolean pause = false;
 	private boolean enabled = true;
@@ -71,43 +74,79 @@ public class PanelJugador  extends JPanel implements ActionListener{
 		
 		ImageIcon ii;
 		
-        puntaje = new JLabel("Puntaje: "+ 0);
-		puntaje.setBounds(800-150, 0, 350, 35);
+        puntaje = new JLabel(""+ 0);
+		puntaje.setBounds(369, -2, 200, 35);
+		puntaje.setFont(new java.awt.Font("Segoe UI",0,20));
+		puntaje.setForeground(new java.awt.Color(255,255,255));
+		puntaje.setBorder(new LineBorder(new java.awt.Color(0,0,255), 1, false));
+		puntaje.setHorizontalAlignment(SwingConstants.RIGHT);
 		bar.add(puntaje);
 		
 		
+		//label enemigos y contador de enemigos
+		ii = new ImageIcon(new ImageIcon(PanelJugador.class.getClassLoader().getResource("ProyectoX/img/Enemigo/basico.png")).getImage().getScaledInstance(25, 25, Image.SCALE_DEFAULT));
+		labelEnemigo = new JLabel(ii);
+		labelEnemigo.setBounds(333, -2, 30, 35);
+		labelEnemigo.setBorder(new LineBorder(new java.awt.Color(0,0,255), 1, false));
+		bar.add(labelEnemigo);
 		
-		contadorEnemigos = new JLabel("Enemigos restantes: " + mapa.cantEnemies());
-		contadorEnemigos.setBounds(800-420, 0, 250, 35);
-		bar.add(contadorEnemigos);
 		
-		puntaje.setFont(new java.awt.Font("Segoe UI",0,20));
-		puntaje.setForeground(new java.awt.Color(0,0,255));
+		contadorEnemigos = new JLabel("" + mapa.cantEnemies());
+		contadorEnemigos.setBounds(363, -2, 45, 35);
 		contadorEnemigos.setFont(new java.awt.Font("Segoe UI",0,20));
 		contadorEnemigos.setForeground(new java.awt.Color(0,255,0));
+		contadorEnemigos.setBorder(new LineBorder(new java.awt.Color(0,0,255), 1, false));
+		contadorEnemigos.setHorizontalAlignment(SwingConstants.CENTER);
+		bar.add(contadorEnemigos);
 		
-		
+		//label vida y cantidad de vida
 		ii = new ImageIcon(new ImageIcon(PanelJugador.class.getClassLoader().getResource("ProyectoX/img/PUP/vida.png")).getImage().getScaledInstance(25, 25, Image.SCALE_DEFAULT));
 		labelVida = new JLabel(ii);
-		labelVida.setBounds(800-550, 0, 60, 35);
+		labelVida.setBounds(252, -2, 30, 35);
+		labelVida.setBorder(new LineBorder(new java.awt.Color(0,0,255), 1, false));
 		bar.add(labelVida);
+		
 		cantVida = new JLabel(""+ jugador.getVida());
-		cantVida.setBounds(800-500, 0, 60, 35);
+		cantVida.setBounds(282, -2, 45, 35);
 		cantVida.setFont(new java.awt.Font("Segoe UI",0,20));
-		cantVida.setForeground(new java.awt.Color(255,0,0));
+		cantVida.setForeground(new java.awt.Color(0,0,255));
+		cantVida.setBorder(new LineBorder(new java.awt.Color(0,0,255), 1, false));
+		cantVida.setHorizontalAlignment(SwingConstants.CENTER);
 		bar.add(cantVida);
 		
 		//icono de corazones y cantidad de corazones
 		ii = new ImageIcon(PanelInit.class.getClassLoader().getResource("ProyectoX/img/Menu_barras/heart.png"));
 		ii = new ImageIcon(ii.getImage().getScaledInstance(20, 20, Image.SCALE_DEFAULT));
 		heart = new JLabel(ii);
-		heart.setBounds(800-610, 0, 30, 35);
+		heart.setBounds(186, -2, 30, 35);
 		bar.add(heart);
+		heart.setBorder(new LineBorder(new java.awt.Color(0,0,255), 1, false));
+		
 		cantHearts = new JLabel("3");
-		cantHearts.setBounds(800-570, -3, 30, 35);
+		cantHearts.setBounds(216, -2, 30, 35);
 		cantHearts.setFont(new java.awt.Font("Segoe UI",0,20));
 		cantHearts.setForeground(new java.awt.Color(255,0,0));
+		cantHearts.setBorder(new LineBorder(new java.awt.Color(0,0,255), 1, false));
+		cantHearts.setHorizontalAlignment(SwingConstants.CENTER);
 		bar.add(cantHearts);
+		
+		//Icono de bomba y cantidad de bombas
+		ii = new ImageIcon(new ImageIcon(PanelJugador.class.getClassLoader().getResource("ProyectoX/img/PUP/bomba.png")).getImage().getScaledInstance(25, 25, Image.SCALE_DEFAULT));
+		labelBomba = new JLabel(ii);
+		labelBomba.setBounds(120, -2, 30, 35);
+		labelBomba.setBackground(new java.awt.Color(0,0,255));
+		labelBomba.setBorder(new LineBorder(new java.awt.Color(0,0,255), 1, false));
+		bar.add(labelBomba);
+		
+		cantBombas = new JLabel(""+jugador.getCantBombas());
+		cantBombas.setBounds(150, -2, 30, 35);
+		cantBombas.setFont(new java.awt.Font("Segoe UI",0,20));
+		cantBombas.setForeground(new java.awt.Color(0,255,0));
+		cantBombas.setHorizontalAlignment(SwingConstants.CENTER);
+		cantBombas.setBorder(new LineBorder(new java.awt.Color(0,0,255), 1, false));
+		bar.add(cantBombas);
+		
+		
 		
 		//icono de sonido y boton de silencio
 		sonido = new JButton("");
@@ -125,16 +164,6 @@ public class PanelJugador  extends JPanel implements ActionListener{
 		sonido.addActionListener(new OyenteSonido());
 		bar.add(sonido);
 		
-		//Icono de bomba y cantidad de bombas
-		ii = new ImageIcon(new ImageIcon(PanelJugador.class.getClassLoader().getResource("ProyectoX/img/PUP/bomba.png")).getImage().getScaledInstance(25, 25, Image.SCALE_DEFAULT));
-		labelBomba = new JLabel(ii);
-		labelBomba.setBounds(800-680, 0, 30, 35);
-		bar.add(labelBomba);
-		cantBombas = new JLabel("2");
-		cantBombas.setBounds(800-640, -3, 30, 35);
-		cantBombas.setFont(new java.awt.Font("Segoe UI",0,20));
-		cantBombas.setForeground(new java.awt.Color(0,255,0));
-		bar.add(cantBombas);
 		
 		
     }
@@ -211,11 +240,11 @@ public class PanelJugador  extends JPanel implements ActionListener{
         		ms.remove(i);
         }
         
-      	puntaje.setText("Puntaje: " + jugador.getPuntaje());
+      	puntaje.setText("" + jugador.getPuntaje());
       	cantVida.setText("" + jugador.getVida());
-		contadorEnemigos.setText("Enemigos restantes: " + mapa.cantEnemies());
+		contadorEnemigos.setText("" + mapa.cantEnemies());
 		cantHearts.setText(""+jugador.getHearts());
-        
+        cantBombas.setText(""+jugador.getCantBombas());
         Toolkit.getDefaultToolkit().sync();
         g.dispose();
         

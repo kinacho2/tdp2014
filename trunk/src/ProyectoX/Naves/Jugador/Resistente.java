@@ -21,7 +21,6 @@ public class Resistente extends Jugador {
 		super(defaultVida,defaultVel,new ImageIcon(url),new ImageIcon(urlDer),new ImageIcon(urlIzq));
 		
 		arma = new MultiplicadorLVI(x, y , 0, 1, this);
-		power = "mul";
 	}
 	
 	public static String getEstadisticas(){
@@ -33,7 +32,7 @@ public class Resistente extends Jugador {
 		super.reset();
 		vida = defaultVida;
 		setNewDisparo( new MultiplicadorLVI(x, y , 0, 1, this));
-		power = "mul";
 	}
+	
 	
 }

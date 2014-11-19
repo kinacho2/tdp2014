@@ -25,7 +25,7 @@ public class Nivel_II extends Mapa{
 	public Nivel_II(Aplication api, PanelGame game){
 		super(api,game);
 		rn = new Random(13);
-		cantEnemies = 50;
+		cantEnemies = 1;
 		power = new PUPBuilder(6);
 		enBuilder = new EnemiesBuilder(9);
 		ImageIcon ii = new ImageIcon(fondo);
