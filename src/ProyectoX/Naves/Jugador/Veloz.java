@@ -5,6 +5,7 @@ import java.net.URL;
 import javax.swing.ImageIcon;
 
 import ProyectoX.Disparos.Disparo;
+import ProyectoX.Disparos.DisparoJugador;
 import ProyectoX.Naves.Nave;
 
 public class Veloz extends Jugador {
@@ -29,6 +30,6 @@ public class Veloz extends Jugador {
 	public void reset() {
 		super.reset();
 		vida = defaultVida;
-		setNewDisparo(new Disparo(x + width/2 , y, 0, 1, velocidadMisil));
+		setNewDisparo(new DisparoJugador(x + width/2 , y, 0, 1, velocidadMisil,this));
 	}
 }

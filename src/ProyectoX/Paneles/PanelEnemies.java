@@ -43,8 +43,6 @@ public class PanelEnemies  extends JPanel implements AbstractPanel {
 	        
 	        g2d.drawImage(mapa.getImage(), mapa.getX(), mapa.getY(), this);
 	        
-	       
-	  
 	        ArrayList enemigos = mind.getEnemies();
 	        
 	        //repinta los enemigos
@@ -52,7 +50,8 @@ public class PanelEnemies  extends JPanel implements AbstractPanel {
 	            Enemigo m = (Enemigo) enemigos.get(i);
 	            AffineTransform tx = m.getRotacion();
 	            g2d.setTransform(tx);
-	            g2d.drawImage(m.getImage(), m.getX(), m.getY(), this);
+	            if(m!=null && m.getVisible())
+	            	g2d.drawImage(m.getImage(), m.getX(), m.getY(), this);
 	            
 	        }
 	        

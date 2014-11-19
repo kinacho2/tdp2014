@@ -39,10 +39,13 @@ public class PanelJugador  extends JPanel implements ActionListener{
 	private JPanel bar;
 	private JButton sonido;
 	private ImageIcon en, dis;
+	private JLabel labelBomba;
+	private JLabel cantBombas;
 	private JLabel heart;
 	private JLabel cantHearts;
 	private JLabel puntaje;
 	private JLabel labelVida;
+	private JLabel cantVida;
 	private JLabel contadorEnemigos;
 	private boolean pause = false;
 	private boolean enabled = true;
@@ -65,38 +68,48 @@ public class PanelJugador  extends JPanel implements ActionListener{
 	
 	public void setBar(JPanel bar) {
 		this.bar = bar;
+		
+		ImageIcon ii;
+		
         puntaje = new JLabel("Puntaje: "+ 0);
 		puntaje.setBounds(800-150, 0, 350, 35);
 		bar.add(puntaje);
 		
-		labelVida = new JLabel("Vida: " + jugador.getVida());
-		labelVida.setBounds(800-250, 0, 100, 35);
-		bar.add(labelVida);
+		
 		
 		contadorEnemigos = new JLabel("Enemigos restantes: " + mapa.cantEnemies());
-		contadorEnemigos.setBounds(800-480, 0, 250, 35);
+		contadorEnemigos.setBounds(800-420, 0, 250, 35);
 		bar.add(contadorEnemigos);
 		
-		labelVida.setFont(new java.awt.Font("Segoe UI",0,20));
-		labelVida.setForeground(new java.awt.Color(255,0,0));
 		puntaje.setFont(new java.awt.Font("Segoe UI",0,20));
 		puntaje.setForeground(new java.awt.Color(0,0,255));
 		contadorEnemigos.setFont(new java.awt.Font("Segoe UI",0,20));
 		contadorEnemigos.setForeground(new java.awt.Color(0,255,0));
 		
-		ImageIcon ii = new ImageIcon(PanelInit.class.getClassLoader().getResource("ProyectoX/img/Menu_barras/heart.png"));
-		ImageIcon aux = new ImageIcon(ii.getImage().getScaledInstance(20, 20, Image.SCALE_DEFAULT));
-		heart = new JLabel(aux);
-		heart.setBounds(800-600, 0, 50, 35);
+		
+		ii = new ImageIcon(new ImageIcon(PanelJugador.class.getClassLoader().getResource("ProyectoX/img/PUP/vida.png")).getImage().getScaledInstance(25, 25, Image.SCALE_DEFAULT));
+		labelVida = new JLabel(ii);
+		labelVida.setBounds(800-550, 0, 60, 35);
+		bar.add(labelVida);
+		cantVida = new JLabel(""+ jugador.getVida());
+		cantVida.setBounds(800-500, 0, 60, 35);
+		cantVida.setFont(new java.awt.Font("Segoe UI",0,20));
+		cantVida.setForeground(new java.awt.Color(255,0,0));
+		bar.add(cantVida);
+		
+		//icono de corazones y cantidad de corazones
+		ii = new ImageIcon(PanelInit.class.getClassLoader().getResource("ProyectoX/img/Menu_barras/heart.png"));
+		ii = new ImageIcon(ii.getImage().getScaledInstance(20, 20, Image.SCALE_DEFAULT));
+		heart = new JLabel(ii);
+		heart.setBounds(800-610, 0, 30, 35);
 		bar.add(heart);
-		
 		cantHearts = new JLabel("3");
-		cantHearts.setBounds(800-550, -3, 50, 35);
-		bar.add(cantHearts);
-		
+		cantHearts.setBounds(800-570, -3, 30, 35);
 		cantHearts.setFont(new java.awt.Font("Segoe UI",0,20));
 		cantHearts.setForeground(new java.awt.Color(255,0,0));
+		bar.add(cantHearts);
 		
+		//icono de sonido y boton de silencio
 		sonido = new JButton("");
 		dis = new ImageIcon(urlDis);
 		dis = new ImageIcon(dis.getImage().getScaledInstance(25, 25, Image.SCALE_DEFAULT));
@@ -112,6 +125,18 @@ public class PanelJugador  extends JPanel implements ActionListener{
 		sonido.addActionListener(new OyenteSonido());
 		bar.add(sonido);
 		
+		//Icono de bomba y cantidad de bombas
+		ii = new ImageIcon(new ImageIcon(PanelJugador.class.getClassLoader().getResource("ProyectoX/img/PUP/bomba.png")).getImage().getScaledInstance(25, 25, Image.SCALE_DEFAULT));
+		labelBomba = new JLabel(ii);
+		labelBomba.setBounds(800-680, 0, 30, 35);
+		bar.add(labelBomba);
+		cantBombas = new JLabel("2");
+		cantBombas.setBounds(800-640, -3, 30, 35);
+		cantBombas.setFont(new java.awt.Font("Segoe UI",0,20));
+		cantBombas.setForeground(new java.awt.Color(0,255,0));
+		bar.add(cantBombas);
+		
+		
     }
 	
 	public synchronized void paint(Graphics g) {
@@ -124,10 +149,27 @@ public class PanelJugador  extends JPanel implements ActionListener{
         //mueve, repinta y elimina los disparos en caso de que ya no sean visibles
         for (int j = 0; j < ms.size(); j++ ) {
             Disparo misil = (Disparo) ms.get(j);
-	        if(misil.isVisible()) {
+	        if(misil!=null && misil.isVisible()) {
 		        g2d.drawImage(misil.getImage(), misil.getX(), misil.getY(), this);
 	        } 
+        }
+        
+        //pinta las explosiones	   
+        
+        ms = mapa.explosiones();
+        for (int i = 0; i < ms.size(); i++ ) {
+            Explosion m = (Explosion) ms.get(i);
+            g2d.drawImage(m.getImage(), m.getX(), m.getY(), this);
             
+        }
+        
+        //elimina las explosiones que no estan en pantalla
+        
+        for (int i = 0; i < ms.size(); i++ ) {
+        	Explosion m = (Explosion) ms.get(i);
+        	if(m!=null && !m.getVisible()) {
+            	ms.remove(i);
+            }
         }
         
         // Pinta el jugador
@@ -155,15 +197,7 @@ public class PanelJugador  extends JPanel implements ActionListener{
         }
         
         
-        //pinta las explosiones	        
-        ms = mapa.explosiones();
-        for (int i = 0; i < ms.size(); i++ ) {
-            Explosion m = (Explosion) ms.get(i);
-            g2d.drawImage(m.getImage(), m.getX(), m.getY(), this);
-            if(!m.getVisible()) {
-            	ms.remove(i);
-            }
-        }
+       
         
         ms = mapa.getObjeto();
         
@@ -178,7 +212,7 @@ public class PanelJugador  extends JPanel implements ActionListener{
         }
         
       	puntaje.setText("Puntaje: " + jugador.getPuntaje());
-        labelVida.setText("Vida: " + jugador.getVida());
+      	cantVida.setText("" + jugador.getVida());
 		contadorEnemigos.setText("Enemigos restantes: " + mapa.cantEnemies());
 		cantHearts.setText(""+jugador.getHearts());
         

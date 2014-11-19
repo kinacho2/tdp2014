@@ -1,8 +1,10 @@
 package ProyectoX.Disparos.Multiplicador;
 
 import ProyectoX.Disparos.Disparo;
+import ProyectoX.Disparos.DisparoJugador;
+import ProyectoX.Naves.Nave;
 
-public abstract class DisparoMultiplicador extends Disparo {
+public abstract class DisparoMultiplicador extends DisparoJugador {
 
 	private static final String sound = "/ProyectoX/sounds/mul.mp3";
 			
@@ -14,8 +16,11 @@ public abstract class DisparoMultiplicador extends Disparo {
 	 * @param dy diferencial y
 	 */
 	
-	public DisparoMultiplicador(int x, int y,double dx, double dy) {
-		super(x, y, dx, dy, 20);
+	public DisparoMultiplicador(int x, int y,double dx, double dy,Nave nave) {
+		super(x, y, dx, dy, 20, nave);
 	}
 	
+	public DisparoJugador getMultiplicador(){
+		return nextLevel();
+	}
 }

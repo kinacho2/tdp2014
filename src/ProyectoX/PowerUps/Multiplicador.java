@@ -4,6 +4,7 @@ import java.net.URL;
 
 import javax.swing.ImageIcon;
 
+import ProyectoX.Disparos.DisparoJugador;
 import ProyectoX.Disparos.Multiplicador.MultiplicadorLVI;
 import ProyectoX.Naves.Jugador.Jugador;
 
@@ -18,13 +19,11 @@ protected static final URL url = (PowerUp.class.getClassLoader().getResource("Pr
 
 
 	protected void efecto(Jugador jugador) {
-		if(jugador.getPower().equals(power)){
-			jugador.setNewDisparo(jugador.getDisparo().nextLevel());
-		}
-		else{
-			jugador.setNewDisparo(new MultiplicadorLVI(x, y , 0, 1));
-			jugador.setPower(power);
-		}
+			
+		DisparoJugador dis = jugador.getDisparo();
+		jugador.setNewDisparo(dis.getMultiplicador());
+			
+		
 		
 	}
 }

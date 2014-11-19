@@ -21,6 +21,11 @@ public class Artillero extends Enemigo {
 	private int delay = 4;
 	private int cont;
 	
+	/**
+	 * Constructor de la clase Artillero
+	 * @param up indica si la instancia es especial
+	 */
+	
 	public Artillero(boolean up){
 		super(defaultVida,defaultVel,up? new ImageIcon(urlUp): new ImageIcon(url),defaultWidth,defaultHeight);
 		y = -defaultHeight;
@@ -29,10 +34,18 @@ public class Artillero extends Enemigo {
 		setFrecuenciaDeDisparo(5,70);
 	}
 
-	@Override
+	/**
+	 * redefine isEspecial() de la clase Enemigo
+	 * @return true si el enemigo es especial, false en caso contrario
+	 */
 	public boolean isEspecial() {
 		return up;
 	}
+	
+	/**
+	 * agrega al Mapa un Disparo con direccion hacia el Jugador
+	 * ademas agrega el sonido correspondiente a la accion de disparar de la instancia
+	 */
 
 	public void disparar() {
 		if(puedeDisparar() && y<500){
@@ -44,7 +57,11 @@ public class Artillero extends Enemigo {
 		}
 	}
 
-	@Override
+	/**
+	 * redefine move() de la clase Nave
+	 * setea al Artillero a la altura del Jugador y modifica la coordenada y en cada iteracion, de modo que se mueva hacia abajo
+	 * ademas verifica la colision
+	 */
 	public void move() {
 		if(puedeMoverse()){
 			if(primerMovimiento){

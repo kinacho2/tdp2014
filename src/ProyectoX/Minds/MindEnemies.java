@@ -71,16 +71,22 @@ public class MindEnemies extends Thread  {
 					
 			        for (int i = 0; i < enemies.size(); i++ ) {
 			            Enemigo m = (Enemigo) enemies.get(i);
-			            m.move();
+			            if(m!=null && m.getVisible()){
+				            m.move();
+				            //dispara y aumenta un contador ciclico que retrasa la distancia entre la ejecucion de los disparos
+				            m.disparar();
+				            m.setDis();
+			            }
+			        }
+			        
+			        for (int i = 0; i < enemies.size(); i++ ) {
+			            Enemigo m = (Enemigo) enemies.get(i);
 			            if (!m.getVisible()){
 			            	enemies.remove(i);
 			            	mapa.addExposion(m.getExplosion());
-			            	
 			            }
-			            //dispara y aumenta un contador ciclico que retrasa la distancia entre la ejecucion de los disparos
-			            m.disparar();
-			            m.setDis();
 			        }
+			        
 			        panel.repaint();
 					
 					if(jefe){

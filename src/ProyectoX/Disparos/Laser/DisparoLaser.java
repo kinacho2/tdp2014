@@ -5,13 +5,14 @@ import java.awt.Image;
 import javax.swing.ImageIcon;
 
 import ProyectoX.Disparos.Disparo;
+import ProyectoX.Disparos.DisparoJugador;
 import ProyectoX.Frames.Explosion;
 import ProyectoX.Naves.Nave;
 import ProyectoX.Naves.Jugador.Jugador;
 import ProyectoX.Sound.Reproductor;
 import ProyectoX.Sound.Sonido;
 
-public abstract class DisparoLaser extends Disparo {
+public abstract class DisparoLaser extends DisparoJugador {
 	
 
 	protected Image laser;
@@ -23,7 +24,6 @@ public abstract class DisparoLaser extends Disparo {
 	//delay para que el laser no impacte de manera continua
 	private int impacto;
 	
-	protected Nave nave;
 	//segunda imagen que representa al disparo
 	private ImageIcon second;
 	//se le asigna false cuando cambia la imagen
@@ -43,7 +43,7 @@ public abstract class DisparoLaser extends Disparo {
 	 */
 	
 	public DisparoLaser(double dy, int width, int height, ImageIcon first, ImageIcon second, Nave nave) {
-		super(0, 0, 0, dy, 0);
+		super(0, 0, 0, dy, 0,nave);
 		this.nave = nave;
 		this.height = 13;
 		this.width = first.getIconWidth();
@@ -165,5 +165,8 @@ public abstract class DisparoLaser extends Disparo {
 		this.impacto = impacto;
 	}
 	
+	public DisparoJugador getLaser(){
+		return nextLevel();
+	}
 	
 }

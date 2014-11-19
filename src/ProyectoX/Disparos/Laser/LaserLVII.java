@@ -5,6 +5,7 @@ import java.net.URL;
 import javax.swing.ImageIcon;
 
 import ProyectoX.Disparos.Disparo;
+import ProyectoX.Disparos.DisparoJugador;
 import ProyectoX.Naves.Nave;
 import ProyectoX.Naves.Jugador.Jugador;
 
@@ -33,13 +34,13 @@ public class LaserLVII extends DisparoLaser{
 	
 	
 	/**
-	 * redefine nextLevel() de la clase Disparo
+	 * redefine nextLevel() de la clase DisparoJugador
 	 * retorna una instancia de LaserLVIII que simboliza el siguiente nivel de LaserLVII
 	 * @return instancia de Disparo de tipo dinamico LaserLVIII
 	 */
 	
 	
-	public Disparo nextLevel(){
+	public DisparoJugador nextLevel(){
 		return new LaserLVIII(nave, dy);
 	}
 	

@@ -5,6 +5,7 @@ import java.util.Random;
 
 import javax.swing.ImageIcon;
 
+import ProyectoX.Frames.Explosion;
 import ProyectoX.Naves.Nave;
 import ProyectoX.Naves.Enemigos.Torretas.FabricaTorretasDobles;
 import ProyectoX.Naves.Enemigos.Torretas.FabricaTorretasInvisibles;
@@ -14,6 +15,7 @@ import ProyectoX.Naves.Enemigos.Torretas.Torreta;
 public class JefeAvion extends Jefe{
 
 	protected static final URL url = (Nave.class.getClassLoader().getResource("ProyectoX/img/Enemigo/JefeAvion/JefeAvion.png"));
+	protected static final URL explode = (Nave.class.getClassLoader().getResource("ProyectoX/img/Explosiones/grande.gif"));
 	protected static final String boundsDouble = "/ProyectoX/img/Enemigo/JefeAvion/posicionesTorretasDobles.txt";
 	protected static final String boundsSimple = "/ProyectoX/img/Enemigo/JefeAvion/posicionesTorretasSimples.txt";
 	protected static final String boundsInvisible = "/ProyectoX/img/Enemigo/JefeAvion/posicionesTorretasInvisibles.txt";
@@ -56,15 +58,19 @@ public class JefeAvion extends Jefe{
 	private long init;
 	private int delay = 5000;
 	
+	private boolean control = false;
+	private boolean control2 = false;
+	private boolean control3 = false;
+	
 	public JefeAvion() {
 		super(2000, defaultVel, new ImageIcon(url), defaultWidth, defaultHeight);
 		rn = new Random();
 		x = 400 - defaultWidth/2;
 		y = - defaultHeight;
 		delay = 2;
-		int cantTorretasDobles = 10;
-		int cantTorretasSimples = 7;
-		int cantTorretasInvisibles = 12;
+		int cantTorretasDobles = 0;//10;
+		int cantTorretasSimples = 1;//7;
+		int cantTorretasInvisibles = 0;//a12;
 		init = System.currentTimeMillis();
 		cargarArchivoTorretas(boundsDouble, new FabricaTorretasDobles(), cantTorretasDobles);
 		cargarArchivoTorretas(boundsSimple, new FabricaTorretasSimples(), cantTorretasSimples);
@@ -75,14 +81,40 @@ public class JefeAvion extends Jefe{
 
 	public void move() {
 		if(torretas.size() == 0){
-			jugador.setPuntaje(puntaje);
-			mapa.addPower(400, 200, true);
-			setVisible();
-			width = defaultWidth;
-			height = defaultHeight;
+			if(!control){
+				init = System.currentTimeMillis();
+				control = true;
+				int[] array = {169, 256, 343, 432, 817, 907, 993, 1083};
+				int expY = 117;
+				int i = 0;
+				URL exp = (Nave.class.getClassLoader().getResource("ProyectoX/img/Explosiones/fuego.gif"));
+				while(i<array.length){
+					Explosion ex = new Explosion(x+array[i],y+expY, new ImageIcon(exp), 32,56);
+					ex.setDelay(5000);
+					mapa.addExposion(ex);
+					i++;
+				}
+			}
+			else{ 
+				if(System.currentTimeMillis() - init > 5000){
+					jugador.setPuntaje(puntaje);
+					mapa.addPower(400, 200, true);
+					setVisible();
+					width = defaultWidth;
+					height = defaultHeight;
+				}
+				if(System.currentTimeMillis() - init > 1000 && !control2){
+					control2 = true;
+					URL exp = (Nave.class.getClassLoader().getResource("ProyectoX/img/Explosiones/player.gif"));
+					mapa.addExposion(new Explosion(x+ 430, y + 250, new ImageIcon(exp), 28, 54));
+					mapa.addExposion(new Explosion(x+ 850, y + 186, new ImageIcon(exp), 35, 65));
+					mapa.addExposion(new Explosion(x+ 660, y + 320, new ImageIcon(exp), 28, 54));
+				}
+			}
+			System.out.println((System.currentTimeMillis() - init > delay));
 			
 		}
-		if(System.currentTimeMillis() - init > delay)
+		if(System.currentTimeMillis() - init > delay && !control)
 			if(puedeMoverse()){
 				if(random){
 					int select = -1;
@@ -269,6 +301,14 @@ public class JefeAvion extends Jefe{
 		return getVisible() && nave.getVisible() && fColision;
 			
 				
+	}
+	
+	public Explosion getExplosion(){
+		
+		addSonidoExplosion();
+		Explosion aux = new Explosion(x + width/2, y + height/2, new ImageIcon(explode), width/2, height/2);
+		aux.setDelay(3500);
+		return aux;
 	}
 	
 	

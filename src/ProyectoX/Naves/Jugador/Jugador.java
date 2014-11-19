@@ -7,6 +7,7 @@ import java.net.URL;
 import javax.swing.ImageIcon;
 
 import ProyectoX.Disparos.Disparo;
+import ProyectoX.Disparos.DisparoJugador;
 import ProyectoX.Disparos.MisilBomba;
 import ProyectoX.Frames.Explosion;
 import ProyectoX.Mapas.Mapa;
@@ -24,7 +25,7 @@ public abstract class Jugador extends Nave {
 	protected static Image invisible = new ImageIcon((Nave.class.getClassLoader().getResource("ProyectoX/img/Enemigo/Torreta/invisible.png"))).getImage();
 	protected Image aux;
 	private boolean cambio = false;
-	protected Disparo arma;
+	protected DisparoJugador arma;
 	private Defensa defensa;
 	protected int bombas;
 	private String explodeSound = "/ProyectoX/sounds/explode.mp3";
@@ -57,12 +58,11 @@ public abstract class Jugador extends Nave {
 		setJugador(this);
 		velocidadMisil = 20;
 		power = "";
-		bombas = 20;
+		bombas = 2;
 		
 		puntaje = 0;
-		arma = new Disparo(x + width/2 , y, 0, 1, velocidadMisil);
+		arma = new DisparoJugador(x + width/2 , y, 0, 1, velocidadMisil,this);
 		
-		boolean cambio = false;
     	
 	}
 	
@@ -77,28 +77,26 @@ public abstract class Jugador extends Nave {
 	            setDis();
 	        }
 	       
-	        if (key == KeyEvent.VK_A) {
+	        if (key == KeyEvent.VK_A || key == KeyEvent.VK_LEFT) {
 	        	dx = -velocidad;
 	            image = iconIzq.getImage();
 	        }
 	        
-	        if (key == KeyEvent.VK_D) {
+	        if (key == KeyEvent.VK_D || key == KeyEvent.VK_RIGHT) {
 	        	dx = velocidad;
 	            image = iconDer.getImage();
 	        }
 	       
-	        if (key == KeyEvent.VK_W) {
+	        if (key == KeyEvent.VK_W || key == KeyEvent.VK_UP) {
 	        	dy = -velocidad;
 	        }
 	        
-	        if (key == KeyEvent.VK_S) {
+	        if (key == KeyEvent.VK_S || key == KeyEvent.VK_DOWN) {
 	        	dy = velocidad;
 	        }
+	        
 	        if (key == KeyEvent.VK_X){
-	        	if(bombas > 0){
-	        		mapa.addDisparoJugador(new MisilBomba(x + width/2, y, mapa, reproductor));
-	        		bombas--;
-	        	}
+	        	tirarBomba();
 	        }
 	        
 	        
@@ -108,25 +106,32 @@ public abstract class Jugador extends Nave {
 		}
     }
 
-    public void keyReleased(KeyEvent e) {
+    private void tirarBomba() {
+    	if(bombas > 0){
+    		mapa.addDisparoJugador(new MisilBomba(x + width/2, y, mapa, reproductor));
+    		bombas--;
+    	}
+	}
+
+	public void keyReleased(KeyEvent e) {
     	if(!pause){
 	        int key = e.getKeyCode();
 	
-	        if (key == KeyEvent.VK_A) {
+	        if (key == KeyEvent.VK_A || key == KeyEvent.VK_LEFT) {
 	            dx = 0;
 	            image = icon.getImage();
 	        }
 	      
-	        if (key == KeyEvent.VK_D) {
+	        if (key == KeyEvent.VK_D || key == KeyEvent.VK_RIGHT) {
 	            dx = 0;
 	            image = icon.getImage();
 	        }
 	        
-	        if (key == KeyEvent.VK_W) {
+	        if (key == KeyEvent.VK_W || key == KeyEvent.VK_UP) {
 	            dy = 0;
 	        }
 	       
-	        if (key == KeyEvent.VK_S) {
+	        if (key == KeyEvent.VK_S || key == KeyEvent.VK_DOWN) {
 	            dy = 0;
 	        }
 	        
@@ -145,13 +150,9 @@ public abstract class Jugador extends Nave {
     	arma.setPosicion(x + width/2, y + height/2);
     	
     	Disparo[] array = arma.cloneNivel();
-    	//if(puedeDisparar()){
-    		for(int i = 0;i<array.length;i++){
-    			Disparo dis = array[i];
-    			mapa.addDisparoJugador(dis);
-    			
-    		//}
-    		
+    	for(int i = 0;i<array.length;i++){
+    		Disparo dis = array[i];
+    		mapa.addDisparoJugador(dis);
     	}
     	arma.getSound();
     }
@@ -215,12 +216,12 @@ public abstract class Jugador extends Nave {
 		this.power = power;
 	}
 	
-	public void setNewDisparo(Disparo d){
+	public void setNewDisparo(DisparoJugador d){
 		arma = d;
 		arma.setReproductor(reproductor);
 	}
 	
-	public Disparo getDisparo(){
+	public DisparoJugador getDisparo(){
 		return arma;
 	}
 	
@@ -302,5 +303,9 @@ public abstract class Jugador extends Nave {
 		}
 		
 		return toRet;
+	}
+	
+	public int getCantBombas(){
+		return bombas;
 	}
 }

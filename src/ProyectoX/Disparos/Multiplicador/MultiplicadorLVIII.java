@@ -1,6 +1,8 @@
 package ProyectoX.Disparos.Multiplicador;
 
 import ProyectoX.Disparos.Disparo;
+import ProyectoX.Disparos.DisparoJugador;
+import ProyectoX.Naves.Nave;
 
 public class MultiplicadorLVIII extends DisparoMultiplicador{
 
@@ -13,8 +15,8 @@ public class MultiplicadorLVIII extends DisparoMultiplicador{
 	 * @param dy diferencial y
 	 */
 	
-	public MultiplicadorLVIII(int x, int y, double dx, double dy) {
-		super(x, y, dx, dy);
+	public MultiplicadorLVIII(int x, int y, double dx, double dy, Nave nave) {
+		super(x, y, dx, dy, nave);
 	}
 	
 	/**
@@ -23,8 +25,8 @@ public class MultiplicadorLVIII extends DisparoMultiplicador{
 	 * @return instancia de Disparo de tipo dinamico MultiplicadorLVIII
 	 */
 	
-	public Disparo nextLevel(){
-		return new MultiplicadorLVIII(x,y,dx,dy);
+	public DisparoJugador nextLevel(){
+		return new MultiplicadorLVIII(x,y,dx,dy,nave);
 	}
 	
 	/**

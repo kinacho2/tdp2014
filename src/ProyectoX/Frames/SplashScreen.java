@@ -38,28 +38,26 @@ public class SplashScreen extends JWindow {
 		
 		int width = 800;
 		int height = 600;
-		setBackground(new java.awt.Color(0,0,0));
+		getContentPane().setBackground(new java.awt.Color(0,0,0));
 		setLayout(null);
 		
 		image = (new ImageIcon(path).getImage().getScaledInstance(800, 600, Image.SCALE_DEFAULT));
-		 
-		 
+		
 		Dimension screen = Toolkit.getDefaultToolkit().getScreenSize();
 		int x = (screen.width - width)/2;
 		int y = (screen.height - height)/2;
 		this.setBounds(x, y, width, height);
 		
 		setVisible(true);
-		long init = System.currentTimeMillis();
-		while(System.currentTimeMillis() - init < duration){
-			try {
-				Thread.sleep(100);
-			} catch (InterruptedException e) {
-				e.printStackTrace();
-			}
-			repaint();
+		
 			
+		repaint();
+		try {
+			Thread.sleep(duration);
+		} catch (InterruptedException e) {	
+			e.printStackTrace();
 		}
+		
 		
 		setVisible(false);
 
@@ -81,7 +79,7 @@ public class SplashScreen extends JWindow {
 	      g2d.drawImage(image, 0, 0, this);
 
 	      Toolkit.getDefaultToolkit().sync();
-	      g.dispose();
+	      //g.dispose();
 	}
 
 }

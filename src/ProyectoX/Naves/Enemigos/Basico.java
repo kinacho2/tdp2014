@@ -22,6 +22,11 @@ public class Basico extends Enemigo {
 	// indica hasta donde se moverá el enemigo 
 	private int alturaMinima;
 	
+	/**
+	 * Constructor de la clase Basico
+	 * @param up indica si la instancia es especial
+	 */
+	
 	public Basico(boolean up) {
 		super(defaultVida, defaultVel, up? new ImageIcon(urlUp): new ImageIcon(url), defaultWidth, defaultHeight);	
 		y = -defaultHeight;
@@ -43,7 +48,10 @@ public class Basico extends Enemigo {
 		puntaje = 25;
 	}
 	
-	// mueve al enemigo en forma parabólica 
+	/**
+	 * redefine move() de la clase Nave 
+	 * modifica las coordenadas del Basico de modo que se mueva en forma parabólica 
+	 */
 	public void move() {
 		if(puedeMoverse()){
 			y += alturaMinima;
@@ -60,10 +68,20 @@ public class Basico extends Enemigo {
 		verificarColision();
 		
 	}
+	
+	/**
+	 * agrega al Mapa un Disparo con direccion hacia el Jugador
+	 * ademas agrega el sonido correspondiente a la accion de disparar de la instancia
+	 */
 
 	public boolean isEspecial() {
 		return up;
 	}
+	
+	/**
+	 * agrega al Mapa un Disparo con direccion hacia abajo
+	 * ademas agrega el sonido correspondiente a la accion de disparar de la instancia
+	 */
 
 	public void disparar() {
 	    if(puedeDisparar()){
