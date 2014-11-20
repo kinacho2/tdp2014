@@ -18,6 +18,14 @@ import ProyectoX.Sound.Reproductor;
 
 public abstract class Nave {
 	
+	//valores por defecto
+	
+	protected int defaultWidth;
+	protected int defaultHeight ;
+	protected int defaultVel;
+	protected int defaultVida;
+	
+	
 	protected Reproductor reproductor;
 	protected Jugador jugador;
 	protected int vida;
@@ -326,5 +334,12 @@ public abstract class Nave {
 	 */
 	
 	public abstract boolean isInvulnerable();
+	
+	protected void setearParametrosDefecto(int vida, int whidt, int height, int velocidad){
+		defaultWidth = width;
+	    defaultHeight = height;
+		defaultVel = velocidad;
+		defaultVida = vida;
+	}
 }
 

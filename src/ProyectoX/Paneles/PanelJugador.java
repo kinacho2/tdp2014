@@ -253,7 +253,7 @@ public class PanelJugador  extends JPanel implements ActionListener{
 	
 	
 	private class TAdapter implements KeyListener {
-
+		
         public void keyReleased(KeyEvent e) {
         	jugador.keyReleased(e);
         	
@@ -275,8 +275,10 @@ public class PanelJugador  extends JPanel implements ActionListener{
         }
 
 		public void keyTyped(KeyEvent arg0) {
-			// Es necesaria poner esta funcion porque implementa a una interfaz TAdapter, no realiza nada
+			// Es necesaria poner esta funcion porque TAdapter implementa a una interfaz, no realiza nada
 		}
+		
+		
     }
 
 	public void actualizarPuntaje(){

@@ -22,6 +22,7 @@ protected static final URL url = (PowerUp.class.getClassLoader().getResource("Pr
 		Defensa aux = jugador.getDefensa();
 		if(aux != null)
 			jugador.setDefensa(jugador.getDefensa().getEscudo());
+			
 		else
 			jugador.setDefensa(new EscudoX(jugador));
 		jugador.addSonidoDePremio(sound);

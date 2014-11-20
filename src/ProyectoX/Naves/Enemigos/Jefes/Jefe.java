@@ -28,9 +28,7 @@ public abstract class Jefe extends Enemigo{
 	protected boolean[] control = {false,false,false,false,false};
 	private boolean primero = true;
 	protected ArrayList torretas;
-	protected int defaultWidth;
-	protected int defaultHeight;
-
+	
 	/**
 	 * Constructor de la clase Jefe
 	 * @param vida no se utiliza porque la vida del Jefe son sus Torretas
@@ -42,8 +40,6 @@ public abstract class Jefe extends Enemigo{
 	
 	public Jefe(int vida, int vel, ImageIcon ii, int w, int h) {
 		super(vida, vel, ii, w, h);
-		defaultWidth = w;
-		defaultHeight = h;
 		torretas = new ArrayList();
 		width = 0;
 		height = 0;

@@ -14,8 +14,9 @@ import ProyectoX.Naves.Jugador.Defensa.Defensa;
 import ProyectoX.Sound.Reproductor;
 
 /**
- * 
- *
+ * Clase que representa a la nave del Jugador
+ * contiene el puntaje y los metodos de movimiento
+ * @author Borek Andrea, Figliuolo Nestor, Gaviot Joaquin
  */
 
 public abstract class Jugador extends Nave {
@@ -38,15 +39,15 @@ public abstract class Jugador extends Nave {
 	//cada 3000 puntos se seteara un nuevo corazon al jugador
 	protected int maxContPuntaje = 3000;
 	protected String winHeart = "/ProyectoX/sounds/power.mp3";
-	
+	//arreglo booleano de keyCodes
 	/**
 	 * Cosntructor de la clase Jugador
 	 * basado en el codigo http://zetcode.com/tutorials/javagamestutorial/movingsprites/ para mover el jugador
-	 * @param vida
-	 * @param vel
-	 * @param icon
-	 * @param iconDer
-	 * @param iconIzq
+	 * @param vida, cantidad de vida del Jugador
+	 * @param vel, cantidad de pixeles que se mueve por iteracion
+	 * @param icon Imagen estatica vertical
+	 * @param iconDer Imagen inclinada hacia la derecha
+	 * @param iconIzq Imagen inclinada hacia la izquierda
 	 */
 	
 	public Jugador(int vida, int vel, ImageIcon icon, ImageIcon iconDer, ImageIcon iconIzq){
@@ -66,15 +67,20 @@ public abstract class Jugador extends Nave {
 		bombas = 2;
 		hearts = 3;
 		puntaje = contPuntaje = 0;
-		arma = new DisparoJugador(x + width/2 , y, 0, 1, velocidadMisil,this);
-		
+		arma = new DisparoJugador(x + width/2 , y, 0, 1, velocidadMisil,this);	
     	
 	}
+	
+	/**
+	 * Si no esta en pausa setea los diferenciales (dx, dy) dependiendo de la tecla presionada
+	 * ademas setea las imagenes de desplazamiento y ordena disparar
+	 * @param e KeyEvent de la tecla que se encuentra presionada
+	 */
 	
 	public void keyPressed(KeyEvent e) {
 		if(!pause){
 	        int key = e.getKeyCode();
-	        
+	       
 	        if (key == KeyEvent.VK_SPACE) {
 	            if(puedeDisparar() && getVisible()){
 	            	disparar();
@@ -84,12 +90,12 @@ public abstract class Jugador extends Nave {
 	       
 	        if (key == KeyEvent.VK_A || key == KeyEvent.VK_LEFT) {
 	        	dx = -velocidad;
-	            image = iconIzq.getImage();
+	            aux = image = iconIzq.getImage();
 	        }
 	        
 	        if (key == KeyEvent.VK_D || key == KeyEvent.VK_RIGHT) {
 	        	dx = velocidad;
-	            image = iconDer.getImage();
+	            aux = image = iconDer.getImage();
 	        }
 	       
 	        if (key == KeyEvent.VK_W || key == KeyEvent.VK_UP) {
@@ -104,32 +110,40 @@ public abstract class Jugador extends Nave {
 	        	tirarBomba();
 	        }
 	        
-	        
 	        if(defensa!=null){
 	        	defensa.keyPressed(e);
 	        }
+	        
 		}
     }
-
+	
+	/**
+	 * Le indica al mapa que se arrojo una bomba y le resta una bomba a la cantidad de bombas
+	 */
     private void tirarBomba() {
     	if(bombas > 0){
     		mapa.addDisparoJugador(new MisilBomba(x + width/2, y, mapa, reproductor));
     		bombas--;
     	}
 	}
+    
+    /**
+     * Setea los diferenciales (dx, dy) en 0 dependiendo de la tecla que se solto
+     * @param e KeyEvent de la tecla soltada
+     */
 
 	public void keyReleased(KeyEvent e) {
     	if(!pause){
 	        int key = e.getKeyCode();
-	
+	       
 	        if (key == KeyEvent.VK_A || key == KeyEvent.VK_LEFT) {
 	            dx = 0;
-	            image = icon.getImage();
+	            aux = image = icon.getImage();
 	        }
 	      
 	        if (key == KeyEvent.VK_D || key == KeyEvent.VK_RIGHT) {
 	            dx = 0;
-	            image = icon.getImage();
+	            aux = image = icon.getImage();
 	        }
 	        
 	        if (key == KeyEvent.VK_W || key == KeyEvent.VK_UP) {
@@ -147,10 +161,16 @@ public abstract class Jugador extends Nave {
 	        if(defensa!=null){
 	        	defensa.keyReleased(e);
 	        }
+	        
     	}
         
     }
     
+	/**
+	 * Ejecuta la accion de disparar y agrega al mapa los disparos del Jugador resultantes
+	 * Ademas agrega un sonido de Disparo al Reproductor
+	 */
+	
     public void disparar() {
     	arma.setPosicion(x + width/2, y + height/2);
     	
@@ -161,34 +181,45 @@ public abstract class Jugador extends Nave {
     	}
     	arma.getSound();
     }
+    
+    /**
+     * Modifica los valores actuales de las coordenadas x,y adicionando los respectivos valores de sus diferenciales
+     */
 
-	 public void move() {
-		 
-		 if(x >= minWidth + width*2)
-			x += dx;
-		 else
-			x = 1;
-		 
-		 if( x <= maxWidth - width*2)
-			x += dx;
-		 else
-			 x = maxWidth  - width*2 - 1;
-		 
-		 if(y >= maxHeight + height*2 )
-	        y += dy;
-		 else
-			y = 1;
-		 
-		 if(y <= minHeight - height)
-			y += dy;
-		 else
-			y = minHeight - height - 1;
-		 
-		 if(defensa!=null){
-			 defensa.move();
-		 }
+    public void move() {
+	 
+	 if(x >= minWidth + width*2)
+		x += dx;
+	 else
+		x = 1;
+	 
+	 if( x <= maxWidth - width*2)
+		x += dx;
+	 else
+		 x = maxWidth  - width*2 - 1;
+	 
+	 if(y >= maxHeight + height*2 )
+	    y += dy;
+	 else
+		y = 1;
+	 
+	 if(y <= minHeight - height)
+		y += dy;
+	 else
+		y = minHeight - height - 1;
+	 
+	 if(defensa!=null){
+		 defensa.move();
 	 }
+ }
 
+    /**
+     * define el metodo setVida(int vd) de la clase Nave
+     * Le resta a la vida del Jugador el valor pasado por parametro
+     * Si el valor del parametro es negativo se aumenta la vida
+     * ademas setea la visibilidad en falso cuando su vida baja de 0
+     * @param vd, entro que sera restado a la vida del Jugador
+     */
 	public void setVida(int vd) {
 		if(System.currentTimeMillis() - init > invulnerable){
 			if(vida > 0)
@@ -199,14 +230,29 @@ public abstract class Jugador extends Nave {
 				setVisible();
 		}
 	}
+	
+	/**
+	 * retorna una instancia de Explosion dependiente del Jugador
+	 * @return instancia de Explosion
+	 */
 	 
 	public Explosion getExplosion() {
 		return new Explosion(x + width/2, y + height/2, new ImageIcon(explode), width, height);
 	}
+	
+	/**
+	 * retorna el puntaje asociado al jugador
+	 * @return entero que representa el puntaje
+	 */
 
 	public int getPuntaje() {
 		return puntaje;
 	}
+	
+	/**
+	 * Suma al puntaje la cantidad pasada por parametro, ademas se encarga de sumarle un corazon al Jugador cada 3000 puntos 
+	 * @param puntaje entero que sera sumado al puntaje del Jugador
+	 */
 
 	public void setPuntaje(int puntaje) {
 		this.puntaje += puntaje;
@@ -218,37 +264,74 @@ public abstract class Jugador extends Nave {
 		}
 	}
 	
+	/**
+	 * le setea al Jugador un nuevo DisparoJugador
+	 * @param d nueva instancia de DisparoJugador
+	 */
 	public void setNewDisparo(DisparoJugador d){
 		arma = d;
 		arma.setReproductor(reproductor);
 	}
 	
+	/**
+	 * retorna el Disparo actual del Jugador
+	 * @return instancia de DisparoJugador
+	 */
+	
 	public DisparoJugador getDisparo(){
 		return arma;
 	}
+	
+	/**
+	 * Setea al Jugador una nueva Defensa
+	 * y le setea a la Defensa su Reproductor
+	 * @param def nueva instancia de Defensa
+	 */
 	
 	public void setDefensa(Defensa def){
 		defensa = def;
 		defensa.addReproductor(reproductor);
 	}
 	
+	/**
+	 * retorna la instancia de Defensa actual del Jugador
+	 * @return instancia de Defensa
+	 */
 	public Defensa getDefensa(){
 		return defensa;
 	}
+	
+	/**
+	 * Le indica al Jugador que perdio la Defensa
+	 */
 
 	public void dropDefensa() {
 		defensa = null;
 	}
+	
+	/**
+	 * agrega una bomba a la cantidad de bombas del jugador siempre que no se exceda de 5
+	 */
 	
 	public void setBomba(){
 		if (bombas < 5)
 			bombas ++;
 	}
 	
+	/**
+	 * Redefine addReproductor(Reproductor rep) de la clase Nave
+	 * setea una nueva instancia de Reproductor al Jugador y a su Disparo
+	 * @param rep nueva instancia de Reproductor
+	 */
+	
 	public void addReproductor(Reproductor rep){
 		super.addReproductor(rep);
 		arma.setReproductor(reproductor);
 	}
+	
+	/**
+	 * Le setea al Jugador los atributos por defecto y resta un corazon
+	 */
 	
 	public void reset(){
 		hearts--;
@@ -260,6 +343,12 @@ public abstract class Jugador extends Nave {
 		visible = true;
 	}
 	
+	/**
+	 * Redefine setMapa(Mapa map) de la clase Nave
+	 * setea al jugador y a su defensa el nuevo Mapa
+	 * @param map nueva instancia de Mapa
+	 */
+	
 	public void setMapa(Mapa map){
 		super.setMapa(map);
 		if(defensa!=null){
@@ -267,21 +356,45 @@ public abstract class Jugador extends Nave {
 		}
 	}
 	
+	/**
+	 * retorna un String que contiene el path del Sonido de Explosion del Jugador
+	 * @return path del Archivo de Sonido 
+	 */
+	
 	protected String getSonidoExplosion(){
 		return explodeSound;
 	}
 	
+	/**
+	 * le indica al Jugador una pausa o una reanudacion
+	 * @param arg booleano si es true se indica pausa, si es false se reanuda
+	 */
+	
 	public void pause(boolean arg){
 		pause = arg;
 	}
+	
+	/**
+	 * @return cantidad de corazones del Jugador
+	 */
 
 	public int getHearts() {
 		return hearts;
 	}
+	
+	/**
+	 * Aumenta en 1 la cantidad de corazones del Jugador
+	 */
 
 	public void setHearts() {
 		hearts ++;
 	}
+	
+	/**
+	 * Define la operacion isInvulnerable() de la clase Nave
+	 * durante 5 segundos el Jugador es invulnerable a los Disparos y no colisiona con los Enemigos
+	 * @return booleano si es true el jugador no puede recibir danio
+	 */
 	
 	public boolean isInvulnerable(){
 		boolean toRet = System.currentTimeMillis() - init <= invulnerable;
@@ -304,9 +417,18 @@ public abstract class Jugador extends Nave {
 		return toRet;
 	}
 	
+	/**
+	 * @return cantidad actual de bombas que tiene el Jugador
+	 */
+	
 	public int getCantBombas(){
 		return bombas;
 	}
+	
+	/**
+	 * Agrega un nuevo Sonido al Reproductor cuando se recibe un PowerUP o un corazon
+	 * @param path del Archivo de Sonido
+	 */
 	
 	public void addSonidoDePremio(String path){
 		reproductor.addSound(path, false);
