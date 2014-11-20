@@ -16,14 +16,6 @@ public class NaveAyudante extends Defensa {
 	protected static URL url = (Defensa.class.getClassLoader().getResource("ProyectoX/img/PUP/Ayudante/Compa.gif"));
 	protected static URL urlDer = (Defensa.class.getClassLoader().getResource("ProyectoX/img/PUP/Ayudante/CompaDer.gif"));
 	protected static URL urlIzq = (Defensa.class.getClassLoader().getResource("ProyectoX/img/PUP/Ayudante/CompaIzq.gif"));
-	private static final int defaultVida = 80;
-	protected static final int defaultWidth = 32;
-	protected static final int defaultHeight = 32;
-	
-	private boolean control = true;
-	private boolean control2 = true;
-	private int xx; 
-	private int yy;
 	
 	/**
 	 * Constructor de la clase NaveAyudante
@@ -31,9 +23,8 @@ public class NaveAyudante extends Defensa {
 	 */
 	
 	public NaveAyudante(Jugador jugador){
-		super(defaultVida, jugador.getVelocidad(), new ImageIcon(url), new ImageIcon(urlDer), new ImageIcon(urlIzq));
-		xx = jugador.getWidth()/2 - width/2;
-		yy = 50 + jugador.getHeight();
+		super(80, jugador.getVelocidad(), new ImageIcon(url), new ImageIcon(urlDer), new ImageIcon(urlIzq));
+		setearParametrosDefecto(80, 0, 32, 32);
 		x = jugador.getX() -50;
 		y = jugador.getY() +20;
 		height = defaultHeight;

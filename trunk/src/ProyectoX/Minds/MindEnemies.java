@@ -88,9 +88,11 @@ public class MindEnemies extends Thread  {
 			        
 			        for (int i = 0; i < enemies.size(); i++ ) {
 			            Enemigo m = (Enemigo) enemies.get(i);
-			            if (!m.getVisible()){
-			            	enemies.remove(i);
-			            	mapa.addExposion(m.getExplosion());
+			            if(m!=null){
+				            if (!m.getVisible()){
+				            	enemies.remove(i);
+				            	mapa.addExposion(m.getExplosion());
+				            }
 			            }
 			        }
 			        
@@ -134,7 +136,7 @@ public class MindEnemies extends Thread  {
         // mueve los misiles del jugador y remueve los que no estan visibles  
         for (int i = 0; i < ms.size(); i++) {
         	Disparo m = (Disparo) ms.get(i);
-            if (m.isVisible()){
+            if (m!=null && m.isVisible()){
                 m.move();
                 for (int j = 0; j < enemigos.size(); j++) {
                 	Enemigo enemigo = (Enemigo) enemigos.get(j);
@@ -149,11 +151,19 @@ public class MindEnemies extends Thread  {
                     
                 }
             }
-            else 
-            	mapa.removerDisparoJugador(i);
+            
             
             // verifica si algun misil del jugador colisiono a un enemigo
            
+        }
+        
+        for (int i = 0; i < ms.size(); i++) {
+        	Disparo m = (Disparo) ms.get(i);
+        	if(m!=null){
+        		if(!m.isVisible()){
+        			ms.remove(i);
+        		}
+        	}
         }
   	
     }

@@ -47,7 +47,6 @@ public class PUPBuilder {
 		}else{
 			up = new Vida(x, y);
 		}
-		up = new Ayudante(x,y);
 		return up;
 	}
 	

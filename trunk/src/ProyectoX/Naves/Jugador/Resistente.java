@@ -16,8 +16,6 @@ public class Resistente extends Jugador {
 	protected static URL url = (Nave.class.getClassLoader().getResource("ProyectoX/img/Jugador/resistente.gif"));
 	protected static URL urlDer = (Nave.class.getClassLoader().getResource("ProyectoX/img/Jugador/resistenteDer.gif"));
 	protected static URL urlIzq = (Nave.class.getClassLoader().getResource("ProyectoX/img/Jugador/resistenteIzq.gif"));
-	private static final int defaultVel = 2;
-	private static final int defaultVida = 80;
 	
 	/**
 	 * Constructor de la clase Resistente
@@ -25,7 +23,7 @@ public class Resistente extends Jugador {
 	 */
 	
 	public Resistente(){
-		super(defaultVida,defaultVel,new ImageIcon(url),new ImageIcon(urlDer),new ImageIcon(urlIzq));
+		super(80,2,new ImageIcon(url),new ImageIcon(urlDer),new ImageIcon(urlIzq));
 		
 		arma = new MultiplicadorLVI(x, y , 0, 1, this);
 	}
@@ -38,7 +36,7 @@ public class Resistente extends Jugador {
 	
 	public static String getEstadisticas(){
 		ImageIcon icon = new ImageIcon(url);
-		return ("<html>VIDA: "+defaultVida+"<br>VELOCIDAD: "+defaultVel+"<br>POTENCIA INICIAL: "+2+"<br>ALTO: "+icon.getIconHeight()+"<br>ANCHO: "+icon.getIconWidth()+"</html>");
+		return ("<html>VIDA: "+80+"<br>VELOCIDAD: "+2+"<br>POTENCIA INICIAL: "+2+"<br>ALTO: "+icon.getIconHeight()+"<br>ANCHO: "+icon.getIconWidth()+"</html>");
 	}
 	
 	/**

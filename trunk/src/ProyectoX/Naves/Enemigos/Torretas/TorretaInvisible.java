@@ -19,10 +19,6 @@ public class TorretaInvisible extends Torreta{
 	protected static final URL url = (Nave.class.getClassLoader().getResource("ProyectoX/img/Enemigo/Torreta/invisible.png"));
 	
 
-	private static final int defaultWidth1 = 34;
-	private static final int defaultHeigth1 = 47;
-	private static final int defaultVida = 150;
-
 	/**
 	 * Constructor de la clase TorretaInvisible
 	 * @param xx coordenada x
@@ -30,7 +26,7 @@ public class TorretaInvisible extends Torreta{
 	 */
 
 	public TorretaInvisible(int xx, int yy) {
-		super(defaultVida, new ImageIcon(url), xx, yy, defaultWidth1, defaultHeigth1);
+		super(150, new ImageIcon(url), xx, yy, 34, 47);
 		setFrecuenciaDeDisparo(10,150);
 	}
 	

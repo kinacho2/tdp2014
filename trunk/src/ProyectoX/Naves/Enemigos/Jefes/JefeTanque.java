@@ -1,9 +1,7 @@
 package ProyectoX.Naves.Enemigos.Jefes;
 
 import java.net.URL;
-
 import javax.swing.ImageIcon;
-
 import ProyectoX.Frames.Explosion;
 import ProyectoX.Naves.Nave;
 import ProyectoX.Naves.Enemigos.Torretas.FabricaTorretasDobles;
@@ -21,17 +19,14 @@ public class JefeTanque extends Jefe{
 	protected static final String boundsSimple = "/ProyectoX/img/Enemigo/JefeTanque/posicionesTorretasSimples.txt";
 	
 	
-	private static final int defaultWidth = 320;
-	private static final int defaultHeight = 1376;
-	private static final int defaultVel = 2;
-	
 	private long init;
+	
 	
 	/**
 	 * Constructor de la clase JefeTAnque
 	 */
 	public JefeTanque() {
-		super(0, defaultVel, new ImageIcon(url), defaultWidth, defaultHeight);
+		super(0, 2, new ImageIcon(url), 320, 1376);
 		
 		x = 400 - defaultWidth/2;
 		y = - defaultHeight;

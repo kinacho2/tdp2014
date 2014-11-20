@@ -24,12 +24,8 @@ public class JefeBarco extends Jefe{
 	protected static final String boundsGrande = "/ProyectoX/img/Enemigo/JefeBarco/posicionesTorretasGrandes.txt";
 	protected static final String boundsInvisible = "/ProyectoX/img/Enemigo/JefeBarco/posicionesTorretaInvisibles.txt";
 	
-	
-	private static final int defaultWidth = 385;
-	private static final int defaultHeight = 2494;
-	private static final int defaultVel = 2;
-	
 	private long init;
+	
 	
 	
 	/**
@@ -37,8 +33,8 @@ public class JefeBarco extends Jefe{
 	 */
 	
 	public JefeBarco() {
-		super(0, defaultVel, new ImageIcon(url), defaultWidth, defaultHeight);
-		
+		super(0, 2, new ImageIcon(url),385,2494);
+		System.out.println(defaultWidth+" "+ defaultHeight);
 		x = 400 - defaultWidth/2;
 		y = - defaultHeight;
 		

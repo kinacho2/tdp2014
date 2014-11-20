@@ -52,7 +52,7 @@ public abstract class Jugador extends Nave {
 	
 	public Jugador(int vida, int vel, ImageIcon icon, ImageIcon iconDer, ImageIcon iconIzq){
 		super(vida, vel, icon, new ImageIcon(explode), icon.getIconWidth(), icon.getIconHeight());
-		
+		setearParametrosDefecto(vida, vel, icon.getIconWidth(), icon.getIconHeight());
 		x = 400;
 		y = 450;
 		

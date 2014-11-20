@@ -188,7 +188,8 @@ public class PanelJugador  extends JPanel implements ActionListener{
         ms = mapa.explosiones();
         for (int i = 0; i < ms.size(); i++ ) {
             Explosion m = (Explosion) ms.get(i);
-            g2d.drawImage(m.getImage(), m.getX(), m.getY(), this);
+            if(m!=null && m.getVisible())
+            	g2d.drawImage(m.getImage(), m.getX(), m.getY(), this);
             
         }
         
@@ -196,8 +197,10 @@ public class PanelJugador  extends JPanel implements ActionListener{
         
         for (int i = 0; i < ms.size(); i++ ) {
         	Explosion m = (Explosion) ms.get(i);
-        	if(m!=null && !m.getVisible()) {
-            	ms.remove(i);
+        	if(m!=null){
+        		if( !m.getVisible()) {
+        			ms.remove(i);
+        		}
             }
         }
         
@@ -205,7 +208,6 @@ public class PanelJugador  extends JPanel implements ActionListener{
         if (jugador.getVisible()){
         	g2d.drawImage(jugador.getImage(), jugador.getX(), jugador.getY(), this);
         }
-        
         
         Jugador aux = jugador.getDefensa();
         
@@ -225,19 +227,27 @@ public class PanelJugador  extends JPanel implements ActionListener{
             g2d.drawImage(pw.getImage(), pw.getX(), pw.getY(), this);
         }
         
-        
-       
-        
         ms = mapa.getObjeto();
         
         for(int i = 0; i<ms.size(); i++){
         	Objeto o = (Objeto) ms.get(i);
-        	if(o.getVisible()){
+        	if(o!= null && o.getVisible()){
                 g2d.drawImage(o.getImage(), o.getX(), o.getY(), this);
                 o.move();
         	}
-        	else
+        	
+        }
+        
+        for(int i = 0; i<ms.size(); i++){
+        	Objeto o = (Objeto) ms.get(i);
+        	if(o!= null){
+        		if(!o.getVisible()){
+        			ms.remove(i);
+        		}
+        	}
+        	else{
         		ms.remove(i);
+        	}
         }
         
       	puntaje.setText("" + jugador.getPuntaje());

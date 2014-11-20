@@ -16,15 +16,13 @@ public class Normal extends Jugador {
 	protected static URL url = (Nave.class.getClassLoader().getResource("ProyectoX/img/Jugador/normal.gif"));
 	protected static URL urlDer = (Nave.class.getClassLoader().getResource("ProyectoX/img/Jugador/normalDer.gif"));
 	protected static URL urlIzq = (Nave.class.getClassLoader().getResource("ProyectoX/img/Jugador/normalIzq.gif"));
-	private static final int defaultVel = 3;
-	private static final int defaultVida = 50;
 
 	/**
 	 * Constructor de la clase Nornal
 	 * setea los atributos propios de su clase
 	 */
 	public Normal(){
-		super(defaultVida,defaultVel,new ImageIcon(url),new ImageIcon(urlDer),new ImageIcon(urlIzq));
+		super(50,3,new ImageIcon(url),new ImageIcon(urlDer),new ImageIcon(urlIzq));
 		
 		
 	}
@@ -38,7 +36,7 @@ public class Normal extends Jugador {
 	public static String getEstadisticas(){
 		ImageIcon icon = new ImageIcon(url);
 		
-		return ("<html>VIDA: "+defaultVida+"<br>VELOCIDAD: "+defaultVel+"<br>POTENCIA INICIAL: "+1+"<br>ALTO: "+icon.getIconHeight()+"<br>ANCHO: "+icon.getIconWidth()+"</html>");
+		return ("<html>VIDA: "+50+"<br>VELOCIDAD: "+3+"<br>POTENCIA INICIAL: "+1+"<br>ALTO: "+icon.getIconHeight()+"<br>ANCHO: "+icon.getIconWidth()+"</html>");
 	}
 
 	/**

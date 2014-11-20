@@ -55,7 +55,6 @@ public class JefeAvion extends Jefe{
 	private long init;
 	private int delay = 5000;
 	
-	
 	/**
 	 * Constructor de la clase JefeAvion
 	 */
@@ -73,7 +72,9 @@ public class JefeAvion extends Jefe{
 		cargarArchivoTorretas(boundsSimple, new FabricaTorretasSimples(), cantTorretasSimples);
 		cargarArchivoTorretas(boundsInvisible,new FabricaTorretasInvisibles(), cantTorretasInvisibles);
 		puntaje = 500;
-			
+		setearParametrosDefecto(2000, 2, 1275, 636);
+		
+		
 	}
 
 	/**
@@ -81,6 +82,7 @@ public class JefeAvion extends Jefe{
 	 * Ademas verifica las colisiones con el jugador
 	 */
 	public void move() {
+		//System.out.println(defaultHeight);
 		if(torretas.size() == 0){
 			agregarExplosiones();
 		}
