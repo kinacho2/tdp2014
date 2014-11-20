@@ -16,6 +16,7 @@ public abstract class PowerUp {
 	private int height = 20;
 	private boolean visible = true;
 	protected int puntaje = 50;
+	protected String sound = "/ProyectoX/sounds/power.mp3";
 	
 	public PowerUp(int x, int y, ImageIcon ii){
 		image = ii.getImage().getScaledInstance(25,25,Image.SCALE_DEFAULT);

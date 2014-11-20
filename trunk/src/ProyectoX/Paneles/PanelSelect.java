@@ -41,8 +41,8 @@ public class PanelSelect  extends JPanel {
 		{
 			veloz = new JButton();
 			add(veloz);
-			veloz.setText("Veloz");
-			veloz.setBounds(400 - 288/2, 88, 288, 64);
+			veloz.setText("Akai Tenshi");
+			veloz.setBounds(400 - 288/2, 88 +50, 288, 64);
 			veloz.setBackground(new java.awt.Color(0,0,0));
 			veloz.setFont(new java.awt.Font("Segoe UI",0,20));
 			veloz.setForeground(new java.awt.Color(0,255,0));
@@ -51,8 +51,8 @@ public class PanelSelect  extends JPanel {
 		{
 			normal = new JButton();
 			add(normal);
-			normal.setText("Normal");
-			normal.setBounds(256, 188, 288, 64);
+			normal.setText("Midori Tenshi");
+			normal.setBounds(256, 188 +50, 288, 64);
 			normal.setFont(new java.awt.Font("Segoe UI",0,20));
 			normal.setForeground(new java.awt.Color(0,255,0));
 			normal.setBackground(new java.awt.Color(0,0,0));
@@ -61,8 +61,8 @@ public class PanelSelect  extends JPanel {
 		{
 			resistente = new JButton();
 			add(resistente);
-			resistente.setText("Resistente");
-			resistente.setBounds(400 - 288/2, 288, 288, 64);
+			resistente.setText("Aoi Tenshi");
+			resistente.setBounds(400 - 288/2, 288 +50, 288, 64);
 			resistente.setBackground(new java.awt.Color(0,0,0));
 			resistente.setForeground(new java.awt.Color(0,255,0));
 			resistente.setFont(new java.awt.Font("Segoe UI",0,20));
@@ -73,7 +73,7 @@ public class PanelSelect  extends JPanel {
 			add(labelVeloz);
 			ImageIcon icon = new ImageIcon(Nave.class.getClassLoader().getResource("ProyectoX/img/Jugador/veloz.gif"));
 			labelVeloz.setIcon(icon);
-			labelVeloz.setBounds(175 + icon.getIconWidth() / 2, 88, icon.getIconWidth(), 64);
+			labelVeloz.setBounds(175 + icon.getIconWidth() / 2, 88 +50, icon.getIconWidth(), 64);
 			labelVeloz.setOpaque(false);
 			
 			velozStatics = new JLabel();
@@ -81,7 +81,7 @@ public class PanelSelect  extends JPanel {
 			velozStatics.setFont(new java.awt.Font("Segoe UI",0,9));
 			velozStatics.setForeground(new java.awt.Color(0,255,0));
 			velozStatics.setText(Veloz.getEstadisticas());
-			velozStatics.setBounds(80, 88, 164, 64);
+			velozStatics.setBounds(80, 88 +50, 164, 64);
 			velozStatics.setOpaque(false);
 			
 		}
@@ -90,7 +90,7 @@ public class PanelSelect  extends JPanel {
 			add(labelNormal);
 			ImageIcon icon = new ImageIcon(Nave.class.getClassLoader().getResource("ProyectoX/img/Jugador/normal.gif"));
 			labelNormal.setIcon(icon);
-			labelNormal.setBounds(175 + icon.getIconWidth() / 2, 188, icon.getIconWidth(), 64);
+			labelNormal.setBounds(175 + icon.getIconWidth() / 2, 188 +50, icon.getIconWidth(), 64);
 			labelNormal.setOpaque(false);
 			
 			normalStatics = new JLabel();
@@ -98,7 +98,7 @@ public class PanelSelect  extends JPanel {
 			normalStatics.setFont(new java.awt.Font("Segoe UI",0,9));
 			normalStatics.setForeground(new java.awt.Color(0,255,0));
 			normalStatics.setText(Normal.getEstadisticas());
-			normalStatics.setBounds(80, 188, 164, 64);
+			normalStatics.setBounds(80, 188 +50, 164, 64);
 			normalStatics.setOpaque(false);
 			
 		}
@@ -107,7 +107,7 @@ public class PanelSelect  extends JPanel {
 			add(labelResistente);
 			ImageIcon icon = new ImageIcon(Nave.class.getClassLoader().getResource("ProyectoX/img/Jugador/resistente.gif"));
 			labelResistente.setIcon(icon);
-			labelResistente.setBounds(175, 288, icon.getIconWidth(), 64);
+			labelResistente.setBounds(175, 288 +50, icon.getIconWidth(), 64);
 			labelResistente.setOpaque(false);
 			
 			resistenteStatics = new JLabel();
@@ -115,7 +115,7 @@ public class PanelSelect  extends JPanel {
 			resistenteStatics.setFont(new java.awt.Font("Segoe UI",0,9));
 			resistenteStatics.setForeground(new java.awt.Color(0,255,0));
 			resistenteStatics.setText(Resistente.getEstadisticas());
-			resistenteStatics.setBounds(80, 288, 164, 64);
+			resistenteStatics.setBounds(80, 288 +50, 164, 64);
 			resistenteStatics.setOpaque(false);
 		}
 		{

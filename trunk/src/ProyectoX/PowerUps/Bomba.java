@@ -19,7 +19,7 @@ public class Bomba extends PowerUp{
 	@Override
 	protected void efecto(Jugador jugador) {
 		jugador.setBomba();
-		
+		jugador.addSonidoDePremio(sound);
 	}
 	
 }

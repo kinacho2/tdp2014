@@ -26,6 +26,7 @@ public class Ayudante extends PowerUp {
 			jugador.setDefensa(jugador.getDefensa().getAyudante());
 		else
 			jugador.setDefensa(new NaveAyudante(jugador));
+		jugador.addSonidoDePremio(sound);
 	}
 
 }

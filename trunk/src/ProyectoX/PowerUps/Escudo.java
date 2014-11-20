@@ -24,5 +24,6 @@ protected static final URL url = (PowerUp.class.getClassLoader().getResource("Pr
 			jugador.setDefensa(jugador.getDefensa().getEscudo());
 		else
 			jugador.setDefensa(new EscudoX(jugador));
+		jugador.addSonidoDePremio(sound);
 	}
 }
