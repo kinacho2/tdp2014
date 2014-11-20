@@ -92,4 +92,12 @@ public class Nivel_II extends Mapa{
 		map.setJugador(jugador);
 		super.reset();
 	}
+
+	/**
+	 * retorna la URL asociada a la imagen del SplashScreen que seguira al terminar el nivel
+	 * @return URL de imagen
+	 */
+	public URL getImagenSplash() {
+		return (Aplication.class.getClassLoader().getResource("ProyectoX/img/Menu_barras/historia/Imagen4.png"));
+	}
 }

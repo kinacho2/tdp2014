@@ -1,6 +1,7 @@
  package ProyectoX.Mapas;
 
 import java.awt.Image;
+import java.net.URL;
 import java.util.ArrayList;
 import java.util.Random;
 import javax.swing.ImageIcon;
@@ -410,5 +411,10 @@ public abstract class Mapa{
 		panel = new PanelGameOver(api,this);
 	}
 	
+	/**
+	 * retorna la URL asociada a la imagen del SplashScreen que seguira al terminar el nivel
+	 * @return URL de imagen
+	 */
+	public abstract URL getImagenSplash();
 }
 
