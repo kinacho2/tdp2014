@@ -1,13 +1,15 @@
 package ProyectoX.Naves.Jugador;
 
 import java.net.URL;
-
 import javax.swing.ImageIcon;
-
-import ProyectoX.Disparos.Disparo;
 import ProyectoX.Disparos.DisparoJugador;
 import ProyectoX.Naves.Nave;
 
+/**
+ * Jugador con atributos equilibrados
+ * baja potencia de fuego, mediana resistencia y velocidad
+ * @author Borek Andrea, Figliuolo Nestor, Gaviot Joaquin
+ */
 
 public class Normal extends Jugador {
 
@@ -17,11 +19,21 @@ public class Normal extends Jugador {
 	private static final int defaultVel = 3;
 	private static final int defaultVida = 50;
 
+	/**
+	 * Constructor de la clase Nornal
+	 * setea los atributos propios de su clase
+	 */
 	public Normal(){
 		super(defaultVida,defaultVel,new ImageIcon(url),new ImageIcon(urlDer),new ImageIcon(urlIzq));
 		
 		
 	}
+	
+	/**
+	 * Retorna un String con los valores por defecto de la clase
+	 * identados con codigo html para que ser seteados en una etiqueta
+	 * @return String con valores por defecto
+	 */
 	
 	public static String getEstadisticas(){
 		ImageIcon icon = new ImageIcon(url);
@@ -29,6 +41,11 @@ public class Normal extends Jugador {
 		return ("<html>VIDA: "+defaultVida+"<br>VELOCIDAD: "+defaultVel+"<br>POTENCIA INICIAL: "+1+"<br>ALTO: "+icon.getIconHeight()+"<br>ANCHO: "+icon.getIconWidth()+"</html>");
 	}
 
+	/**
+	 * redefine reset() de la clase Jugador
+	 * Setea los valores por defecto de la clase Normal
+	 * y llama a reset() de la clase Jugador
+	 */
 
 	public void reset() {
 		super.reset();

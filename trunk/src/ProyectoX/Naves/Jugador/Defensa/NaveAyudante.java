@@ -1,14 +1,15 @@
 package ProyectoX.Naves.Jugador.Defensa;
 
 import java.net.URL;
-import java.util.ArrayList;
-
 import javax.swing.ImageIcon;
-
 import ProyectoX.Disparos.Multiplicador.MultiplicadorLVI;
-import ProyectoX.Naves.Nave;
-import ProyectoX.Naves.Enemigos.Enemigo;
 import ProyectoX.Naves.Jugador.Jugador;
+
+/**
+ * Clase que simboliza una Nave que ayuda al Jugador
+ * Tiene un Disparo de tipo MultiplicadorLVI
+ * @author Borek Andrea, Figliuolo Nestor, Gaviot Joaquin
+ */
 
 public class NaveAyudante extends Defensa {
 	
@@ -24,12 +25,17 @@ public class NaveAyudante extends Defensa {
 	private int xx; 
 	private int yy;
 	
+	/**
+	 * Constructor de la clase NaveAyudante
+	 * @param jugador el Jugador actual
+	 */
+	
 	public NaveAyudante(Jugador jugador){
 		super(defaultVida, jugador.getVelocidad(), new ImageIcon(url), new ImageIcon(urlDer), new ImageIcon(urlIzq));
 		xx = jugador.getWidth()/2 - width/2;
 		yy = 50 + jugador.getHeight();
-		x = jugador.getX() + xx;
-		y = jugador.getY() + yy;
+		x = jugador.getX() -50;
+		y = jugador.getY() +20;
 		height = defaultHeight;
 		width = defaultWidth;
 		
@@ -43,39 +49,28 @@ public class NaveAyudante extends Defensa {
 		setFrecuenciaDeDisparo(0,7);
 	}
 	
+	/**
+	 * redefine setVisible de la clase Nave
+	 * setea la visibilidad en falseo y agrega una nueva explosion al mapa
+	 */
 	public void setVisible(){
 		super.setVisible();
 		mapa.addExposion(getExplosion());
 	}
 	
+	/**
+	 * 
+	 */
+	
 	public void move(){
-		if(control && x < jugador.getX() + jugador.getWidth() + 50 - width){
-			xx++;
-		}
-		else{
-			control = false;
-			if(x > jugador.getX() - 50){
-				xx--;
-			}
-			else{
-				control = true;
-			}	
-		}
-		if(control2 && y > jugador.getY() - 50){
-			yy--;
-		}
-		else{
-			control2 = false;
-			if(y < jugador.getY() + jugador.getHeight() + 50 - height){
-				yy++;
-			}
-			else{
-				control2 = true;
-			}	
-		}
-		x = jugador.getX() + xx;
-		y = jugador.getY() + yy;
+		x = jugador.getX() -50;
+		y = jugador.getY() +20;
 	}
+	
+	/**
+	 * redefine disparar() de la clase Jugador
+	 * verifica si puede disparar y si el jugador esta en pantalla efectua el disparo
+	 */
 	
 	public void disparar(){
 		if(puedeDisparar() && getVisible() && jugador.getVisible()){

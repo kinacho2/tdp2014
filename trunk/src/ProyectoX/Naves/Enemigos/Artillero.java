@@ -14,10 +14,6 @@ public class Artillero extends Enemigo {
 
 	protected static final URL url = (Nave.class.getClassLoader().getResource("ProyectoX/img/Enemigo/artillero.png"));
 	protected static final URL urlUp = (Nave.class.getClassLoader().getResource("ProyectoX/img/Enemigo/artilleroUP.png"));
-	private static final int defaultWidth = 60;
-	private static final int defaultHeight = 48;
-	private static final int defaultVel = 4;
-	private static final int defaultVida = 50;
 	private boolean up;
 	private boolean primerMovimiento = true;
 	
@@ -27,7 +23,8 @@ public class Artillero extends Enemigo {
 	 */
 	
 	public Artillero(boolean up){
-		super(defaultVida,defaultVel,up? new ImageIcon(urlUp): new ImageIcon(url),defaultWidth,defaultHeight);
+		super(50,4,up? new ImageIcon(urlUp): new ImageIcon(url),60,48);
+		
 		y = -defaultHeight;
 		this.up = up;
 		puntaje = 50;

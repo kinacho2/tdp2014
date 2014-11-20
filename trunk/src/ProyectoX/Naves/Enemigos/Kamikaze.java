@@ -19,10 +19,6 @@ public class Kamikaze extends Enemigo {
 	protected static final URL url = (Nave.class.getClassLoader().getResource("ProyectoX/img/Enemigo/kamikaze.png"));
 	protected static final URL urlUp = (Nave.class.getClassLoader().getResource("ProyectoX/img/Enemigo/kamikazeUP.png"));
 
-	private static final int defaultWidth = 40;
-	private static final int defaultHeight = 32;
-	private static final int defaultVel = 10;
-	private static final int defaultVida = 30;
 	private boolean up;
 	
 	/**
@@ -31,7 +27,7 @@ public class Kamikaze extends Enemigo {
 	 */
 	
 	public Kamikaze(boolean up) {
-		super(defaultVida, defaultVel, up? new ImageIcon(urlUp): new ImageIcon(url), defaultWidth, defaultHeight);
+		super(30, 10, up? new ImageIcon(urlUp): new ImageIcon(url), 40, 32);
 		y = -defaultHeight;
 		Random rand = new Random();
 		x = rand.nextInt(800);

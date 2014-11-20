@@ -16,10 +16,6 @@ public class Basico extends Enemigo {
 
 	protected static final URL url = (Nave.class.getClassLoader().getResource("ProyectoX/img/Enemigo/basico.png"));
 	protected static final URL urlUp = (Nave.class.getClassLoader().getResource("ProyectoX/img/Enemigo/basicoUP.png"));
-	private static final int defaultWidth = 27;
-	private static final int defaultHeight = 38;
-	private static final int defaultVel = 2;
-	private static final int defaultVida = 20;
 	
 	// up indica si el enemigo es de tipo especial y devuelve el PowerUp
 	private boolean up;
@@ -32,7 +28,7 @@ public class Basico extends Enemigo {
 	 */
 	
 	public Basico(boolean up) {
-		super(defaultVida, defaultVel, up? new ImageIcon(urlUp): new ImageIcon(url), defaultWidth, defaultHeight);	
+		super(20, 2, up? new ImageIcon(urlUp): new ImageIcon(url), 27, 38);	
 		y = -defaultHeight;
 		Random rand = new Random();
 		alturaMinima = rand.nextInt(10) + 20;

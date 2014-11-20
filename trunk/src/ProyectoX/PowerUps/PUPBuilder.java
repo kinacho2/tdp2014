@@ -20,6 +20,13 @@ public class PUPBuilder {
 		this.rn = new Random(rn);
 	}
 	
+	/**
+	 * crea un PowerUP aleatorio en las coordenadas x,y y lo retorna
+	 * @param x coordenada x
+	 * @param y coordenada y
+	 * @return instancia de PowerUP
+	 */
+	
 	public PowerUp getPowerUpRandom(int x, int y){
 		PowerUp up;
 		int aux = rn.nextInt(100);
@@ -40,7 +47,7 @@ public class PUPBuilder {
 		}else{
 			up = new Vida(x, y);
 		}
-		
+		up = new Ayudante(x,y);
 		return up;
 	}
 	

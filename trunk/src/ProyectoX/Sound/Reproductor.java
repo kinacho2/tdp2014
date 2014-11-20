@@ -2,7 +2,10 @@ package ProyectoX.Sound;
 
 import java.util.ArrayList;
  
-
+/**
+ * Clase que crea sonidos
+ * @author Borek Andrea, Figliuolo Nestor, Gaviot Joaquin
+ */
 public class Reproductor{
 	private boolean enabled = true;
 	

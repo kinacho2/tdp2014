@@ -17,11 +17,9 @@ public class Bombardero extends Enemigo {
 	private static final String alarm = "/ProyectoX/sounds/alarm.mp3";
 	protected static final URL explode = (Nave.class.getClassLoader().getResource("ProyectoX/img/Explosiones/grande.gif"));
 	
-	private static final int defaultWidth = 192;
-	private static final int defaultHeight = 168;
-	private static final int defaultVel = 3;
-	private static final int defaultVida = 200;
+	/*
 	
+	*/
 	private boolean noSound = true;
 	
 	//altura de inicio del segundo patron
@@ -50,7 +48,7 @@ public class Bombardero extends Enemigo {
 	 */
 	
 	public Bombardero(boolean init) {
-		super(defaultVida,defaultVel,new ImageIcon(url),defaultWidth,defaultHeight);
+		super(200,3,new ImageIcon(url),192,168);
 		
 		cont=0;
 		y = minHeight;

@@ -23,11 +23,6 @@ public class JefeAvion extends Jefe{
 	protected static final String boundsInvisible = "/ProyectoX/img/Enemigo/JefeAvion/posicionesTorretasInvisibles.txt";
 	private static final String alarm = "/ProyectoX/sounds/alarm.mp3";
 
-	
-	private static final int defaultWidth = 1275;
-	private static final int defaultHeight = 636;
-	private static final int defaultVel = 2;
-	
 	//alturas y anchos de los distintos cuadros de colision las hi son las alturas las wi son los anchos
 	private final int hm = 55;
 	private final int h1 = 584;
@@ -65,7 +60,7 @@ public class JefeAvion extends Jefe{
 	 * Constructor de la clase JefeAvion
 	 */
 	public JefeAvion() {
-		super(2000, defaultVel, new ImageIcon(url), defaultWidth, defaultHeight);
+		super(2000, 2, new ImageIcon(url), 1275, 636);
 		rn = new Random();
 		x = 400 - defaultWidth/2;
 		y = - defaultHeight;
