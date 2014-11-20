@@ -8,7 +8,11 @@ import ProyectoX.Frames.Explosion;
 import ProyectoX.Naves.Nave;
 import ProyectoX.Naves.Enemigos.Torretas.FabricaTorretasDobles;
 import ProyectoX.Naves.Enemigos.Torretas.FabricaTorretasSimples;
-import ProyectoX.Naves.Enemigos.Torretas.Torreta;
+
+/**
+ * JefeTanque es la clase que representa al 1er Jefe del juego,
+ * @author Borek Andrea, Figliuolo Nestor, Gaviot Joaquin
+*/
 
 public class JefeTanque extends Jefe{
 
@@ -21,11 +25,11 @@ public class JefeTanque extends Jefe{
 	private static final int defaultHeight = 1376;
 	private static final int defaultVel = 2;
 	
-	private boolean primero = true;
 	private long init;
-	private boolean[] control = {false,false,false,false,false};
 	
-	
+	/**
+	 * Constructor de la clase JefeTAnque
+	 */
 	public JefeTanque() {
 		super(0, defaultVel, new ImageIcon(url), defaultWidth, defaultHeight);
 		
@@ -44,7 +48,8 @@ public class JefeTanque extends Jefe{
 	}
 
 	/**
-	 * redefine agregarExplosiones() de la clase Jefe
+	 * define agregarExplosiones() de la clase Jefe
+	 * Agrega al mapa una serie de Explosiones al morir el Jefe
 	 */
 	protected void agregarExplosiones() {
 		if(!control[0]){

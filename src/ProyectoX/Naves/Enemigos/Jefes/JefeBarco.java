@@ -10,7 +10,11 @@ import ProyectoX.Naves.Enemigos.Torretas.FabricaTorretasDobles;
 import ProyectoX.Naves.Enemigos.Torretas.FabricaTorretasGrandes;
 import ProyectoX.Naves.Enemigos.Torretas.FabricaTorretasInvisibles;
 import ProyectoX.Naves.Enemigos.Torretas.FabricaTorretasSimples;
-import ProyectoX.Naves.Enemigos.Torretas.Torreta;
+
+/**
+ * JefeBArco es la clase que representa al 2do Jefe del juego,
+ * @author Borek Andrea, Figliuolo Nestor, Gaviot Joaquin
+*/
 
 public class JefeBarco extends Jefe{
 
@@ -23,10 +27,14 @@ public class JefeBarco extends Jefe{
 	
 	private static final int defaultWidth = 385;
 	private static final int defaultHeight = 2494;
-	private static final int defaultVel = 5;
+	private static final int defaultVel = 2;
 	
 	private long init;
-	private boolean[] control = {false,false,false,false,false};
+	
+	
+	/**
+	 * Constructor de la clase JefeBarco
+	 */
 	
 	public JefeBarco() {
 		super(0, defaultVel, new ImageIcon(url), defaultWidth, defaultHeight);
@@ -49,6 +57,10 @@ public class JefeBarco extends Jefe{
 		
 	}
 
+	/**
+	 * define agregarExplosiones() de la clase Jefe
+	 * Agrega al mapa una serie de Explosiones al morir el Jefe
+	 */
 
 	protected void agregarExplosiones() {
 		if(!control[0]){
