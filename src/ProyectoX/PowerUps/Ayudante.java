@@ -29,6 +29,7 @@ public class Ayudante extends PowerUp {
 	/**
 	 * define efecto(Jugador jugador) de la clase PowerUP
 	 * le setea al jugador una instancia de NaveAyudante
+	 * @param jugador, Jugador actual
 	 */
 	protected void efecto(Jugador jugador) {
 		Defensa aux = jugador.getDefensa();

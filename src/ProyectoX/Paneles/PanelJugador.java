@@ -8,10 +8,8 @@ import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 import java.awt.event.KeyEvent;
 import java.awt.event.KeyListener;
-import java.awt.geom.AffineTransform;
 import java.net.URL;
 import java.util.ArrayList;
-
 import javax.swing.BorderFactory;
 import javax.swing.ImageIcon;
 import javax.swing.JButton;
@@ -19,8 +17,6 @@ import javax.swing.JLabel;
 import javax.swing.JPanel;
 import javax.swing.SwingConstants;
 import javax.swing.border.LineBorder;
-
-import ProyectoX.Naves.Enemigos.Enemigo;
 import ProyectoX.Naves.Jugador.Jugador;
 import ProyectoX.PowerUps.PowerUp;
 import ProyectoX.Disparos.Disparo;
@@ -28,6 +24,12 @@ import ProyectoX.Frames.Explosion;
 import ProyectoX.Frames.Objeto;
 import ProyectoX.Mapas.Mapa;
 import ProyectoX.Minds.Mind;
+
+/**
+ * Panel que se encarga de pintar al Jugador y se Defensa, los disparos enemigos, los PowerUP y las nubes
+ * implementa a la interface ActionListener
+ * @author Borek Andrea, Figliuolo Nestor, Gaviot Joaquin
+ */
 
 public class PanelJugador  extends JPanel implements ActionListener{
 
@@ -38,7 +40,6 @@ public class PanelJugador  extends JPanel implements ActionListener{
 	private Mapa mapa;
 	private Jugador jugador;
 	
-	private JPanel bar;
 	private JButton sonido;
 	private ImageIcon en, dis;
 	private JLabel labelBomba;
@@ -53,6 +54,12 @@ public class PanelJugador  extends JPanel implements ActionListener{
 	private boolean pause = false;
 	private boolean enabled = true;
 	
+	/**
+	 * Constructor de la clase PanelJugador
+	 * crea una instancia de Mind
+	 * @param map
+	 * @param select
+	 */
 	public PanelJugador(Mapa map, int select){
 		mind = new Mind( this, select);
 		map.setMind(mind);
@@ -69,8 +76,11 @@ public class PanelJugador  extends JPanel implements ActionListener{
         
 	}
 	
+	/**
+	 * @param bar de tipo JPanel, panel con estadisticas y opciones que aparece abajo del panel de juego
+	 */
+	
 	public void setBar(JPanel bar) {
-		this.bar = bar;
 		
 		ImageIcon ii;
 		
@@ -168,14 +178,19 @@ public class PanelJugador  extends JPanel implements ActionListener{
 		
     }
 	
-	public synchronized void paint(Graphics g) {
+	/**
+	 * redefine paint(Graphic g) de JComponent
+	 * pinta en el panel los disparos enemigos, el jugador y su defensa, los powerup y las nubes
+	 */
+	
+	public void paint(Graphics g) {
         super.paint(g);
         
         Graphics2D g2d = (Graphics2D) g;
         
         ArrayList ms = mapa.getMisilesEnemigos();
         
-        //mueve, repinta y elimina los disparos en caso de que ya no sean visibles
+        //mueve, y repinta los disparos enemigos
         for (int j = 0; j < ms.size(); j++ ) {
             Disparo misil = (Disparo) ms.get(j);
 	        if(misil!=null && misil.isVisible()) {
@@ -229,6 +244,8 @@ public class PanelJugador  extends JPanel implements ActionListener{
         
         ms = mapa.getObjeto();
         
+        // mueve y repinta las nubes
+        
         for(int i = 0; i<ms.size(); i++){
         	Objeto o = (Objeto) ms.get(i);
         	if(o!= null && o.getVisible()){
@@ -237,6 +254,8 @@ public class PanelJugador  extends JPanel implements ActionListener{
         	}
         	
         }
+        
+        // remueve las nubes
         
         for(int i = 0; i<ms.size(); i++){
         	Objeto o = (Objeto) ms.get(i);
@@ -261,6 +280,10 @@ public class PanelJugador  extends JPanel implements ActionListener{
        
 	}
 	
+	/**
+	 * clase que implementa KeyListener, se encarga de captar los KeyEvent y de derivarle la accion al jugador
+	 * @author Borek Andrea, Figliuolo Nestor, Gaviot Joaquin
+	 */
 	
 	private class TAdapter implements KeyListener {
 		
@@ -290,21 +313,31 @@ public class PanelJugador  extends JPanel implements ActionListener{
 		
 		
     }
-
-	public void actualizarPuntaje(){
-        puntaje.setText("Puntaje: " + jugador.getPuntaje());
-
-	}
+	
+	/**
+	 * metodo derivado hacia la instancia de Mind
+	 * @param event
+	 */
 	
 	public void actionPerformed(ActionEvent event) {
 		
 		mind.actionPerformed(event);
 	}
+	
+	/**
+	 * le setea al panel el Mapa actual
+	 * @param map instancia actual de Mapa
+	 */
 
 	public void setMapa(Mapa map) {
 		mapa = map;
 		
 	}
+	
+	/**
+	 * 
+	 * @author Borek Andrea, Figliuolo Nestor, Gaviot Joaquin
+	 */
 	
 	private class OyenteSonido implements ActionListener{
 

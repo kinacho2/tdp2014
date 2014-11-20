@@ -36,6 +36,7 @@ public class Mind implements ActionListener {
    
     /**
      * Constructor de la clase Mind
+     * crea al jugador e inicializa el hilo del juego
      * @param panel JPanel donde se dibuja el jugador, los disparos enemigos, los objetosm, los powerup y las explosiones
      * @param select indica el tipo de nave elegida por el jugador
      */
@@ -97,7 +98,7 @@ public class Mind implements ActionListener {
      * verifica si el Jugador colisiona con un PowerUP
      */
     
-    private synchronized void colisionPowerUp() {
+    private void colisionPowerUp() {
     	//Arreglo de PowerUP
 		ArrayList powers = mapa.getPowers();
 		
@@ -125,7 +126,7 @@ public class Mind implements ActionListener {
      * Mueve los disparos visibles de los enemigos y los que no son removidos
      * además verifica si algún disparo colisiono con algún jugador
      */
-    private synchronized void disparosEnemigos() {
+    private void disparosEnemigos() {
     	
     	// arreglo de disparos de los enemigos que se encuentran en el mapa
     	ArrayList ms = mapa.getMisilesEnemigos();
