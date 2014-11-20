@@ -3,6 +3,7 @@ package ProyectoX.Naves.Enemigos;
 import java.net.URL;
 import javax.swing.ImageIcon;
 import ProyectoX.Disparos.Disparo;
+import ProyectoX.Frames.Explosion;
 import ProyectoX.Naves.Nave;
 
 /**
@@ -14,7 +15,8 @@ import ProyectoX.Naves.Nave;
 public class Bombardero extends Enemigo {
 	protected static final URL url = (Nave.class.getClassLoader().getResource("ProyectoX/img/Enemigo/bombardero.png"));
 	private static final String alarm = "/ProyectoX/sounds/alarm.mp3";
-
+	protected static final URL explode = (Nave.class.getClassLoader().getResource("ProyectoX/img/Explosiones/grande.gif"));
+	
 	private static final int defaultWidth = 192;
 	private static final int defaultHeight = 168;
 	private static final int defaultVel = 3;
@@ -176,5 +178,13 @@ public class Bombardero extends Enemigo {
 	 */
 	public boolean isEspecial() {
 		return true;
+	}
+	
+public Explosion getExplosion(){
+		
+		addSonidoExplosion();
+		Explosion aux = new Explosion(x + width/2, y + height/2, new ImageIcon(explode), width, height);
+		aux.setDelay(3000);
+		return aux;
 	}
 }

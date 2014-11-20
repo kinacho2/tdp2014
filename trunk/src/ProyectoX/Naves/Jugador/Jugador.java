@@ -37,6 +37,7 @@ public abstract class Jugador extends Nave {
 	protected int contPuntaje;
 	//cada 3000 puntos se seteara un nuevo corazon al jugador
 	protected int maxContPuntaje = 3000;
+	protected String winHeart = "/ProyectoX/sounds/power.mp3";
 	
 	/**
 	 * Cosntructor de la clase Jugador
@@ -213,6 +214,7 @@ public abstract class Jugador extends Nave {
 		if(contPuntaje > maxContPuntaje){
 			contPuntaje -= maxContPuntaje;
 			setHearts();
+			reproductor.addSound(winHeart, false);
 		}
 	}
 	
@@ -239,7 +241,7 @@ public abstract class Jugador extends Nave {
 	}
 	
 	public void setBomba(){
-		if (bombas <= 5)
+		if (bombas < 5)
 			bombas ++;
 	}
 	
@@ -305,4 +307,9 @@ public abstract class Jugador extends Nave {
 	public int getCantBombas(){
 		return bombas;
 	}
+	
+	public void addSonidoDePremio(String path){
+		reproductor.addSound(path, false);
+	}
+	
 }

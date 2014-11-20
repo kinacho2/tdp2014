@@ -3,8 +3,11 @@ package ProyectoX.Naves.Enemigos.Jefes;
 import java.io.DataInputStream;
 import java.io.IOException;
 import java.io.InputStream;
+import java.net.URL;
 import java.util.ArrayList;
 import javax.swing.ImageIcon;
+
+import ProyectoX.Frames.Explosion;
 import ProyectoX.Mapas.Mapa;
 import ProyectoX.Naves.Nave;
 import ProyectoX.Naves.Enemigos.Enemigo;
@@ -21,6 +24,8 @@ import ProyectoX.Sound.Reproductor;
 
 public abstract class Jefe extends Enemigo{
 	
+	protected static final URL explode = (Nave.class.getClassLoader().getResource("ProyectoX/img/Explosiones/grande.gif"));
+	protected boolean[] control = {false,false,false,false,false};
 	private boolean primero = true;
 	protected ArrayList torretas;
 	protected int defaultWidth;
@@ -267,4 +272,19 @@ public abstract class Jefe extends Enemigo{
 	 */
 	
 	protected abstract void agregarExplosiones();
+	
+	
+	/**
+	 * redefine getExplosion() de la clase Enemigo
+	 * retorna la Explosion tipica de los Jefes
+	 * @return instancia de Explosion
+	 */
+	
+	public Explosion getExplosion(){
+		
+		addSonidoExplosion();
+		Explosion aux = new Explosion(x + width/2, y + height/2, new ImageIcon(explode), width/2, height/2);
+		aux.setDelay(3000);
+		return aux;
+	}
 }

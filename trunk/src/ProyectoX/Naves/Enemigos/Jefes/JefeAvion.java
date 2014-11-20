@@ -10,10 +10,14 @@ import ProyectoX.Naves.Enemigos.Torretas.FabricaTorretasInvisibles;
 import ProyectoX.Naves.Enemigos.Torretas.FabricaTorretasSimples;
 import ProyectoX.Naves.Enemigos.Torretas.Torreta;
 
+/**
+ * JefeAvion es la clase que representa al 3er Jefe del juego,
+ * @author Borek Andrea, Figliuolo Nestor, Gaviot Joaquin
+*/
+
 public class JefeAvion extends Jefe{
 
 	protected static final URL url = (Nave.class.getClassLoader().getResource("ProyectoX/img/Enemigo/JefeAvion/JefeAvion.png"));
-	protected static final URL explode = (Nave.class.getClassLoader().getResource("ProyectoX/img/Explosiones/grande.gif"));
 	protected static final String boundsDouble = "/ProyectoX/img/Enemigo/JefeAvion/posicionesTorretasDobles.txt";
 	protected static final String boundsSimple = "/ProyectoX/img/Enemigo/JefeAvion/posicionesTorretasSimples.txt";
 	protected static final String boundsInvisible = "/ProyectoX/img/Enemigo/JefeAvion/posicionesTorretasInvisibles.txt";
@@ -24,7 +28,7 @@ public class JefeAvion extends Jefe{
 	private static final int defaultHeight = 636;
 	private static final int defaultVel = 2;
 	
-	
+	//alturas y anchos de los distintos cuadros de colision las hi son las alturas las wi son los anchos
 	private final int hm = 55;
 	private final int h1 = 584;
 	private final int h1a = 522;
@@ -56,8 +60,10 @@ public class JefeAvion extends Jefe{
 	private long init;
 	private int delay = 5000;
 	
-	private boolean[] control = {false,false,false,false,false};
 	
+	/**
+	 * Constructor de la clase JefeAvion
+	 */
 	public JefeAvion() {
 		super(2000, defaultVel, new ImageIcon(url), defaultWidth, defaultHeight);
 		rn = new Random();
@@ -75,6 +81,10 @@ public class JefeAvion extends Jefe{
 			
 	}
 
+	/**
+	 * Genera 8 patrones de movimiento distintos y verifica si el jefe tiene torretas
+	 * Ademas verifica las colisiones con el jugador
+	 */
 	public void move() {
 		if(torretas.size() == 0){
 			agregarExplosiones();
@@ -211,6 +221,13 @@ public class JefeAvion extends Jefe{
 			}
 		setMove();
 	}
+	
+	/**
+	 * actualiza la posicion de las torretas dependiendo del movimiento que siga el JefeAvion
+	 * al salir de la pantalla y volver a entrar
+	 * @param dx diferencial x
+	 * @param dy diferencial y
+	 */
 
 	private void actualizarTorretas(int dx, int dy){
 		for(int i=0; i<torretas.size(); i++){
@@ -222,6 +239,12 @@ public class JefeAvion extends Jefe{
 		}
 	}
 	
+	/**
+	 * Verifica que hay Torretas entre los dos valores de x pasados por parametro
+	 * @param x1 offset menor
+	 * @param x2 offset mayor
+	 * @return true si hay Torretas entre ambos offset
+	 */
 	private boolean hayTorretas(int x1,int x2){
 		boolean ret = false;
 		int i = 0;
@@ -232,6 +255,11 @@ public class JefeAvion extends Jefe{
 		}
 		return ret;
 	}
+	
+	/**
+	 * define agregarExplosiones() de la clase Jefe
+	 * Agrega al mapa una serie de Explosiones al morir el Jefe
+	 */
 	
 	protected void agregarExplosiones(){
 		if(!control[0]){
@@ -306,12 +334,11 @@ public class JefeAvion extends Jefe{
 		}
 		
 	}
-	
 
-	public int getMovimiento() {
-		return 0;
-	}
-	
+	/**
+	 * redefine la funcion colision(Nave nave) de la clase Jefe
+	 * la colision con esta instancia se da con las alas el cuerpo y la cola de la imagen
+	 */
 
 	public boolean colision(Nave nave) {
 		
@@ -341,16 +368,5 @@ public class JefeAvion extends Jefe{
 			
 				
 	}
-	
-	public Explosion getExplosion(){
-		
-		addSonidoExplosion();
-		Explosion aux = new Explosion(x + width/2, y + height/2, new ImageIcon(explode), width/2, height/2);
-		aux.setDelay(3000);
-		return aux;
-	}
-	
-	
-	
 	
 }

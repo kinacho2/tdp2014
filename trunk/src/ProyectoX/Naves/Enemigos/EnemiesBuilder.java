@@ -36,7 +36,7 @@ public class EnemiesBuilder {
 		else if(probabilidad % 5 == 1) 
 			m = new Artillero((probabilidad % 30) == 1);
 		else
-			m = new Basico(true || (probabilidad % 11) == 1);
+			m = new Basico((probabilidad % 11) == 1);
 		
         return m;
 	}
