@@ -335,8 +335,14 @@ public abstract class Nave {
 	
 	public abstract boolean isInvulnerable();
 	
+	/**
+	 * setea los atributos por defecto de cada Nave
+	 * @param vida por defecto
+	 * @param velocidad por defecto
+	 * @param width, ancho por defecto
+	 * @param height, alto por defecto
+	 */
 	protected void setearParametrosDefecto(int vida, int velocidad, int width, int height){
-		//System.out.println("Nave"+width+" "+height);
 		defaultWidth = width;
 	    defaultHeight = height;
 		defaultVel = velocidad;

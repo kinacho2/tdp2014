@@ -31,6 +31,7 @@ public class PanelGame extends JPanel implements AbstractPanel {
 	private Random rn ;
 	
 	/**
+	 * Constructor de la clase PanelGame
 	 * crea los paneles del jugador y del enemigo
 	 * crea tambien el primer nivel y setea los atributos correspondientes
 	 * @param api Aplicacion principal

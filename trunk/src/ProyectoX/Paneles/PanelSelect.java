@@ -5,12 +5,10 @@ import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 import java.awt.event.KeyEvent;
 import java.awt.event.KeyListener;
-
 import javax.swing.ImageIcon;
 import javax.swing.JButton;
 import javax.swing.JLabel;
 import javax.swing.JPanel;
-
 import ProyectoX.Aplication;
 import ProyectoX.Naves.Nave;
 import ProyectoX.Naves.Jugador.Normal;
@@ -197,9 +195,7 @@ public class PanelSelect  extends JPanel {
 		@Override
 		public void actionPerformed(ActionEvent arg0) {
 			setVisible(false);
-			//setVisible(false);
 			api.showSplashBeforeGame(1);
-			//setVisible(true);
 			
 		}
 	}
@@ -209,9 +205,7 @@ public class PanelSelect  extends JPanel {
 		@Override
 		public void actionPerformed(ActionEvent arg0) {
 			setVisible(false);
-			//setVisible(false);
 			api.showSplashBeforeGame(2);
-			//setVisible(true);
             
 		}
 	}
@@ -221,9 +215,7 @@ public class PanelSelect  extends JPanel {
 		@Override
 		public void actionPerformed(ActionEvent arg0) {
 			setVisible(false);
-			//setVisible(false);
 			api.showSplashBeforeGame(3);
-			//setVisible(true);
            
 		}
 	}

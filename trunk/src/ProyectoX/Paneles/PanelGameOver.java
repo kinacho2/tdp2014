@@ -14,6 +14,11 @@ import ProyectoX.Aplication;
 import ProyectoX.Mapas.Mapa;
 import ProyectoX.Sound.Reproductor;
 
+/**
+ * panel de fin de juego se encarga de redirigir el juego al comienzo del nivel o al primer panel de la aplicacion
+ * @author Borek Andrea, Figliuolo Nestor, Gaviot Joaquin
+ */
+
 public class PanelGameOver  extends JPanel {
 
 	private static final URL url = (PanelGameOver.class.getClassLoader().getResource("ProyectoX/img/Menu_barras/gameover.gif"));
@@ -27,6 +32,12 @@ public class PanelGameOver  extends JPanel {
 	private Reproductor rep;
 
 	private JLabel fondo;
+	
+	/**
+	 * Constructor de la clase PanelGameOver
+	 * @param api Aplicacion del Juego
+	 * @param map Mapa actual del Juego
+	 */
 	
 	public PanelGameOver(Aplication api, Mapa map){
 		api.setVisible(false);
@@ -79,6 +90,11 @@ public class PanelGameOver  extends JPanel {
 		api.setVisible(true);
 	}
 	
+	/**
+	 * se encarga de redirigir el juego al comienzo del nivel actual
+	 * @author Borek Andrea, Figliuolo Nestor, Gaviot Joaquin
+	 */
+	
 	private class OyenteYes implements ActionListener{
 
 		public void actionPerformed(ActionEvent arg0) {
@@ -92,6 +108,11 @@ public class PanelGameOver  extends JPanel {
 		}
 		
 	}
+	
+	/**
+	 * se encarga de redirigir el juego al primer panel de la aplicacion
+	 * @author Borek Andrea, Figliuolo Nestor, Gaviot Joaquin
+	 */
 	
 	private class OyenteNo implements ActionListener{
 

@@ -26,6 +26,7 @@ public class Bomba extends PowerUp{
 	/**
 	 * define efecto(Jugador jugador) de la clase PowerUP
 	 * aumenta la cantidad de bombas del jugador en 1
+	 * @param jugador, Jugador actual
 	 */
 	protected void efecto(Jugador jugador) {
 		jugador.setBomba();
