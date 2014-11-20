@@ -335,7 +335,8 @@ public abstract class Nave {
 	
 	public abstract boolean isInvulnerable();
 	
-	protected void setearParametrosDefecto(int vida, int whidt, int height, int velocidad){
+	protected void setearParametrosDefecto(int vida, int velocidad, int width, int height){
+		//System.out.println("Nave"+width+" "+height);
 		defaultWidth = width;
 	    defaultHeight = height;
 		defaultVel = velocidad;

@@ -19,11 +19,6 @@ public abstract class Enemigo extends Nave {
 	protected static final String sonido = "/ProyectoX/sounds/disparo.mp3";
 	private String explodeSound = "/ProyectoX/sounds/explode2.mp3";
 	
-	protected static int defaultWidth;
-	protected static int defaultHeight;
-	protected static int defaultVel;
-	protected static int defaultVida;
-	
 	
 	//angulo de rotacion en radianes
 	protected double rotacion = 0.0;
@@ -44,6 +39,7 @@ public abstract class Enemigo extends Nave {
 	 */
 	public Enemigo(int vida, int vel, ImageIcon ii,int w, int h) {
 		super(vida,vel, ii, new ImageIcon(explode), w, h);
+		
 		setearParametrosDefecto(vida, vel, w, h);
 		velocidadMisil = -7;
 	}

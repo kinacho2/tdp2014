@@ -17,9 +17,6 @@ public class EscudoX extends Defensa {
 	protected static final URL url = (Jugador.class.getClassLoader().getResource("ProyectoX/img/PUP/Escudo/Escudo.gif"));
 	protected static final URL urlWarning = (Jugador.class.getClassLoader().getResource("ProyectoX/img/PUP/Escudo/Escudo_Warning.gif"));
 
-	protected static final int defaultVida = 200;
-	protected static final int defaultWidth = 64;
-	protected static final int defaultHeight = 64;
 	private boolean warning = false;
 	
 	/**
@@ -29,8 +26,8 @@ public class EscudoX extends Defensa {
 	 * @param jugador el Jugador actual
 	 */
 	public EscudoX(Jugador jugador){
-		super(defaultVida, jugador.getVelocidad(),  new ImageIcon(url), new ImageIcon(url), new ImageIcon(url));
-		
+		super(200, jugador.getVelocidad(),  new ImageIcon(url), new ImageIcon(url), new ImageIcon(url));
+		setearParametrosDefecto(200, 0, 64, 64);
 		x = jugador.getX() + jugador.getWidth()/2 - defaultWidth/2;
 		y = jugador.getY() + jugador.getHeight()/2 - defaultHeight/2;
 		height = defaultHeight;

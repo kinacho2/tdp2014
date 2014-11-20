@@ -112,9 +112,12 @@ public class Mind implements ActionListener {
 		}
 	    for (int j = 0; j < powers.size(); j++ ) {
 			PowerUp pw = (PowerUp) powers.get(j);
-			if(!pw.isVisible())
-				powers.remove(j);
-		}
+			if(pw!=null){
+				if(!pw.isVisible()){
+					powers.remove(j);
+				}
+			}
+	    }
 	    
 	}
     
@@ -154,8 +157,10 @@ public class Mind implements ActionListener {
        	}
         for (int j = 0; j < ms.size(); j++ ) {
             Disparo misil = (Disparo) ms.get(j);
-            if(!misil.isVisible()){
-            	ms.remove(j);
+            if(misil!=null){
+            	if(!misil.isVisible()){
+            		ms.remove(j);
+            	}
             }
         }
        	

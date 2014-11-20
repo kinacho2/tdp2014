@@ -5,6 +5,7 @@ import java.io.IOException;
 import java.io.InputStream;
 import java.net.URL;
 import java.util.ArrayList;
+
 import javax.swing.ImageIcon;
 
 import ProyectoX.Frames.Explosion;
@@ -69,7 +70,6 @@ public abstract class Jefe extends Enemigo{
 					c = (char) lector.read();
 					
 				}
-				
 				
 				int dx =  new Integer(ss).intValue();
 				ss = "";

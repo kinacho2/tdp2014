@@ -1,10 +1,15 @@
 package ProyectoX.Paneles;
 
-import javax.swing.JPanel;
-
+/**
+ * Interface definida para intercambiar SplashScreens entre los distintos niveles del juego
+ * @author Borek Andrea, Figliuolo Nestor, Gaviot Joaquin
+ */
 public interface AbstractPanel{
 
-	public abstract void function();
+	/**
+	 * Se ejecuta luego de finalizado el SplashScreen
+	 */
+	public void function();
 	
 	
 }

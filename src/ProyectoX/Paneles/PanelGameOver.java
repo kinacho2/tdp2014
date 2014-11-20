@@ -4,8 +4,6 @@ import java.awt.Image;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 import java.net.URL;
-import java.util.Random;
-
 import javax.swing.BorderFactory;
 import javax.swing.ImageIcon;
 import javax.swing.JButton;
@@ -20,7 +18,6 @@ public class PanelGameOver  extends JPanel {
 
 	private static final URL url = (PanelGameOver.class.getClassLoader().getResource("ProyectoX/img/Menu_barras/gameover.gif"));
 
-	private static final String volver = "/ProyectoX/sounds/music/menu_";
 	private static final String sound = "/ProyectoX/sounds/music/outro.mp3";
 	
 	private JButton yes,no;
@@ -31,15 +28,12 @@ public class PanelGameOver  extends JPanel {
 
 	private JLabel fondo;
 	
-	private Random rn ;
-	
 	public PanelGameOver(Aplication api, Mapa map){
 		api.setVisible(false);
 		rep = new Reproductor();
 		rep.addSound(sound, true);
 		this.api = api;
 		this.mapa = map;
-		rn = new Random();
 		setLayout(null);
 		{
 			yes = new JButton();
@@ -57,7 +51,7 @@ public class PanelGameOver  extends JPanel {
 			no = new JButton();
 			add(no);
 			no.setText("No");
-			no.setBounds(800/2 + 50, 472, 41, 29);
+			no.setBounds(800/2 + 50 - no.getWidth(), 472, 41, 29);
 			no.setForeground(new java.awt.Color(0,255,0));
 			no.setBackground(new java.awt.Color(0,0,0));
 			no.setBorder(BorderFactory.createCompoundBorder(null,null));
@@ -68,7 +62,7 @@ public class PanelGameOver  extends JPanel {
 			label = new JLabel();
 			add(label);
 			label.setText("Desea continuar?");
-			label.setBounds(321, 418, 155, 33);
+			label.setBounds(800/2 - 155/2, 418, 155, 33);
 			label.setForeground(new java.awt.Color(0,255,0));
 			label.setBackground(new java.awt.Color(0,0,0));
 			label.setBorder(BorderFactory.createCompoundBorder(null,null));
