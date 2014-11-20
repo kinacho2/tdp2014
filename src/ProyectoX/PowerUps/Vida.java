@@ -20,6 +20,6 @@ protected static final URL url = (PowerUp.class.getClassLoader().getResource("Pr
 	@Override
 	protected void efecto(Jugador jugador) {
 		jugador.setVida(-30);
-		
+		jugador.addSonidoDePremio(sound);
 	}
 }

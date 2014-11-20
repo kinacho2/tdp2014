@@ -21,7 +21,6 @@ public class PanelEnemies  extends JPanel implements AbstractPanel {
 
 	protected MindEnemies mind;
 	protected Mapa mapa;
-	private URL url = (Aplication.class.getClassLoader().getResource("ProyectoX/img/Fondos/fondoNivel1.png"));
 	private Aplication api;
 
 	public PanelEnemies(Mapa map, Aplication api) {
@@ -95,7 +94,7 @@ public class PanelEnemies  extends JPanel implements AbstractPanel {
 	public void jefeMuerto() {
 		
 		api.setVisible(false);
-		MenteSplash mente = new MenteSplash(5000,url,this);
+		MenteSplash mente = new MenteSplash(5000,mapa.getImagenSplash(),this);
 		mente.start();
 		
 	}

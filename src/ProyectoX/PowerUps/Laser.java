@@ -25,6 +25,7 @@ public class Laser extends PowerUp {
 		
 		DisparoJugador dis = jugador.getDisparo();
 		jugador.setNewDisparo(dis.getLaser());
+		jugador.addSonidoDePremio(sound);
 		
 	}
 }

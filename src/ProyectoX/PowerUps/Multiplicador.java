@@ -23,7 +23,7 @@ protected static final URL url = (PowerUp.class.getClassLoader().getResource("Pr
 		DisparoJugador dis = jugador.getDisparo();
 		jugador.setNewDisparo(dis.getMultiplicador());
 			
-		
+		jugador.addSonidoDePremio(sound);
 		
 	}
 }

@@ -32,7 +32,7 @@ public class PanelInit   extends JPanel {
 			newGame = new JButton();
 			add(newGame);
 			newGame.setText("JUEGO NUEVO");
-			newGame.setBounds(400 - 288/2, 90, 288, 50);
+			newGame.setBounds(400 - 288/2, 170, 288, 50);
 			newGame.setForeground(new java.awt.Color(0,255,0));
 			newGame.setBackground(new java.awt.Color(0,0,0));
 			newGame.setBorder(BorderFactory.createCompoundBorder(null,null));
@@ -43,7 +43,7 @@ public class PanelInit   extends JPanel {
 			quit = new JButton();
 			add(quit);
 			quit.setText("SALIR");
-			quit.setBounds(400 - 288/2, 177, 288, 50);
+			quit.setBounds(400 - 288/2, 257, 288, 50);
 			quit.setBackground(new java.awt.Color(0,0,0));
 			quit.setForeground(new java.awt.Color(0,255,0));
 			quit.setPreferredSize(new java.awt.Dimension(14, 7));

@@ -39,6 +39,5 @@ protected static final URL url = (PowerUp.class.getClassLoader().getResource("Pr
 			up = new Vida(x, y);
 		}
 		up.efecto(jugador);
-		
 	}
 }

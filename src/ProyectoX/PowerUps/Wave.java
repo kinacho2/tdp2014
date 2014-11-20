@@ -27,7 +27,7 @@ protected String power = "wav";
 		
 		DisparoJugador dis = jugador.getDisparo();
 		jugador.setNewDisparo(dis.getWave());
-			
+		jugador.addSonidoDePremio(sound);
 		
 		
 	}
