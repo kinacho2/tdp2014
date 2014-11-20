@@ -7,6 +7,7 @@ import ProyectoX.Paneles.PanelGame;
 import ProyectoX.Paneles.PanelInit;
 import ProyectoX.Paneles.PanelSelect;
 import ProyectoX.Frames.MenteSplash;
+import ProyectoX.Frames.SplashScreen;
 import ProyectoX.Sound.Reproductor;
 import java.awt.event.WindowAdapter;
 import java.awt.event.WindowEvent;
@@ -29,7 +30,8 @@ public class Aplication extends javax.swing.JFrame {
 	private Reproductor rep;
 	private Random rn;
 	
-	private URL url = (Aplication.class.getClassLoader().getResource("ProyectoX/img/Menu_barras/historia/bombardero.png"));
+	private URL url = (Aplication.class.getClassLoader().getResource("ProyectoX/img/Menu_barras/historia/Imagen1.png"));
+	private URL url2 = (Aplication.class.getClassLoader().getResource("ProyectoX/img/Menu_barras/historia/Imagen2.png"));
 
 	/**
 	 * Constructor de la clase Aplication 
@@ -46,7 +48,6 @@ public class Aplication extends javax.swing.JFrame {
         
     }
 	    
-    //inicializa el panel del juego
     /**
      * Metodo que crea una SplashScreen antes de iniciar el juego
      * y procede a iniciar el juego con el parametro select
@@ -55,7 +56,7 @@ public class Aplication extends javax.swing.JFrame {
     
     public void showSplashBeforeGame(int select){
     	setVisible(false);
-    	MenteSplash spl = new MenteSplash(15000, url, this, select);
+    	MenteSplash spl = new MenteSplash(5000, url2, this, select);
     	spl.start();
     }
     
@@ -81,7 +82,8 @@ public class Aplication extends javax.swing.JFrame {
      */
   
     private void initGUI() {
-    	
+    	SplashScreen spl = new SplashScreen(15000, url);
+    	spl.showSplash();
     	initPrimerPanel();
 		setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
         setSize(800, 600);
