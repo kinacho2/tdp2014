@@ -239,7 +239,6 @@ public class Mind implements ActionListener {
 
 	public void pause(boolean arg){
 		mapa.pause(arg);
-		silencio(!arg);
 		jugador.pause(arg);
 		pause = arg;
 		

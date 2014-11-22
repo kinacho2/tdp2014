@@ -12,6 +12,7 @@ import javax.swing.JPanel;
 import ProyectoX.Aplication;
 import ProyectoX.Mapas.Mapa;
 import ProyectoX.Mapas.Nivel_I;
+import ProyectoX.Mapas.Nivel_III;
 import ProyectoX.Sound.Reproductor;
 
 /**
@@ -41,7 +42,7 @@ public class PanelGame extends JPanel implements AbstractPanel {
 		this.api = api;
 		this.rep = rep;
 		
-		map = new Nivel_I(api, this,rep);
+		map = new Nivel_III(api, this,rep);
 		api.add(this, BorderLayout.CENTER);
 		setBackground(new java.awt.Color(0,0,0));
 		
@@ -116,6 +117,7 @@ public class PanelGame extends JPanel implements AbstractPanel {
 	 * se encarga de frenar la ejecucion del juego y volver al primer panel de la aplicacion
 	 */
 	public void function() {
+		map = map.getMind().getJugador().getMapa();
 		map.stop();
 		api.initPanelFinal(map.getMind().getJugador());
 	}
