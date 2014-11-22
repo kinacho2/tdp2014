@@ -7,8 +7,9 @@ import java.util.ArrayList;
  * @author Borek Andrea, Figliuolo Nestor, Gaviot Joaquin
  */
 public class Reproductor{
-	private boolean enabled = true;
+	private static boolean enabled = true;
 	
+	private String path;
 	private Sonido sonido;
 	
 	/**
@@ -20,11 +21,14 @@ public class Reproductor{
 	 */
 	
 	public void addSound(String path, boolean loop){
+		
 		if(enabled){
 			Sonido sound = new Sonido(path, loop);
 			if(loop)
 				sonido = sound;
 		}
+		if(loop)
+			this.path = path;
 	}
 	
 	/**
@@ -49,8 +53,12 @@ public class Reproductor{
 			stop(0);
 		}
 		else{
-			sonido = new Sonido(sonido.getPath(),true);
+			sonido = new Sonido(path,true);
 		}
+	}
+	
+	public boolean getEnabled(){
+		return enabled;
 	}
 	
 }

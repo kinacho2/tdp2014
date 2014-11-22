@@ -82,7 +82,6 @@ public class JefeAvion extends Jefe{
 	 * Ademas verifica las colisiones con el jugador
 	 */
 	public void move() {
-		//System.out.println(defaultHeight);
 		if(torretas.size() == 0){
 			agregarExplosiones();
 		}

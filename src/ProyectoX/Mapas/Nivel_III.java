@@ -11,6 +11,7 @@ import ProyectoX.Naves.Enemigos.EnemiesBuilder;
 import ProyectoX.Naves.Enemigos.Jefes.JefeAvion;
 import ProyectoX.Paneles.PanelGame;
 import ProyectoX.PowerUps.PUPBuilder;
+import ProyectoX.Sound.Reproductor;
 
 /**
  * Tercer y ultimo nivel del juego
@@ -25,10 +26,16 @@ public class Nivel_III extends Mapa{
 	protected static final String soundBoss = "/ProyectoX/sounds/music/level3boss.mp3";
 	protected static final String sound = "/ProyectoX/sounds/music/level3.mp3";
 
-	
+	/**
+	 * Constructor de la clase NivelIII
+	 * se encarga de setear los atributos por defecto para su estado
+	 * @param api la aplicacion que ejecutara el siguiente metodo al terminarse el SplashScreen
+	 * @param game el panel donde se dibuja el juego
+	 * @param rep el Reproductor actual del juego
+	 */
 
-	public Nivel_III(Aplication api, PanelGame game){
-		super(api,game);
+	public Nivel_III(Aplication api, PanelGame game, Reproductor rep){
+		super(api, game, rep);
 		rn = new Random(13);
 		cantEnemies = 201;
 		power = new PUPBuilder(16);
@@ -71,10 +78,10 @@ public class Nivel_III extends Mapa{
 	 */
 	
 	public void nextMapa() {
+		reproductor.stop(100);
 		game.setVisible(false);
-		MenteSplash spl = new MenteSplash(5000, fondo, game);
-    	spl.start();
- 
+		game.function();
+		
 	}
 
 	/**
@@ -84,7 +91,7 @@ public class Nivel_III extends Mapa{
 	
 	public void reset() {
 		reproductor.stop(0);
-		Mapa map = new Nivel_III(api,game);
+		Mapa map = new Nivel_III(api,game,reproductor);
 		map.setMind(mind);
 		map.setMindEnemies(mindEnemies);
 		mind.setMapa(map);

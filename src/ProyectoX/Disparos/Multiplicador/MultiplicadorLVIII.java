@@ -48,10 +48,10 @@ public class MultiplicadorLVIII extends DisparoMultiplicador{
 		d[2] = new Disparo(x, y, -0.4d, dy, velocidad);
 		d[3] = new Disparo(x, y + 30, 0.4d, -dy, velocidad);
 		d[4] = new Disparo(x, y + 30, -0.4d, -dy, velocidad);
-		d[5] = new Disparo(x, y + 30, 0.4d, -0.1d, velocidad*3/2);
-		d[6] = new Disparo(x, y + 30, -0.4d, -0.1d, velocidad*3/2);
-		d[7] = new Disparo(x, y + 30, 0.4d, 0.1d, velocidad*3/2);
-		d[8] = new Disparo(x, y + 30, -0.4d, 0.1d, velocidad*3/2);
+		d[5] = new Disparo(x, y, 0.4d, -0.1d, velocidad*3/2);
+		d[6] = new Disparo(x, y, -0.4d, -0.1d, velocidad*3/2);
+		d[7] = new Disparo(x, y, 0.4d, 0.1d, velocidad*3/2);
+		d[8] = new Disparo(x, y, -0.4d, 0.1d, velocidad*3/2);
 		setearReproductor(d);
 		return d;
 	}

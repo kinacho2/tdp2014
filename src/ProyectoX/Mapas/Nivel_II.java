@@ -2,12 +2,15 @@ package ProyectoX.Mapas;
 
 import java.net.URL;
 import java.util.Random;
+
 import javax.swing.ImageIcon;
+
 import ProyectoX.Aplication;
 import ProyectoX.Naves.Enemigos.EnemiesBuilder;
 import ProyectoX.Naves.Enemigos.Jefes.JefeBarco;
 import ProyectoX.Paneles.PanelGame;
 import ProyectoX.PowerUps.PUPBuilder;
+import ProyectoX.Sound.Reproductor;
 
 /**
  * Segundo nivel del juego
@@ -21,10 +24,16 @@ public class Nivel_II extends Mapa{
 	protected static final String soundBoss = "/ProyectoX/sounds/music/level2boss.mp3";
 	protected static final String sound = "/ProyectoX/sounds/music/level2.mp3";
 
+	/**
+	 * Constructor de la clase NivelII
+	 * se encarga de setear los atributos por defecto para su estado
+	 * @param api la aplicacion que ejecutara el siguiente metodo al terminarse el SplashScreen
+	 * @param game el panel donde se dibuja el juego
+	 * @param rep el Reproductor actual del juego
+	 */
 	
-	
-	public Nivel_II(Aplication api, PanelGame game){
-		super(api,game);
+	public Nivel_II(Aplication api, PanelGame game, Reproductor rep){
+		super(api,game,rep);
 		rn = new Random(13);
 		cantEnemies = 151;
 		power = new PUPBuilder(6);
@@ -69,7 +78,7 @@ public class Nivel_II extends Mapa{
 
 	public void nextMapa() {
 		reproductor.stop(0);
-		Mapa map = new Nivel_III(api,game);
+		Mapa map = new Nivel_III(api,game,reproductor);
 		map.setMind(mind);
 		map.setMindEnemies(mindEnemies);
 		mind.setMapa(map);
@@ -84,7 +93,7 @@ public class Nivel_II extends Mapa{
 	
 	public void reset() {
 		reproductor.stop(0);
-		Mapa map = new Nivel_II(api,game);
+		Mapa map = new Nivel_II(api,game,reproductor);
 		map.setMind(mind);
 		map.setMindEnemies(mindEnemies);
 		mind.setMapa(map);

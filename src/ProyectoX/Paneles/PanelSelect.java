@@ -5,20 +5,32 @@ import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 import java.awt.event.KeyEvent;
 import java.awt.event.KeyListener;
+import java.net.URL;
+
+import javax.swing.BorderFactory;
 import javax.swing.ImageIcon;
 import javax.swing.JButton;
 import javax.swing.JLabel;
 import javax.swing.JPanel;
+
 import ProyectoX.Aplication;
 import ProyectoX.Naves.Nave;
 import ProyectoX.Naves.Jugador.Normal;
 import ProyectoX.Naves.Jugador.Resistente;
 import ProyectoX.Naves.Jugador.Veloz;
-
+import ProyectoX.Sound.OyenteSonido;
+/**
+ * Panel de seleccion de Jugador
+ * @author Borek Andrea, Figliuolo Nestor, Gaviot Joaquin
+ */
 public class PanelSelect  extends JPanel {
 
-	private JButton resistente;
+	private static final URL urlEn = (PanelInit.class.getClassLoader().getResource("ProyectoX/img/Menu_barras/sonido-enabled.jpg"));
+	private static final URL urlDis = (PanelInit.class.getClassLoader().getResource("ProyectoX/img/Menu_barras/sonido-disabled.png"));
 	
+	private JButton resistente;
+	private JButton sonido;
+	private ImageIcon en,dis;
 	private JButton normal;
 	private JButton veloz;
 	private JButton atras;
@@ -28,7 +40,10 @@ public class PanelSelect  extends JPanel {
 	private JLabel resistenteStatics, normalStatics, velozStatics, fondo;
 	private Aplication api;
 	private int round = 0;
-	
+	/**
+	 * Constructor de la clase PanelSelect
+	 * @param api Aplicacion principal del juego
+	 */
 	public PanelSelect(Aplication api){
 		super();
 		
@@ -129,6 +144,22 @@ public class PanelSelect  extends JPanel {
 			atras.addActionListener(new OyenteAtras());
 		}
 		{
+			sonido = new JButton("");
+			dis = new ImageIcon(urlDis);
+			dis = new ImageIcon(dis.getImage().getScaledInstance(25, 25, Image.SCALE_DEFAULT));
+			en = new ImageIcon(urlEn);
+			en = new ImageIcon(en.getImage().getScaledInstance(25, 25, Image.SCALE_DEFAULT));
+			
+			sonido.setBounds(750, 10, 25, 25);
+			sonido.setForeground(new java.awt.Color(0,255,0));
+			sonido.setBackground(new java.awt.Color(0,0,0));
+			sonido.setBorder(BorderFactory.createCompoundBorder(null,null));
+			sonido.setFont(new java.awt.Font("Segoe UI",0,20));
+			sonido.setFocusable(false);
+			sonido.addActionListener(new OyenteSonido(sonido,api.getReproductor(),en,dis));
+			add(sonido);
+		}
+		{
 			
 			ImageIcon icon = new ImageIcon(Nave.class.getClassLoader().getResource("ProyectoX/img/Menu_barras/menu.gif"));
 			fondo = new JLabel(icon);
@@ -190,6 +221,12 @@ public class PanelSelect  extends JPanel {
 		}
 	}
 	
+	/**
+	 * Implementa ActionListener
+	 * Indica que se selecciono la Nave Veloz
+	 * @author Borek Andrea, Figliuolo Nestor, Gaviot Joaquin
+	 */
+	
 	private class OyenteVeloz implements ActionListener{
 
 		@Override
@@ -199,6 +236,12 @@ public class PanelSelect  extends JPanel {
 			
 		}
 	}
+	
+	/**
+	 * Implementa ActionListener
+	 * Indica que se selecciono la Nave Resistente
+	 * @author Borek Andrea, Figliuolo Nestor, Gaviot Joaquin
+	 */
 	
 	private class OyenteNormal implements ActionListener{
 
@@ -210,6 +253,12 @@ public class PanelSelect  extends JPanel {
 		}
 	}
 	
+	/**
+	 * Implementa ActionListener
+	 * Indica que se selecciono la Nave Resistente
+	 * @author Borek Andrea, Figliuolo Nestor, Gaviot Joaquin
+	 */
+	
 	private class OyenteResistente implements ActionListener{
 
 		@Override
@@ -219,6 +268,12 @@ public class PanelSelect  extends JPanel {
            
 		}
 	}
+	
+	/**
+	 * Implementa ActionListener
+	 * Retorna al primer panel
+	 * @author Borek Andrea, Figliuolo Nestor, Gaviot Joaquin
+	 */
 	
 	private class OyenteAtras implements ActionListener{
 

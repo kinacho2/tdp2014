@@ -3,7 +3,9 @@ package ProyectoX.Naves.Jugador;
 import java.awt.Image;
 import java.awt.event.KeyEvent;
 import java.net.URL;
+
 import javax.swing.ImageIcon;
+
 import ProyectoX.Disparos.Disparo;
 import ProyectoX.Disparos.DisparoJugador;
 import ProyectoX.Disparos.MisilBomba;
@@ -39,6 +41,7 @@ public abstract class Jugador extends Nave {
 	//cada 3000 puntos se seteara un nuevo corazon al jugador
 	protected int maxContPuntaje = 3000;
 	protected String winHeart = "/ProyectoX/sounds/power.mp3";
+	private String nombre;
 	//arreglo booleano de keyCodes
 	/**
 	 * Cosntructor de la clase Jugador
@@ -50,12 +53,13 @@ public abstract class Jugador extends Nave {
 	 * @param iconIzq Imagen inclinada hacia la izquierda
 	 */
 	
-	public Jugador(int vida, int vel, ImageIcon icon, ImageIcon iconDer, ImageIcon iconIzq){
+	public Jugador(int vida, int vel, ImageIcon icon, ImageIcon iconDer, ImageIcon iconIzq, String nombre){
 		super(vida, vel, icon, new ImageIcon(explode), icon.getIconWidth(), icon.getIconHeight());
+		this.nombre = nombre;
 		setearParametrosDefecto(vida, vel, icon.getIconWidth(), icon.getIconHeight());
 		x = 400;
 		y = 450;
-		
+		System.out.println(nombre);
 		init = System.currentTimeMillis();
 		
 		this.icon = icon;
@@ -393,13 +397,18 @@ public abstract class Jugador extends Nave {
 	/**
 	 * Define la operacion isInvulnerable() de la clase Nave
 	 * durante 5 segundos el Jugador es invulnerable a los Disparos y no colisiona con los Enemigos
+	 * y genera un pestaneo en la imagen
 	 * @return booleano si es true el jugador no puede recibir danio
 	 */
 	
 	public boolean isInvulnerable(){
 		boolean toRet = System.currentTimeMillis() - init <= invulnerable;
 		if(!toRet){
+			if(!cambio){
+				image = aux;
+			}
 			cambio = false;
+			
 		}else{
 			if(!cambio){
 				cambio = true;
@@ -432,6 +441,15 @@ public abstract class Jugador extends Nave {
 	
 	public void addSonidoDePremio(String path){
 		reproductor.addSound(path, false);
+	}
+	
+	/**
+	 * retorna el nombre asociado al jugador
+	 * @return nombre del jugador
+	 */
+	
+	public String getNombre(){
+		return nombre;
 	}
 	
 }

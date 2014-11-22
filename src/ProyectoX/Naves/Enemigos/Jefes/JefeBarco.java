@@ -34,7 +34,7 @@ public class JefeBarco extends Jefe{
 	
 	public JefeBarco() {
 		super(0, 2, new ImageIcon(url),385,2494);
-		System.out.println(defaultWidth+" "+ defaultHeight);
+		
 		x = 400 - defaultWidth/2;
 		y = - defaultHeight;
 		

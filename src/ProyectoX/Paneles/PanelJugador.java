@@ -10,6 +10,7 @@ import java.awt.event.KeyEvent;
 import java.awt.event.KeyListener;
 import java.net.URL;
 import java.util.ArrayList;
+
 import javax.swing.BorderFactory;
 import javax.swing.ImageIcon;
 import javax.swing.JButton;
@@ -17,8 +18,10 @@ import javax.swing.JLabel;
 import javax.swing.JPanel;
 import javax.swing.SwingConstants;
 import javax.swing.border.LineBorder;
+
 import ProyectoX.Naves.Jugador.Jugador;
 import ProyectoX.PowerUps.PowerUp;
+import ProyectoX.Sound.OyenteSonido;
 import ProyectoX.Disparos.Disparo;
 import ProyectoX.Frames.Explosion;
 import ProyectoX.Frames.Objeto;
@@ -40,6 +43,7 @@ public class PanelJugador  extends JPanel implements ActionListener{
 	private Mapa mapa;
 	private Jugador jugador;
 	
+	private OyenteSonido oyente;
 	private JButton sonido;
 	private ImageIcon en, dis;
 	private JLabel labelBomba;
@@ -60,8 +64,8 @@ public class PanelJugador  extends JPanel implements ActionListener{
 	 * @param map
 	 * @param select
 	 */
-	public PanelJugador(Mapa map, int select){
-		mind = new Mind( this, select);
+	public PanelJugador(Mapa map, int select, String nombre){
+		mind = new Mind( this, select,nombre);
 		map.setMind(mind);
 		jugador = mind.getJugador();
 		mapa = map;
@@ -164,14 +168,14 @@ public class PanelJugador  extends JPanel implements ActionListener{
 		dis = new ImageIcon(dis.getImage().getScaledInstance(25, 25, Image.SCALE_DEFAULT));
 		en = new ImageIcon(urlEn);
 		en = new ImageIcon(en.getImage().getScaledInstance(25, 25, Image.SCALE_DEFAULT));
-		sonido.setIcon(en);
+		oyente = new OyenteSonido(sonido,mind.getReproductor(),en,dis);
 		sonido.setBounds(70, 0, 25, 25);
 		sonido.setForeground(new java.awt.Color(0,255,0));
 		sonido.setBackground(new java.awt.Color(0,0,0));
 		sonido.setBorder(BorderFactory.createCompoundBorder(null,null));
 		sonido.setFont(new java.awt.Font("Segoe UI",0,20));
 		sonido.setFocusable(false);
-		sonido.addActionListener(new OyenteSonido());
+		sonido.addActionListener(oyente);
 		bar.add(sonido);
 		
 		
@@ -334,26 +338,6 @@ public class PanelJugador  extends JPanel implements ActionListener{
 		
 	}
 	
-	/**
-	 * 
-	 * @author Borek Andrea, Figliuolo Nestor, Gaviot Joaquin
-	 */
 	
-	private class OyenteSonido implements ActionListener{
-
-		@Override
-		public void actionPerformed(ActionEvent arg0) {
-			mind.silencio(!enabled);
-			enabled = !enabled;
-			if(enabled){
-				sonido.setIcon(en);
-			}
-			else{
-				sonido.setIcon(dis);
-			}
-			
-		}
-		
-	}
 	
 }
