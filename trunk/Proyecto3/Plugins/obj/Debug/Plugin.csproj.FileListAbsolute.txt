@@ -1,5 +1,0 @@
-C:\Users\M4k44n\Documents\Visual Studio 2013\Projects\Proyecto3\Plugins\obj\Debug\Plugin.csprojResolveAssemblyReference.cache
-C:\Users\M4k44n\Documents\Visual Studio 2013\Projects\Proyecto3\Plugins\bin\Debug\Plugins.dll
-C:\Users\M4k44n\Documents\Visual Studio 2013\Projects\Proyecto3\Plugins\bin\Debug\Plugins.pdb
-C:\Users\M4k44n\Documents\Visual Studio 2013\Projects\Proyecto3\Plugins\obj\Debug\Plugins.dll
-C:\Users\M4k44n\Documents\Visual Studio 2013\Projects\Proyecto3\Plugins\obj\Debug\Plugins.pdb
