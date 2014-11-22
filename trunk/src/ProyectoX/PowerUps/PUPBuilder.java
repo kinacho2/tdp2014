@@ -47,6 +47,7 @@ public class PUPBuilder {
 		}else{
 			up = new Vida(x, y);
 		}
+		up = new Escudo(x,y);
 		return up;
 	}
 	
