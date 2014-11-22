@@ -22,7 +22,6 @@ public abstract class Torreta extends Enemigo {
 	 * @param w, ancho de la Torreta
 	 * @param h, alto de la Torreta
 	 */
-	
 	public Torreta(int vida, ImageIcon ii,int xx, int yy,int w, int h) {
 		super(vida, 0, ii, w, h);
 		x = xx;

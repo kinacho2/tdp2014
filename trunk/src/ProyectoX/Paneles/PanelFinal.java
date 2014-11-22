@@ -47,7 +47,6 @@ public class PanelFinal extends JPanel {
 	/**
 	 * Constructor de la clase PanelFinal
 	 * @param api Aplicacion del Juego
-	 * @param map Mapa actual del Juego
 	 * @param jugador Jugador actual
 	 */
 	
