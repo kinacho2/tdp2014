@@ -168,58 +168,8 @@ public class PanelSelect  extends JPanel {
 			add(fondo);
 		}
 		round = 0;
-		veloz.addKeyListener(new OyenteBotonesMain());
 	}
-	
-	private class OyenteBotonesMain implements KeyListener{
 
-		@Override
-		public void keyPressed(KeyEvent k) {
-			int key = k.getKeyCode();
-			if (key == KeyEvent.VK_DOWN){
-				round = (round + 1) % 3;
-			}
-			if (key == KeyEvent.VK_UP){
-				round = (round - 1) % 3;
-			}
-			JButton aux = null;
-			if(round == 0){
-				veloz.setSelected(true);
-				aux = veloz;
-			}
-			if(round == 1 || round == -2){
-				normal.setSelected(true);
-				aux = normal;
-			}
-			if(round == 2 || round == -1){
-				resistente.setSelected(true);
-				aux = resistente;
-			}
-			
-			veloz.setBackground(new java.awt.Color(0,0,0));
-			normal.setBackground(new java.awt.Color(0,0,0));
-			resistente.setBackground(new java.awt.Color(0,0,0));
-			aux.setBackground(new java.awt.Color(0,50,200));
-			
-			
-			
-			if (key == KeyEvent.VK_ENTER || key == KeyEvent.VK_SPACE){
-				aux.doClick();
-			}
-			
-			
-		}
-
-		@Override
-		public void keyReleased(KeyEvent k) {
-			
-		}
-
-		@Override
-		public void keyTyped(KeyEvent k) {
-			
-		}
-	}
 	
 	/**
 	 * Implementa ActionListener

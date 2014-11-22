@@ -16,11 +16,10 @@ public abstract class Torreta extends Enemigo {
 	
 	/**
 	 * Constructor de la clase Torreta
-	 * @param vida, cantidad de vida de la Torreta
-	 * @param vel la cantidad de pixeles que se mueve por iteracion
-	 * @param ii,ImageIcon que contiene la Image de la Torreta
-	 * @param w, ancho de la Torreta
-	 * @param h, alto de la Torreta
+	 * @param vida cantidad de vida de la Torreta
+	 * @param ii ImageIcon que contiene la Image de la Torreta
+	 * @param w ancho de la Torreta
+	 * @param h alto de la Torreta
 	 */
 	public Torreta(int vida, ImageIcon ii,int xx, int yy,int w, int h) {
 		super(vida, 0, ii, w, h);

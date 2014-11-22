@@ -13,8 +13,8 @@ public abstract class Defensa extends Jugador{
 	
 	/**
 	 * Cosntructor de la clase Defensa
-	 * @param vida, cantidad de vida de la Defensa
-	 * @param vel, cantidad de pixeles que se mueve por iteracion
+	 * @param vida cantidad de vida de la Defensa
+	 * @param vel cantidad de pixeles que se mueve por iteracion
 	 * @param icon Imagen estatica vertical
 	 * @param iconDer Imagen inclinada hacia la derecha
 	 * @param iconIzq Imagen inclinada hacia la izquierda
