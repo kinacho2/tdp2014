@@ -46,8 +46,8 @@ public abstract class Jugador extends Nave {
 	/**
 	 * Cosntructor de la clase Jugador
 	 * basado en el codigo http://zetcode.com/tutorials/javagamestutorial/movingsprites/ para mover el jugador
-	 * @param vida, cantidad de vida del Jugador
-	 * @param vel, cantidad de pixeles que se mueve por iteracion
+	 * @param vida cantidad de vida del Jugador
+	 * @param vel cantidad de pixeles que se mueve por iteracion
 	 * @param icon Imagen estatica vertical
 	 * @param iconDer Imagen inclinada hacia la derecha
 	 * @param iconIzq Imagen inclinada hacia la izquierda
@@ -221,7 +221,7 @@ public abstract class Jugador extends Nave {
      * Le resta a la vida del Jugador el valor pasado por parametro
      * Si el valor del parametro es negativo se aumenta la vida
      * ademas setea la visibilidad en falso cuando su vida baja de 0
-     * @param vd, entro que sera restado a la vida del Jugador
+     * @param vd entro que sera restado a la vida del Jugador
      */
 	public void setVida(int vd) {
 		if(System.currentTimeMillis() - init > invulnerable){

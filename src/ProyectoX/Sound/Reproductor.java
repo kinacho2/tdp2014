@@ -57,6 +57,11 @@ public class Reproductor{
 		}
 	}
 	
+	/**
+	 * retorna el estado actual de la clase Reproductor
+	 * @return true si esta habilitado o false en caso contrario
+	 */
+	
 	public boolean getEnabled(){
 		return enabled;
 	}

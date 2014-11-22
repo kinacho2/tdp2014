@@ -31,11 +31,11 @@ public abstract class Enemigo extends Nave {
 	
 	/**
 	 * Constructor de la clase Enemigo
-	 * @param vida, cantidad de vida del Enemigo
+	 * @param vida cantidad de vida del Enemigo
 	 * @param vel la cantidad de pixeles que se mueve por iteracion
-	 * @param ii,ImageIcon que contiene la Image del Enemigo
-	 * @param w, ancho del Enemigo
-	 * @param h, alto del Enemigo
+	 * @param iiImageIcon que contiene la Image del Enemigo
+	 * @param w ancho del Enemigo
+	 * @param h alto del Enemigo
 	 */
 	public Enemigo(int vida, int vel, ImageIcon ii,int w, int h) {
 		super(vida,vel, ii, new ImageIcon(explode), w, h);
