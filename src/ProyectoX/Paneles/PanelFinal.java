@@ -4,6 +4,7 @@ import java.awt.Image;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 import java.net.URL;
+
 import javax.swing.BorderFactory;
 import javax.swing.ImageIcon;
 import javax.swing.JButton;
@@ -18,20 +19,21 @@ import ProyectoX.Naves.Jugador.Jugador;
 import ProyectoX.Sound.Reproductor;
 
 /**
- * panel de fin de juego se encarga de redirigir el juego al comienzo del nivel o al primer panel de la aplicacion
+ * Panel final del juego donde se muestra la puntuacion obtenida y la opcion de guardar el  puntaje
  * @author Borek Andrea, Figliuolo Nestor, Gaviot Joaquin
  */
 
-public class PanelGameOver  extends JPanel {
+public class PanelFinal extends JPanel {
 
+	
 	private static final URL url = (PanelGameOver.class.getClassLoader().getResource("ProyectoX/img/Menu_barras/gameover.gif"));
 
-	private static final String sound = "/ProyectoX/sounds/music/outro.mp3";
+	private static final String sound = "/ProyectoX/sounds/music/outro2.mp3";
 	
-	private JButton yes,no;
-	private JLabel label;
+	private JButton atras;
+
+	private boolean guardado = false;
 	private Aplication api;
-	private Mapa mapa;
 	private Reproductor rep;
 	private Jugador jugador;
 	private JLabel fondo;
@@ -43,59 +45,36 @@ public class PanelGameOver  extends JPanel {
 	private JLabel nombre;
 	
 	/**
-	 * Constructor de la clase PanelGameOver
+	 * Constructor de la clase PanelFinal
 	 * @param api Aplicacion del Juego
 	 * @param map Mapa actual del Juego
 	 * @param jugador Jugador actual
 	 */
 	
-	public PanelGameOver(Aplication api, Mapa map,Reproductor rep,Jugador jugador){
+	public PanelFinal(Aplication api,Reproductor rep,Jugador jugador){
 		api.setVisible(false);
-		rep.stop(0);
 		rep.addSound(sound, true);
 		this.rep = rep;
 		this.api = api;
-		this.mapa = map;
 		this.jugador = jugador;
 		setLayout(null);
+		
 		{
-			yes = new JButton();
-			add(yes);
-			yes.setText("SI");
-			yes.setBounds(234, 473, 41, 29);
-			yes.setForeground(new java.awt.Color(0,255,0));
-			yes.setBackground(new java.awt.Color(0,0,0));
-			yes.setBorder(BorderFactory.createCompoundBorder(null,null));
-			yes.setFont(new java.awt.Font("Segoe UI",0,20));
-			yes.addActionListener(new OyenteYes());
-
-		}
-		{
-			no = new JButton();
-			add(no);
-			no.setText("No");
-			no.setBounds(375, 473, 41, 29);
-			no.setForeground(new java.awt.Color(0,255,0));
-			no.setBackground(new java.awt.Color(0,0,0));
-			no.setBorder(BorderFactory.createCompoundBorder(null,null));
-			no.setFont(new java.awt.Font("Segoe UI",0,20));
-			no.addActionListener(new OyenteNo());
-		}
-		{
-			label = new JLabel();
-			add(label);
-			label.setText("Desea continuar?");
-			label.setBounds(800/2 - 155/2, 418, 155, 33);
-			label.setForeground(new java.awt.Color(0,255,0));
-			label.setBackground(new java.awt.Color(0,0,0));
-			label.setBorder(BorderFactory.createCompoundBorder(null,null));
-			label.setFont(new java.awt.Font("Segoe UI",0,20));
+			atras = new JButton();
+			add(atras);
+			atras.setText("CONTINUAR");
+			atras.setBounds(800/2-200, 478, 147, 29);
+			atras.setForeground(new java.awt.Color(0,255,0));
+			atras.setBackground(new java.awt.Color(0,0,0));
+			atras.setBorder(BorderFactory.createCompoundBorder(null,null));
+			atras.setFont(new java.awt.Font("Segoe UI",0,20));
+			atras.addActionListener(new OyenteAtras());
 		}
 		{
 			guardar = new JButton();
 			add(guardar);
 			guardar.setText("GUARDAR");
-			guardar.setBounds(521, 475, 104, 25);
+			guardar.setBounds(800/2+200-147/2, 478, 147, 29);
 			guardar.setForeground(new java.awt.Color(0,255,0));
 			guardar.setBackground(new java.awt.Color(0,0,0));
 			guardar.setBorder(BorderFactory.createCompoundBorder(null,null));
@@ -133,41 +112,38 @@ public class PanelGameOver  extends JPanel {
 	}
 	
 	/**
-	 * se encarga de redirigir el juego al comienzo del nivel actual
+	 * Implementa ActionListener
+	 * Retorna al primer panel
 	 * @author Borek Andrea, Figliuolo Nestor, Gaviot Joaquin
 	 */
 	
-	private class OyenteYes implements ActionListener{
+	private class OyenteAtras implements ActionListener{
 
+		@Override
 		public void actionPerformed(ActionEvent arg0) {
-			rep.stop(0);
-			setVisible(false);
-			api.setVisible(false);
-			mapa.reset();
-			api.setVisible(true);
-
-			
+			if(!guardado){
+				int verd;
+	            
+				JOptionPane dialogo = new JOptionPane();
+		            
+				verd = dialogo.showConfirmDialog(null, "Desea salir sin guardar su puntuación?", "Atencion",JOptionPane.YES_NO_OPTION);
+					
+				if(verd == 0){
+					rep.stop(0);
+					setVisible(false);
+					api.initPrimerPanel();
+				}
+			}
+			else{
+				rep.stop(0);
+				setVisible(false);
+				api.initPrimerPanel();
+			}
 		}
-		
 	}
 	
 	/**
-	 * se encarga de redirigir el juego al primer panel de la aplicacion
-	 * @author Borek Andrea, Figliuolo Nestor, Gaviot Joaquin
-	 */
-	
-	private class OyenteNo implements ActionListener{
-
-		public void actionPerformed(ActionEvent arg0) {
-			rep.stop(0);
-			setVisible(false);
-			
-			api.initPrimerPanel();
-		}
-		
-	}
-	
-	/**
+	 * Implementa ActionListener
 	 * se encarga de guardar la puntuacion en el archivo de Rankings
 	 * @author Borek Andrea, Figliuolo Nestor, Gaviot Joaquin
 	 */
@@ -185,11 +161,11 @@ public class PanelGameOver  extends JPanel {
 			if(verd == 0){
 				Ranking ran = new Ranking();
 				ran.insertNewPuntaje(jugador.getNombre(), jugador.getPuntaje());
+				guardado = true;
 			}
 			
 			
 		}
 	}
-	
-	
+
 }

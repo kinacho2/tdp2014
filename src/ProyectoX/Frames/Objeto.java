@@ -17,7 +17,7 @@ public class Objeto {
 	private int velocidad;
 	private int dx;
 	private int dy;
-	boolean visible = true;
+	private boolean visible = true;
 	
 	/**
 	 * 

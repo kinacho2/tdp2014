@@ -21,8 +21,6 @@ public abstract class DisparoLaser extends DisparoJugador {
 	protected int minDuracion;
 	//delay que indica el tiempo que permanece el disparo en la pantalla
 	protected int maxDuracion;
-	//delay para que el laser no impacte de manera continua
-	private int impacto;
 	
 	//segunda imagen que representa al disparo
 	private ImageIcon second;
@@ -162,7 +160,6 @@ public abstract class DisparoLaser extends DisparoJugador {
 	protected void setDelays(int min, int max, int impacto){
 		maxDuracion = max;
 		minDuracion = min;
-		this.impacto = impacto;
 	}
 	
 	/**

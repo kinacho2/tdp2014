@@ -42,7 +42,6 @@ public class PanelJugador  extends JPanel implements ActionListener{
 	private Mind mind;
 	private Mapa mapa;
 	private Jugador jugador;
-	
 	private OyenteSonido oyente;
 	private JButton sonido;
 	private ImageIcon en, dis;
@@ -56,7 +55,6 @@ public class PanelJugador  extends JPanel implements ActionListener{
 	private JLabel labelEnemigo;
 	private JLabel contadorEnemigos;
 	private boolean pause = false;
-	private boolean enabled = true;
 	
 	/**
 	 * Constructor de la clase PanelJugador
@@ -188,99 +186,100 @@ public class PanelJugador  extends JPanel implements ActionListener{
 	 */
 	
 	public void paint(Graphics g) {
-        super.paint(g);
-        
-        Graphics2D g2d = (Graphics2D) g;
-        
-        ArrayList ms = mapa.getMisilesEnemigos();
-        
-        //mueve, y repinta los disparos enemigos
-        for (int j = 0; j < ms.size(); j++ ) {
-            Disparo misil = (Disparo) ms.get(j);
-	        if(misil!=null && misil.isVisible()) {
-		        g2d.drawImage(misil.getImage(), misil.getX(), misil.getY(), this);
-	        } 
-        }
-        
-        //pinta las explosiones	   
-        
-        ms = mapa.explosiones();
-        for (int i = 0; i < ms.size(); i++ ) {
-            Explosion m = (Explosion) ms.get(i);
-            if(m!=null && m.getVisible())
-            	g2d.drawImage(m.getImage(), m.getX(), m.getY(), this);
-            
-        }
-        
-        //elimina las explosiones que no estan en pantalla
-        
-        for (int i = 0; i < ms.size(); i++ ) {
-        	Explosion m = (Explosion) ms.get(i);
-        	if(m!=null){
-        		if( !m.getVisible()) {
-        			ms.remove(i);
-        		}
-            }
-        }
-        
-        // Pinta el jugador
-        if (jugador.getVisible()){
-        	g2d.drawImage(jugador.getImage(), jugador.getX(), jugador.getY(), this);
-        }
-        
-        Jugador aux = jugador.getDefensa();
-        
-        if (aux != null){
-        	if(aux.getVisible()){
-        		g2d.drawImage(aux.getImage(), aux.getX(), aux.getY(), this);
-        	}
-        	else
-        		jugador.dropDefensa();
-        }
-        
-        //repinta los powerUps
-        ms = mapa.getPowers();
-        
-        for (int j = 0; j < ms.size(); j++ ) {
-            PowerUp pw = (PowerUp) ms.get(j);
-            g2d.drawImage(pw.getImage(), pw.getX(), pw.getY(), this);
-        }
-        
-        ms = mapa.getObjeto();
-        
-        // mueve y repinta las nubes
-        
-        for(int i = 0; i<ms.size(); i++){
-        	Objeto o = (Objeto) ms.get(i);
-        	if(o!= null && o.getVisible()){
-                g2d.drawImage(o.getImage(), o.getX(), o.getY(), this);
-                o.move();
-        	}
-        	
-        }
-        
-        // remueve las nubes
-        
-        for(int i = 0; i<ms.size(); i++){
-        	Objeto o = (Objeto) ms.get(i);
-        	if(o!= null){
-        		if(!o.getVisible()){
-        			ms.remove(i);
-        		}
-        	}
-        	else{
-        		ms.remove(i);
-        	}
-        }
-        
-      	puntaje.setText("" + jugador.getPuntaje());
-      	cantVida.setText("" + jugador.getVida());
-		contadorEnemigos.setText("" + mapa.cantEnemies());
-		cantHearts.setText(""+jugador.getHearts());
-        cantBombas.setText(""+jugador.getCantBombas());
-        Toolkit.getDefaultToolkit().sync();
-        g.dispose();
-        
+		if(!pause){
+	        super.paint(g);
+	        
+	        Graphics2D g2d = (Graphics2D) g;
+	        
+	        ArrayList ms = mapa.getMisilesEnemigos();
+	        
+	        //mueve, y repinta los disparos enemigos
+	        for (int j = 0; j < ms.size(); j++ ) {
+	            Disparo misil = (Disparo) ms.get(j);
+		        if(misil!=null && misil.isVisible()) {
+			        g2d.drawImage(misil.getImage(), misil.getX(), misil.getY(), this);
+		        } 
+	        }
+	        
+	        //pinta las explosiones	   
+	        
+	        ms = mapa.explosiones();
+	        for (int i = 0; i < ms.size(); i++ ) {
+	            Explosion m = (Explosion) ms.get(i);
+	            if(m!=null && m.getVisible())
+	            	g2d.drawImage(m.getImage(), m.getX(), m.getY(), this);
+	            
+	        }
+	        
+	        //elimina las explosiones que no estan en pantalla
+	        
+	        for (int i = 0; i < ms.size(); i++ ) {
+	        	Explosion m = (Explosion) ms.get(i);
+	        	if(m!=null){
+	        		if( !m.getVisible()) {
+	        			ms.remove(i);
+	        		}
+	            }
+	        }
+	        
+	        // Pinta el jugador
+	        if (jugador.getVisible()){
+	        	g2d.drawImage(jugador.getImage(), jugador.getX(), jugador.getY(), this);
+	        }
+	        
+	        Jugador aux = jugador.getDefensa();
+	        
+	        if (aux != null){
+	        	if(aux.getVisible()){
+	        		g2d.drawImage(aux.getImage(), aux.getX(), aux.getY(), this);
+	        	}
+	        	else
+	        		jugador.dropDefensa();
+	        }
+	        
+	        //repinta los powerUps
+	        ms = mapa.getPowers();
+	        
+	        for (int j = 0; j < ms.size(); j++ ) {
+	            PowerUp pw = (PowerUp) ms.get(j);
+	            g2d.drawImage(pw.getImage(), pw.getX(), pw.getY(), this);
+	        }
+	        
+	        ms = mapa.getObjeto();
+	        
+	        // mueve y repinta las nubes
+	        
+	        for(int i = 0; i<ms.size(); i++){
+	        	Objeto o = (Objeto) ms.get(i);
+	        	if(o!= null && o.getVisible()){
+	                g2d.drawImage(o.getImage(), o.getX(), o.getY(), this);
+	                o.move();
+	        	}
+	        	
+	        }
+	        
+	        // remueve las nubes
+	        
+	        for(int i = 0; i<ms.size(); i++){
+	        	Objeto o = (Objeto) ms.get(i);
+	        	if(o!= null){
+	        		if(!o.getVisible()){
+	        			ms.remove(i);
+	        		}
+	        	}
+	        	else{
+	        		ms.remove(i);
+	        	}
+	        }
+	        
+	      	puntaje.setText("" + jugador.getPuntaje());
+	      	cantVida.setText("" + jugador.getVida());
+			contadorEnemigos.setText("" + mapa.cantEnemies());
+			cantHearts.setText(""+jugador.getHearts());
+	        cantBombas.setText(""+jugador.getCantBombas());
+	        Toolkit.getDefaultToolkit().sync();
+	        g.dispose();
+		}
        
 	}
 	

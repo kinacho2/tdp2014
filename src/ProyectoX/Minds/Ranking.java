@@ -109,18 +109,30 @@ public class Ranking {
 		int i = 1;
 		int j = 0;
 		String aux = "";
+		char c =' ';
 		while(i < cont){
 			
-			char c = linea.charAt(j);
+			c = linea.charAt(j);
 			 
 			while(c!='@' && j < linea.length()){
 				aux += c;
 				j++;
 				c = linea.charAt(j);
 			}
+			
 			j++;
+			
 			aux+=""+i;
+				
+			
 			i++;
+		}
+		c = linea.charAt(j);
+		while(j < linea.length()-1){
+			aux += c;
+			j++;
+			c = linea.charAt(j);
+			
 		}
 		
 		return aux;

@@ -120,7 +120,7 @@ public class PanelGame extends JPanel implements AbstractPanel {
 	 */
 	public void function() {
 		map.stop();
-		api.initPrimerPanel();
+		api.initPanelFinal(map.getJugador());
 	}
 
 }
