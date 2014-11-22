@@ -117,7 +117,7 @@ public class PanelGame extends JPanel implements AbstractPanel {
 	 */
 	public void function() {
 		map.stop();
-		api.initPanelFinal(map.getJugador());
+		api.initPanelFinal(map.getMind().getJugador());
 	}
 
 }

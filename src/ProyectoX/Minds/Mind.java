@@ -255,4 +255,6 @@ public class Mind implements ActionListener {
 			reproductor.stop(0);
 		reproductor.setEnabled(arg);
 	}
+	
+	
 }
