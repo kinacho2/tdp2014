@@ -14,7 +14,6 @@ import javax.swing.JPanel;
 
 import ProyectoX.Aplication;
 import ProyectoX.Mapas.Mapa;
-import ProyectoX.Minds.Ranking;
 import ProyectoX.Naves.Jugador.Jugador;
 import ProyectoX.Sound.Reproductor;
 
@@ -38,7 +37,6 @@ public class PanelFinal extends JPanel {
 	private Jugador jugador;
 	private JLabel fondo;
 
-	private JButton guardar;
 
 	private JLabel puntuacion;
 
@@ -62,23 +60,12 @@ public class PanelFinal extends JPanel {
 			atras = new JButton();
 			add(atras);
 			atras.setText("CONTINUAR");
-			atras.setBounds(800/2-200, 478, 147, 29);
+			atras.setBounds(800/2-147/2, 478, 147, 29);
 			atras.setForeground(new java.awt.Color(0,255,0));
 			atras.setBackground(new java.awt.Color(0,0,0));
 			atras.setBorder(BorderFactory.createCompoundBorder(null,null));
 			atras.setFont(new java.awt.Font("Segoe UI",0,20));
 			atras.addActionListener(new OyenteAtras());
-		}
-		{
-			guardar = new JButton();
-			add(guardar);
-			guardar.setText("GUARDAR");
-			guardar.setBounds(800/2+200-147/2, 478, 147, 29);
-			guardar.setForeground(new java.awt.Color(0,255,0));
-			guardar.setBackground(new java.awt.Color(0,0,0));
-			guardar.setBorder(BorderFactory.createCompoundBorder(null,null));
-			guardar.setFont(new java.awt.Font("Segoe UI",0,20));
-			guardar.addActionListener(new OyenteGuardar());
 		}
 		{
 			puntuacion = new JLabel();
@@ -141,30 +128,5 @@ public class PanelFinal extends JPanel {
 		}
 	}
 	
-	/**
-	 * Implementa ActionListener
-	 * se encarga de guardar la puntuacion en el archivo de Rankings
-	 * @author Borek Andrea, Figliuolo Nestor, Gaviot Joaquin
-	 */
-	
-	private class OyenteGuardar implements ActionListener{
-		
-		public void actionPerformed(ActionEvent arg0) {
-			
-			int verd;
-	            
-			JOptionPane dialogo = new JOptionPane();
-	            
-			verd = dialogo.showConfirmDialog(null, "Desea guardar su puntuación?", "Atencion",JOptionPane.YES_NO_OPTION);
-				
-			if(verd == 0){
-				Ranking ran = new Ranking();
-				ran.insertNewPuntaje(jugador.getNombre(), jugador.getPuntaje());
-				guardado = true;
-			}
-			
-			
-		}
-	}
 
 }

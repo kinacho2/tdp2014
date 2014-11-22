@@ -83,6 +83,9 @@ public abstract class Jefe extends Enemigo{
 				
 				torretas.add(fabrica.nuevaTorreta(x + dx , y + dy));
 			}
+			
+			lector.close();
+			arch.close();
 		} catch ( IOException e) {
 			
 		}

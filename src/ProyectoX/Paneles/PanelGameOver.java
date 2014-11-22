@@ -13,7 +13,6 @@ import javax.swing.JPanel;
 
 import ProyectoX.Aplication;
 import ProyectoX.Mapas.Mapa;
-import ProyectoX.Minds.Ranking;
 import ProyectoX.Naves.Jugador.Jugador;
 import ProyectoX.Sound.Reproductor;
 
@@ -36,7 +35,6 @@ public class PanelGameOver  extends JPanel {
 	private Jugador jugador;
 	private JLabel fondo;
 
-	private JButton guardar;
 
 	private JLabel puntuacion;
 
@@ -62,7 +60,7 @@ public class PanelGameOver  extends JPanel {
 			yes = new JButton();
 			add(yes);
 			yes.setText("SI");
-			yes.setBounds(234, 473, 41, 29);
+			yes.setBounds(800/2-100, 473, 41, 29);
 			yes.setForeground(new java.awt.Color(0,255,0));
 			yes.setBackground(new java.awt.Color(0,0,0));
 			yes.setBorder(BorderFactory.createCompoundBorder(null,null));
@@ -74,7 +72,7 @@ public class PanelGameOver  extends JPanel {
 			no = new JButton();
 			add(no);
 			no.setText("No");
-			no.setBounds(375, 473, 41, 29);
+			no.setBounds(800/2+100-41/2, 473, 41, 29);
 			no.setForeground(new java.awt.Color(0,255,0));
 			no.setBackground(new java.awt.Color(0,0,0));
 			no.setBorder(BorderFactory.createCompoundBorder(null,null));
@@ -90,17 +88,6 @@ public class PanelGameOver  extends JPanel {
 			label.setBackground(new java.awt.Color(0,0,0));
 			label.setBorder(BorderFactory.createCompoundBorder(null,null));
 			label.setFont(new java.awt.Font("Segoe UI",0,20));
-		}
-		{
-			guardar = new JButton();
-			add(guardar);
-			guardar.setText("GUARDAR");
-			guardar.setBounds(521, 475, 104, 25);
-			guardar.setForeground(new java.awt.Color(0,255,0));
-			guardar.setBackground(new java.awt.Color(0,0,0));
-			guardar.setBorder(BorderFactory.createCompoundBorder(null,null));
-			guardar.setFont(new java.awt.Font("Segoe UI",0,20));
-			guardar.addActionListener(new OyenteGuardar());
 		}
 		{
 			puntuacion = new JLabel();
@@ -165,30 +152,6 @@ public class PanelGameOver  extends JPanel {
 			api.initPrimerPanel();
 		}
 		
-	}
-	
-	/**
-	 * se encarga de guardar la puntuacion en el archivo de Rankings
-	 * @author Borek Andrea, Figliuolo Nestor, Gaviot Joaquin
-	 */
-	
-	private class OyenteGuardar implements ActionListener{
-		
-		public void actionPerformed(ActionEvent arg0) {
-			
-			int verd;
-	            
-			JOptionPane dialogo = new JOptionPane();
-	            
-			verd = dialogo.showConfirmDialog(null, "Desea guardar su puntuación?", "Atencion",JOptionPane.YES_NO_OPTION);
-				
-			if(verd == 0){
-				Ranking ran = new Ranking();
-				ran.insertNewPuntaje(jugador.getNombre(), jugador.getPuntaje());
-			}
-			
-			
-		}
 	}
 	
 	
