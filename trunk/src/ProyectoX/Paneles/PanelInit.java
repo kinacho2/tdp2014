@@ -13,7 +13,6 @@ import javax.swing.JOptionPane;
 import javax.swing.JPanel;
 
 import ProyectoX.Aplication;
-import ProyectoX.Minds.Ranking;
 import ProyectoX.Sound.OyenteSonido;
 
 /**
@@ -25,7 +24,7 @@ public class PanelInit   extends JPanel {
 	
 	private static final URL urlEn = (PanelInit.class.getClassLoader().getResource("ProyectoX/img/Menu_barras/sonido-enabled.png"));
 	private static final URL urlDis = (PanelInit.class.getClassLoader().getResource("ProyectoX/img/Menu_barras/sonido-disabled.png"));
-	private JButton rank;
+	
 	private JButton sonido;
 	private ImageIcon en,dis;
 	private Aplication api;
@@ -59,7 +58,7 @@ public class PanelInit   extends JPanel {
 			quit = new JButton();
 			add(quit);
 			quit.setText("SALIR");
-			quit.setBounds(400 - 288/2, 257*2-170, 288, 50);
+			quit.setBounds(400 - 288/2, 257, 288, 50);
 			quit.setBackground(new java.awt.Color(0,0,0));
 			quit.setForeground(new java.awt.Color(0,255,0));
 			quit.setPreferredSize(new java.awt.Dimension(14, 7));
@@ -83,17 +82,7 @@ public class PanelInit   extends JPanel {
 			sonido.addActionListener(new OyenteSonido(sonido,api.getReproductor(),en,dis));
 			add(sonido);
 		}
-		{
-			rank = new JButton();
-			add(rank);
-			rank.setText("MOSTRAR RANKING");
-			rank.setBounds(400 - 288/2, 257, 288, 50);
-			rank.setForeground(new java.awt.Color(0,255,0));
-			rank.setBackground(new java.awt.Color(0,0,0));
-			rank.setBorder(BorderFactory.createCompoundBorder(null,null));
-			rank.setFont(new java.awt.Font("Segoe UI",0,20));
-			rank.addActionListener(new OyenteRanking());
-		}
+		
 		{
 			
 			ImageIcon icon = new ImageIcon(PanelInit.class.getClassLoader().getResource("ProyectoX/img/Menu_barras/menu.gif"));
@@ -150,21 +139,6 @@ public class PanelInit   extends JPanel {
 		}
 	}
 	
-	/**
-	 * Clase que implementa ActionListener
-	 * inicia el panel de seleccion de Jugador
-	 * @author Borek Andrea, Figliuolo Nestor, Gaviot Joaquin
-	 */
-		
-	private class OyenteRanking implements ActionListener{
-
-		@Override
-		public void actionPerformed(ActionEvent arg0) {
-			setVisible(false);
-			Ranking ran = new Ranking();
-            String linea = ran.mostrarPuntaje();
-            api.initPanelRanking(linea);
-		}
-	}
+	
 
 }

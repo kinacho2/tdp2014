@@ -68,7 +68,7 @@ public abstract class Jugador extends Nave {
 		setJugador(this);
 		velocidadMisil = 20;
 		bombas = 2;
-		hearts = 3;
+		hearts = 0;
 		puntaje = contPuntaje = 0;
 		arma = new DisparoJugador(x + width/2 , y, 0, 1, velocidadMisil,this);	
     	

@@ -4,12 +4,10 @@ package ProyectoX;
 import javax.swing.JFrame;
 import javax.swing.JPanel;
 
-import ProyectoX.Minds.Ranking;
 import ProyectoX.Naves.Jugador.Jugador;
 import ProyectoX.Paneles.PanelFinal;
 import ProyectoX.Paneles.PanelGame;
 import ProyectoX.Paneles.PanelInit;
-import ProyectoX.Paneles.PanelRanking;
 import ProyectoX.Paneles.PanelSelect;
 import ProyectoX.Frames.MenteSplash;
 import ProyectoX.Frames.SplashScreen;
@@ -28,7 +26,7 @@ import java.util.Random;
 */
 public class Aplication extends javax.swing.JFrame {
 	
-	private Ranking ran;
+
 	private JPanel principal;
 	private JPanel main;
 	private JPanel game;
@@ -45,7 +43,6 @@ public class Aplication extends javax.swing.JFrame {
 	 * inicia el reproductor y la GUI
 	 */
 	 public Aplication() {
-		ran = new Ranking();
 		rep = new Reproductor();
 		rn = new Random();
 		initGUI();
@@ -90,7 +87,7 @@ public class Aplication extends javax.swing.JFrame {
      */
   
     private void initGUI() {
-    	SplashScreen spl = new SplashScreen(15000, url);
+    	SplashScreen spl = new SplashScreen(000, url);
     	spl.showSplash();
     	initPrimerPanel();
 		setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
@@ -119,13 +116,6 @@ public class Aplication extends javax.swing.JFrame {
 		setVisible(false);
 		principal = new PanelInit(this);
 		add(principal);
-		setVisible(true);
-	}
-	
-	public void initPanelRanking(String linea){
-		setVisible(false);
-		
-		add(new PanelRanking(this,linea));
 		setVisible(true);
 	}
 	
