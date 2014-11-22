@@ -123,6 +123,14 @@ public abstract class Mapa{
 		return enemiesInWindow;
 	}
 	
+	/**
+	 * @return instancia actual de Mind
+	 */
+	
+	public Mind getMind(){
+		return mind;
+	}
+	
 
 	/**
 	 * retorna al jugador principal, que en caso de tener escudo es el mismo escudo
