@@ -4,13 +4,16 @@ import java.awt.BorderLayout;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 import java.util.Random;
+
 import javax.swing.BorderFactory;
 import javax.swing.JButton;
 import javax.swing.JOptionPane;
 import javax.swing.JPanel;
+
 import ProyectoX.Aplication;
 import ProyectoX.Mapas.Mapa;
 import ProyectoX.Mapas.Nivel_I;
+import ProyectoX.Mapas.Nivel_III;
 import ProyectoX.Sound.Reproductor;
 
 /**
@@ -28,7 +31,6 @@ public class PanelGame extends JPanel implements AbstractPanel {
 	private Mapa map;
 	private Aplication api;
 	private Reproductor rep;
-	private Random rn ;
 	
 	/**
 	 * Constructor de la clase PanelGame
@@ -38,17 +40,16 @@ public class PanelGame extends JPanel implements AbstractPanel {
 	 * @param select entero que representa el tipo de Jugador elegido
 	 * @param rep Reproductor en curso de la Aplicacion
 	 */
-	public PanelGame(Aplication api, int select, Reproductor rep){
+	public PanelGame(Aplication api, int select,String nombre, Reproductor rep){
 		this.api = api;
 		this.rep = rep;
-		rn = new Random();
 		
-		map = new Nivel_I(api, this);
+		map = new Nivel_I(api, this,rep);
 		api.add(this, BorderLayout.CENTER);
 		setBackground(new java.awt.Color(0,0,0));
 		
 		//panel del jugador
-		panel = new PanelJugador(map,select);
+		panel = new PanelJugador(map,select,nombre);
 		
 		add(panel);
 		panel.setLayout(null);
@@ -106,8 +107,7 @@ public class PanelGame extends JPanel implements AbstractPanel {
             	map.stop();
             	setVisible(false);
     			api.initMain(rep);
-        		rep.addSound(sound+rn.nextInt(4)+".mp3",true);
-
+        		
             }
             
     		

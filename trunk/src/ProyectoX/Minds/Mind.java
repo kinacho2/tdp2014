@@ -41,12 +41,12 @@ public class Mind implements ActionListener {
      * @param select indica el tipo de nave elegida por el jugador
      */
 
-    public Mind(PanelJugador panel, int select) {
+    public Mind(PanelJugador panel, int select,String nombre) {
     	
     	this.panel = panel;
         
         
-        crearJugador(select);
+        crearJugador(select,nombre);
         stop = false;
         delayFinal = jugador.getExplosion().getDelay();
         contDelay = 0;
@@ -181,13 +181,13 @@ public class Mind implements ActionListener {
      * @param select indica el tipo de nave elegida
      */
     
-    public void crearJugador(int select) {
+    public void crearJugador(int select,String nombre) {
     	if (select == 1) {
-        	jugador = new Veloz();
+        	jugador = new Veloz(nombre);
     	} else if (select == 2) {
-        	jugador = new Normal();
+        	jugador = new Normal(nombre);
     	} else if (select == 3) {
-        	jugador = new Resistente();
+        	jugador = new Resistente(nombre);
     	}
         jugador.setMinHeight(530);
         
@@ -209,6 +209,15 @@ public class Mind implements ActionListener {
 		reproductor = rep;
 		jugador.addReproductor(reproductor);
 		
+	}
+	
+	/**
+	 * retorna la instancia de Reproductor asociada a Mind
+	 * @return instancia actual de Reproductor
+	 */
+	
+	public Reproductor getReproductor(){
+		return reproductor;
 	}
 	
 	/**
@@ -240,6 +249,8 @@ public class Mind implements ActionListener {
 	 */
 	
 	public void silencio(boolean arg){
+		if(arg)
+			reproductor.stop(0);
 		reproductor.setEnabled(arg);
 	}
 }

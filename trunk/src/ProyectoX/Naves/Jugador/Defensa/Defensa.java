@@ -20,7 +20,7 @@ public abstract class Defensa extends Jugador{
 	 * @param iconIzq Imagen inclinada hacia la izquierda
 	 */
 	public Defensa(int vida, int vel,ImageIcon icon, ImageIcon iconDer, ImageIcon iconIzq){
-		super(vida, vel, icon, iconDer, iconIzq);
+		super(vida, vel, icon, iconDer, iconIzq,"Defensa");
 	}
 	
 	/**

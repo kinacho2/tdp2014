@@ -22,8 +22,8 @@ public class Resistente extends Jugador {
 	 * setea los atributos propios de su clase
 	 */
 	
-	public Resistente(){
-		super(80,2,new ImageIcon(url),new ImageIcon(urlDer),new ImageIcon(urlIzq));
+	public Resistente(String nombre){
+		super(80,2,new ImageIcon(url),new ImageIcon(urlDer),new ImageIcon(urlIzq),nombre);
 		
 		arma = new MultiplicadorLVI(x, y , 0, 1, this);
 	}

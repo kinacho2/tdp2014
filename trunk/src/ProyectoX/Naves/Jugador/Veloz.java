@@ -22,8 +22,8 @@ public class Veloz extends Jugador {
 	 * setea los atributos propios de su clase
 	 */
 	
-	public Veloz(){
-		super(30,5,new ImageIcon(url),new ImageIcon(urlDer),new ImageIcon(urlIzq));
+	public Veloz(String nombre){
+		super(30,5,new ImageIcon(url),new ImageIcon(urlDer),new ImageIcon(urlIzq),nombre);
 		
 	}
 	

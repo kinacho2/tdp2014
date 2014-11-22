@@ -3,12 +3,16 @@ package ProyectoX;
 
 import javax.swing.JFrame;
 import javax.swing.JPanel;
+
+import ProyectoX.Minds.Ranking;
 import ProyectoX.Paneles.PanelGame;
 import ProyectoX.Paneles.PanelInit;
+import ProyectoX.Paneles.PanelRanking;
 import ProyectoX.Paneles.PanelSelect;
 import ProyectoX.Frames.MenteSplash;
 import ProyectoX.Frames.SplashScreen;
 import ProyectoX.Sound.Reproductor;
+
 import java.awt.event.WindowAdapter;
 import java.awt.event.WindowEvent;
 import java.net.URL;
@@ -22,22 +26,24 @@ import java.util.Random;
 */
 public class Aplication extends javax.swing.JFrame {
 	
-	
+	private Ranking ran;
 	private JPanel principal;
 	private JPanel main;
 	private JPanel game;
 	private static final String sound = "/ProyectoX/sounds/music/menu_";
 	private Reproductor rep;
 	private Random rn;
-	
+	private boolean enabled = false;
 	private URL url = (Aplication.class.getClassLoader().getResource("ProyectoX/img/Menu_barras/historia/Imagen1.png"));
 	private URL url2 = (Aplication.class.getClassLoader().getResource("ProyectoX/img/Menu_barras/historia/Imagen2.png"));
+	private String nombre;
 
 	/**
 	 * Constructor de la clase Aplication 
 	 * inicia el reproductor y la GUI
 	 */
 	 public Aplication() {
+		ran = new Ranking();
 		rep = new Reproductor();
 		rn = new Random();
 		initGUI();
@@ -68,10 +74,10 @@ public class Aplication extends javax.swing.JFrame {
     
     public void initGame(int select){
     	rep.stop(100);
-    	
+    	enabled = false;
     	setVisible(false);
     	
-    	game = new PanelGame(this,select,rep);    
+    	game = new PanelGame(this,select,nombre,rep);    
         
         setVisible(true);
         
@@ -104,10 +110,20 @@ public class Aplication extends javax.swing.JFrame {
      */
     
 	public void initPrimerPanel(){
-		rep.addSound(sound+rn.nextInt(4)+".mp3",true);
+		if(!enabled){
+			rep.addSound(sound+rn.nextInt(4)+".mp3",true);
+			enabled = true;
+		}
 		setVisible(false);
 		principal = new PanelInit(this);
 		add(principal);
+		setVisible(true);
+	}
+	
+	public void initPanelRanking(String linea){
+		setVisible(false);
+		
+		add(new PanelRanking(this,linea));
 		setVisible(true);
 	}
 	
@@ -119,6 +135,10 @@ public class Aplication extends javax.swing.JFrame {
 	 */
 	
 	public void initMain(Reproductor rep){
+		if(!enabled){
+			rep.addSound(sound+rn.nextInt(4)+".mp3",true);
+			enabled = true;
+		}
 		this.rep = rep;
 		setVisible(false);
 		main = new PanelSelect(this);
@@ -144,4 +164,12 @@ public class Aplication extends javax.swing.JFrame {
 		return rep;
 	}
 	
+	/**
+	 * setea el nombre del Jugador
+	 * @param arg nombre del Jugador
+	 */
+	
+	public void setNombre(String arg){
+		nombre = arg;
+	}
 }

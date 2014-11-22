@@ -16,7 +16,6 @@ import ProyectoX.Naves.Enemigos.EnemiesBuilder;
 import ProyectoX.Naves.Enemigos.Enemigo;
 import ProyectoX.Naves.Enemigos.Jefes.*;
 import ProyectoX.Naves.Jugador.Jugador;
-import ProyectoX.Paneles.AbstractPanel;
 import ProyectoX.Paneles.PanelGame;
 import ProyectoX.Paneles.PanelGameOver;
 import ProyectoX.PowerUps.Bomba;
@@ -73,9 +72,10 @@ public abstract class Mapa{
 	 * Constructor de la clase Mapa
 	 * @param api la aplicacion que ejecutara el siguiente metodo al terminarse el SplashScreen
 	 * @param game el panel donde se dibuja el juego
+	 * @param rep Reproductor actual
 	 */
 	
-	public Mapa(Aplication api, PanelGame  game) {
+	public Mapa(Aplication api, PanelGame  game, Reproductor rep) {
 		this.game = game;
 		this.api = api;
 		
@@ -91,7 +91,7 @@ public abstract class Mapa{
 		
 		powerUps = new ArrayList();
 		
-		reproductor = new Reproductor();
+		reproductor = rep;
 		
 		objetos = new ArrayList();
 		objetosEnPantalla = new ArrayList();
@@ -391,6 +391,7 @@ public abstract class Mapa{
 		jugador.setHearts();
 		jugador.setHearts();
 		panel.setVisible(false);
+		
 		api.setVisible(false);
 		game.setVisible(true);
 		mind.pause(false);

@@ -10,6 +10,7 @@ import ProyectoX.Naves.Enemigos.EnemiesBuilder;
 import ProyectoX.Naves.Enemigos.Jefes.JefeTanque;
 import ProyectoX.Paneles.PanelGame;
 import ProyectoX.PowerUps.PUPBuilder;
+import ProyectoX.Sound.Reproductor;
 
 /**
  * Primer nivel del juego
@@ -24,14 +25,15 @@ public class Nivel_I extends Mapa{
 	protected static final String sound = "/ProyectoX/sounds/music/level1.mp3";
 
 	/**
-	 * Constructor de la clase Mapa
+	 * Constructor de la clase NivelI
 	 * se encarga de setear los atributos por defecto para su estado
 	 * @param api la aplicacion que ejecutara el siguiente metodo al terminarse el SplashScreen
 	 * @param game el panel donde se dibuja el juego
+	 * @param rep el Reproductor actual del juego
 	 */
 	
-	public Nivel_I(Aplication api, PanelGame game){
-		super(api,game);
+	public Nivel_I(Aplication api, PanelGame game, Reproductor rep){
+		super(api,game,rep);
 		rn = new Random(7);
 		cantEnemies = 101;
 		power = new PUPBuilder(7);
@@ -77,7 +79,7 @@ public class Nivel_I extends Mapa{
 	
 	public void nextMapa() {
 		reproductor.stop(0);
-		Mapa map = new Nivel_II(api,game);
+		Mapa map = new Nivel_II(api,game,reproductor);
 		map.setMind(mind);
 		map.setMindEnemies(mindEnemies);
 		mind.setMapa(map);
@@ -91,7 +93,7 @@ public class Nivel_I extends Mapa{
 	 */
 	public void reset() {
 		reproductor.stop(0);
-		Mapa map = new Nivel_I(api,game);
+		Mapa map = new Nivel_I(api,game,reproductor);
 		map.setMind(mind);
 		map.setMindEnemies(mindEnemies);
 		mind.setMapa(map);

@@ -21,8 +21,8 @@ public class Normal extends Jugador {
 	 * Constructor de la clase Nornal
 	 * setea los atributos propios de su clase
 	 */
-	public Normal(){
-		super(50,3,new ImageIcon(url),new ImageIcon(urlDer),new ImageIcon(urlIzq));
+	public Normal(String nombre){
+		super(50,3,new ImageIcon(url),new ImageIcon(urlDer),new ImageIcon(urlIzq),nombre);
 		
 		
 	}
