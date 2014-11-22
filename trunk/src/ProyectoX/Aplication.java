@@ -5,6 +5,8 @@ import javax.swing.JFrame;
 import javax.swing.JPanel;
 
 import ProyectoX.Minds.Ranking;
+import ProyectoX.Naves.Jugador.Jugador;
+import ProyectoX.Paneles.PanelFinal;
 import ProyectoX.Paneles.PanelGame;
 import ProyectoX.Paneles.PanelInit;
 import ProyectoX.Paneles.PanelRanking;
@@ -143,6 +145,17 @@ public class Aplication extends javax.swing.JFrame {
 		setVisible(false);
 		main = new PanelSelect(this);
 		add(main);
+		setVisible(true);
+	}
+	
+	
+	/**
+	 * Inicia el panel Final donde se muestra la puntuacion final y la opsion de guardar
+	 * @param jugador jugador actual
+	 */
+	public void initPanelFinal(Jugador jugador){
+		setVisible(false);
+		add(new PanelFinal(this,rep,jugador));
 		setVisible(true);
 	}
 	
