@@ -59,7 +59,6 @@ public abstract class Jugador extends Nave {
 		setearParametrosDefecto(vida, vel, icon.getIconWidth(), icon.getIconHeight());
 		x = 400;
 		y = 450;
-		System.out.println(nombre);
 		init = System.currentTimeMillis();
 		
 		this.icon = icon;

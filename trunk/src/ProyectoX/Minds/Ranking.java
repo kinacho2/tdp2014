@@ -89,7 +89,6 @@ public class Ranking {
 		mapeo.put(punt, nom);
 		ranking.add(punt);
 		writeRanking();
-		System.out.println(mostrarPuntaje());
 		
 	}
 	
@@ -101,16 +100,34 @@ public class Ranking {
 	public String mostrarPuntaje(){
 		String linea = "";
 		leerArchivo();
+		int cont = 1;
 		while(!ranking.isEmpty()){
 			Integer h = ranking.poll();
-			linea = ""+h+" "+mapeo.get(h)+"/n"+linea;
-			
+			linea = ""+"@"+"º	"+mapeo.get(h)+"	"+h+"\n"+linea;
+			cont ++;
 		}
-		return linea;
+		int i = 1;
+		int j = 0;
+		String aux = "";
+		while(i < cont){
+			
+			char c = linea.charAt(j);
+			 
+			while(c!='@' && j < linea.length()){
+				aux += c;
+				j++;
+				c = linea.charAt(j);
+			}
+			j++;
+			aux+=""+i;
+			i++;
+		}
+		
+		return aux;
 	}
 	
 	/**
-	 * borra el archivo de puntajes del juego
+	 * Borra el archivo de puntajes del juego
 	 */
 	
 	public void borrarArchivo(){

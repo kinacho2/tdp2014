@@ -36,7 +36,7 @@ import ProyectoX.Minds.Mind;
 
 public class PanelJugador  extends JPanel implements ActionListener{
 
-	private static final URL urlEn = (PanelInit.class.getClassLoader().getResource("ProyectoX/img/Menu_barras/sonido-enabled.jpg"));
+	private static final URL urlEn = (PanelInit.class.getClassLoader().getResource("ProyectoX/img/Menu_barras/sonido-enabled.png"));
 	private static final URL urlDis = (PanelInit.class.getClassLoader().getResource("ProyectoX/img/Menu_barras/sonido-disabled.png"));
 	
 	private Mind mind;

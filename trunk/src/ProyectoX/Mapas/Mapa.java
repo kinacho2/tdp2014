@@ -409,7 +409,7 @@ public abstract class Mapa{
 		mind.pause(true);
 		game.setVisible(false);
 		reproductor.stop(0);
-		panel = new PanelGameOver(api,this);
+		panel = new PanelGameOver(api,this,mind.getJugador());
 	}
 	
 	/**

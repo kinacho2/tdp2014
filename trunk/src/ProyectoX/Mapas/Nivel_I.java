@@ -40,7 +40,7 @@ public class Nivel_I extends Mapa{
 		enBuilder = new EnemiesBuilder(5);
 		ImageIcon ii = new ImageIcon(fondo);
 		imagenFondo = ii.getImage();
-		x = -50;
+		x = -25;
 		y = initY;
 
 		jefe = new JefeTanque(); 

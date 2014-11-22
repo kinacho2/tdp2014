@@ -42,7 +42,7 @@ public class Nivel_III extends Mapa{
 		enBuilder = new EnemiesBuilder(19);
 		ImageIcon ii = new ImageIcon(fondo);
 		imagenFondo = ii.getImage();
-		x = -1200;
+		x = -800;
 		y = initY;
 		jefe = new JefeAvion(); 
 		jefe.addReproductor(reproductor);
