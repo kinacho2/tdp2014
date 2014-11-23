@@ -19,13 +19,6 @@ import ProyectoX.Naves.Enemigos.Torretas.FabricaTorretasSimples;
 public class JefeBarco extends Jefe{
 
 	protected static final URL url = (Nave.class.getClassLoader().getResource("ProyectoX/img/Enemigo/JefeBarco/JefeBarco.png"));
-	protected static final String boundsDouble = "/ProyectoX/img/Enemigo/JefeBarco/posicionesTorretasDobles.txt";
-	protected static final String boundsSimple = "/ProyectoX/img/Enemigo/JefeBarco/posicionesTorretasSimples.txt";
-	protected static final String boundsGrande = "/ProyectoX/img/Enemigo/JefeBarco/posicionesTorretasGrandes.txt";
-	protected static final String boundsInvisible = "/ProyectoX/img/Enemigo/JefeBarco/posicionesTorretaInvisibles.txt";
-	
-	private long init;
-	
 	
 	
 	/**
@@ -42,6 +35,12 @@ public class JefeBarco extends Jefe{
 		int cantTorretasSimples = 5;
 		int cantTorretasGrandes = 4;
 		int cantTorretasInvisibles = 15;
+		
+		String boundsDouble = "/ProyectoX/img/Enemigo/JefeBarco/posicionesTorretasDobles.txt";
+		String boundsSimple = "/ProyectoX/img/Enemigo/JefeBarco/posicionesTorretasSimples.txt";
+		String boundsGrande = "/ProyectoX/img/Enemigo/JefeBarco/posicionesTorretasGrandes.txt";
+		String boundsInvisible = "/ProyectoX/img/Enemigo/JefeBarco/posicionesTorretaInvisibles.txt";
+		
 		
 		cargarArchivoTorretas(boundsDouble, new FabricaTorretasDobles(), cantTorretasDobles);
 		cargarArchivoTorretas(boundsSimple, new FabricaTorretasSimples(), cantTorretasSimples);

@@ -16,7 +16,6 @@ public abstract class DisparoLaser extends DisparoJugador {
 	
 
 	protected Image laser;
-	private int delay = 0;
 	//delay entre la carga y el disparo
 	protected int minDuracion;
 	//delay que indica el tiempo que permanece el disparo en la pantalla
@@ -116,7 +115,7 @@ public abstract class DisparoLaser extends DisparoJugador {
 	public void move(){
 		x = nave.getX() + nave.getWidth()/2 - width/2;
 		y = nave.getY() - (int)(dy*height) - (int)(dy-1)*nave.getHeight();
-		delay++;
+		
 		if(System.currentTimeMillis() - init > maxDuracion){
 			desarmar();
 		}
@@ -154,10 +153,9 @@ public abstract class DisparoLaser extends DisparoJugador {
 	 * setea los distintos delays del disparo
 	 * @param min indica el delay entre carga y disparo
 	 * @param max el tiempo que permanece el disparo efectivo
-	 * @param impacto es un delay que se usa para disminuir la cantidad de colisiones durante el tiempo que dura el disparo efectivo
 	 */
 	
-	protected void setDelays(int min, int max, int impacto){
+	protected void setDelays(int min, int max){
 		maxDuracion = max;
 		minDuracion = min;
 	}

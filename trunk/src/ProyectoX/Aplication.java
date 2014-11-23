@@ -29,7 +29,6 @@ public class Aplication extends javax.swing.JFrame {
 
 	private JPanel principal;
 	private JPanel main;
-	private JPanel game;
 	private static final String sound = "/ProyectoX/sounds/music/menu_";
 	private Reproductor rep;
 	private Random rn;
@@ -76,7 +75,7 @@ public class Aplication extends javax.swing.JFrame {
     	enabled = false;
     	setVisible(false);
     	
-    	game = new PanelGame(this,select,nombre,rep);    
+    	new PanelGame(this,select,nombre,rep);    
         
         setVisible(true);
         
@@ -87,7 +86,7 @@ public class Aplication extends javax.swing.JFrame {
      */
   
     private void initGUI() {
-    	SplashScreen spl = new SplashScreen(000, url);
+    	SplashScreen spl = new SplashScreen(15000, url);
     	spl.showSplash();
     	initPrimerPanel();
 		setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
