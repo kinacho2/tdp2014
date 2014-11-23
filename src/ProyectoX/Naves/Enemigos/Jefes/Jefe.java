@@ -29,7 +29,7 @@ public abstract class Jefe extends Enemigo{
 	protected boolean[] control = {false,false,false,false,false};
 	private boolean primero = true;
 	protected ArrayList torretas;
-	
+	protected long init;
 	/**
 	 * Constructor de la clase Jefe
 	 * @param vida no se utiliza porque la vida del Jefe son sus Torretas

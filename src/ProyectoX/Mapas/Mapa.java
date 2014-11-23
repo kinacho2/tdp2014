@@ -42,7 +42,6 @@ public abstract class Mapa{
 	protected ArrayList misilesJugador;
 	protected ArrayList explosiones;
 	protected Jugador jugador;
-	protected ArrayList jugadores;
 	protected ArrayList enemiesInWindow;
 	protected int indiceEnemigos;
 	protected int indiceExplosiones;
@@ -82,7 +81,6 @@ public abstract class Mapa{
 		misilesEnemigos = new ArrayList();
 		misilesJugador = new ArrayList();
 		
-		jugadores = new ArrayList();
      	
 		enemiesInWindow = new ArrayList();
 		indiceEnemigos = 0;
@@ -395,6 +393,7 @@ public abstract class Mapa{
 	 */
 
 	public void reset(){
+		jugador.setHearts();
 		jugador.setHearts();
 		jugador.setHearts();
 		jugador.setHearts();

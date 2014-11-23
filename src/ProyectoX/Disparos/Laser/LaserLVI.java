@@ -31,7 +31,7 @@ public class LaserLVI extends DisparoLaser{
 		
 		damage = 3;
 		
-		setDelays(200, 1199, 7);
+		setDelays(200, 1199);
 	}
 	
 	/**

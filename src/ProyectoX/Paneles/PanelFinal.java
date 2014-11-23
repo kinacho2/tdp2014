@@ -31,10 +31,8 @@ public class PanelFinal extends JPanel {
 	
 	private JButton atras;
 
-	private boolean guardado = false;
 	private Aplication api;
 	private Reproductor rep;
-	private Jugador jugador;
 	private JLabel fondo;
 
 
@@ -53,7 +51,6 @@ public class PanelFinal extends JPanel {
 		rep.addSound(sound, true);
 		this.rep = rep;
 		this.api = api;
-		this.jugador = jugador;
 		setLayout(null);
 		
 		{
@@ -107,24 +104,13 @@ public class PanelFinal extends JPanel {
 
 		@Override
 		public void actionPerformed(ActionEvent arg0) {
-			if(!guardado){
-				int verd;
-	            
-				JOptionPane dialogo = new JOptionPane();
-		            
-				verd = dialogo.showConfirmDialog(null, "Desea salir sin guardar su puntuación?", "Atencion",JOptionPane.YES_NO_OPTION);
-					
-				if(verd == 0){
-					rep.stop(0);
-					setVisible(false);
-					api.initPrimerPanel();
-				}
-			}
-			else{
-				rep.stop(0);
-				setVisible(false);
-				api.initPrimerPanel();
-			}
+			
+			
+			rep.stop(0);
+			setVisible(false);
+			api.initPrimerPanel();
+			
+		
 		}
 	}
 	

@@ -18,41 +18,12 @@ import ProyectoX.Naves.Enemigos.Torretas.Torreta;
 public class JefeAvion extends Jefe{
 
 	protected static final URL url = (Nave.class.getClassLoader().getResource("ProyectoX/img/Enemigo/JefeAvion/JefeAvion.png"));
-	protected static final String boundsDouble = "/ProyectoX/img/Enemigo/JefeAvion/posicionesTorretasDobles.txt";
-	protected static final String boundsSimple = "/ProyectoX/img/Enemigo/JefeAvion/posicionesTorretasSimples.txt";
-	protected static final String boundsInvisible = "/ProyectoX/img/Enemigo/JefeAvion/posicionesTorretasInvisibles.txt";
 	private static final String alarm = "/ProyectoX/sounds/alarm.mp3";
 
-	//alturas y anchos de los distintos cuadros de colision las hi son las alturas las wi son los anchos
-	private final int hm = 55;
-	private final int h1 = 584;
-	private final int h1a = 522;
-	private final int h2 = 500;
-	private final int h3 = 384;
-	private final int h4 = 312;
-	private final int h5 = 246;
-	private final int h1w1 = 410;
-	private final int h1w2 = 860;
-	private final int h2w1 = 553;
-	private final int h2w2 = 720;
-	private final int h3w1 = 410;
-	private final int h3w2 = 860;
-	private final int h4w1 = 298;
-	private final int h4w2 = 975;
-	private final int h5w1 = 133;
-	private final int h5w2 = 1142;
-	
-	private boolean primero = false;
-	private boolean segundo = false;
-	private boolean tercero =  false;
-	private boolean cuarto = false;
-	private boolean quinto = false;
-	private boolean sexto = false;
-	private boolean septimo = false;
-	private boolean octavo = false;
+	private boolean[] moves = {false,false,false,false,false,false,false,false};
 	private boolean random = true;
 	private Random rn;
-	private long init;
+	
 	private int delay = 5000;
 	
 	/**
@@ -67,6 +38,12 @@ public class JefeAvion extends Jefe{
 		int cantTorretasDobles = 10;
 		int cantTorretasSimples = 7;
 		int cantTorretasInvisibles = 12;
+		
+		String boundsDouble = "/ProyectoX/img/Enemigo/JefeAvion/posicionesTorretasDobles.txt";
+		String boundsSimple = "/ProyectoX/img/Enemigo/JefeAvion/posicionesTorretasSimples.txt";
+		String boundsInvisible = "/ProyectoX/img/Enemigo/JefeAvion/posicionesTorretasInvisibles.txt";
+		
+		
 		init = System.currentTimeMillis();
 		cargarArchivoTorretas(boundsDouble, new FabricaTorretasDobles(), cantTorretasDobles);
 		cargarArchivoTorretas(boundsSimple, new FabricaTorretasSimples(), cantTorretasSimples);
@@ -76,7 +53,8 @@ public class JefeAvion extends Jefe{
 		
 		
 	}
-
+	
+	
 	/**
 	 * Genera 8 patrones de movimiento distintos y verifica si el jefe tiene torretas
 	 * Ademas verifica las colisiones con el jugador
@@ -107,25 +85,25 @@ public class JefeAvion extends Jefe{
 					int auxY = y;
 					
 					if(select == 0){
-						primero = segundo = true;
+						moves[0] = moves[1] = true;
 						x = -237;
 						y = -defaultHeight;
 						velocidad = 4;
 					}
 					if(select == 1){
-						tercero = cuarto = true;
+						moves[2] = moves[3] = true;
 						x = 800;
 						y = 0;
 						velocidad = 3;
 					}
 					if(select == 2){
-						quinto = sexto = true;
+						moves[4] = moves[5] = true;
 						x = - defaultWidth;
 						y = 0;
 						velocidad = 3;
 					}
 					if(select == 3){
-						septimo = octavo = true;
+						moves[6] = moves[7] = true;
 						x = -237;
 						y = 800;
 						velocidad = 5;
@@ -138,38 +116,38 @@ public class JefeAvion extends Jefe{
 				
 				
 				//movimiento de arriba a abajo
-				if(!tercero && !cuarto && !quinto && !sexto && !septimo && !octavo)
-				if(primero && y + defaultHeight < 500){
+				if(!moves[2] && !moves[3] && !moves[4] && !moves[5] && !moves[6] && !moves[7])
+				if(moves[0] && y + defaultHeight < 500){
 					y +=velocidad;
 					actualizarTorretas(0, +velocidad);
 				}
 				else{
-					primero = false;
-					if(y + defaultHeight > -100 && segundo){
+					moves[0] = false;
+					if(y + defaultHeight > -100 && moves[1]){
 						y-=velocidad;
 						actualizarTorretas(0, -velocidad);
 					}
 					else {
-						segundo = false;
+						moves[1] = false;
 						random = true;
 						init = System.currentTimeMillis();
 					}
 				}
 				
 				//movimiento de derecha a izquierda
-				if(!primero && !segundo && !quinto && !sexto && !septimo && !octavo)
-				if(tercero && x > 250){	
+				if(!moves[0] && !moves[1] && !moves[4] && !moves[5] && !moves[6] && !moves[7])
+				if(moves[2] && x > 250){	
 					x-=velocidad;
 					actualizarTorretas(-velocidad,0);
 				}
 				else{
-					tercero = false;
-					if(x < 900 && cuarto){
+					moves[2] = false;
+					if(x < 900 && moves[3]){
 						x+=velocidad;
 						actualizarTorretas(velocidad,0);
 					}
 					else{
-						cuarto = false;
+						moves[3] = false;
 						random = true;
 						init = System.currentTimeMillis();
 					}
@@ -177,39 +155,39 @@ public class JefeAvion extends Jefe{
 				}
 				
 				//movimiento de izquierda a derecha
-				if(!primero && !segundo && !tercero && !cuarto && !septimo && !octavo)
-				if(quinto && x + defaultWidth < 550){
+				if(!moves[0] && !moves[1] && !moves[2] && !moves[3] && !moves[6] && !moves[7])
+				if(moves[4] && x + defaultWidth < 550){
 					
 					x+=velocidad;
 					actualizarTorretas(velocidad,0);
 				}
 				else{
-					quinto = false;
-					if(x + defaultWidth > -100 && sexto){
+					moves[4] = false;
+					if(x + defaultWidth > -100 && moves[5]){
 						x-=velocidad;
 						actualizarTorretas(-velocidad,0);
 					}
 					else{
-						sexto = false;
+						moves[5] = false;
 						random = true;
 						init = System.currentTimeMillis();
 					}
 				}
 				
 				//movimiento de abajo a arriba
-				if(!primero && !segundo && !tercero && !cuarto && !quinto && !sexto)
-				if(septimo && y > 250){
+				if(!moves[0] && !moves[1] && !moves[2] && !moves[3] && !moves[4] && !moves[5])
+				if(moves[6] && y > 250){
 					y-=velocidad;
 					actualizarTorretas(0,-velocidad);
 				}
 				else{
-					septimo = false;
-					if(y < 700 && octavo){
+					moves[6] = false;
+					if(y < 700 && moves[7]){
 						y+=velocidad;
 						actualizarTorretas(0,velocidad);
 					}
 					else{
-						octavo = false;
+						moves[7] = false;
 						random = true;
 						init = System.currentTimeMillis();
 					}
@@ -338,8 +316,8 @@ public class JefeAvion extends Jefe{
 
 	public boolean colision(Nave nave) {
 		
-		int[] arrayY = {h1a,h1,hm,h2,hm,h3,hm,h4,hm,h5};
-		int[] arrayX = {h1w1,h1w2,h2w1,h2w2,h3w1,h3w2,h4w1,h4w2,h5w1,h5w2};
+		int[] arrayY = cargarPuntoColisionY();
+		int[] arrayX = cargarPuntoColisionX();
 		boolean A,B,C,D,E,F,G,H;
 		boolean fColision = false;
 		int i = 0;
@@ -364,5 +342,45 @@ public class JefeAvion extends Jefe{
 			
 				
 	}
+
+	/**
+	 * 
+	 * @return arreglo de enteros que contiene las coordenadas y relativas para la colision
+	 */
+	private int[] cargarPuntoColisionY(){
+		//alturas relativas de los distintos puntos de colision
+		int hm = 55;
+		int h1 = 584;
+		int h1a = 522;
+		int h2 = 500;
+		int h3 = 384;
+		int h4 = 312;
+		int h5 = 246;
+		
+		int[] points = {h1a,h1,hm,h2,hm,h3,hm,h4,hm,h5};
+		return points;
+	}
+	
+	/**
+	 * 
+	 * @return arreglo de enteros que contiene las coordenadas x relativas para la colision
+	 */
+	private int[] cargarPuntoColisionX(){
+		//anchos relativos de los distintos puntos de colision
+		int h1w1 = 410;
+		int h1w2 = 860;
+		int h2w1 = 553;
+		int h2w2 = 720;
+		int h3w1 = 410;
+		int h3w2 = 860;
+		int h4w1 = 298;
+		int h4w2 = 975;
+		int h5w1 = 133;
+		int h5w2 = 1142;
+		
+		int[] points = {h1w1,h1w2,h2w1,h2w2,h3w1,h3w2,h4w1,h4w2,h5w1,h5w2};
+		return points;
+	}
+
 	
 }

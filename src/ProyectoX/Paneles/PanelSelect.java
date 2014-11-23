@@ -39,7 +39,6 @@ public class PanelSelect  extends JPanel {
 	private JLabel labelVeloz;
 	private JLabel resistenteStatics, normalStatics, velozStatics, fondo;
 	private Aplication api;
-	private int round = 0;
 	/**
 	 * Constructor de la clase PanelSelect
 	 * @param api Aplicacion principal del juego
@@ -167,7 +166,6 @@ public class PanelSelect  extends JPanel {
 			fondo.setBorder(null);
 			add(fondo);
 		}
-		round = 0;
 	}
 
 	

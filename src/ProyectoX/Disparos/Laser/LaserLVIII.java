@@ -30,7 +30,7 @@ public class LaserLVIII extends DisparoLaser{
 		y = nave.getY() - height;
 		damage = 8;
 		
-		setDelays(1000, 2000, 2);
+		setDelays(1000, 2000);
 	}
 
 	
