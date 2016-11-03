@@ -45,8 +45,8 @@ public class WaveLVII extends DisparoWave{
 		
 		d[0] = new DisparoWave(x  - 10 , y, 3, 1,nave);
 		d[1] = new DisparoWave(x  + 10 , y, -3, 1,nave);
-		d[2] = new DisparoWave(x  - 10 , y, 2, 1,nave);
-		d[3] = new DisparoWave(x  + 10 , y, -2, 1,nave);
+		d[2] = new WaveLVIII(x  - 10 , y, 3, -1, nave);
+		d[3] = new WaveLVIII(x  + 10 , y, -3, -1, nave);
 		setearReproductor(d);
 		return d;
 	}

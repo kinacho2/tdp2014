@@ -31,7 +31,7 @@ public class LaserLVI extends DisparoLaser{
 		
 		damage = 3;
 		
-		setDelays(200, 1199);
+		setDelays(200, 1200);
 	}
 	
 	/**
@@ -51,10 +51,18 @@ public class LaserLVI extends DisparoLaser{
 	 */
 	
 	public Disparo[] cloneNivel(){
-		Disparo[] toRet = new Disparo[1];
-		toRet[0] = new LaserLVI(nave,dy);
-		toRet[0].setReproductor(rep);
-		return toRet;
+		long ret = System.currentTimeMillis();
+		if(ret - init > totalDuracion || primerDisparo){
+			if(primerDisparo){
+				primerDisparo = false;
+			}
+			init = System.currentTimeMillis();
+			Disparo[] toRet = new Disparo[1];
+			toRet[0] = new LaserLVI(nave,dy);
+			toRet[0].setReproductor(rep);
+			return toRet;}
+		else
+			return new Disparo[0];
 	}
 	
 }

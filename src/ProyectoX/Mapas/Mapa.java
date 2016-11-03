@@ -125,6 +125,14 @@ public abstract class Mapa{
 	 * @return instancia actual de Mind
 	 */
 	
+	public void setEnemies(Enemigo e) {
+		enemiesInWindow.add(e);
+	}
+	
+	/**
+	 * @return instancia actual de Mind
+	 */
+	
 	public Mind getMind(){
 		return mind;
 	}
@@ -235,14 +243,17 @@ public abstract class Mapa{
 		} else {
 			if(!estaJefe){
 				if(enemiesInWindow.size() == 0){
-					reproductor.stop(1000);
-					reproductor.addSound(sonidoJefe,true);
+					
 					m = jefe;
 					mindEnemies.addBoss(jefe);
-					estaJefe = true;
-					m.setJugador(jugador);
-					m.setMapa(this);
-					m.addReproductor(reproductor);
+					estaJefe = mindEnemies.estaJefe();
+					reproductor.stop(2000);
+					if(estaJefe){
+						reproductor.addSound(sonidoJefe,true);
+						m.setJugador(jugador);
+						m.setMapa(this);
+						m.addReproductor(reproductor);
+					}
 					m = null;
 				}
 				else{
@@ -322,7 +333,10 @@ public abstract class Mapa{
 			puntaje += m.bomba();
 		}
 		jugador.setPuntaje(puntaje);
-		
+		for(int i = 0; i < misilesEnemigos.size(); i++){
+			((Disparo)misilesEnemigos.get(i)).setVisible();
+			
+		}
 	}
 	
 	/**

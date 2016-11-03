@@ -30,7 +30,7 @@ public class WaveLVIII extends DisparoWave {
 	 */
 	
 	public DisparoJugador nextLevel(){
-		return new WaveLVIII(x,y,dx,dy,nave);
+		return new WaveLVIV(x,y,dx,dy,nave,0);
 	}
 	
 	/**
@@ -41,8 +41,8 @@ public class WaveLVIII extends DisparoWave {
 	public Disparo[] cloneNivel(){
 		Disparo[] d = new Disparo[6];
 		
-		d[0] = new WaveLVIII(x  - 10 , y, 2, -1, nave);
-		d[1] = new WaveLVIII(x  + 10 , y, -2, -1, nave);
+		d[0] = new WaveLVIII(x  - 10 , y, 3, -1, nave);
+		d[1] = new WaveLVIII(x  + 10 , y, -3, -1, nave);
 		d[2] = new DisparoWave(x  - 10 , y, 2, 1, nave);
 		d[3] = new DisparoWave(x  + 10 , y, -2, 1, nave);
 		d[4] = new WaveLVIII(x  - 10 , y, 2, 1, nave);

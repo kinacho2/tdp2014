@@ -6,6 +6,7 @@ import javax.swing.ImageIcon;
 import ProyectoX.Frames.Explosion;
 import ProyectoX.Naves.Nave;
 import ProyectoX.Naves.Enemigos.Torretas.FabricaTorretasDobles;
+import ProyectoX.Naves.Enemigos.Torretas.FabricaTorretasGrandes;
 import ProyectoX.Naves.Enemigos.Torretas.FabricaTorretasInvisibles;
 import ProyectoX.Naves.Enemigos.Torretas.FabricaTorretasSimples;
 import ProyectoX.Naves.Enemigos.Torretas.Torreta;
@@ -35,19 +36,21 @@ public class JefeAvion extends Jefe{
 		x = 400 - defaultWidth/2;
 		y = - defaultHeight;
 		delay = 2;
-		int cantTorretasDobles = 10;
-		int cantTorretasSimples = 7;
+		int cantTorretasDobles = 8;
+		int cantTorretasSimples = 3;
 		int cantTorretasInvisibles = 12;
+		int cantTorretasGrandes = 6;
 		
 		String boundsDouble = "/ProyectoX/img/Enemigo/JefeAvion/posicionesTorretasDobles.txt";
 		String boundsSimple = "/ProyectoX/img/Enemigo/JefeAvion/posicionesTorretasSimples.txt";
 		String boundsInvisible = "/ProyectoX/img/Enemigo/JefeAvion/posicionesTorretasInvisibles.txt";
-		
+		String boundsGrande = "/ProyectoX/img/Enemigo/JefeAvion/posicionesTorretasGrandes.txt";
 		
 		init = System.currentTimeMillis();
 		cargarArchivoTorretas(boundsDouble, new FabricaTorretasDobles(), cantTorretasDobles);
 		cargarArchivoTorretas(boundsSimple, new FabricaTorretasSimples(), cantTorretasSimples);
 		cargarArchivoTorretas(boundsInvisible,new FabricaTorretasInvisibles(), cantTorretasInvisibles);
+		cargarArchivoTorretas(boundsGrande,new FabricaTorretasGrandes(), cantTorretasGrandes);
 		puntaje = 500;
 		setearParametrosDefecto(2000, 2, 1275, 636);
 		
@@ -254,9 +257,9 @@ public class JefeAvion extends Jefe{
 			if(System.currentTimeMillis() - init > 5000){
 				jugador.setPuntaje(puntaje);
 				mapa.addPower(400, 200, true);
-				setVisible();
 				width = defaultWidth;
-				height = defaultHeight;
+				height = defaultHeight;				
+				super.destroy();
 			}
 			if(System.currentTimeMillis() - init > 1000 && !control[1]){
 				control[1] = true;

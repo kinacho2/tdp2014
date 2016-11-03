@@ -15,6 +15,7 @@ import ProyectoX.Naves.Jugador.Defensa.EscudoX;
 public class Escudo extends PowerUp {
 
 protected static final URL url = (PowerUp.class.getClassLoader().getResource("ProyectoX/img/PUP/escudo.png"));
+private String escudo = "/ProyectoX/sounds/escudo.mp3";
 	
 	/**
 	 * constructor de la clase Escudo
@@ -32,12 +33,18 @@ protected static final URL url = (PowerUp.class.getClassLoader().getResource("Pr
 	 */
 
 	protected void efecto(Jugador jugador) {
-		Defensa aux = jugador.getDefensa();
-		if(aux != null)
-			jugador.setDefensa(jugador.getDefensa().getEscudo());
+		Defensa[] aux = jugador.getDefensa();
+		//jugador.addSonidoDePremio(sound);
+		if(aux!=null && aux[0] != null){
+			Defensa[] nueva = {jugador.getDefensa()[0].getEscudo()};
+			jugador.setDefensa(nueva);
 			
-		else
-			jugador.setDefensa(new EscudoX(jugador));
-		jugador.addSonidoDePremio(sound);
+		}
+		else{
+			Defensa[] nueva = {new EscudoX(jugador)};
+			jugador.setDefensa(nueva);
+			
+		}
+		jugador.addSonidoDePremio(escudo);
 	}
 }

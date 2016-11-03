@@ -33,6 +33,7 @@ public class MindEnemies extends Thread  {
 	private boolean pause = false;
 	private Reproductor rep;
 	private String outro = "/ProyectoX/sounds/music/outro.mp3";
+	private String bosscoming = "/ProyectoX/sounds/bosscoming.mp3";
 	
 	/**
 	 * Constructor de la clase MindEnemies
@@ -67,7 +68,7 @@ public class MindEnemies extends Thread  {
 					
 					disparosJugador();
 					
-					if(ran.nextInt(88)==0){
+					if(ran.nextInt(75)==0){
 						Enemigo m = mapa.nextEnemigo();
 						if(m!=null){
 							enemies.add(m);
@@ -146,7 +147,8 @@ public class MindEnemies extends Thread  {
                     		enemigo.setVida(m.getDamage());
                     	}
                     	m.setVisible();
-                    	mapa.addExposion(m.newExplosion(enemigo.getY() + enemigo.getHeight()));
+                    	if(!m.isVisible())
+                    		mapa.addExposion(m.newExplosion(enemigo.getY() + enemigo.getHeight()));
                     }
                     
                 }
@@ -189,16 +191,27 @@ public class MindEnemies extends Thread  {
 	/**
 	 * agrega un Jefe al arreglo de enemigos en pantalla y tambien sus torretas
 	 * @param boss de tipo Jefe el ultimo Enemigo del nivel
+	 * @throws InterruptedException 
 	 */
+	
+	private boolean sonido = false;
+	private long wait = 0;
+	
 	public void addBoss(Jefe boss){
-		enemies.add(boss);
-		ArrayList en = boss.getTorretas();
-		jefe = true;
-		
-		for(int i=0; i<en.size(); i++){
-			enemies.add(en.get(i));
+		if(!sonido){
+			wait = System.currentTimeMillis();
+			rep.addSound(bosscoming, false);
+			sonido = true;
 		}
-		
+		if(System.currentTimeMillis()-wait>=5000){
+			enemies.add(boss);
+			ArrayList en = boss.getTorretas();
+			jefe = true;
+			
+			for(int i=0; i<en.size(); i++){
+				enemies.add(en.get(i));
+			}
+		}
 	}
 	
 	/**
@@ -236,6 +249,11 @@ public class MindEnemies extends Thread  {
 
 	public void setEstaJefe() {
 		jefe = false;
+		sonido=false;
+	}
+	
+	public boolean estaJefe() {
+		return jefe;
 		
 	}
 }

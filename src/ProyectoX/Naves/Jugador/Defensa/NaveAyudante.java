@@ -21,12 +21,14 @@ public class NaveAyudante extends Defensa {
 	 * Constructor de la clase NaveAyudante
 	 * @param jugador el Jugador actual
 	 */
+	int bool;
 	
-	public NaveAyudante(Jugador jugador){
+	public NaveAyudante(Jugador jugador, int bool){
 		super(80, jugador.getVelocidad(), new ImageIcon(url), new ImageIcon(urlDer), new ImageIcon(urlIzq));
 		setearParametrosDefecto(80, 0, 32, 32);
-		x = jugador.getX() -50;
+		x =(bool==0)? jugador.getX() -50:jugador.getX() +18 +jugador.getWidth();
 		y = jugador.getY() +20;
+		this.bool=bool;
 		height = defaultHeight;
 		width = defaultWidth;
 		
@@ -54,7 +56,8 @@ public class NaveAyudante extends Defensa {
 	 */
 	
 	public void move(){
-		x = jugador.getX() -50;
+	   
+		x =(bool==0)? jugador.getX() -50:jugador.getX() +18 +jugador.getWidth();
 		y = jugador.getY() +20;
 	}
 	
@@ -67,6 +70,13 @@ public class NaveAyudante extends Defensa {
 		if(puedeDisparar() && getVisible() && jugador.getVisible()){
 			super.disparar();
 		}
+	}
+	
+	public Defensa[] getAyudante(){
+		//setVisible();
+		Defensa[] nueva = { (bool==0)?this:new NaveAyudante(jugador,0),(bool==0)?new NaveAyudante(jugador,1):this};
+		
+		return nueva;
 	}
 	
 }

@@ -20,6 +20,7 @@ public abstract class Defensa extends Jugador{
 	 * @param iconIzq Imagen inclinada hacia la izquierda
 	 */
 	public Defensa(int vida, int vel,ImageIcon icon, ImageIcon iconDer, ImageIcon iconIzq){
+		//TODO
 		super(vida, vel, icon, iconDer, iconIzq,"Defensa");
 	}
 	
@@ -40,8 +41,9 @@ public abstract class Defensa extends Jugador{
 	 * @return instancia de NaveAyudante
 	 */
 	
-	public Defensa getAyudante(){
-		return new NaveAyudante(jugador);
+	public Defensa[] getAyudante(){
+		Defensa[] nueva = {new NaveAyudante(jugador,0)};
+		return nueva;
 	}
 	
 	/**
@@ -60,4 +62,5 @@ public abstract class Defensa extends Jugador{
 	public boolean isInvulnerable(){
 		return false;
 	}
+	
 }

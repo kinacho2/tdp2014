@@ -44,7 +44,7 @@ public class Basico extends Enemigo {
 		}
 		
 		this.up = up;
-		setFrecuenciaDeDisparo(10,80);
+		setFrecuenciaDeDisparo(10,60);
 		puntaje = 25;
 	}
 	

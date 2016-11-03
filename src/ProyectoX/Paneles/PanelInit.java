@@ -124,12 +124,15 @@ public class PanelInit   extends JPanel {
 
 		@Override
 		public void actionPerformed(ActionEvent arg0) {
+			String nom;
 			JOptionPane pane = new JOptionPane();
-			String nom = pane.showInputDialog("ingrese su Nombre", "");
-            nom = nom.replaceAll(" ", "_");
-            nom = nom.replaceAll("@", ".");
-            if(nom==""){
+			nom = pane.showInputDialog("ingrese su Nombre", "");
+            if(nom=="" || nom==null){
             	nom = "Player";
+            }
+            else{
+            	nom = nom.replaceAll(" ", "_");
+                nom = nom.replaceAll("@", ".");
             }
             api.setNombre(nom);
 			setVisible(false);

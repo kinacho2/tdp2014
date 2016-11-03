@@ -4,6 +4,7 @@ import java.net.URL;
 import java.util.Random;
 import javax.swing.ImageIcon;
 import ProyectoX.Naves.Jugador.Jugador;
+import ProyectoX.Sound.Reproductor;
 
 
 /**
@@ -11,7 +12,7 @@ import ProyectoX.Naves.Jugador.Jugador;
  * @author Borek Andrea, Figliuolo Nestor, Gaviot Joaquin
  */
 
-public class PRandom extends PowerUp{
+public class PRocket extends PowerUp{
 
 	protected static final URL url = (PowerUp.class.getClassLoader().getResource("ProyectoX/img/PUP/random.png"));
 	
@@ -21,7 +22,7 @@ public class PRandom extends PowerUp{
 	 * @param y coordenada y
 	 */
 	
-	public PRandom(int x, int y) {
+	public PRocket(int x, int y) {
 		super(x, y, new ImageIcon(url));
 	}
 
@@ -31,6 +32,7 @@ public class PRandom extends PowerUp{
 	 */
 	
 	protected void efecto(Jugador jugador) {
+		
 		jugador.setRocket();
 		jugador.addSonidoDePremio(sound);
 	}

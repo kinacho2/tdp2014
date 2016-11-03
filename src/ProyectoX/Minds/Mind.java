@@ -130,10 +130,10 @@ public class Mind implements ActionListener {
     	
     	// arreglo de disparos de los enemigos que se encuentran en el mapa
     	ArrayList ms = mapa.getMisilesEnemigos();
-    	
+    	ArrayList dis = mapa.getMisilesJugador();
        	Jugador aux ;
        	
-        Jugador def = jugador.getDefensa();
+        Jugador[] def = jugador.getDefensa();
         
         // verifica si algun misil del enemigo colisiono con el jugador o alguna de sus defensas
        
@@ -148,12 +148,26 @@ public class Mind implements ActionListener {
 	           			misil.setVisible();
 	           			mapa.addExposion(misil.newExplosion(aux.getY()));
 		            }
-	       		if(def != null && def.getVisible())
-	           		if ( misil.colision(def)) {
-	           			def.setVida(misil.getDamage());
-	           			misil.setVisible();
-	           			mapa.addExposion(misil.newExplosion(def.getY()));
-		           }
+	       		if(def!=null)
+	       		for(int i = 0;i < def.length; i++){
+	       			if(def != null && def[i]!=null && def[i].getVisible())
+		           	    if ( misil.colision(def[i])) {
+		           	    	def[i].setVida(misil.getDamage());
+		           			misil.setVisible();
+		           			mapa.addExposion(misil.newExplosion(def[i].getY()));
+			            }
+	       		}
+	       		for (int i = 0; i < dis.size(); i++ ) {
+	       			Disparo misilJugador = (Disparo) dis.get(i);
+	       			if(misilJugador!=null){
+	       				if (misil!=null && misilJugador!=null && misil.colisionDisparo(misilJugador)) {
+	       					misil.setVisible();
+	       					mapa.addExposion(misil.newExplosion(misilJugador.getY()));
+	       					misilJugador.setVisible();
+	       					mapa.addExposion(misilJugador.newExplosion(misil.getY()));
+	       				}
+	       			}
+	       		}
             }
        	}
         for (int j = 0; j < ms.size(); j++ ) {

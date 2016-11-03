@@ -41,7 +41,7 @@ public abstract class Enemigo extends Nave {
 		super(vida,vel, ii, new ImageIcon(explode), w, h);
 		
 		setearParametrosDefecto(vida, vel, w, h);
-		velocidadMisil = -7;
+		velocidadMisil = -5;
 	}
 	
 	/**
@@ -56,14 +56,17 @@ public abstract class Enemigo extends Nave {
 			setVida(vd);	
 		}
 		//verifica la colision con la Defensa del Jugador
-		Jugador aux = jugador.getDefensa();
-		if(aux != null){
-			if (colision(aux)) {
-				int vd = aux.getDamageColision();
-				aux.setVida(vida);
+		Jugador[] aux = jugador.getDefensa();
+		if(aux!=null)
+		for (int i = 0; i < aux.length; i++ ) {
+		if(aux[i] != null)
+			if (colision(aux[i])) {
+				int vd = aux[i].getDamageColision();
+				aux[i].setVida(vida);
 				setVida(vd);	
 			}
 		}
+		
 		
 		// establece que el eneimgo no está en la pantalla, por lo que no está visible
 		if(fueraDePantalla()) {
@@ -168,6 +171,7 @@ public abstract class Enemigo extends Nave {
 		vida -= vd;
 		if(vida <= 0 && getVisible()) {
 			setVisible();
+			if(jugador!=null)
 			jugador.setPuntaje(puntaje);
 			//si es especial agrega un powerUp al mapa
 			if(isEspecial() )

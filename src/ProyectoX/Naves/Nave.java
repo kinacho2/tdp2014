@@ -83,10 +83,10 @@ public abstract class Nave {
 		this.vida =vida;
 		visible = true;
 		
-		maxHeight = -height*2;
-		minHeight = 600 + height;
-		maxWidth = 800 + width;
-		minWidth = -width*2;
+		maxHeight = -height - 5;
+		minHeight = 600 + 5;
+		maxWidth = 800 + 5;
+		minWidth = -width - 5;
 		
 	}
 	
@@ -272,7 +272,7 @@ public abstract class Nave {
 	 * indica si la instancia de Nave se encuentra dentro de los limites de la pantalla
 	 * @return true si la Nave se encuentra fuera de los limites de la pantalla, false en caso contrario
 	 */
-	protected boolean fueraDePantalla() {
+	public boolean fueraDePantalla() {
 		return (x < minWidth || x > maxWidth || y > minHeight || y < maxHeight);
 	}
 	
@@ -348,5 +348,11 @@ public abstract class Nave {
 		defaultVel = velocidad;
 		defaultVida = vida;
 	}
+	
+	public void setPosition(int x, int y){
+		this.x=x;
+		this.y=y;
+	}
+	
 }
 

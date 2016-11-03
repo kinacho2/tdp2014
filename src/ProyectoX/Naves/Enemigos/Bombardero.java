@@ -59,7 +59,7 @@ public class Bombardero extends Enemigo {
 			posInicialX = 45;
 			
 		} else {
-			posInicialX = maxWidth - 45 - velocidad*20 - height*2;
+			posInicialX = maxWidth - 45 - velocidad*20 - height;
 			
 		}
 		x = posInicialX;
@@ -151,13 +151,29 @@ public class Bombardero extends Enemigo {
 
 	public void disparar() {
 		
-		if(puedeDisparar() && y < 350) {
+		if(puedeDisparar() && y < 350 && y > 0) {
 			Disparo d = apuntarYDisparar();
 			d.setReproductor(reproductor);
 			addSonido();
-			d.setPosicion(d.getX(), d.getY() - defaultHeight/2);
 			mapa.addDisparoEnemigo(d);
 		}
+	}
+	
+	protected Disparo apuntarYDisparar() {
+		
+		double dxAux=jugador.getX() - x + jugador.getWidth()/2 - defaultWidth/2;
+		double dyAux=jugador.getY() - y + jugador.getHeight()/2 - defaultHeight/2;
+		double mod = Math.sqrt(dyAux*dyAux+dxAux*dxAux);
+		
+		if(dxAux != 0 || dyAux != 0) {
+			dxAux = dxAux / mod;
+			dyAux = dyAux / mod;
+		} else {
+			dyAux = 0.1d;
+			dxAux = 0.1d;
+		}
+		
+		return new Disparo(x + width/2 , y + defaultHeight/2, -dxAux, dyAux, velocidadMisil);
 	}
 	
 	/**

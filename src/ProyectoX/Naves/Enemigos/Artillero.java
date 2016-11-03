@@ -28,7 +28,7 @@ public class Artillero extends Enemigo {
 		y = -defaultHeight;
 		this.up = up;
 		puntaje = 50;
-		setFrecuenciaDeDisparo(5,70);
+		setFrecuenciaDeDisparo(10,40);//5,70
 	}
 
 	/**

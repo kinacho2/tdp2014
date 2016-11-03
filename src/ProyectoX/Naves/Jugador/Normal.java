@@ -3,6 +3,8 @@ package ProyectoX.Naves.Jugador;
 import java.net.URL;
 import javax.swing.ImageIcon;
 import ProyectoX.Disparos.DisparoJugador;
+import ProyectoX.Disparos.Multiplicador.DisparoMultiplicador;
+import ProyectoX.Disparos.Multiplicador.MultiplicadorLVII;
 import ProyectoX.Naves.Nave;
 
 /**
@@ -22,8 +24,7 @@ public class Normal extends Jugador {
 	 * setea los atributos propios de su clase
 	 */
 	public Normal(String nombre){
-		super(50,3,new ImageIcon(url),new ImageIcon(urlDer),new ImageIcon(urlIzq),nombre);
-		
+		super(80,3,new ImageIcon(url),new ImageIcon(urlDer),new ImageIcon(urlIzq),nombre);
 		
 	}
 	
@@ -48,7 +49,7 @@ public class Normal extends Jugador {
 	public void reset() {
 		super.reset();
 		vida = defaultVida;
-		setNewDisparo(new DisparoJugador(x + width/2 , y, 0, 1, velocidadMisil,this));
+		setNewDisparo(new MultiplicadorLVII(x, y, 0, 1,this));
 	}
 	
 }

@@ -7,3 +7,12 @@ si se quieren ver los 3 niveles sin necesidad de pasarlos completos puede modifi
 Ademas se puede modificar la cantidad de enemigos de las clases NivelI, NivelII o NivelIII
 Los PowerUP los crea una clase llamada PUPBuilder en forma aleatoria se puede modificar para que retorne solo un tipo de PowerUP
 No se pudo solucionar un problema que surge con los oyentes del teclado, si se aprieta 1 tecla e inmediatamente otra la primera tecla apretada deja de funcionar
+
+
+
+agregar bordes al mapa
+agregar powerup de evasion o invulnerabilidad
+?modificar velocidad de spameo
+modificar velocidad del fondo y las nubes al sobrevolar los jefes
+agregar mas torretas a los jefes I y II
+recordar acomodar velocidad de disparojugador

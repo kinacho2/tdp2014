@@ -47,7 +47,7 @@ public class PanelEnemies  extends JPanel implements AbstractPanel {
 	 * pinta en el panel el fondo, los enemigos y los disparos del jugador
 	 * @param g de tipo Graphics 
 	 */
-	public void paint(Graphics g) {
+	public synchronized void paint(Graphics g) {
 		 
 	        super.paint(g);
 

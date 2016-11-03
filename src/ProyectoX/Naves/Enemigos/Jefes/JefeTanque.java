@@ -66,9 +66,10 @@ public class JefeTanque extends Jefe{
 			if(System.currentTimeMillis() - init > 5000){
 				jugador.setPuntaje(puntaje);
 				mapa.addPower(400, 200, true);
-				setVisible();
+				
 				width = defaultWidth;
 				height = defaultHeight;
+				super.destroy();
 			}
 			if(System.currentTimeMillis() - init > 1000 && !control[1]){
 				control[1] = true;

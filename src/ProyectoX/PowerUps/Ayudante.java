@@ -4,6 +4,7 @@ import java.net.URL;
 import javax.swing.ImageIcon;
 import ProyectoX.Naves.Jugador.Jugador;
 import ProyectoX.Naves.Jugador.Defensa.Defensa;
+import ProyectoX.Naves.Jugador.Defensa.EscudoX;
 import ProyectoX.Naves.Jugador.Defensa.NaveAyudante;
 
 /**
@@ -32,11 +33,18 @@ public class Ayudante extends PowerUp {
 	 * @param jugador, Jugador actual
 	 */
 	protected void efecto(Jugador jugador) {
-		Defensa aux = jugador.getDefensa();
-		if(aux != null)
-			jugador.setDefensa(jugador.getDefensa().getAyudante());
-		else
-			jugador.setDefensa(new NaveAyudante(jugador));
+		Defensa[] aux = jugador.getDefensa();
+		if(aux!=null && aux[0]!=null){
+			int j=1;
+			Defensa[] nueva = aux[0].getAyudante();
+			
+			jugador.setDefensa(nueva);
+			
+		}
+		else{
+			Defensa[] nueva = {new NaveAyudante(jugador,0)};
+			jugador.setDefensa(nueva);
+		}
 		jugador.addSonidoDePremio(sound);
 	}
 

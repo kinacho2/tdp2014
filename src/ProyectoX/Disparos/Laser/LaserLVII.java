@@ -32,7 +32,7 @@ public class LaserLVII extends DisparoLaser{
 		
 		damage = 5;
 		
-		setDelays(500, 1499);
+		setDelays(400, 1500);
 	}
 	
 	
@@ -44,7 +44,7 @@ public class LaserLVII extends DisparoLaser{
 	
 	
 	public DisparoJugador nextLevel(){
-		return new LaserLVIII(nave, dy);
+		return new LaserLVIV(nave, dy);
 	}
 	
 	/**
@@ -54,10 +54,18 @@ public class LaserLVII extends DisparoLaser{
 	 */
 	
 	public Disparo[] cloneNivel(){
-		Disparo[] toRet = new Disparo[1];
-		toRet[0] = new LaserLVII(nave,dy);
-		toRet[0].setReproductor(rep);
-		return toRet;
+		long ret = System.currentTimeMillis();
+		if(ret - init > totalDuracion || primerDisparo){
+			if(primerDisparo){
+				primerDisparo = false;
+			}
+			init = System.currentTimeMillis();
+			Disparo[] toRet = new Disparo[1];
+			toRet[0] = new LaserLVII(nave,dy);
+			toRet[0].setReproductor(rep);
+			return toRet;
+		}
+		else return new Disparo[0];
 	}
 	
 }

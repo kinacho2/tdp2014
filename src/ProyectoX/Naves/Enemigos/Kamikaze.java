@@ -31,7 +31,7 @@ public class Kamikaze extends Enemigo {
 		y = -defaultHeight;
 		Random rand = new Random();
 		x = rand.nextInt(800);
-		setFrecuenciaDeDisparo(7,80);
+		setFrecuenciaDeDisparo(15,50);//7
 		this.up = up;
 		puntaje = 35;
 	}

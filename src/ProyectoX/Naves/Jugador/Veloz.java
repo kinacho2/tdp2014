@@ -3,6 +3,7 @@ package ProyectoX.Naves.Jugador;
 import java.net.URL;
 import javax.swing.ImageIcon;
 import ProyectoX.Disparos.DisparoJugador;
+import ProyectoX.Disparos.Multiplicador.MultiplicadorLVI;
 import ProyectoX.Naves.Nave;
 
 /**
@@ -23,8 +24,8 @@ public class Veloz extends Jugador {
 	 */
 	
 	public Veloz(String nombre){
-		super(30,5,new ImageIcon(url),new ImageIcon(urlDer),new ImageIcon(urlIzq),nombre);
-		
+		super(60,5,new ImageIcon(url),new ImageIcon(urlDer),new ImageIcon(urlIzq),nombre);
+		//TODO
 	}
 	
 	/**
@@ -46,6 +47,6 @@ public class Veloz extends Jugador {
 	public void reset() {
 		super.reset();
 		vida = defaultVida;
-		setNewDisparo(new DisparoJugador(x + width/2 , y, 0, 1, velocidadMisil,this));
+		setNewDisparo( new MultiplicadorLVI(x,y,dx,dy,this));
 	}
 }

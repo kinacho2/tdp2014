@@ -21,12 +21,15 @@ public abstract class DisparoLaser extends DisparoJugador {
 	//delay que indica el tiempo que permanece el disparo en la pantalla
 	protected int maxDuracion;
 	
+	protected int totalDuracion;
+
+	
 	//segunda imagen que representa al disparo
-	private ImageIcon second;
+	protected ImageIcon second;
 	//se le asigna false cuando cambia la imagen
 	private boolean control = true;
 	
-	private long init ;
+	protected long init ;
 	
 	
 	/**
@@ -39,6 +42,8 @@ public abstract class DisparoLaser extends DisparoJugador {
 	 * @param nave la Nave que efectua el DisparoLaser
 	 */
 	
+	protected boolean primerDisparo = true;
+	
 	public DisparoLaser(double dy, int width, int height, ImageIcon first, ImageIcon second, Nave nave) {
 		super(0, 0, 0, dy, 0,nave);
 		this.nave = nave;
@@ -49,8 +54,7 @@ public abstract class DisparoLaser extends DisparoJugador {
 		this.second = second;
 		
 		init = System.currentTimeMillis();
-		minDuracion = 200;
-		maxDuracion = 1500;
+		setDelays(200, 1500);
 		sonido =  "/ProyectoX/sounds/laserChargue.mp3";
 		
 	}
@@ -71,41 +75,56 @@ public abstract class DisparoLaser extends DisparoJugador {
 	 */
 	
 	public synchronized boolean colision(Nave nave){
-		boolean A, B, C, D, I, F, toRet = false;
+		boolean  toRet = false;
 		
-		
-		long aux = System.currentTimeMillis();
-		if(aux  - init > minDuracion){
-			if(control){
-				laser = second.getImage();
-				this.height = second.getIconHeight();
-				this.width = second.getIconWidth();
-				sonido =  "/ProyectoX/sounds/laser.mp3";
-				getSound();
-				move();
-				control = false;
-			}
-			//laser cubre al enemigo
-			A = x < nave.getX() && x + width > nave.getX() + nave.getWidth();
-			//laser pasa por el centro del enemigo
-			B = x + width < nave.getX() + nave.getWidth() && x > nave.getX();
-			//enemigo adelante del jugador (al alcance del laser)
-			C = y + height > nave.getY() + nave.getHeight() && y < nave.getY();
-			//laser golpea el extremo derecho del enemigo
-			D = x > nave.getX() &&  x < nave.getX() + nave.getWidth();
-			//laser golpea el extremo derecho del enemigo
-			I =  x + width > nave.getX() &&  x + width < nave.getX() + nave.getWidth();
-			
-			//enemigo en pantalla
-			F = nave.getY() + nave.getHeight()/2 > 0;
-			
-			toRet = (A || B || D || I) && C && F;
-			
+		if(System.currentTimeMillis()  - init > minDuracion){
+			//verificarNuevaImagen();
+			toRet = super.colision(nave) || colisionLaser(nave);
 		}
 		
 		
 		return toRet;
 	}
+	
+	
+	private synchronized boolean colisionLaser(Nave nave){
+		boolean A, B, C, D, I, F, toRet = false;
+		
+	
+		//laser cubre al enemigo
+		A = x < nave.getX() && x + width > nave.getX() + nave.getWidth();
+		//laser pasa por el centro del enemigo
+		B = x + width < nave.getX() + nave.getWidth() && x > nave.getX();
+		//enemigo adelante del jugador (al alcance del laser)
+		C = y + height > nave.getY() + nave.getHeight() && y < nave.getY();
+		//laser golpea el extremo derecho del enemigo
+		D = x > nave.getX() &&  x < nave.getX() + nave.getWidth();
+		//laser golpea el extremo derecho del enemigo
+		I =  x + width > nave.getX() &&  x + width < nave.getX() + nave.getWidth();
+		
+		//enemigo en pantalla
+		F = nave.getY() + nave.getHeight()/2 > 0;
+		
+		toRet = (A || B || D || I) && C && F;
+
+		return toRet;
+	}
+	
+	protected void verificarNuevaImagen(){
+			if(control){
+				control = false;
+				laser = second.getImage();
+				this.height = second.getIconHeight();
+				this.width = second.getIconWidth();
+				move();
+				sonido =  "/ProyectoX/sounds/laser.mp3";
+				getSound();
+				
+				
+			}
+		
+	}
+	
 	
 	/**
 	 * redefine move() de la clase Disparo
@@ -113,7 +132,11 @@ public abstract class DisparoLaser extends DisparoJugador {
 	 */
 	
 	public void move(){
-		x = nave.getX() + nave.getWidth()/2 - width/2;
+		if(System.currentTimeMillis() - init > minDuracion){
+			verificarNuevaImagen();
+		}
+		
+		x = nave.getX() + (nave.getWidth()-4)/2 - width/2;
 		y = nave.getY() - (int)(dy*height) - (int)(dy-1)*nave.getHeight();
 		
 		if(System.currentTimeMillis() - init > maxDuracion){
@@ -145,8 +168,9 @@ public abstract class DisparoLaser extends DisparoJugador {
 	 * es la nueva funcione que hace desaparecer el disparo cuando se cumple su tiempo
 	 */
 	
-	private void desarmar(){
+	protected void desarmar(){
 		super.setVisible();
+		
 	}
 	
 	/**
@@ -158,6 +182,7 @@ public abstract class DisparoLaser extends DisparoJugador {
 	protected void setDelays(int min, int max){
 		maxDuracion = max;
 		minDuracion = min;
+		totalDuracion = (max/3)*2 + min;
 	}
 	
 	/**

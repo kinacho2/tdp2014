@@ -29,7 +29,7 @@ public class PUPBuilder {
 	
 	public PowerUp getPowerUpRandom(int x, int y){
 		PowerUp up;
-		int aux = rn.nextInt(100);
+		int aux = rn.nextInt(105);
 		if(aux >= 0 && aux < 12){
 			up = new Ayudante(x, y);
 		}else if(aux < 25){
@@ -42,11 +42,20 @@ public class PUPBuilder {
 			up = new Laser(x, y);
 		}else if(aux < 75){
 			up = new Wave(x, y);
-		}else if(aux < 80){
-			up = new PRandom(x, y);
+		}else if(aux < 85){
+			up = new PRocket(x, y);
 		}else{
 			up = new Vida(x, y);
 		}
+
+		/*
+		if(aux%3==0)
+		up = new Multiplicador(x, y);
+		if(aux%3==2)
+		up = new Escudo(x, y);
+		if(aux%3==1)
+		up = new Ayudante(x, y);
+/**/
 		return up;
 	}
 	

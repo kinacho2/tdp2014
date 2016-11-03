@@ -9,9 +9,11 @@ import javax.swing.ImageIcon;
 import ProyectoX.Disparos.Disparo;
 import ProyectoX.Disparos.DisparoJugador;
 import ProyectoX.Disparos.MisilBomba;
+import ProyectoX.Disparos.Multiplicador.MultiplicadorLVI;
 import ProyectoX.Frames.Explosion;
 import ProyectoX.Mapas.Mapa;
 import ProyectoX.Naves.Nave;
+import ProyectoX.Naves.Enemigos.Rocket;
 import ProyectoX.Naves.Jugador.Defensa.Defensa;
 import ProyectoX.Sound.Reproductor;
 
@@ -31,7 +33,7 @@ public abstract class Jugador extends Nave {
 	protected Image aux;
 	private boolean cambio = false;
 	protected DisparoJugador arma;
-	private Defensa defensa;
+	private Defensa[] defensa;
 	protected int bombas;
 	private String explodeSound = "/ProyectoX/sounds/explode.mp3";
 	private boolean pause;
@@ -42,6 +44,8 @@ public abstract class Jugador extends Nave {
 	protected int maxContPuntaje = 3000;
 	protected String winHeart = "/ProyectoX/sounds/power.mp3";
 	private String nombre;
+	protected int rocket;
+	private boolean misilLanzado=false;
 	//arreglo booleano de keyCodes
 	/**
 	 * Cosntructor de la clase Jugador
@@ -70,7 +74,7 @@ public abstract class Jugador extends Nave {
 		bombas = 2;
 		hearts = 3;
 		puntaje = contPuntaje = 0;
-		arma = new DisparoJugador(x + width/2 , y, 0, 1, velocidadMisil,this);	
+		arma = new MultiplicadorLVI(x, y , 0, 1, this);
     	
 	}
 	
@@ -112,10 +116,12 @@ public abstract class Jugador extends Nave {
 	        if (key == KeyEvent.VK_X){
 	        	tirarBomba();
 	        }
-	        
-	        if(defensa!=null){
-	        	defensa.keyPressed(e);
-	        }
+	        if(defensa!=null)
+		        for(int i=0; i<defensa.length;i++){
+		        	if(defensa[i]!=null)
+		        		defensa[i].keyPressed(e);
+			        
+		        }
 	        
 		}
     }
@@ -125,8 +131,25 @@ public abstract class Jugador extends Nave {
 	 */
     private void tirarBomba() {
     	if(bombas > 0){
-    		mapa.addDisparoJugador(new MisilBomba(x + width/2, y, mapa, reproductor));
-    		bombas--;
+    		if(!misilLanzado){
+    			misilLanzado = true; 
+    			
+    			mapa.addDisparoJugador(new MisilBomba(x + width/2, y, mapa, reproductor));
+	    		
+	    		bombas--;
+    		}
+    	}
+    	if(rocket>0){
+    		if(!misilLanzado){
+		    	Rocket r = new Rocket(50,12);
+		    	misilLanzado = true;
+		    	r.addReproductor(reproductor);
+		    	r.setPosition(x+width/2,y+3);
+		    	r.setMapa(mapa);
+		    	mapa.setEnemies(r);
+		    	
+		    	rocket--;
+    		}
     	}
 	}
     
@@ -161,9 +184,12 @@ public abstract class Jugador extends Nave {
 	            setDisCero();
 	        }
 	        
-	        if(defensa!=null){
-	        	defensa.keyReleased(e);
-	        }
+	        if(defensa!=null)
+		        for(int i=0; i<defensa.length;i++){
+		        	if(defensa[i]!=null)
+		        		defensa[i].keyReleased(e);
+			        
+		        }
 	        
     	}
         
@@ -182,7 +208,8 @@ public abstract class Jugador extends Nave {
     		Disparo dis = array[i];
     		mapa.addDisparoJugador(dis);
     	}
-    	arma.getSound();
+    	if(array.length>0)
+    		arma.getSound();
     }
     
     /**
@@ -191,17 +218,17 @@ public abstract class Jugador extends Nave {
 
     public void move() {
 	 
-	 if(x >= minWidth + width*2)
+	 if(x >= 0)
 		x += dx;
 	 else
 		x = 1;
 	 
-	 if( x <= maxWidth - width*2)
+	 if( x <= maxWidth - width)
 		x += dx;
 	 else
-		 x = maxWidth  - width*2 - 1;
+		 x = maxWidth  - width - 1;
 	 
-	 if(y >= maxHeight + height*2 )
+	 if(y >= 0)
 	    y += dy;
 	 else
 		y = 1;
@@ -211,9 +238,13 @@ public abstract class Jugador extends Nave {
 	 else
 		y = minHeight - height - 1;
 	 
-	 if(defensa!=null){
-		 defensa.move();
-	 }
+	 
+	 if(defensa!=null)
+	        for(int i=0; i<defensa.length;i++){
+	        	if(defensa[i]!=null)
+	        		defensa[i].move();
+		        
+	        }
  }
 
     /**
@@ -225,11 +256,13 @@ public abstract class Jugador extends Nave {
      */
 	public void setVida(int vd) {
 		if(System.currentTimeMillis() - init > invulnerable){
-			if(vida > 0)
-				vida-=vd;		
-			if(vida > 100)
-				vida = 100;
-			if(vida <= -1) 
+			if(vida-vd > 0)
+				vida-=vd;	
+			else
+				vida = 0;
+			if(vida > 150)
+				vida = 150;
+			if(vida <= 0) 
 				setVisible();
 		}
 	}
@@ -291,16 +324,17 @@ public abstract class Jugador extends Nave {
 	 * @param def nueva instancia de Defensa
 	 */
 	
-	public void setDefensa(Defensa def){
+	public void setDefensa(Defensa[] def){
 		defensa = def;
-		defensa.addReproductor(reproductor);
+		for(int i=0;i<defensa.length;i++)
+			defensa[i].addReproductor(reproductor);
 	}
 	
 	/**
 	 * retorna la instancia de Defensa actual del Jugador
 	 * @return instancia de Defensa
 	 */
-	public Defensa getDefensa(){
+	public Defensa[] getDefensa(){
 		return defensa;
 	}
 	
@@ -308,8 +342,14 @@ public abstract class Jugador extends Nave {
 	 * Le indica al Jugador que perdio la Defensa
 	 */
 
-	public void dropDefensa() {
-		defensa = null;
+	public void dropDefensa(int i) {
+		if(i<0)
+			defensa = null;
+		else
+			defensa[i] = null;
+		if(i==0 && defensa.length>1 &&defensa[1]!=null){
+			defensa[0] = defensa[1];
+		}
 	}
 	
 	/**
@@ -317,8 +357,12 @@ public abstract class Jugador extends Nave {
 	 */
 	
 	public void setBomba(){
-		if (bombas < 5)
-			bombas ++;
+		if (bombas <= 6)
+			bombas +=2;
+		else
+			bombas = 8;
+		
+		rocket=0;
 	}
 	
 	/**
@@ -341,8 +385,9 @@ public abstract class Jugador extends Nave {
 		init = System.currentTimeMillis();
 		x = 400;
 		y = 450;
-		dropDefensa();
-		bombas = 1;
+		dropDefensa(-1);
+		bombas = 2;
+		rocket = 0;
 		visible = true;
 	}
 	
@@ -354,9 +399,13 @@ public abstract class Jugador extends Nave {
 	
 	public void setMapa(Mapa map){
 		super.setMapa(map);
-		if(defensa!=null){
-			defensa.setMapa(map);
-		}
+		if(defensa!=null)
+	        for(int i=0; i<defensa.length;i++){
+	        	if(defensa[i]!=null)
+	        		defensa[i].setMapa(map);
+		        
+	        }
+		arma.reset();
 	}
 	
 	/**
@@ -449,6 +498,23 @@ public abstract class Jugador extends Nave {
 	
 	public String getNombre(){
 		return nombre;
+	}
+
+	public void setRocket() {
+		if(rocket<=40)
+			rocket+=10;
+		else
+			rocket = 50;
+		bombas = 0;
+		
+	}
+	
+	public void misilLanzado(){
+		misilLanzado = false;
+	}
+
+	public int getCantRockets() {
+		return rocket;
 	}
 	
 }

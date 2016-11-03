@@ -18,6 +18,7 @@ public class EscudoX extends Defensa {
 	protected static final URL urlWarning = (Jugador.class.getClassLoader().getResource("ProyectoX/img/PUP/Escudo/Escudo_Warning.gif"));
 
 	private boolean warning = false;
+	private String warningSound = "/ProyectoX/sounds/warning.mp3";
 	
 	/**
 	 * Constructor de la clase EscudoX
@@ -26,8 +27,8 @@ public class EscudoX extends Defensa {
 	 * @param jugador el Jugador actual
 	 */
 	public EscudoX(Jugador jugador){
-		super(200, jugador.getVelocidad(),  new ImageIcon(url), new ImageIcon(url), new ImageIcon(url));
-		setearParametrosDefecto(200, 0, 64, 64);
+		super(400, jugador.getVelocidad(),  new ImageIcon(url), new ImageIcon(url), new ImageIcon(url));
+		setearParametrosDefecto(400, 0, 64, 64);
 		x = jugador.getX() + jugador.getWidth()/2 - defaultWidth/2;
 		y = jugador.getY() + jugador.getHeight()/2 - defaultHeight/2;
 		height = defaultHeight;
@@ -47,6 +48,7 @@ public class EscudoX extends Defensa {
 		}
 		
 		mapa.setJugador(this);
+		
 		
 	}
 	
@@ -97,9 +99,10 @@ public class EscudoX extends Defensa {
 	public void setVida(int vd){
 		super.setVida(vd);	
 		
-		if(vida <= 50) 
+		if(vida <= 100 && vida>0) {
 			setWarning();
-		
+			
+		}
 	}
 	
 	/**
@@ -111,6 +114,7 @@ public class EscudoX extends Defensa {
 			icon = new ImageIcon(urlWarning);
 			iconDer = new ImageIcon(urlWarning);
 			iconIzq = new ImageIcon(urlWarning);
+			reproductor.addSound(warningSound , false);
 			warning = true;
 		}
 	}
@@ -132,9 +136,10 @@ public class EscudoX extends Defensa {
 	 * @return instancia de Ayudante
 	 */
 	
-	public Defensa getAyudante(){
+	public Defensa[] getAyudante(){
 		setVisible();
-		return new NaveAyudante(jugador);
+		Defensa[] nueva = {new NaveAyudante(jugador,0)};
+		return nueva;
 	}
 	
 	/**
@@ -157,5 +162,9 @@ public class EscudoX extends Defensa {
 	
 	public void setPuntaje(int puntaje){
 		jugador.setPuntaje(puntaje);
+	}
+	
+	public void misilLanzado(){
+		jugador.misilLanzado();
 	}
 }

@@ -55,6 +55,7 @@ public class PanelJugador  extends JPanel implements ActionListener{
 	private JLabel labelEnemigo;
 	private JLabel contadorEnemigos;
 	private boolean pause = false;
+	private ImageIcon bombaORocket;
 	
 	/**
 	 * Constructor de la clase PanelJugador
@@ -85,7 +86,6 @@ public class PanelJugador  extends JPanel implements ActionListener{
 	public void setBar(JPanel bar) {
 		
 		ImageIcon ii;
-		
         puntaje = new JLabel(""+ 0);
 		puntaje.setBounds(369, -2, 200, 35);
 		puntaje.setFont(new java.awt.Font("Segoe UI",0,20));
@@ -158,8 +158,6 @@ public class PanelJugador  extends JPanel implements ActionListener{
 		cantBombas.setBorder(new LineBorder(new java.awt.Color(0,0,255), 1, false));
 		bar.add(cantBombas);
 		
-		
-		
 		//icono de sonido y boton de silencio
 		sonido = new JButton("");
 		dis = new ImageIcon(urlDis);
@@ -226,17 +224,19 @@ public class PanelJugador  extends JPanel implements ActionListener{
 	        if (jugador.getVisible()){
 	        	g2d.drawImage(jugador.getImage(), jugador.getX(), jugador.getY(), this);
 	        }
-	        
-	        Jugador aux = jugador.getDefensa();
-	        
-	        if (aux != null){
-	        	if(aux.getVisible()){
-	        		g2d.drawImage(aux.getImage(), aux.getX(), aux.getY(), this);
-	        	}
-	        	else
-	        		jugador.dropDefensa();
+	        Jugador[] aux = jugador.getDefensa();
+	        if(aux!=null)
+	        for (int i = 0; i < aux.length; i++ ) {
+		        
+		        
+		        if (aux[i] != null){
+		        	if(aux[i].getVisible()){
+		        		g2d.drawImage(aux[i].getImage(), aux[i].getX(), aux[i].getY(), this);
+		        	}
+		        	else
+		        		jugador.dropDefensa(i);
+		        }
 	        }
-	        
 	        //repinta los powerUps
 	        ms = mapa.getPowers();
 	        
@@ -276,7 +276,24 @@ public class PanelJugador  extends JPanel implements ActionListener{
 	      	cantVida.setText("" + jugador.getVida());
 			contadorEnemigos.setText("" + mapa.cantEnemies());
 			cantHearts.setText(""+jugador.getHearts());
-	        cantBombas.setText(""+jugador.getCantBombas());
+			int cantB = jugador.getCantBombas();
+			int cantR = jugador.getCantRockets();
+			if(cantR==0 && cantB ==0)
+				cantBombas.setText(""+0);
+			else{
+				if(cantR>0 && cantB==0){
+					cantBombas.setText(""+cantR);
+					bombaORocket = new ImageIcon(new ImageIcon(PanelJugador.class.getClassLoader().getResource("ProyectoX/img/PUP/rocket.png")).getImage().getScaledInstance(25, 25, Image.SCALE_DEFAULT));
+
+				}
+				if(cantR==0 && cantB>0){
+					cantBombas.setText(""+cantB);
+					bombaORocket = new ImageIcon(new ImageIcon(PanelJugador.class.getClassLoader().getResource("ProyectoX/img/PUP/bomba.png")).getImage().getScaledInstance(25, 25, Image.SCALE_DEFAULT));
+
+				}
+				labelBomba.setIcon(bombaORocket);
+				
+			}
 	        Toolkit.getDefaultToolkit().sync();
 	        g.dispose();
 		}

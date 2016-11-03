@@ -17,7 +17,7 @@ public class DisparoWave extends DisparoJugador {
 
 	private static final URL url = Disparo.class.getClassLoader().getResource("ProyectoX/img/Disparos/Wave/wave.png");
 		
-	protected int variacion = 0;
+	protected double variacion = 0;
 	
 	/**
 	 * Constructor de la clase DisparoWave

@@ -56,7 +56,7 @@ public class MisilBomba extends Disparo{
 	 */
 	
 	public MisilBomba(int x, int y, Mapa mapa, Reproductor rep) {
-		super(x, y, 0, 0, 1);
+		super(x, y, 0, 0, 5);
 		ImageIcon ii =  new ImageIcon(url);
 		misil = ii.getImage().getScaledInstance(defaultWidth, defaultHeight, Image.SCALE_DEFAULT);
 		
@@ -98,13 +98,13 @@ public class MisilBomba extends Disparo{
 	 * le indica a la instancia de Mapa que se lanzo una bomba
 	 */
 	
-	public void move(){
+	public void move(){ 
 		long now = System.currentTimeMillis();
 		
 		
 		if(isVisible()){
 			y = y - velocidad;
-			distancia ++;
+			distancia +=4;
 			
 			//cuando el misil recorre la distancia debe explotar, antes puede ser colisionado por un enemigo y destruirse
 			if(control2 && distancia>=maxDistancia){
@@ -140,6 +140,7 @@ public class MisilBomba extends Disparo{
 				if(now - init > maxDelay){
 					super.setVisible();
 					mapa.bomba();
+					mapa.getJugador().misilLanzado();
 				}
 			}
 		}
@@ -153,6 +154,7 @@ public class MisilBomba extends Disparo{
 	public void setVisible(){
 		if(control2){
 			super.setVisible();
+			mapa.getJugador().misilLanzado();
 		}
 	}
 

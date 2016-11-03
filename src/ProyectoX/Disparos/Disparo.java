@@ -17,7 +17,7 @@ import ProyectoX.Sound.Reproductor;
 
 public class Disparo {
 
-	private static final URL url = Disparo.class.getClassLoader().getResource("ProyectoX/img/Disparos/Basico/Basico.png");
+	private static final URL url = Disparo.class.getClassLoader().getResource("ProyectoX/img/Disparos/Basico/BasicoRed.png");
 	private static final URL explode = Disparo.class.getClassLoader().getResource("ProyectoX/img/Explosiones/pequena.gif");
 	protected String sonido;
 	protected String golpe = "/ProyectoX/sounds/bala_golpeando.mp3";
@@ -137,7 +137,7 @@ public class Disparo {
 		H = (y + height) <= (nave.getY() + nave.getHeight());
 		
 		// funcion de colicion que verifica si alguno de los 4 puntos del borde del objeto disparo intersectan con area del objeto pasado por parametro
-		fColision = (A && B || E && F) && (C && D || G && H) ||  !A && !F && ( !H && D || G && H) ||  !C &&  !H && (B &&  !F ||  !A && E) && !nave.isInvulnerable() && isVisible() && nave.getVisible();
+		fColision = (A && B || E && F) && (C && D || G && H) ||  !A && !F && ( !H && D || G && H) ||  !C &&  !H && (B &&  !F ||  !A && E) && !nave.isInvulnerable() && isVisible() && nave.getVisible() && !nave.fueraDePantalla();
 		if(fColision){
 			if(rep!=null)
 				rep.addSound(golpe,false) ;
@@ -146,7 +146,43 @@ public class Disparo {
 		return fColision;
 	}
     
+    
     /**
+     *  Determina si el disparo colisiono con la nave pasada por parametro
+     */
+    public synchronized boolean colisionDisparo(Disparo dis) {
+    	boolean A,B,C,D,E,F,G,H, fColision; 
+		
+		A = x >= dis.getX();
+		B = x <= (dis.getX() + dis.getWidth());
+		C = y >= dis.getY();
+		D = y <= (dis.getY() + dis.getHeight());
+		E = (x + width) >= dis.getX();
+		F = (x + width) <= (dis.getX() + dis.getWidth());
+		G = (y + height) >= dis.getY();
+		H = (y + height) <= (dis.getY() + dis.getHeight());
+		
+		// funcion de colicion que verifica si alguno de los 4 puntos del borde del objeto disparo intersectan con area del objeto pasado por parametro
+		fColision = (A && B || E && F) && (C && D || G && H) ||  !A && !F && ( !H && D || G && H) ||  !C &&  !H && (B &&  !F ||  !A && E)  && isVisible() && dis.isVisible();
+		if(fColision){
+			if(rep!=null)
+				rep.addSound(golpe,false) ;
+		}
+		
+		return fColision;
+	}
+    
+    public int getHeight() {
+		// TODO Auto-generated method stub
+		return height;
+	}
+
+	public int getWidth() {
+		// TODO Auto-generated method stub
+		return width;
+	}
+
+	/**
      *  Establece que el disparo no esta visible en la pantalla
      */
     public void setVisible() {

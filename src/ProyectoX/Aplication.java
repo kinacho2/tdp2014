@@ -86,7 +86,8 @@ public class Aplication extends javax.swing.JFrame {
      */
   
     private void initGUI() {
-    	SplashScreen spl = new SplashScreen(15000, url);
+    	//#MODIFY
+    	SplashScreen spl = new SplashScreen(100, url);
     	spl.showSplash();
     	initPrimerPanel();
 		setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);

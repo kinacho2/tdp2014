@@ -284,6 +284,15 @@ public abstract class Jefe extends Enemigo{
 		addSonidoExplosion();
 		Explosion aux = new Explosion(x + width/2, y + height/2, new ImageIcon(explode), width/2, height/2);
 		aux.setDelay(3000);
+		
 		return aux;
+	}
+	
+	public void setVisible(){
+		
+	}
+
+	public void destroy() {
+		super.setVisible();
 	}
 }

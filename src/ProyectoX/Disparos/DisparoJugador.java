@@ -1,5 +1,10 @@
 package ProyectoX.Disparos;
 
+import java.awt.Image;
+import java.net.URL;
+
+import javax.swing.ImageIcon;
+
 import ProyectoX.Disparos.Laser.LaserLVI;
 import ProyectoX.Disparos.Multiplicador.MultiplicadorLVI;
 import ProyectoX.Disparos.Wave.WaveLVI;
@@ -15,7 +20,8 @@ import ProyectoX.Naves.Nave;
  */
 public class DisparoJugador extends Disparo{
 
-	
+	private static final URL url = Disparo.class.getClassLoader().getResource("ProyectoX/img/Disparos/Basico/Basico.png");
+
 	protected Nave nave;
 	
 	/**
@@ -31,6 +37,10 @@ public class DisparoJugador extends Disparo{
 	public DisparoJugador(int x, int y, double dx, double dy, int missileSpeed, Nave nave) {
 		super(x, y, dx, dy, missileSpeed);
 		this.nave = nave;
+		ImageIcon ii = new ImageIcon(url);
+	    image = ii.getImage().getScaledInstance(width, height, Image.SCALE_DEFAULT);
+	    //velocidad = 4;
+	       
 	}
 	
 	/**
@@ -68,6 +78,10 @@ public class DisparoJugador extends Disparo{
 	
 	public DisparoJugador getWave(){
 		return new WaveLVI(x,y,dx,dy,nave);
+	}
+
+	public void reset() {
+		
 	}
 
 }

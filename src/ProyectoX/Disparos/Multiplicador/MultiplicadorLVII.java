@@ -41,11 +41,11 @@ public class MultiplicadorLVII extends DisparoMultiplicador{
 	
 	public Disparo[] cloneNivel(){
 		Disparo[] d = new Disparo[5];
-		d[0] = new Disparo(x, y, 0, dy, velocidad);
-		d[1] = new Disparo(x, y, 0.4d, dy, velocidad);
-		d[2] = new Disparo(x, y, -0.4d, dy, velocidad);
-		d[3] = new Disparo(x, y + 30, 0.4d, -dy, velocidad);
-		d[4] = new Disparo(x, y + 30, -0.4d, -dy, velocidad);
+		d[0] = new DisparoJugador(x - width/4, y, 0, dy, velocidad,null);
+		d[1] = new DisparoJugador(x - width/4, y, 0.4d, dy, velocidad,null);
+		d[2] = new DisparoJugador(x - width/4, y, -0.4d, dy, velocidad,null);
+		d[3] = new DisparoJugador(x - width/4, y + 30, 0.4d, -dy, velocidad,null);
+		d[4] = new DisparoJugador(x - width/4, y + 30, -0.4d, -dy, velocidad,null);
 		setearReproductor(d);
 		return d;
 	}
