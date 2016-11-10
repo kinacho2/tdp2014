@@ -66,6 +66,8 @@ public abstract class Mapa{
 	protected String sonido;
 	protected String sonidoJefe;
 	protected PanelGame game;
+
+	private boolean pauseTime = false;
 	
 	/**
 	 * Constructor de la clase Mapa
@@ -396,10 +398,29 @@ public abstract class Mapa{
 
 	public void pause(boolean arg) {
 		mindEnemies.pause(arg);
-		if(arg)
+		
+		if(arg){
 			dy = 0;
-		else
+			reproductor.stop(1);
+		}
+		else{
+			if(!pauseTime)
+				dy = 1;
+			reproductor.addSound(sonido, true);
+		}
+	}
+	
+
+	public void pauseTime(boolean arg) {
+		mindEnemies.pauseTime(arg);
+		mind.pauseTime(arg);
+		pauseTime  = arg;
+		if(arg){
+			dy = 0;
+		}
+		else{
 			dy = 1;
+		}
 	}
 	
 	/**
@@ -438,5 +459,10 @@ public abstract class Mapa{
 	 * @return URL de imagen
 	 */
 	public abstract URL getImagenSplash();
+
+	public void bombarderoFuera() {
+		enBuilder.bombarderoFuera();
+	}
+
 }
 

@@ -35,6 +35,11 @@ public class MindEnemies extends Thread  {
 	private String outro = "/ProyectoX/sounds/music/outro.mp3";
 	private String bosscoming = "/ProyectoX/sounds/bosscoming.mp3";
 	
+	private boolean sonido = false;
+	private long wait = 0;
+	private boolean pauseTime;
+	
+	
 	/**
 	 * Constructor de la clase MindEnemies
 	 * @param p JPanel donde se dibujan los enemigos, el fondo y los disparos del jugador
@@ -67,16 +72,18 @@ public class MindEnemies extends Thread  {
 					//calcula la probabilidad de aparicion de los enemigos en pantalla
 					
 					disparosJugador();
-					
-					if(ran.nextInt(75)==0){
-						Enemigo m = mapa.nextEnemigo();
-						if(m!=null){
-							enemies.add(m);
+					//TODO
+					if(!pauseTime)
+						if(ran.nextInt(75)==0){
+							Enemigo m = mapa.nextEnemigo();
+							if(m!=null){
+								enemies.add(m);
+							}
 						}
-					}
 	
 					//mueve y remueve, en caso de ser necesario, las naves enemigas
-					
+					//TODO
+					if(!pauseTime)
 			        for (int i = 0; i < enemies.size(); i++ ) {
 			            Enemigo m = (Enemigo) enemies.get(i);
 			            if(m!=null && m.getVisible()){
@@ -97,7 +104,7 @@ public class MindEnemies extends Thread  {
 			            }
 			        }
 			        
-			        panel.repaint();
+			        
 					
 					if(jefe){
 						if(enemies.size() == 0 && !muerteJefe){
@@ -115,6 +122,7 @@ public class MindEnemies extends Thread  {
 						}
 					}
 				}
+				panel.repaint();
 				
 			}
 		
@@ -193,10 +201,7 @@ public class MindEnemies extends Thread  {
 	 * @param boss de tipo Jefe el ultimo Enemigo del nivel
 	 * @throws InterruptedException 
 	 */
-	
-	private boolean sonido = false;
-	private long wait = 0;
-	
+
 	public void addBoss(Jefe boss){
 		if(!sonido){
 			wait = System.currentTimeMillis();
@@ -254,6 +259,11 @@ public class MindEnemies extends Thread  {
 	
 	public boolean estaJefe() {
 		return jefe;
+		
+	}
+
+	public void pauseTime(boolean arg) {
+		pauseTime = arg;
 		
 	}
 }

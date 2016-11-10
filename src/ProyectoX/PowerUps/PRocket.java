@@ -14,7 +14,7 @@ import ProyectoX.Sound.Reproductor;
 
 public class PRocket extends PowerUp{
 
-	protected static final URL url = (PowerUp.class.getClassLoader().getResource("ProyectoX/img/PUP/random.png"));
+	protected static final URL url = (PowerUp.class.getClassLoader().getResource("ProyectoX/img/PUP/rocket.png"));
 	
 	/**
 	 * constructor de la clase PRandom

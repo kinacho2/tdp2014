@@ -2,6 +2,9 @@ package ProyectoX.Naves.Enemigos;
 
 import java.net.URL;
 import javax.swing.ImageIcon;
+
+import org.omg.PortableServer.ServantRetentionPolicyValue;
+
 import ProyectoX.Disparos.Disparo;
 import ProyectoX.Frames.Explosion;
 import ProyectoX.Naves.Nave;
@@ -41,6 +44,8 @@ public class Bombardero extends Enemigo {
 	//variables que controlan un patron de disparo
 	private int delayDisparo = 50;
 	private int bombarderoDis = 0;
+	
+	private boolean movfinal = false;
 	
 	/**
 	 * Constructor de la clase Bombardero
@@ -135,11 +140,14 @@ public class Bombardero extends Enemigo {
 					if(y > (-100  -defaultWidth) ) {
 						y -= velocidad;
 					}
+					
+					
 				}
 			}
 		}
 		setMove();
-		verificarColision();	
+		verificarColision();
+		
 	}
 	
 	
@@ -200,5 +208,13 @@ public Explosion getExplosion(){
 		Explosion aux = new Explosion(x + width/2, y + height/2, new ImageIcon(explode), width, height);
 		aux.setDelay(3000);
 		return aux;
+	}
+
+	public void setVisible(){
+		super.setVisible();
+		if(!movfinal){
+			movfinal = true;
+			mapa.bombarderoFuera();
+		}
 	}
 }

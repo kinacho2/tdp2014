@@ -33,11 +33,12 @@ public class Mind implements ActionListener {
     private int contDelay;
     private Reproductor reproductor;
     private boolean pause = false;
+	private boolean pauseTime = false;
    
     /**
      * Constructor de la clase Mind
      * crea al jugador e inicializa el hilo del juego
-     * @param panel JPanel donde se dibuja el jugador, los disparos enemigos, los objetosm, los powerup y las explosiones
+     * @param panel JPanel donde se dibuja el jugador, los disparos enemigos, los objetos, los powerup y las explosiones
      * @param select indica el tipo de nave elegida por el jugador
      */
 
@@ -90,8 +91,9 @@ public class Mind implements ActionListener {
 	        if(jugador.getHearts()<0){
 	        	mapa.gameOver();
 	        }
-	       	panel.repaint();  
+	       	  
     	}
+    	panel.repaint();
     }
     
     /**
@@ -105,7 +107,8 @@ public class Mind implements ActionListener {
 		for (int j = 0; j < powers.size(); j++ ) {
 			PowerUp pw = (PowerUp) powers.get(j);
 	        if (pw!=null && pw.isVisible()) {
-	        	pw.move();
+	        	if(!pauseTime )
+	        		pw.move();
 	           	if(pw.colision(jugador)){
 	           		pw.setVisible();
 	            }
@@ -267,6 +270,12 @@ public class Mind implements ActionListener {
 		if(arg)
 			reproductor.stop(0);
 		reproductor.setEnabled(arg);
+	}
+
+	public void pauseTime(boolean arg) {
+		pauseTime = arg;
+		panel.pauseTime(arg);
+		
 	}
 	
 	

@@ -16,3 +16,6 @@ agregar powerup de evasion o invulnerabilidad
 modificar velocidad del fondo y las nubes al sobrevolar los jefes
 agregar mas torretas a los jefes I y II
 recordar acomodar velocidad de disparojugador
+agregar powerup congelante (pausa a mind enemies)
+agregar alguno cheats (trabajo dificil?)
+agregar mochila de buffos

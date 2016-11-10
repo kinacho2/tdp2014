@@ -67,7 +67,7 @@ public class Rocket extends Kamikaze{
 	
 	public synchronized void move() {
 		
-			if(objetivo!=null && !objetivo.getVisible()){
+			if(objetivo!=null && objetivo.getVisible()){
 				dx = objetivo.getX() - x;
 				dy = objetivo.getY() - y;
 				double mod = Math.sqrt(dy*dy+dx*dx);

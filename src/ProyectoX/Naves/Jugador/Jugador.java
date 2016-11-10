@@ -39,6 +39,7 @@ public abstract class Jugador extends Nave {
 	private boolean pause;
 	private long init;
 	protected int invulnerable = 5000;
+	private int timePaused = 5000;
 	protected int contPuntaje;
 	//cada 3000 puntos se seteara un nuevo corazon al jugador
 	protected int maxContPuntaje = 3000;
@@ -245,6 +246,10 @@ public abstract class Jugador extends Nave {
 	        		defensa[i].move();
 		        
 	        }
+	 
+	 if(pauseTime){
+		 pauseTime();
+	 }
  }
 
     /**
@@ -454,6 +459,7 @@ public abstract class Jugador extends Nave {
 		if(!toRet){
 			if(!cambio){
 				image = aux;
+				invulnerable = 5000;
 			}
 			cambio = false;
 			
@@ -515,6 +521,37 @@ public abstract class Jugador extends Nave {
 
 	public int getCantRockets() {
 		return rocket;
+	}
+	
+	public void invulnerable(){
+		invulnerable = 20000;
+		init = System.currentTimeMillis();
+	}
+	
+	public long getInvulnerableTime(){
+		return invulnerable - (System.currentTimeMillis()-init);
+	}
+
+	private long pauseTimeInit;
+	private boolean pauseTime;
+	
+	public void pauseTime() {
+		if(!pauseTime){
+			pauseTime= true;
+			mapa.pauseTime(true);
+			pauseTimeInit = System.currentTimeMillis();
+		}
+		else{
+			if(System.currentTimeMillis() - pauseTimeInit > timePaused){
+				pauseTime = false;
+				mapa.pauseTime(false);
+			}
+		}
+		
+	}
+	
+	public long getPauseTime(){
+		return timePaused - (System.currentTimeMillis() - pauseTimeInit);
 	}
 	
 }

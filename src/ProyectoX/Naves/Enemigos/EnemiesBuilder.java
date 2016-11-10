@@ -10,6 +10,7 @@ import java.util.Random;
 public class EnemiesBuilder {
 	
 	private Random rn;
+	private int bombardero = 0;
 	
 	/**
 	 * constructor de la clase EnemiesBuilder
@@ -31,8 +32,14 @@ public class EnemiesBuilder {
 		
 		if(probabilidad % 5 == 0)
 			m = new Kamikaze(probabilidad % 15 == 0);
-		else if(probabilidad % 13 == 0)
-			m = new Bombardero(probabilidad % 2 == 0);
+		else if(probabilidad % 13 == 0){
+			if(bombardero<=2){
+				m = new Bombardero(probabilidad % 2 == 0);
+				bombardero  ++;
+			}
+			else
+				m = new Artillero(false);
+		}
 		else if(probabilidad % 5 == 1) 
 			m = new Artillero((probabilidad % 20) == 1);
 		else
@@ -41,6 +48,11 @@ public class EnemiesBuilder {
 		//m = new Basico(true);
 		
         return m;
+	}
+	
+	public void bombarderoFuera(){
+		bombardero --;
+
 	}
 
 }

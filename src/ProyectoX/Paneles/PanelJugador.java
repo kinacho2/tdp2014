@@ -56,6 +56,9 @@ public class PanelJugador  extends JPanel implements ActionListener{
 	private JLabel contadorEnemigos;
 	private boolean pause = false;
 	private ImageIcon bombaORocket;
+	private boolean pauseTime = false;
+	private JLabel labelBuff;
+	private JLabel timeBuff;
 	
 	/**
 	 * Constructor de la clase PanelJugador
@@ -87,10 +90,10 @@ public class PanelJugador  extends JPanel implements ActionListener{
 		
 		ImageIcon ii;
         puntaje = new JLabel(""+ 0);
-		puntaje.setBounds(369, -2, 200, 35);
+		puntaje.setBounds(390, -2, 200, 35);
 		puntaje.setFont(new java.awt.Font("Segoe UI",0,20));
 		puntaje.setForeground(new java.awt.Color(255,255,255));
-		puntaje.setBorder(new LineBorder(new java.awt.Color(0,0,255), 1, false));
+		puntaje.setBorder(new LineBorder(new java.awt.Color(255,255,255), 1, false));
 		puntaje.setHorizontalAlignment(SwingConstants.RIGHT);
 		bar.add(puntaje);
 		
@@ -98,31 +101,31 @@ public class PanelJugador  extends JPanel implements ActionListener{
 		//label enemigos y contador de enemigos
 		ii = new ImageIcon(new ImageIcon(PanelJugador.class.getClassLoader().getResource("ProyectoX/img/Enemigo/basico.png")).getImage().getScaledInstance(25, 25, Image.SCALE_DEFAULT));
 		labelEnemigo = new JLabel(ii);
-		labelEnemigo.setBounds(333, -2, 30, 35);
-		labelEnemigo.setBorder(new LineBorder(new java.awt.Color(0,0,255), 1, false));
+		labelEnemigo.setBounds(315, -2, 30, 35);
+		labelEnemigo.setBorder(new LineBorder(new java.awt.Color(215,56,7), 1, false));
 		bar.add(labelEnemigo);
 		
 		
 		contadorEnemigos = new JLabel("" + mapa.cantEnemies());
-		contadorEnemigos.setBounds(363, -2, 45, 35);
+		contadorEnemigos.setBounds(345, -2, 45, 35);
 		contadorEnemigos.setFont(new java.awt.Font("Segoe UI",0,20));
-		contadorEnemigos.setForeground(new java.awt.Color(0,255,0));
-		contadorEnemigos.setBorder(new LineBorder(new java.awt.Color(0,0,255), 1, false));
+		contadorEnemigos.setForeground(new java.awt.Color(215,56,7));
+		contadorEnemigos.setBorder(new LineBorder(new java.awt.Color(215,56,7), 1, false));
 		contadorEnemigos.setHorizontalAlignment(SwingConstants.CENTER);
 		bar.add(contadorEnemigos);
 		
 		//label vida y cantidad de vida
 		ii = new ImageIcon(new ImageIcon(PanelJugador.class.getClassLoader().getResource("ProyectoX/img/PUP/vida.png")).getImage().getScaledInstance(25, 25, Image.SCALE_DEFAULT));
 		labelVida = new JLabel(ii);
-		labelVida.setBounds(252, -2, 30, 35);
-		labelVida.setBorder(new LineBorder(new java.awt.Color(0,0,255), 1, false));
+		labelVida.setBounds(240, -2, 30, 35);
+		labelVida.setBorder(new LineBorder(new java.awt.Color(0,255,0), 1, false));
 		bar.add(labelVida);
 		
 		cantVida = new JLabel(""+ jugador.getVida());
-		cantVida.setBounds(282, -2, 45, 35);
+		cantVida.setBounds(270, -2, 45, 35);
 		cantVida.setFont(new java.awt.Font("Segoe UI",0,20));
 		cantVida.setForeground(new java.awt.Color(0,0,255));
-		cantVida.setBorder(new LineBorder(new java.awt.Color(0,0,255), 1, false));
+		cantVida.setBorder(new LineBorder(new java.awt.Color(0,255,0), 1, false));
 		cantVida.setHorizontalAlignment(SwingConstants.CENTER);
 		bar.add(cantVida);
 		
@@ -130,17 +133,34 @@ public class PanelJugador  extends JPanel implements ActionListener{
 		ii = new ImageIcon(PanelInit.class.getClassLoader().getResource("ProyectoX/img/Menu_barras/heart.png"));
 		ii = new ImageIcon(ii.getImage().getScaledInstance(20, 20, Image.SCALE_DEFAULT));
 		heart = new JLabel(ii);
-		heart.setBounds(186, -2, 30, 35);
+		heart.setBounds(186+550, -2, 30, 35);
+		heart.setBorder(new LineBorder(new java.awt.Color(255,0,0), 1, false));
 		bar.add(heart);
-		heart.setBorder(new LineBorder(new java.awt.Color(0,0,255), 1, false));
+		
 		
 		cantHearts = new JLabel("3");
-		cantHearts.setBounds(216, -2, 30, 35);
+		cantHearts.setBounds(216+550, -2, 30, 35);
 		cantHearts.setFont(new java.awt.Font("Segoe UI",0,20));
 		cantHearts.setForeground(new java.awt.Color(255,0,0));
-		cantHearts.setBorder(new LineBorder(new java.awt.Color(0,0,255), 1, false));
+		cantHearts.setBorder(new LineBorder(new java.awt.Color(255,0,0), 1, false));
 		cantHearts.setHorizontalAlignment(SwingConstants.CENTER);
 		bar.add(cantHearts);
+		
+		//icono de buffs y tiempo
+		ii = new ImageIcon(new ImageIcon(PanelJugador.class.getClassLoader().getResource("ProyectoX/img/PUP/fantasma.png")).getImage().getScaledInstance(25, 25, Image.SCALE_DEFAULT));
+		labelBuff = new JLabel(ii);
+		labelBuff.setBounds(180, -2, 30, 35);
+		labelBuff.setBackground(new java.awt.Color(0,0,255));
+		labelBuff.setBorder(new LineBorder(new java.awt.Color(0,0,255), 1, false));
+		bar.add(labelBuff);
+		
+		timeBuff = new JLabel(""+jugador.getCantBombas());
+		timeBuff.setBounds(210, -2, 30, 35);
+		timeBuff.setFont(new java.awt.Font("Segoe UI",0,20));
+		timeBuff.setForeground(new java.awt.Color(0,255,0));
+		timeBuff.setHorizontalAlignment(SwingConstants.CENTER);
+		timeBuff.setBorder(new LineBorder(new java.awt.Color(0,0,255), 1, false));
+		bar.add(timeBuff);
 		
 		//Icono de bomba y cantidad de bombas
 		ii = new ImageIcon(new ImageIcon(PanelJugador.class.getClassLoader().getResource("ProyectoX/img/PUP/bomba.png")).getImage().getScaledInstance(25, 25, Image.SCALE_DEFAULT));
@@ -184,7 +204,7 @@ public class PanelJugador  extends JPanel implements ActionListener{
 	 */
 	
 	public void paint(Graphics g) {
-		if(!pause){
+		{
 	        super.paint(g);
 	        
 	        Graphics2D g2d = (Graphics2D) g;
@@ -253,6 +273,7 @@ public class PanelJugador  extends JPanel implements ActionListener{
 	        	Objeto o = (Objeto) ms.get(i);
 	        	if(o!= null && o.getVisible()){
 	                g2d.drawImage(o.getImage(), o.getX(), o.getY(), this);
+	                if(!pause && !pauseTime)
 	                o.move();
 	        	}
 	        	
@@ -278,6 +299,9 @@ public class PanelJugador  extends JPanel implements ActionListener{
 			cantHearts.setText(""+jugador.getHearts());
 			int cantB = jugador.getCantBombas();
 			int cantR = jugador.getCantRockets();
+			int invulnerable = (int)jugador.getInvulnerableTime()/1000;
+			int timeP = (int)jugador.getPauseTime()/1000;
+
 			if(cantR==0 && cantB ==0)
 				cantBombas.setText(""+0);
 			else{
@@ -289,11 +313,29 @@ public class PanelJugador  extends JPanel implements ActionListener{
 				if(cantR==0 && cantB>0){
 					cantBombas.setText(""+cantB);
 					bombaORocket = new ImageIcon(new ImageIcon(PanelJugador.class.getClassLoader().getResource("ProyectoX/img/PUP/bomba.png")).getImage().getScaledInstance(25, 25, Image.SCALE_DEFAULT));
-
 				}
 				labelBomba.setIcon(bombaORocket);
-				
 			}
+			
+			if(timeP>=0){	
+				ImageIcon ii = new ImageIcon(new ImageIcon(PanelJugador.class.getClassLoader().getResource("ProyectoX/img/PUP/tiempo.png")).getImage().getScaledInstance(25, 25, Image.SCALE_DEFAULT));
+				timeBuff.setText(""+timeP);
+				labelBuff.setIcon(ii);
+			}else{
+				if(invulnerable>=0){
+					ImageIcon ii = new ImageIcon(new ImageIcon(PanelJugador.class.getClassLoader().getResource("ProyectoX/img/PUP/fantasma.png")).getImage().getScaledInstance(25, 25, Image.SCALE_DEFAULT));
+					timeBuff.setText(""+invulnerable);
+					labelBuff.setIcon(ii);
+				}
+				else{
+					//Enemigo/Torreta/invisible.png
+					ImageIcon ii = new ImageIcon(new ImageIcon(PanelJugador.class.getClassLoader().getResource("ProyectoX/img/Enemigo/Torreta/invisible.png")).getImage().getScaledInstance(25, 25, Image.SCALE_DEFAULT));
+					timeBuff.setText("");
+					labelBuff.setIcon(ii);
+				}
+			}
+			
+			
 	        Toolkit.getDefaultToolkit().sync();
 	        g.dispose();
 		}
@@ -351,6 +393,11 @@ public class PanelJugador  extends JPanel implements ActionListener{
 
 	public void setMapa(Mapa map) {
 		mapa = map;
+		
+	}
+
+	public void pauseTime(boolean arg) {
+		pauseTime = arg;// TODO Auto-generated method stub
 		
 	}
 	
