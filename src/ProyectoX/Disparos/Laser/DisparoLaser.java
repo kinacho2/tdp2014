@@ -79,7 +79,7 @@ public abstract class DisparoLaser extends DisparoJugador {
 		
 		if(System.currentTimeMillis()  - init > minDuracion){
 			//verificarNuevaImagen();
-			toRet = super.colision(nave) || colisionLaser(nave);
+			toRet = (super.colision(nave) || colisionLaser(nave)) && !nave.fueraDePantalla() && !nave.isInvulnerable();
 		}
 		
 		

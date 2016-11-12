@@ -132,4 +132,8 @@ public class WaveLVIV extends DisparoWave {
 		contador=0;
 	}
 	
+	
+	public int getLevel() {
+		return 4;
+	}
 }

@@ -203,7 +203,7 @@ public class MindEnemies extends Thread  {
 	 */
 
 	public void addBoss(Jefe boss){
-		if(!sonido){
+		if(!sonido && !jefe){
 			wait = System.currentTimeMillis();
 			rep.addSound(bosscoming, false);
 			sonido = true;
@@ -212,7 +212,7 @@ public class MindEnemies extends Thread  {
 			enemies.add(boss);
 			ArrayList en = boss.getTorretas();
 			jefe = true;
-			
+			sonido = false;
 			for(int i=0; i<en.size(); i++){
 				enemies.add(en.get(i));
 			}

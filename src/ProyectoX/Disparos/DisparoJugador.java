@@ -84,4 +84,8 @@ public class DisparoJugador extends Disparo{
 		
 	}
 
+	public int getLevel() {
+		return 1;
+	}
+
 }

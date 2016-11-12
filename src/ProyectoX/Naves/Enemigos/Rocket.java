@@ -65,31 +65,41 @@ public class Rocket extends Kamikaze{
 		return dis;
 	}
 	
+	private long mov;
+	
+	
 	public synchronized void move() {
 		
 			if(objetivo!=null && objetivo.getVisible()){
-				dx = objetivo.getX() - x;
-				dy = objetivo.getY() - y;
-				double mod = Math.sqrt(dy*dy+dx*dx);
-				setRotacion();
-				
-				//centra la direccion del Enemigo hacia el jugador
-				dx += objetivo.getWidth() / 2;
-				dy += objetivo.getHeight() / 2;
-				
-				if (dx != 0 || dy != 0) {
-					dx = dx / mod;
-					dy = dy / mod;
-				} else {
-					dy = 0.1d;
-					dx = 0.1d;
+				if(System.currentTimeMillis()-mov > 1000 || mapa!=null){
+					mov = System.currentTimeMillis();
+					dx = objetivo.getX() - x;
+					dy = objetivo.getY() - y;
+					double mod = Math.sqrt(dy*dy+dx*dx);
+					setRotacion();
+					
+					//centra la direccion del Enemigo hacia el jugador
+					dx += objetivo.getWidth() / 2;
+					dy += objetivo.getHeight() / 2;
+					
+					if (dx != 0 || dy != 0) {
+						dx = dx / mod;
+						dy = dy / mod;
+					} else {
+						dy = 0.1d;
+						dx = 0.1d;
+					}
 				}
 				y += dy * velocidad;
 				x += dx * velocidad;
 			
 			}
 			else{
-				y -= velocidad;
+				dy=(mapa!=null)?-1:1;
+				dx=0;
+				setRotacion();
+				y += dy * velocidad;
+				x += dx * velocidad;
 			}
 		 
 		setMove();
@@ -125,7 +135,7 @@ public class Rocket extends Kamikaze{
 		
 	}
 	private boolean verificarDistancia() {
-		int dis = objetivo.getHeight()/2;
+		int dis = objetivo.getWidth()/2;
 				
 		return distancia(objetivo)<dis;
 	}

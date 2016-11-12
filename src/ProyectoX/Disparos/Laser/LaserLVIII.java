@@ -56,4 +56,8 @@ public class LaserLVIII extends DisparoLaser{
 		toRet[0].setReproductor(rep);
 		return toRet;
 	}
+	
+	public int getLevel() {
+		return 3;
+	}
 }

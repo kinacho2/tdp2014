@@ -15,6 +15,7 @@ public class LaserLVI extends DisparoLaser{
 
 
 	private static final URL url = Disparo.class.getClassLoader().getResource("ProyectoX/img/Disparos/Laser/laser1.gif");
+	private static final URL url2 = Disparo.class.getClassLoader().getResource("ProyectoX/img/Disparos/Laser/laser1-180.gif");
 	private static final URL urlCarga = Disparo.class.getClassLoader().getResource("ProyectoX/img/Disparos/Laser/laser1_carga.gif");
 	
 	/**
@@ -24,7 +25,7 @@ public class LaserLVI extends DisparoLaser{
 	 */
 	
 	public LaserLVI(Nave nave, double dy) {
-		super(dy, 13, 800, new ImageIcon(urlCarga), new ImageIcon(url), nave);
+		super(dy, 13, 800, new ImageIcon(urlCarga), (dy==0)?new ImageIcon(url2):new ImageIcon(url), nave);
 		
 		x = nave.getX() + nave.getWidth()/2 - width/2;
 		y = nave.getY() - (int)dy*height;

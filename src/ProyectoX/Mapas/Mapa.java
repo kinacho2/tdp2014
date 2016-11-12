@@ -386,7 +386,8 @@ public abstract class Mapa{
 		if(rn.nextInt()%500 == 2){
 			Objeto o = (Objeto)objetos.get(rn.nextInt(5));
 			o.setX(rn.nextInt(700));
-			objetosEnPantalla.add(o.clone());
+			if(dy!=0 && !estaJefe)
+				objetosEnPantalla.add(o.clone());
 		}
 		return objetosEnPantalla;
 	}
@@ -406,7 +407,10 @@ public abstract class Mapa{
 		else{
 			if(!pauseTime)
 				dy = 1;
-			reproductor.addSound(sonido, true);
+			if(estaJefe)
+				reproductor.addSound(sonidoJefe,true);
+			else
+				reproductor.addSound(sonido, true);
 		}
 	}
 	
@@ -462,6 +466,10 @@ public abstract class Mapa{
 
 	public void bombarderoFuera() {
 		enBuilder.bombarderoFuera();
+	}
+	
+	public void setdy(int dy){
+		this.dy = dy;
 	}
 
 }

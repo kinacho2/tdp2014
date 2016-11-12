@@ -62,8 +62,11 @@ public class Nivel_I extends Mapa{
 	public int getY(){
 		if(delay % delayVel  == 0){
 			y += dy;
-			if(y  >= 0 ){
+			if(y  >= 0 && dy>0){
 				y = initY;
+			}
+			if(y<=initY && dy<0){
+				y=0;
 			}
 		}
 		

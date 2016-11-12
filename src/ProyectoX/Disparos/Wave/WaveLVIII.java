@@ -62,4 +62,8 @@ public class WaveLVIII extends DisparoWave {
 		variacion = variacion + 1;
 		verificarColisionBorde();
 	}
+	
+	public int getLevel() {
+		return 3;
+	}
 }

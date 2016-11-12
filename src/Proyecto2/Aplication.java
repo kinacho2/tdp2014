@@ -59,7 +59,8 @@ public class Aplication extends javax.swing.JFrame {
 	
 
 	 public Aplication() {
-		 
+		 JOptionPane dialogo = new JOptionPane();
+		dialogo.showConfirmDialog(null, ""+Integer.toBinaryString(-543), "Atencion",JOptionPane.YES_NO_OPTION);
 		initGUI();
     }
 

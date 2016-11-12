@@ -232,11 +232,12 @@ public abstract class Jefe extends Enemigo{
 		if(puedeMoverse()){
 			if(torretas.size() == 0){
 				agregarExplosiones();
-				
+				mapa.setdy(0);
 			}
 			else
 				if(torretaMasBaja(false) < 200 && primero){
 					y +=velocidad;
+					mapa.setdy(1);
 					for(int i=0; i<torretas.size(); i++){
 						Torreta t =(Torreta)torretas.get(i);
 						t.setPosition(0, +velocidad);
@@ -249,6 +250,7 @@ public abstract class Jefe extends Enemigo{
 					primero = false;
 					if(torretaMasBaja(true) > -100){
 						y-=velocidad;
+						mapa.setdy(-1);
 						for(int i=0; i<torretas.size(); i++){
 							Torreta t =(Torreta)torretas.get(i);
 							t.setPosition(0, -velocidad);
@@ -282,7 +284,7 @@ public abstract class Jefe extends Enemigo{
 	public Explosion getExplosion(){
 		
 		addSonidoExplosion();
-		Explosion aux = new Explosion(x + width/2, y + height/2, new ImageIcon(explode), width/2, height/2);
+		Explosion aux = new Explosion(x + width/2, y + height/2, new ImageIcon(explode), width, height);
 		aux.setDelay(3000);
 		
 		return aux;
@@ -294,5 +296,9 @@ public abstract class Jefe extends Enemigo{
 
 	public void destroy() {
 		super.setVisible();
+	}
+	
+	public boolean isInvulnerable(){
+		return true;
 	}
 }

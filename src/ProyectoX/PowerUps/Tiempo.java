@@ -30,7 +30,7 @@ public class Tiempo extends PowerUp{
 	 * @param jugador, Jugador actual
 	 */
 	protected void efecto(Jugador jugador) {
-		jugador.pauseTime();
+		jugador.setTime();
 		jugador.addSonidoDePremio(sound);
 	}
 }

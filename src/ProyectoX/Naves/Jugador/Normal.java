@@ -4,7 +4,7 @@ import java.net.URL;
 import javax.swing.ImageIcon;
 import ProyectoX.Disparos.DisparoJugador;
 import ProyectoX.Disparos.Multiplicador.DisparoMultiplicador;
-import ProyectoX.Disparos.Multiplicador.MultiplicadorLVII;
+import ProyectoX.Disparos.Multiplicador.MultiplicadorLVI;
 import ProyectoX.Naves.Nave;
 
 /**
@@ -49,7 +49,7 @@ public class Normal extends Jugador {
 	public void reset() {
 		super.reset();
 		vida = defaultVida;
-		setNewDisparo(new MultiplicadorLVII(x, y, 0, 1,this));
+		setNewDisparo(new MultiplicadorLVI(x, y, 0, 1,this));
 	}
 	
 }

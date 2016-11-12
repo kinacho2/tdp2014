@@ -59,7 +59,17 @@ public class PanelJugador  extends JPanel implements ActionListener{
 	private boolean pauseTime = false;
 	private JLabel labelBuff;
 	private JLabel timeBuff;
-	
+	private JLabel buffVida;
+	private JLabel buffVidaboton;
+	private JLabel buffFantasmaboton;
+	private JLabel buffFantasma;
+	private JLabel buffTimeboton;
+	private JLabel buffTime;
+	private JLabel defensa;
+	private Jugador def;
+	private JLabel disparo;
+	private JLabel disparoLVL;
+	private JLabel defensaVida;
 	/**
 	 * Constructor de la clase PanelJugador
 	 * crea una instancia de Mind
@@ -90,7 +100,7 @@ public class PanelJugador  extends JPanel implements ActionListener{
 		
 		ImageIcon ii;
         puntaje = new JLabel(""+ 0);
-		puntaje.setBounds(390, -2, 200, 35);
+		puntaje.setBounds(270+15+30, -2, 100, 35);
 		puntaje.setFont(new java.awt.Font("Segoe UI",0,20));
 		puntaje.setForeground(new java.awt.Color(255,255,255));
 		puntaje.setBorder(new LineBorder(new java.awt.Color(255,255,255), 1, false));
@@ -101,31 +111,31 @@ public class PanelJugador  extends JPanel implements ActionListener{
 		//label enemigos y contador de enemigos
 		ii = new ImageIcon(new ImageIcon(PanelJugador.class.getClassLoader().getResource("ProyectoX/img/Enemigo/basico.png")).getImage().getScaledInstance(25, 25, Image.SCALE_DEFAULT));
 		labelEnemigo = new JLabel(ii);
-		labelEnemigo.setBounds(315, -2, 30, 35);
-		labelEnemigo.setBorder(new LineBorder(new java.awt.Color(215,56,7), 1, false));
+		labelEnemigo.setBounds(180-45-30, -2, 30, 35);
+		labelEnemigo.setBorder(new LineBorder(new java.awt.Color(255,255,255), 1, false));
 		bar.add(labelEnemigo);
 		
 		
 		contadorEnemigos = new JLabel("" + mapa.cantEnemies());
-		contadorEnemigos.setBounds(345, -2, 45, 35);
+		contadorEnemigos.setBounds(180-45, -2, 45, 35);
 		contadorEnemigos.setFont(new java.awt.Font("Segoe UI",0,20));
 		contadorEnemigos.setForeground(new java.awt.Color(215,56,7));
-		contadorEnemigos.setBorder(new LineBorder(new java.awt.Color(215,56,7), 1, false));
+		contadorEnemigos.setBorder(new LineBorder(new java.awt.Color(255,255,255), 1, false));
 		contadorEnemigos.setHorizontalAlignment(SwingConstants.CENTER);
 		bar.add(contadorEnemigos);
 		
 		//label vida y cantidad de vida
 		ii = new ImageIcon(new ImageIcon(PanelJugador.class.getClassLoader().getResource("ProyectoX/img/PUP/vida.png")).getImage().getScaledInstance(25, 25, Image.SCALE_DEFAULT));
 		labelVida = new JLabel(ii);
-		labelVida.setBounds(240, -2, 30, 35);
-		labelVida.setBorder(new LineBorder(new java.awt.Color(0,255,0), 1, false));
+		labelVida.setBounds(180, -2, 30, 35);
+		labelVida.setBorder(new LineBorder(new java.awt.Color(255,255,255), 1, false));
 		bar.add(labelVida);
 		
 		cantVida = new JLabel(""+ jugador.getVida());
-		cantVida.setBounds(270, -2, 45, 35);
+		cantVida.setBounds(210, -2, 45, 35);
 		cantVida.setFont(new java.awt.Font("Segoe UI",0,20));
 		cantVida.setForeground(new java.awt.Color(0,0,255));
-		cantVida.setBorder(new LineBorder(new java.awt.Color(0,255,0), 1, false));
+		cantVida.setBorder(new LineBorder(new java.awt.Color(255,255,255), 1, false));
 		cantVida.setHorizontalAlignment(SwingConstants.CENTER);
 		bar.add(cantVida);
 		
@@ -133,50 +143,133 @@ public class PanelJugador  extends JPanel implements ActionListener{
 		ii = new ImageIcon(PanelInit.class.getClassLoader().getResource("ProyectoX/img/Menu_barras/heart.png"));
 		ii = new ImageIcon(ii.getImage().getScaledInstance(20, 20, Image.SCALE_DEFAULT));
 		heart = new JLabel(ii);
-		heart.setBounds(186+550, -2, 30, 35);
+		heart.setBounds(216+550, -2, 30, 35);
 		heart.setBorder(new LineBorder(new java.awt.Color(255,0,0), 1, false));
 		bar.add(heart);
 		
 		
-		cantHearts = new JLabel("3");
-		cantHearts.setBounds(216+550, -2, 30, 35);
-		cantHearts.setFont(new java.awt.Font("Segoe UI",0,20));
-		cantHearts.setForeground(new java.awt.Color(255,0,0));
-		cantHearts.setBorder(new LineBorder(new java.awt.Color(255,0,0), 1, false));
+		cantHearts = new JLabel("     "+jugador.getHearts());
+		cantHearts.setBounds(216+550, 20, 30, 10);
+		cantHearts.setFont(new java.awt.Font("Segoe UI",0,11));
+		cantHearts.setForeground(new java.awt.Color(255,255,255));
+		cantHearts.setOpaque(false);
 		cantHearts.setHorizontalAlignment(SwingConstants.CENTER);
 		bar.add(cantHearts);
 		
-		//icono de buffs y tiempo
+		//icono de buffs y tiempo de buff
 		ii = new ImageIcon(new ImageIcon(PanelJugador.class.getClassLoader().getResource("ProyectoX/img/PUP/fantasma.png")).getImage().getScaledInstance(25, 25, Image.SCALE_DEFAULT));
 		labelBuff = new JLabel(ii);
-		labelBuff.setBounds(180, -2, 30, 35);
+		labelBuff.setBounds(240+15, -2, 30, 35);
 		labelBuff.setBackground(new java.awt.Color(0,0,255));
 		labelBuff.setBorder(new LineBorder(new java.awt.Color(0,0,255), 1, false));
 		bar.add(labelBuff);
 		
-		timeBuff = new JLabel(""+jugador.getCantBombas());
-		timeBuff.setBounds(210, -2, 30, 35);
+		timeBuff = new JLabel("");
+		timeBuff.setBounds(270+15, -2, 30, 35);
 		timeBuff.setFont(new java.awt.Font("Segoe UI",0,20));
 		timeBuff.setForeground(new java.awt.Color(0,255,0));
 		timeBuff.setHorizontalAlignment(SwingConstants.CENTER);
 		timeBuff.setBorder(new LineBorder(new java.awt.Color(0,0,255), 1, false));
 		bar.add(timeBuff);
 		
+		
 		//Icono de bomba y cantidad de bombas
+		cantBombas = new JLabel("X    "+jugador.getCantBombas());
+		cantBombas.setBounds(186+490, 20, 30, 10);
+		cantBombas.setFont(new java.awt.Font("Segoe UI",0,11));
+		cantBombas.setOpaque(false);
+		cantBombas.setForeground(new java.awt.Color(255,255,255));
+		cantBombas.setHorizontalAlignment(SwingConstants.CENTER);
+		bar.add(cantBombas);
+		
+		
 		ii = new ImageIcon(new ImageIcon(PanelJugador.class.getClassLoader().getResource("ProyectoX/img/PUP/bomba.png")).getImage().getScaledInstance(25, 25, Image.SCALE_DEFAULT));
 		labelBomba = new JLabel(ii);
-		labelBomba.setBounds(120, -2, 30, 35);
+		labelBomba.setBounds(186+490, -2, 30, 35);
 		labelBomba.setBackground(new java.awt.Color(0,0,255));
 		labelBomba.setBorder(new LineBorder(new java.awt.Color(0,0,255), 1, false));
 		bar.add(labelBomba);
 		
-		cantBombas = new JLabel(""+jugador.getCantBombas());
-		cantBombas.setBounds(150, -2, 30, 35);
-		cantBombas.setFont(new java.awt.Font("Segoe UI",0,20));
-		cantBombas.setForeground(new java.awt.Color(0,255,0));
-		cantBombas.setHorizontalAlignment(SwingConstants.CENTER);
-		cantBombas.setBorder(new LineBorder(new java.awt.Color(0,0,255), 1, false));
-		bar.add(cantBombas);
+		
+		
+		//buffvida
+		
+		buffVidaboton = new JLabel("V    "+jugador.getPotas());
+		buffVidaboton.setBounds(186+400, 20, 30, 10);
+		buffVidaboton.setFont(new java.awt.Font("Segoe UI",0,11));
+		buffVidaboton.setOpaque(false);
+		buffVidaboton.setForeground(new java.awt.Color(255,255,255));
+		buffVidaboton.setHorizontalAlignment(SwingConstants.CENTER);
+		bar.add(buffVidaboton);
+		
+		ii = new ImageIcon(new ImageIcon(PanelJugador.class.getClassLoader().getResource("ProyectoX/img/PUP/vida.png")).getImage().getScaledInstance(25, 25, Image.SCALE_DEFAULT));
+		buffVida = new JLabel(ii);
+		buffVida.setBounds(186+400, -2, 30, 35);
+		buffVida.setBorder(new LineBorder(new java.awt.Color(255,0,0), 1, false));
+		bar.add(buffVida);
+		
+		//bufffantasma
+		buffFantasmaboton = new JLabel("F    "+jugador.getFantasma());
+		buffFantasmaboton.setBounds(186+430, 20, 30, 10);
+		buffFantasmaboton.setFont(new java.awt.Font("Segoe UI",0,11));
+		buffFantasmaboton.setOpaque(false);
+		buffFantasmaboton.setForeground(new java.awt.Color(255,255,255));
+		buffFantasmaboton.setHorizontalAlignment(SwingConstants.CENTER);
+		bar.add(buffFantasmaboton);
+		
+		ii = new ImageIcon(new ImageIcon(PanelJugador.class.getClassLoader().getResource("ProyectoX/img/PUP/fantasma.png")).getImage().getScaledInstance(25, 25, Image.SCALE_DEFAULT));
+		buffFantasma = new JLabel(ii);
+		buffFantasma.setBounds(186+430, -2, 30, 35);
+		buffFantasma.setBorder(new LineBorder(new java.awt.Color(255,0,0), 1, false));
+		bar.add(buffFantasma);
+		
+		//bufffantasma
+		buffTimeboton = new JLabel("R    "+jugador.getTime());
+		buffTimeboton.setBounds(186+460, 20, 30, 10);
+		buffTimeboton.setFont(new java.awt.Font("Segoe UI",0,11));
+		buffTimeboton.setOpaque(false);
+		buffTimeboton.setForeground(new java.awt.Color(255,255,255));
+		buffTimeboton.setHorizontalAlignment(SwingConstants.CENTER);
+		bar.add(buffTimeboton);
+		
+		ii = new ImageIcon(new ImageIcon(PanelJugador.class.getClassLoader().getResource("ProyectoX/img/PUP/tiempo.png")).getImage().getScaledInstance(25, 25, Image.SCALE_DEFAULT));
+		buffTime = new JLabel(ii);
+		buffTime.setBounds(186+460, -2, 30, 35);
+		buffTime.setBorder(new LineBorder(new java.awt.Color(255,0,0), 1, false));
+		bar.add(buffTime);
+		
+		//Defensa
+		defensaVida = new JLabel("");
+		defensaVida.setBounds(186+520, 20, 30, 10);
+		defensaVida.setFont(new java.awt.Font("Segoe UI",0,11));
+		defensaVida.setOpaque(false);
+		defensaVida.setForeground(new java.awt.Color(0,255,0));
+		defensaVida.setHorizontalAlignment(SwingConstants.CENTER);
+		bar.add(defensaVida);
+		
+		ii = new ImageIcon(new ImageIcon(PanelJugador.class.getClassLoader().getResource("ProyectoX/img/Enemigo/Torreta/invisible.png")).getImage().getScaledInstance(25, 25, Image.SCALE_DEFAULT));
+		defensa = new JLabel(ii);
+		defensa.setBounds(186+520, -2, 30, 35);
+		defensa.setBackground(new java.awt.Color(0,0,255));
+		defensa.setBorder(new LineBorder(new java.awt.Color(0,0,255), 1, false));
+		bar.add(defensa);
+		
+		//Disparo
+		disparoLVL = new JLabel("LVL  "+jugador.getDisparo().getLevel());
+		disparoLVL.setBounds(186+550, 20, 30, 10);
+		disparoLVL.setFont(new java.awt.Font("Segoe UI",0,11));
+		disparoLVL.setOpaque(false);
+		disparoLVL.setForeground(new java.awt.Color(255,255,255));
+		disparoLVL.setHorizontalAlignment(SwingConstants.CENTER);
+		bar.add(disparoLVL);
+		
+		
+		ii = new ImageIcon(jugador.getDisparo().getImage().getScaledInstance(10, 10, Image.SCALE_DEFAULT));
+		disparo = new JLabel(ii);
+		disparo.setBounds(186+550, -2, 30, 35);
+		disparo.setBackground(new java.awt.Color(0,0,255));
+		disparo.setBorder(new LineBorder(new java.awt.Color(0,0,255), 1, false));
+		bar.add(disparo);
 		
 		//icono de sonido y boton de silencio
 		sonido = new JButton("");
@@ -296,22 +389,22 @@ public class PanelJugador  extends JPanel implements ActionListener{
 	      	puntaje.setText("" + jugador.getPuntaje());
 	      	cantVida.setText("" + jugador.getVida());
 			contadorEnemigos.setText("" + mapa.cantEnemies());
-			cantHearts.setText(""+jugador.getHearts());
+			cantHearts.setText("     "+jugador.getHearts());
 			int cantB = jugador.getCantBombas();
 			int cantR = jugador.getCantRockets();
 			int invulnerable = (int)jugador.getInvulnerableTime()/1000;
 			int timeP = (int)jugador.getPauseTime()/1000;
 
 			if(cantR==0 && cantB ==0)
-				cantBombas.setText(""+0);
+				cantBombas.setText("X    "+0);
 			else{
 				if(cantR>0 && cantB==0){
-					cantBombas.setText(""+cantR);
+					cantBombas.setText("X    "+cantR);
 					bombaORocket = new ImageIcon(new ImageIcon(PanelJugador.class.getClassLoader().getResource("ProyectoX/img/PUP/rocket.png")).getImage().getScaledInstance(25, 25, Image.SCALE_DEFAULT));
 
 				}
 				if(cantR==0 && cantB>0){
-					cantBombas.setText(""+cantB);
+					cantBombas.setText("X    "+cantB);
 					bombaORocket = new ImageIcon(new ImageIcon(PanelJugador.class.getClassLoader().getResource("ProyectoX/img/PUP/bomba.png")).getImage().getScaledInstance(25, 25, Image.SCALE_DEFAULT));
 				}
 				labelBomba.setIcon(bombaORocket);
@@ -334,6 +427,33 @@ public class PanelJugador  extends JPanel implements ActionListener{
 					labelBuff.setIcon(ii);
 				}
 			}
+			
+			
+			buffTimeboton.setText("R    "+jugador.getTime());
+			buffVidaboton.setText("V    "+jugador.getPotas());
+			buffFantasmaboton.setText("F    "+jugador.getFantasma());
+			
+			Jugador[] nv = jugador.getDefensa();
+			if(nv==null || nv[0]==null){
+				ImageIcon ii = new ImageIcon(new ImageIcon(PanelJugador.class.getClassLoader().getResource("ProyectoX/img/Enemigo/Torreta/invisible.png")).getImage().getScaledInstance(25, 25, Image.SCALE_DEFAULT));
+				defensa.setIcon(ii);
+				defensaVida.setText("");
+			}
+			else{
+				Jugador auxiliar = nv[0];
+				if(auxiliar!=def){
+					def=auxiliar;
+					ImageIcon ii = new ImageIcon(def.getImage().getScaledInstance(25, 25, Image.SCALE_DEFAULT));
+					defensa.setIcon(ii);
+				}
+				String ss = ""+def.getVida();
+				if(nv.length>1 && nv[1]!=null){
+					ss=ss+"-"+nv[1].getVida();
+				}
+				defensaVida.setText(ss);
+			}
+			disparoLVL.setText("LVL  "+jugador.getDisparo().getLevel());
+			disparo.setIcon(new ImageIcon(jugador.getDisparo().getImage()));
 			
 			
 	        Toolkit.getDefaultToolkit().sync();

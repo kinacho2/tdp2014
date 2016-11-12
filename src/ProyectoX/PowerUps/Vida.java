@@ -30,7 +30,7 @@ public class Vida extends PowerUp{
 	 * @param jugador, Jugador actual
 	 */
 	protected void efecto(Jugador jugador) {
-		jugador.setVida(-30);
+		jugador.setPotas();
 		jugador.addSonidoDePremio(sound);
 	}
 }

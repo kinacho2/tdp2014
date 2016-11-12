@@ -104,4 +104,8 @@ public class LaserLVV extends DisparoLaser{
 			desarmar();
 		}
 	}
+	
+	public int getLevel() {
+		return 4;
+	}
 }

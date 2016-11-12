@@ -50,4 +50,8 @@ public class WaveLVII extends DisparoWave{
 		setearReproductor(d);
 		return d;
 	}
+	
+	public int getLevel() {
+		return 2;
+	}
 }

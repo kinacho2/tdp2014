@@ -68,4 +68,7 @@ public class LaserLVII extends DisparoLaser{
 		else return new Disparo[0];
 	}
 	
+	public int getLevel() {
+		return 2;
+	}
 }

@@ -49,4 +49,8 @@ public class MultiplicadorLVII extends DisparoMultiplicador{
 		setearReproductor(d);
 		return d;
 	}
+	
+	public int getLevel() {
+		return 2;
+	}
 }

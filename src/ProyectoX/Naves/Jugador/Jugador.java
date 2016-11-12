@@ -47,6 +47,14 @@ public abstract class Jugador extends Nave {
 	private String nombre;
 	protected int rocket;
 	private boolean misilLanzado=false;
+	
+	private long pauseTimeInit;
+	private boolean pauseTime;
+	private int time = 1;
+	private int fantasma = 1;
+	private int potas = 1;
+	
+	
 	//arreglo booleano de keyCodes
 	/**
 	 * Cosntructor de la clase Jugador
@@ -116,6 +124,19 @@ public abstract class Jugador extends Nave {
 	        
 	        if (key == KeyEvent.VK_X){
 	        	tirarBomba();
+	        }
+	        if (key == KeyEvent.VK_V){
+	        	if(potas>0){
+	        		potas--;
+	        		setVida(-30);
+	        		
+	        	}
+	        }
+	        if (key == KeyEvent.VK_F){
+	        	invulnerable();
+	        }
+	        if (key == KeyEvent.VK_R){
+	        	pauseTime();
 	        }
 	        if(defensa!=null)
 		        for(int i=0; i<defensa.length;i++){
@@ -354,6 +375,7 @@ public abstract class Jugador extends Nave {
 			defensa[i] = null;
 		if(i==0 && defensa.length>1 &&defensa[1]!=null){
 			defensa[0] = defensa[1];
+			defensa[1] = null;
 		}
 	}
 	
@@ -524,20 +546,24 @@ public abstract class Jugador extends Nave {
 	}
 	
 	public void invulnerable(){
-		invulnerable = 20000;
-		init = System.currentTimeMillis();
+		if(fantasma>0){
+			fantasma--;
+			invulnerable = 20000;
+			init = System.currentTimeMillis();
+		}
 	}
 	
 	public long getInvulnerableTime(){
 		return invulnerable - (System.currentTimeMillis()-init);
 	}
 
-	private long pauseTimeInit;
-	private boolean pauseTime;
+
 	
 	public void pauseTime() {
-		if(!pauseTime){
+		
+		if(!pauseTime && time>0){
 			pauseTime= true;
+			time--;
 			mapa.pauseTime(true);
 			pauseTimeInit = System.currentTimeMillis();
 		}
@@ -552,6 +578,33 @@ public abstract class Jugador extends Nave {
 	
 	public long getPauseTime(){
 		return timePaused - (System.currentTimeMillis() - pauseTimeInit);
+	}
+
+	public int getTime() {
+		return time;
+	}
+
+	public void setTime() {
+		if(time < 2)
+			time++;
+	}
+	
+	public int getFantasma() {
+		return fantasma;
+	}
+
+	public void setFantasma() {
+		if(fantasma < 2)
+			fantasma++;
+	}
+	
+	public int getPotas() {
+		return potas;
+	}
+
+	public void setPotas() {
+		if(potas < 5)
+			potas++;
 	}
 	
 }

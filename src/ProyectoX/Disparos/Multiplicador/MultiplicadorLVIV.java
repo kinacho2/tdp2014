@@ -115,6 +115,10 @@ public class MultiplicadorLVIV extends DisparoMultiplicador{
 		 
 	}
 
+	
+	public int getLevel() {
+		return 4;
+	}
 }
 
 

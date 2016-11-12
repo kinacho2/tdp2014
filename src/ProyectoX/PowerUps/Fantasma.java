@@ -30,7 +30,7 @@ public class Fantasma extends PowerUp{
 	 * @param jugador, Jugador actual
 	 */
 	protected void efecto(Jugador jugador) {
-		jugador.invulnerable();
+		jugador.setFantasma();
 		jugador.addSonidoDePremio(sound);
 	}
 }

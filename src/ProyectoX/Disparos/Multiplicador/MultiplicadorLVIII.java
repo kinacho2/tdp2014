@@ -56,4 +56,8 @@ public class MultiplicadorLVIII extends DisparoMultiplicador{
 		return d;
 	}
 
+	public int getLevel() {
+		return 3;
+	}
+	
 }
