@@ -3,6 +3,7 @@ package ProyectoX.Naves.Jugador;
 import java.net.URL;
 import javax.swing.ImageIcon;
 
+import ProyectoX.Disparos.Laser.LaserLVI;
 import ProyectoX.Disparos.Laser.LaserLVIV;
 import ProyectoX.Disparos.Multiplicador.MultiplicadorLVI;
 import ProyectoX.Disparos.Multiplicador.MultiplicadorLVIV;
@@ -28,9 +29,8 @@ public class Resistente extends Jugador {
 	
 	public Resistente(String nombre){
 		super(110,2,new ImageIcon(url),new ImageIcon(urlDer),new ImageIcon(urlIzq),nombre);
-		//bombas=99;
-		//rocket = 99;
-		arma = new MultiplicadorLVI(x, y , 0, 1, this);
+		vidaEstandar = 110;
+		invulnerable = 2000000;
 	}
 	
 	/**
@@ -54,7 +54,7 @@ public class Resistente extends Jugador {
 		super.reset();
 		vida = defaultVida;
 		setNewDisparo( new MultiplicadorLVI(x, y , 0, 1, this));
-		//setNewDisparo( new WaveLVIV(x,y,dx,dy,this,0));
+		setNewDisparo( new LaserLVI(this,1));
 	}
 	
 	

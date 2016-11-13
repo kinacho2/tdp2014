@@ -25,7 +25,7 @@ public class Normal extends Jugador {
 	 */
 	public Normal(String nombre){
 		super(80,3,new ImageIcon(url),new ImageIcon(urlDer),new ImageIcon(urlIzq),nombre);
-		
+		vidaEstandar = 80;
 	}
 	
 	/**

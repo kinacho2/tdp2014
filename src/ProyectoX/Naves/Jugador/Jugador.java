@@ -11,6 +11,7 @@ import ProyectoX.Disparos.DisparoJugador;
 import ProyectoX.Disparos.MisilBomba;
 import ProyectoX.Disparos.Multiplicador.MultiplicadorLVI;
 import ProyectoX.Frames.Explosion;
+import ProyectoX.Frames.PoderEspecial;
 import ProyectoX.Mapas.Mapa;
 import ProyectoX.Naves.Nave;
 import ProyectoX.Naves.Enemigos.Rocket;
@@ -53,7 +54,10 @@ public abstract class Jugador extends Nave {
 	private int time = 1;
 	private int fantasma = 1;
 	private int potas = 1;
+	protected int maxVida;
 	
+	protected int vidaEstandar;
+	protected long regen;
 	
 	//arreglo booleano de keyCodes
 	/**
@@ -84,7 +88,7 @@ public abstract class Jugador extends Nave {
 		hearts = 3;
 		puntaje = contPuntaje = 0;
 		arma = new MultiplicadorLVI(x, y , 0, 1, this);
-    	
+    	maxVida = 150;
 	}
 	
 	/**
@@ -126,11 +130,7 @@ public abstract class Jugador extends Nave {
 	        	tirarBomba();
 	        }
 	        if (key == KeyEvent.VK_V){
-	        	if(potas>0){
-	        		potas--;
-	        		setVida(-30);
-	        		
-	        	}
+	        	curar();
 	        }
 	        if (key == KeyEvent.VK_F){
 	        	invulnerable();
@@ -148,6 +148,17 @@ public abstract class Jugador extends Nave {
 		}
     }
 	
+	private void curar() {
+		if(potas>0){
+    		potas--;
+    		setVida(-30);
+    		ImageIcon especial = new ImageIcon((Nave.class.getClassLoader().getResource("ProyectoX/img/Explosiones/regen.gif")));
+    		mapa.addExposion(new PoderEspecial(0,0,especial,especial.getIconWidth(),especial.getIconHeight(),this));
+    		this.addSonidoDePremio("/ProyectoX/sounds/power.mp3");
+    	}
+		
+	}
+
 	/**
 	 * Le indica al mapa que se arrojo una bomba y le resta una bomba a la cantidad de bombas
 	 */
@@ -281,13 +292,15 @@ public abstract class Jugador extends Nave {
      * @param vd entro que sera restado a la vida del Jugador
      */
 	public void setVida(int vd) {
-		if(System.currentTimeMillis() - init > invulnerable){
+		regen=System.currentTimeMillis();
+		//si no es invulnerable o vida es menor que 0 quiere decir que esta recibiendo una curacion
+		if(System.currentTimeMillis() - init > invulnerable || vida < 0){
 			if(vida-vd > 0)
 				vida-=vd;	
 			else
 				vida = 0;
-			if(vida > 150)
-				vida = 150;
+			if(vida > maxVida)
+				vida = maxVida;
 			if(vida <= 0) 
 				setVisible();
 		}
@@ -585,8 +598,7 @@ public abstract class Jugador extends Nave {
 	}
 
 	public void setTime() {
-		if(time < 2)
-			time++;
+			time = 1;
 	}
 	
 	public int getFantasma() {
@@ -605,6 +617,13 @@ public abstract class Jugador extends Nave {
 	public void setPotas() {
 		if(potas < 5)
 			potas++;
+	}
+	
+	public int getVida(){
+		if(System.currentTimeMillis()-regen>2000 && vida < vidaEstandar){
+			setVida(-1);
+		}
+		return vida;
 	}
 	
 }

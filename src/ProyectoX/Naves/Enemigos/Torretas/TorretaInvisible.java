@@ -43,4 +43,8 @@ public class TorretaInvisible extends Torreta{
 			
 		}
 	}
+	
+	public void setVida(int vd){
+		
+	}
 }

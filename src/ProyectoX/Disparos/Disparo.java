@@ -256,5 +256,11 @@ public class Disparo {
 			d[i].setReproductor(rep);
 		}
 	}
+	
+	public void anular(int dy){
+		
+		
+	}
+
 }
 

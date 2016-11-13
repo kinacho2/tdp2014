@@ -319,7 +319,7 @@ public class PanelJugador  extends JPanel implements ActionListener{
 	            Explosion m = (Explosion) ms.get(i);
 	            if(m!=null && m.getVisible())
 	            	g2d.drawImage(m.getImage(), m.getX(), m.getY(), this);
-	            
+	            	m.move();
 	        }
 	        
 	        //elimina las explosiones que no estan en pantalla

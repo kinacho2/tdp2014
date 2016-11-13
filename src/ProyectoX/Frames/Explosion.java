@@ -13,8 +13,10 @@ import javax.swing.ImageIcon;
 public class Explosion {
 	
 	private Image image;
-	private int x;
-	private int y;
+	protected int x;
+	protected int y;
+	protected int width;
+	protected int height;
 	private int delay;
 	
 	private long init;
@@ -32,6 +34,9 @@ public class Explosion {
 		
 		this.x = x - w/2;
 		this.y = y - h/2;
+		
+		this.width = w;
+		this.height = h;
 
 		delay = 1200;
 		
@@ -98,6 +103,10 @@ public class Explosion {
 	
 	public void setDelay(int delay){
 		this.delay = delay;
+	}
+	
+	public void move(){
+		
 	}
 	
 }

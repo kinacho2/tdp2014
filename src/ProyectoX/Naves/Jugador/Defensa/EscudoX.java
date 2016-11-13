@@ -33,7 +33,8 @@ public class EscudoX extends Defensa {
 		y = jugador.getY() + jugador.getHeight()/2 - defaultHeight/2;
 		height = defaultHeight;
 		width = defaultWidth;
-		
+		maxVida = 400;
+		vidaEstandar = 100;
 		setJugador(jugador);
 		
 		bombas = 0;

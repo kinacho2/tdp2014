@@ -53,13 +53,13 @@ public class PUPBuilder {
 			up = new Vida(x, y);
 		}
 		
-		/*
+		
 		if(aux%3==0)
-		up = new Ayudante(x, y);
+			up = new Fantasma(x, y);
 		if(aux%3==2)
 		up = new Escudo(x, y);
 		if(aux%3==1)
-		up = new Fantasma(x, y);
+		up = new Laser(x, y);
 /**/
 		return up;
 	}

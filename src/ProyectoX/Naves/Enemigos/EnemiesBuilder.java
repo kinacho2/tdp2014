@@ -33,7 +33,7 @@ public class EnemiesBuilder {
 		if(probabilidad % 5 == 0)
 			m = new Kamikaze(probabilidad % 15 == 0);
 		else if(probabilidad % 13 == 0){
-			if(bombardero<=2){
+			if(bombardero<2){
 				m = new Bombardero(probabilidad % 2 == 0);
 				bombardero  ++;
 			}
@@ -45,14 +45,13 @@ public class EnemiesBuilder {
 		else
 			m = new Basico((probabilidad % 9) == 0);
 		
-		//m = new Basico(true);
+		m = new Basico(true);
 		
         return m;
 	}
 	
 	public void bombarderoFuera(){
 		bombardero --;
-
 	}
 
 }

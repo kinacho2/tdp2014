@@ -2,6 +2,8 @@ package ProyectoX.Disparos.Laser;
 
 import java.awt.Image;
 import javax.swing.ImageIcon;
+
+import ProyectoX.Disparos.Disparo;
 import ProyectoX.Disparos.DisparoJugador;
 import ProyectoX.Frames.Explosion;
 import ProyectoX.Naves.Nave;
@@ -193,5 +195,27 @@ public abstract class DisparoLaser extends DisparoJugador {
 	public DisparoJugador getLaser(){
 		return nextLevel();
 	}
+	
+	public synchronized boolean colisionDisparo(Disparo dis) {
+		boolean verd = super.colisionDisparo(dis);
+		if(verd){
+			dis.anular(y);
+			this.anular(dis.getY());
+		}
+		
+		return verd;
+	}
+	
+	public void anular(int ny){
+		if(dy==1){
+			height = Math.abs((y + height) - ny) /2;
+			System.out.println("jugador: "+height);
+		}
+		else if (dy == 0){
+			height = Math.abs(y - (ny+height)) /2;
+			System.out.println("Enemigo: "+height);
+		}
+	}
+	
 	
 }

@@ -31,7 +31,7 @@ public class NaveAyudante extends Defensa {
 		this.bool=bool;
 		height = defaultHeight;
 		width = defaultWidth;
-		
+		maxVida = 80;
 		setJugador(jugador);
 		setMapa(jugador.getMapa());
 		

@@ -25,7 +25,7 @@ public class Veloz extends Jugador {
 	
 	public Veloz(String nombre){
 		super(60,5,new ImageIcon(url),new ImageIcon(urlDer),new ImageIcon(urlIzq),nombre);
-		//TODO
+		vidaEstandar = 60;
 	}
 	
 	/**

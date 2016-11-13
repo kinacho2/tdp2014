@@ -20,15 +20,16 @@ public abstract class Defensa extends Jugador{
 	 * @param iconIzq Imagen inclinada hacia la izquierda
 	 */
 	public Defensa(int vida, int vel,ImageIcon icon, ImageIcon iconDer, ImageIcon iconIzq){
-		//TODO
+		
 		super(vida, vel, icon, iconDer, iconIzq,"Defensa");
+		
 	}
 	
 	/**
 	 * redefine setVida(int vd) de la clase Jugador
 	 * 
 	 */
-
+/*
 	public void setVida(int vd){
 		
 		vida-=vd;	
@@ -36,7 +37,7 @@ public abstract class Defensa extends Jugador{
 			setVisible();
 		
 	}
-	
+	*/
 	/**
 	 * @return instancia de NaveAyudante
 	 */
