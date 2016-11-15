@@ -484,7 +484,7 @@ public class PanelJugador  extends JPanel implements ActionListener{
             		 pause = true;
             	 else
             		 pause = false;
-            	 mind.pause(pause);
+            	 mind.pause(pause,false);
              }
         	
         }

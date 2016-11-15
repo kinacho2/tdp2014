@@ -293,6 +293,7 @@ public abstract class Jugador extends Nave {
      */
 	public void setVida(int vd) {
 		regen=System.currentTimeMillis();
+		System.out.println("vida -"+vd);
 		//si no es invulnerable o vida es menor que 0 quiere decir que esta recibiendo una curacion
 		if(System.currentTimeMillis() - init > invulnerable || vida < 0){
 			if(vida-vd > 0)

@@ -254,8 +254,9 @@ public class Mind implements ActionListener {
 	 * @param arg booleano si es true se pausa el juego, si es false se reanuda
 	 */
 
-	public void pause(boolean arg){
-		mapa.pause(arg);
+	public void pause(boolean arg, boolean reset){
+		if(!reset)
+			mapa.pause(arg);
 		jugador.pause(arg);
 		pause = arg;
 		

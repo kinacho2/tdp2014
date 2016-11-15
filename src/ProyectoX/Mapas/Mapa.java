@@ -407,6 +407,7 @@ public abstract class Mapa{
 		else{
 			if(!pauseTime)
 				dy = 1;
+			
 			if(estaJefe)
 				reproductor.addSound(sonidoJefe,true);
 			else
@@ -437,12 +438,11 @@ public abstract class Mapa{
 		jugador.setHearts();
 		jugador.setHearts();
 		panel.setVisible(false);
-		
 		api.setVisible(false);
 		game.setVisible(true);
-		mind.pause(false);
+		mind.pause(false,true);
 		mindEnemies.setEstaJefe();
-		pause(false);
+		//pause(false);
 		api.setVisible(true);
 	}
 	
@@ -451,10 +451,10 @@ public abstract class Mapa{
 	 */
 	
 	public void gameOver(){
-		pause(true);
-		mind.pause(true);
+		//fpause(true);
+		mind.pause(true,false);
 		game.setVisible(false);
-		reproductor.stop(0);
+		//reproductor.stop(0);
 		panel = new PanelGameOver(api,this,reproductor,mind.getJugador());
 	}
 	

@@ -30,7 +30,7 @@ public class LaserLVI extends DisparoLaser{
 		x = nave.getX() + nave.getWidth()/2 - width/2;
 		y = nave.getY() - (int)dy*height;
 		
-		damage = 3;
+		damage = 2;
 		
 		setDelays(200, 1200);
 	}

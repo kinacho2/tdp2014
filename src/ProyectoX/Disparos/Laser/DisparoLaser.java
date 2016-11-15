@@ -1,7 +1,13 @@
 package ProyectoX.Disparos.Laser;
 
 import java.awt.Image;
+import java.awt.image.BufferedImage;
+import java.awt.image.CropImageFilter;
+import java.awt.image.FilteredImageSource;
+import java.net.URL;
+
 import javax.swing.ImageIcon;
+import javax.swing.JFrame;
 
 import ProyectoX.Disparos.Disparo;
 import ProyectoX.Disparos.DisparoJugador;
@@ -16,7 +22,8 @@ import ProyectoX.Naves.Nave;
 
 public abstract class DisparoLaser extends DisparoJugador {
 	
-
+	private static final URL explosionlaser = Disparo.class.getClassLoader().getResource("ProyectoX/img/Explosiones/explosion-laser.gif");
+	
 	protected Image laser;
 	//delay entre la carga y el disparo
 	protected int minDuracion;
@@ -33,6 +40,7 @@ public abstract class DisparoLaser extends DisparoJugador {
 	
 	protected long init ;
 	
+
 	
 	/**
 	 * Constructor de la clase DisparoLaser
@@ -199,22 +207,35 @@ public abstract class DisparoLaser extends DisparoJugador {
 	public synchronized boolean colisionDisparo(Disparo dis) {
 		boolean verd = super.colisionDisparo(dis);
 		if(verd){
-			dis.anular(y);
-			this.anular(dis.getY());
+			dis.anular(y,height);
+			this.anular(dis.getY(),dis.getHeight());
 		}
 		
 		return verd;
 	}
+	private boolean anulado = false;
 	
-	public void anular(int ny){
-		if(dy==1){
-			height = Math.abs((y + height) - ny) /2;
-			System.out.println("jugador: "+height);
+	public void anular(int ny,int h){
+		if(!anulado){
+			anulado = true;
+			if(dy==1){
+				int aux = height;
+				height = Math.abs((y + height) - ny) /2;
+				
+				System.out.println("jugador: h="+height);
+				y = nave.getY() - height;
+				laser = (new JFrame()).createImage(new FilteredImageSource(second.getImage().getSource(),new CropImageFilter(0, aux, width, height)));
+				nave.getMapa().addExposion(new Explosion(x,y,new ImageIcon(explosionlaser),40,40));
+			}
+			else if (dy == 0){
+				height = Math.abs(y - (ny+h)) /2;
+				System.out.println("enemigo: h="+height);
+				laser = (new JFrame()).createImage(new FilteredImageSource(second.getImage().getSource(),new CropImageFilter(0, 0, width, height)));
+				nave.getMapa().addExposion(new Explosion(x,y+height,new ImageIcon(explosionlaser),40,40));
+			}
+			
 		}
-		else if (dy == 0){
-			height = Math.abs(y - (ny+height)) /2;
-			System.out.println("Enemigo: "+height);
-		}
+		
 	}
 	
 	

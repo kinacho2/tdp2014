@@ -257,7 +257,7 @@ public class Disparo {
 		}
 	}
 	
-	public void anular(int dy){
+	public void anular(int dy, int h){
 		
 		
 	}
