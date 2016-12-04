@@ -40,7 +40,9 @@ public abstract class DisparoLaser extends DisparoJugador {
 	
 	protected long init ;
 	
-
+	private boolean anulado = false;
+	
+	protected boolean primerDisparo = true;
 	
 	/**
 	 * Constructor de la clase DisparoLaser
@@ -51,8 +53,6 @@ public abstract class DisparoLaser extends DisparoJugador {
 	 * @param second segunda imagen del laser que simboliza al disparo
 	 * @param nave la Nave que efectua el DisparoLaser
 	 */
-	
-	protected boolean primerDisparo = true;
 	
 	public DisparoLaser(double dy, int width, int height, ImageIcon first, ImageIcon second, Nave nave) {
 		super(0, 0, 0, dy, 0,nave);
@@ -88,7 +88,6 @@ public abstract class DisparoLaser extends DisparoJugador {
 		boolean  toRet = false;
 		
 		if(System.currentTimeMillis()  - init > minDuracion){
-			//verificarNuevaImagen();
 			toRet = (super.colision(nave) || colisionLaser(nave)) && !nave.fueraDePantalla() && !nave.isInvulnerable();
 		}
 		
@@ -99,7 +98,6 @@ public abstract class DisparoLaser extends DisparoJugador {
 	
 	private synchronized boolean colisionLaser(Nave nave){
 		boolean A, B, C, D, I, F, toRet = false;
-		
 	
 		//laser cubre al enemigo
 		A = x < nave.getX() && x + width > nave.getX() + nave.getWidth();
@@ -206,37 +204,38 @@ public abstract class DisparoLaser extends DisparoJugador {
 	
 	public synchronized boolean colisionDisparo(Disparo dis) {
 		boolean verd = super.colisionDisparo(dis);
-		if(verd){
+		if(verd && dis.puedeAnular()){
 			dis.anular(y,height);
 			this.anular(dis.getY(),dis.getHeight());
 		}
 		
 		return verd;
 	}
-	private boolean anulado = false;
+
 	
 	public void anular(int ny,int h){
 		if(!anulado){
+			damage = 0;
 			anulado = true;
 			if(dy==1){
 				int aux = height;
-				height = Math.abs((y + height) - ny) /2;
-				
-				System.out.println("jugador: h="+height);
+				height = Math.abs((y + height) - ny) /2;				
 				y = nave.getY() - height;
 				laser = (new JFrame()).createImage(new FilteredImageSource(second.getImage().getSource(),new CropImageFilter(0, aux, width, height)));
-				nave.getMapa().addExposion(new Explosion(x,y,new ImageIcon(explosionlaser),40,40));
+				//nave.getMapa().addExposion(new Explosion(x,y,new ImageIcon(explosionlaser),20,20));
 			}
 			else if (dy == 0){
 				height = Math.abs(y - (ny+h)) /2;
-				System.out.println("enemigo: h="+height);
 				laser = (new JFrame()).createImage(new FilteredImageSource(second.getImage().getSource(),new CropImageFilter(0, 0, width, height)));
-				nave.getMapa().addExposion(new Explosion(x,y+height,new ImageIcon(explosionlaser),40,40));
+				nave.getMapa().addExposion(new Explosion(x,y+height,new ImageIcon(explosionlaser),20,20));
 			}
 			
 		}
 		
 	}
 	
-	
+	public boolean puedeAnular() {
+		return true;
+	}
+
 }

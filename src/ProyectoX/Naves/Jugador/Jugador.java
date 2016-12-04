@@ -51,7 +51,7 @@ public abstract class Jugador extends Nave {
 	
 	private long pauseTimeInit;
 	private boolean pauseTime;
-	private int time = 1;
+	private int time = 0;
 	private int fantasma = 1;
 	private int potas = 1;
 	protected int maxVida;
@@ -251,37 +251,37 @@ public abstract class Jugador extends Nave {
 
     public void move() {
 	 
-	 if(x >= 0)
-		x += dx;
-	 else
-		x = 1;
-	 
-	 if( x <= maxWidth - width)
-		x += dx;
-	 else
-		 x = maxWidth  - width - 1;
-	 
-	 if(y >= 0)
-	    y += dy;
-	 else
-		y = 1;
-	 
-	 if(y <= minHeight - height)
-		y += dy;
-	 else
-		y = minHeight - height - 1;
-	 
-	 
-	 if(defensa!=null)
-	        for(int i=0; i<defensa.length;i++){
-	        	if(defensa[i]!=null)
-	        		defensa[i].move();
-		        
-	        }
-	 
-	 if(pauseTime){
-		 pauseTime();
-	 }
+		 if(x >= 0)
+			x += dx;
+		 else
+			x = 1;
+		 
+		 if( x <= maxWidth - width)
+			x += dx;
+		 else
+			 x = maxWidth  - width - 1;
+		 
+		 if(y >= 0)
+		    y += dy;
+		 else
+			y = 1;
+		 
+		 if(y <= minHeight - height)
+			y += dy;
+		 else
+			y = minHeight - height - 1;
+		 
+		 
+		 if(defensa!=null)
+		        for(int i=0; i<defensa.length;i++){
+		        	if(defensa[i]!=null)
+		        		defensa[i].move();
+			        
+		        }
+		 
+		 if(pauseTime){
+			 pauseTime();
+		 }
  }
 
     /**
@@ -293,7 +293,6 @@ public abstract class Jugador extends Nave {
      */
 	public void setVida(int vd) {
 		regen=System.currentTimeMillis();
-		System.out.println("vida -"+vd);
 		//si no es invulnerable o vida es menor que 0 quiere decir que esta recibiendo una curacion
 		if(System.currentTimeMillis() - init > invulnerable || vida < 0){
 			if(vida-vd > 0)
@@ -591,7 +590,7 @@ public abstract class Jugador extends Nave {
 	}
 	
 	public long getPauseTime(){
-		return timePaused - (System.currentTimeMillis() - pauseTimeInit);
+		return (pauseTime)?timePaused - (System.currentTimeMillis() - pauseTimeInit):-1000;
 	}
 
 	public int getTime() {
@@ -616,8 +615,13 @@ public abstract class Jugador extends Nave {
 	}
 
 	public void setPotas() {
-		if(potas < 5)
+		if(potas < 4)
 			potas++;
+		for(int i = 0; i<defensa.length;i++){
+			if(defensa[i]!=null){
+				potas++;
+			}
+		}
 	}
 	
 	public int getVida(){
@@ -625,6 +629,10 @@ public abstract class Jugador extends Nave {
 			setVida(-1);
 		}
 		return vida;
+	}
+	
+	public int getMaxVida(){
+		return maxVida;
 	}
 	
 }

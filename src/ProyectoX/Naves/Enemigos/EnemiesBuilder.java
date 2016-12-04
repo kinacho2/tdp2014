@@ -45,7 +45,7 @@ public class EnemiesBuilder {
 		else
 			m = new Basico((probabilidad % 9) == 0);
 		
-		m = new Basico(true);
+		//m = new Basico(true);
 		
         return m;
 	}

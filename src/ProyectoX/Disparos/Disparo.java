@@ -262,5 +262,9 @@ public class Disparo {
 		
 	}
 
+	public boolean puedeAnular() {
+		return false;
+	}
+
 }
 

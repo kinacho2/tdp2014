@@ -52,10 +52,10 @@ public class PUPBuilder {
 		else{
 			up = new Vida(x, y);
 		}
-		
+		up = new Escudo(x, y);
 		
 		if(aux%3==0)
-			up = new Fantasma(x, y);
+			up = new Ayudante(x, y);
 		if(aux%3==2)
 		up = new Escudo(x, y);
 		if(aux%3==1)

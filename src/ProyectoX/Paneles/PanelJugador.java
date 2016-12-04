@@ -69,7 +69,9 @@ public class PanelJugador  extends JPanel implements ActionListener{
 	private Jugador def;
 	private JLabel disparo;
 	private JLabel disparoLVL;
-	private JLabel defensaVida;
+	private JPanel defensaVida;
+	
+	private int[] vidaDef = new int[2];
 	/**
 	 * Constructor de la clase PanelJugador
 	 * crea una instancia de Mind
@@ -239,12 +241,14 @@ public class PanelJugador  extends JPanel implements ActionListener{
 		bar.add(buffTime);
 		
 		//Defensa
-		defensaVida = new JLabel("");
+		defensaVida = new JPanel();//new JLabel("");
 		defensaVida.setBounds(186+520, 20, 30, 10);
 		defensaVida.setFont(new java.awt.Font("Segoe UI",0,11));
-		defensaVida.setOpaque(false);
+		defensaVida.setOpaque(true);
 		defensaVida.setForeground(new java.awt.Color(0,255,0));
-		defensaVida.setHorizontalAlignment(SwingConstants.CENTER);
+		defensaVida.setBackground(new java.awt.Color(255,0,0));
+		//defensaVida.setHorizontalAlignment(SwingConstants.CENTER);
+		defensaVida.setLayout(null);
 		bar.add(defensaVida);
 		
 		ii = new ImageIcon(new ImageIcon(PanelJugador.class.getClassLoader().getResource("ProyectoX/img/Enemigo/Torreta/invisible.png")).getImage().getScaledInstance(25, 25, Image.SCALE_DEFAULT));
@@ -435,9 +439,10 @@ public class PanelJugador  extends JPanel implements ActionListener{
 			
 			Jugador[] nv = jugador.getDefensa();
 			if(nv==null || nv[0]==null){
+				//no hay defensa se setea invisible
 				ImageIcon ii = new ImageIcon(new ImageIcon(PanelJugador.class.getClassLoader().getResource("ProyectoX/img/Enemigo/Torreta/invisible.png")).getImage().getScaledInstance(25, 25, Image.SCALE_DEFAULT));
 				defensa.setIcon(ii);
-				defensaVida.setText("");
+				//defensaVida.setText("");
 			}
 			else{
 				Jugador auxiliar = nv[0];
@@ -446,11 +451,39 @@ public class PanelJugador  extends JPanel implements ActionListener{
 					ImageIcon ii = new ImageIcon(def.getImage().getScaledInstance(25, 25, Image.SCALE_DEFAULT));
 					defensa.setIcon(ii);
 				}
+				
 				String ss = ""+def.getVida();
+				boolean segundo = false;
 				if(nv.length>1 && nv[1]!=null){
 					ss=ss+"-"+nv[1].getVida();
+					segundo = true;
 				}
-				defensaVida.setText(ss);
+				int bound = 600/def.getMaxVida();
+				//defensaVida.setText(ss);
+				if(vidaDef[0]!=def.getVida() || (segundo && vidaDef[1]!=nv[1].getVida()) ){
+					vidaDef[0]=def.getVida();
+					defensaVida.removeAll();
+					for(int i = 0; i<def.getVida();i=i+20){
+						
+						JLabel label = new JLabel();
+						label.setBackground(new java.awt.Color(0,255,0));
+						label.setOpaque(true);
+						label.setBounds(i/20,0,1,20);
+						defensaVida.add(label);
+					}
+					
+					if(segundo){
+						vidaDef[1]=nv[1].getVida();
+						for(int i = 600; i>600-vidaDef[1];i=i-20){
+							
+							JLabel label = new JLabel();
+							label.setBackground(new java.awt.Color(0,255,0));
+							label.setOpaque(true);
+							label.setBounds(i/20-1,0,1,20);
+							defensaVida.add(label);
+						}
+					}
+				}
 			}
 			disparoLVL.setText("LVL  "+jugador.getDisparo().getLevel());
 			disparo.setIcon(new ImageIcon(jugador.getDisparo().getImage()));
@@ -517,7 +550,7 @@ public class PanelJugador  extends JPanel implements ActionListener{
 	}
 
 	public void pauseTime(boolean arg) {
-		pauseTime = arg;// TODO Auto-generated method stub
+		pauseTime = arg;
 		
 	}
 	
