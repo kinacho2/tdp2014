@@ -31,7 +31,7 @@ public class WaveLVIV extends DisparoWave {
 		super(x, y, dx, dy,nave);
 		this.contador = contador;
 		estado=true;
-		damage = 2;
+		damage = 1;
 	}
 	
 	/**

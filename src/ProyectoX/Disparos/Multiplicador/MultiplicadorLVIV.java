@@ -34,7 +34,7 @@ public class MultiplicadorLVIV extends DisparoMultiplicador{
 		sonido = sound;
 		this.contador = contador;
 		estado=true;
-		damage=2;
+		damage=1;
 	}
 	
 	/**
