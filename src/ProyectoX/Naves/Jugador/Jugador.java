@@ -148,7 +148,7 @@ public abstract class Jugador extends Nave {
 		}
     }
 	
-	private void curar() {
+	public void curar() {
 		if(potas>0){
     		potas--;
     		setVida(-30);

@@ -14,6 +14,7 @@ import java.util.ArrayList;
 import javax.swing.BorderFactory;
 import javax.swing.ImageIcon;
 import javax.swing.JButton;
+import javax.swing.JCheckBox;
 import javax.swing.JLabel;
 import javax.swing.JPanel;
 import javax.swing.SwingConstants;
@@ -70,6 +71,7 @@ public class PanelJugador  extends JPanel implements ActionListener{
 	private JLabel disparo;
 	private JLabel disparoLVL;
 	private JPanel defensaVida;
+	private JCheckBox chk;
 	
 	private int[] vidaDef = new int[2];
 	/**
@@ -195,6 +197,12 @@ public class PanelJugador  extends JPanel implements ActionListener{
 		
 		
 		//buffvida
+		
+		chk = new JCheckBox();
+		chk.setPreferredSize(new java.awt.Dimension(10,10));
+		//TODO
+		chk.setBounds(186+400,0,chk.getPreferredSize().width,chk.getPreferredSize().height);
+		bar.add(chk);
 		
 		buffVidaboton = new JLabel("V    "+jugador.getPotas());
 		buffVidaboton.setBounds(186+400, 20, 30, 10);
