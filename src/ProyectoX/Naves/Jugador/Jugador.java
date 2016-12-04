@@ -429,6 +429,9 @@ public abstract class Jugador extends Nave {
 		bombas = 2;
 		rocket = 0;
 		visible = true;
+		invulnerable = 5000;
+		vida = defaultVida;
+		setNewDisparo( new MultiplicadorLVI(x, y , 0, 1, this));
 	}
 	
 	/**
@@ -617,9 +620,10 @@ public abstract class Jugador extends Nave {
 	public void setPotas() {
 		if(potas < 4)
 			potas++;
+		if(defensa!=null)
 		for(int i = 0; i<defensa.length;i++){
 			if(defensa[i]!=null){
-				potas++;
+				defensa[i].setPotas();
 			}
 		}
 	}

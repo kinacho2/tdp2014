@@ -442,10 +442,15 @@ public class PanelJugador  extends JPanel implements ActionListener{
 				//no hay defensa se setea invisible
 				ImageIcon ii = new ImageIcon(new ImageIcon(PanelJugador.class.getClassLoader().getResource("ProyectoX/img/Enemigo/Torreta/invisible.png")).getImage().getScaledInstance(25, 25, Image.SCALE_DEFAULT));
 				defensa.setIcon(ii);
+				defensaVida.removeAll();
+				defensaVida.setOpaque(false);
 				//defensaVida.setText("");
 			}
 			else{
 				Jugador auxiliar = nv[0];
+				
+				defensaVida.setOpaque(true);
+
 				if(auxiliar!=def){
 					def=auxiliar;
 					ImageIcon ii = new ImageIcon(def.getImage().getScaledInstance(25, 25, Image.SCALE_DEFAULT));
@@ -458,9 +463,13 @@ public class PanelJugador  extends JPanel implements ActionListener{
 					ss=ss+"-"+nv[1].getVida();
 					segundo = true;
 				}
+				
 				int bound = 600/def.getMaxVida();
+				if(bound>6){
+					bound = bound/2;
+				}
 				//defensaVida.setText(ss);
-				if(vidaDef[0]!=def.getVida() || (segundo && vidaDef[1]!=nv[1].getVida()) ){
+				if(vidaDef[0]!=def.getVida() || (segundo && vidaDef[1]!=nv[1].getVida()) || (!segundo && vidaDef[1]<20)){
 					vidaDef[0]=def.getVida();
 					defensaVida.removeAll();
 					for(int i = 0; i<def.getVida();i=i+20){
@@ -468,9 +477,10 @@ public class PanelJugador  extends JPanel implements ActionListener{
 						JLabel label = new JLabel();
 						label.setBackground(new java.awt.Color(0,255,0));
 						label.setOpaque(true);
-						label.setBounds(i/20,0,1,20);
+						label.setBounds(i/20*bound,0,bound,20);
 						defensaVida.add(label);
 					}
+					
 					
 					if(segundo){
 						vidaDef[1]=nv[1].getVida();
@@ -479,10 +489,11 @@ public class PanelJugador  extends JPanel implements ActionListener{
 							JLabel label = new JLabel();
 							label.setBackground(new java.awt.Color(0,255,0));
 							label.setOpaque(true);
-							label.setBounds(i/20-1,0,1,20);
+							label.setBounds(600/20-bound*((600-i)/20+1),0,bound,20);
 							defensaVida.add(label);
 						}
 					}
+					
 				}
 			}
 			disparoLVL.setText("LVL  "+jugador.getDisparo().getLevel());

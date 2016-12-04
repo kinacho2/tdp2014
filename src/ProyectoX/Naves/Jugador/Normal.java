@@ -46,11 +46,7 @@ public class Normal extends Jugador {
 	 * y llama a reset() de la clase Jugador
 	 */
 
-	public void reset() {
-		super.reset();
-		vida = defaultVida;
-		setNewDisparo(new MultiplicadorLVI(x, y, 0, 1,this));
-	}
+
 	
 }
 
