@@ -1,5 +1,6 @@
 package ProyectoX.Paneles;
 
+import java.awt.BorderLayout;
 import java.awt.Graphics;
 import java.awt.Graphics2D;
 import java.awt.Image;
@@ -12,9 +13,11 @@ import java.net.URL;
 import java.util.ArrayList;
 
 import javax.swing.BorderFactory;
+import javax.swing.Icon;
 import javax.swing.ImageIcon;
 import javax.swing.JButton;
 import javax.swing.JCheckBox;
+import javax.swing.JComboBox;
 import javax.swing.JLabel;
 import javax.swing.JPanel;
 import javax.swing.SwingConstants;
@@ -39,6 +42,8 @@ public class PanelJugador  extends JPanel implements ActionListener{
 
 	private static final URL urlEn = (PanelInit.class.getClassLoader().getResource("ProyectoX/img/Menu_barras/sonido-enabled.png"));
 	private static final URL urlDis = (PanelInit.class.getClassLoader().getResource("ProyectoX/img/Menu_barras/sonido-disabled.png"));
+	private static final URL check = (PanelInit.class.getClassLoader().getResource("ProyectoX/img/Menu_barras/check.png"));
+	private static final URL uncheck = (PanelInit.class.getClassLoader().getResource("ProyectoX/img/Menu_barras/uncheck.png"));
 	
 	private Mind mind;
 	private Mapa mapa;
@@ -71,9 +76,10 @@ public class PanelJugador  extends JPanel implements ActionListener{
 	private JLabel disparo;
 	private JLabel disparoLVL;
 	private JPanel defensaVida;
-	private JCheckBox chk;
+	private JButton chk;
 	
 	private int[] vidaDef = new int[2];
+	private boolean checkVida = false;
 	/**
 	 * Constructor de la clase PanelJugador
 	 * crea una instancia de Mind
@@ -198,10 +204,17 @@ public class PanelJugador  extends JPanel implements ActionListener{
 		
 		//buffvida
 		
-		chk = new JCheckBox();
-		chk.setPreferredSize(new java.awt.Dimension(10,10));
+		chk = new JButton();
 		//TODO
-		chk.setBounds(186+400,0,chk.getPreferredSize().width,chk.getPreferredSize().height);
+		chk.setIcon(new ImageIcon(new ImageIcon(uncheck).getImage().getScaledInstance(10, 10, Image.SCALE_DEFAULT)));
+		chk.setBounds(186+400, 0, 10, 10);
+		chk.addActionListener(new OyenteChk());
+		chk.setFocusable(false);
+
+		chk.setForeground(new java.awt.Color(0,255,0));
+		chk.setBackground(new java.awt.Color(0,0,0));
+		chk.setBorder(BorderFactory.createCompoundBorder(null,null));
+		chk.setFont(new java.awt.Font("Segoe UI",0,20));
 		bar.add(chk);
 		
 		buffVidaboton = new JLabel("V    "+jugador.getPotas());
@@ -400,6 +413,11 @@ public class PanelJugador  extends JPanel implements ActionListener{
 	        
 	      	puntaje.setText("" + jugador.getPuntaje());
 	      	cantVida.setText("" + jugador.getVida());
+	      	
+	      	if(checkVida && jugador.getVida()<40 && jugador.getVida()>0){
+	      		jugador.curar();  
+	      	}
+	      	
 			contadorEnemigos.setText("" + mapa.cantEnemies());
 			cantHearts.setText("     "+jugador.getHearts());
 			int cantB = jugador.getCantBombas();
@@ -573,6 +591,22 @@ public class PanelJugador  extends JPanel implements ActionListener{
 		
 	}
 	
+
 	
+	private class OyenteChk implements ActionListener{
+
+		@Override
+		public void actionPerformed(ActionEvent arg0) {
+			if(!checkVida){
+				chk.setIcon(new ImageIcon(new ImageIcon(check).getImage().getScaledInstance(10, 10, Image.SCALE_DEFAULT)));
+				checkVida = true;
+			}
+			else{
+				chk.setIcon(new ImageIcon(new ImageIcon(uncheck).getImage().getScaledInstance(10, 10, Image.SCALE_DEFAULT)));
+				checkVida = false;
+			}
+			
+		}
+	}
 	
 }
